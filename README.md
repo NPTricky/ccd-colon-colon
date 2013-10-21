@@ -1,2 +1,4 @@
-ccd-colon-colon
+Paamayim Nekudotayim (::)
 ===============
+TODOs:
+* Name auswendig lernen!
