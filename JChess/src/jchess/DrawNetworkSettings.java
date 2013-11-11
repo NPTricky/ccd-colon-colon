@@ -45,7 +45,7 @@ import jchess.server.Server;
  */
 public class DrawNetworkSettings extends JPanel implements ActionListener
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     private JDialog parent;
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
@@ -245,7 +245,7 @@ public class DrawNetworkSettings extends JPanel implements ActionListener
 
                 if (isJoining) //Client connection: succesful
                 {
-                    System.out.println("Client connection: succesful");
+                    log.info("Client connection: succesful");
                     //create new game and draw chessboard
                     Game newGUI = JChessApp.jcv.addNewTab("Network game, table: " + textGameID.getText()/*client.sett.playerWhite.getName()+" vs "+client.sett.playerBlack.getName()*/);
                     client.game = newGUI;
@@ -265,7 +265,7 @@ public class DrawNetworkSettings extends JPanel implements ActionListener
             }
             catch (Error err)
             {
-                System.out.println("Client connection: failure");
+                log.error("Client connection: failure");
                 JOptionPane.showMessageDialog(this, err);
             }
         }

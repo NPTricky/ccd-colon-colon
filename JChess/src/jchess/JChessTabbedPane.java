@@ -27,7 +27,7 @@ import java.awt.image.ImageObserver;
 
 public class JChessTabbedPane extends JTabbedPane implements MouseListener, ImageObserver
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     private TabbedPaneIcon closeIcon;
     private Image addIcon = null;
     private Image clickedAddIcon = null;
@@ -54,7 +54,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
     public void addTab(String title, Component component, Icon closeIcon)
     {
         super.addTab(title, new TabbedPaneIcon(closeIcon), component);
-        System.out.println("Present number of tabs: " + this.getTabCount());
+        log.info("Present number of tabs: " + this.getTabCount());
         this.updateAddIconRect();
     }
 
@@ -85,7 +85,7 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
             rect = ((TabbedPaneIcon) getIconAt(tabNumber)).getBounds();
             if (rect.contains(e.getX(), e.getY()))
             {
-                System.out.println("Removing tab with " + tabNumber + " number!...");
+                log.debug("Removing tab with " + tabNumber + " number!...");
                 this.removeTabAt(tabNumber);//remove tab
                 this.updateAddIconRect();
             }
@@ -96,10 +96,10 @@ public class JChessTabbedPane extends JTabbedPane implements MouseListener, Imag
         }
         else if (this.addIconRect != null && this.addIconRect.contains(e.getX(), e.getY()))
         {
-            System.out.println("newGame by + button");
+            log.debug("newGame by + button");
             this.showNewGameWindow();
         }
-        //System.out.println("x:" +e.getX()+" y: "+e.getY()+" x:"+this.addIconRect.x+" y::"+this.addIconRect.y+" width:"+this.addIconRect.width+" height: "+this.addIconRect.height);
+        //log.debug("x:" +e.getX()+" y: "+e.getY()+" x:"+this.addIconRect.x+" y::"+this.addIconRect.y+" width:"+this.addIconRect.width+" height: "+this.addIconRect.height);
     }
 
     public void mouseEntered(MouseEvent e)

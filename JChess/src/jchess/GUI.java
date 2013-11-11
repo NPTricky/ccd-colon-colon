@@ -37,7 +37,7 @@ import java.util.logging.Logger;
  */
 public class GUI
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     public Game game;
     static final public Properties configFile = GUI.getConfigFile();
 
@@ -65,14 +65,14 @@ public class GUI
         try
         {
             String imageLink = "theme/" + configFile.getProperty("THEME", "default") + "/images/" + name;
-            System.out.println(configFile.getProperty("THEME"));
+            log.info(configFile.getProperty("THEME"));
             url = JChessApp.class.getResource(imageLink);
             img = tk.getImage(url);
 
         }
         catch (Exception e)
         {
-            System.out.println("some error loading image!");
+            log.error("some error loading image!");
             e.printStackTrace();
         }
         return img;
@@ -108,7 +108,7 @@ public class GUI
         }
         catch (java.io.IOException exc)
         {
-            System.out.println("some error loading image! what goes: " + exc);
+            log.error("some error loading image! what goes: " + exc);
             exc.printStackTrace();
         }
         if (!outFile.exists())

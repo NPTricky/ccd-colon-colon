@@ -28,7 +28,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
+
 import jchess.server.Connection_info;
 
 /**
@@ -37,7 +39,7 @@ import jchess.server.Connection_info;
  */
 public class Client implements Runnable
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     public static boolean isPrintEnable = true; //print all messages (print function)
     Socket s;
     ObjectOutputStream output;
@@ -218,7 +220,7 @@ public class Client implements Runnable
     {
         if (isPrintEnable)
         {
-            System.out.println("Client: " + str);
+            log.info("Client: " + str);
         }
     }
     

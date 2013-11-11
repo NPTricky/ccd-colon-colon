@@ -22,15 +22,18 @@ package jchess;
 
 import java.awt.*;
 import java.awt.image.*;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import org.apache.log4j.Logger;
 
 /** Class to representing the full game time
  * @param game The current game
  */
 public class GameClock extends JPanel implements Runnable
 {
-
+	private static Logger log = Logger.getRootLogger();
     public Clock clock1;
     public Clock clock2;
     private Clock runningClock;
@@ -85,11 +88,11 @@ public class GameClock extends JPanel implements Runnable
         }
         catch (java.lang.InterruptedException exc)
         {
-            System.out.println("Error blocking thread: " + exc);
+            log.error("Error blocking thread: " + exc);
         }
         catch (java.lang.IllegalMonitorStateException exc1)
         {
-            System.out.println("Error blocking thread: " + exc1);
+            log.error("Error blocking thread: " + exc1);
         }
     }
 
@@ -126,8 +129,8 @@ public class GameClock extends JPanel implements Runnable
     @Override
     public void paint(Graphics g)
     {
-        //System.out.println("rysuje zegary");
-        super.paint(g);
+        //log.debug("rysuje zegary"); // "draws clocks" or something
+    	super.paint(g);
         white_clock = this.clock1.prepareString();
         black_clock = this.clock2.prepareString();
         Graphics2D g2d = (Graphics2D) g;
@@ -233,7 +236,7 @@ public class GameClock extends JPanel implements Runnable
                     }
                     catch (InterruptedException e)
                     {
-                        System.out.println("Some error in gameClock thread: " + e);
+                        log.error("Some error in gameClock thread: " + e);
                     }
                     //if(this.game.blockedChessboard)
                     //  this.game.blockedChessboard = false;
@@ -261,7 +264,7 @@ public class GameClock extends JPanel implements Runnable
         }
         else
         {//if called in wrong moment
-            System.out.println("Time over called when player got time 2 play");
+            log.warn("Time over called when player got time 2 play");
         }
         this.game.endGame("Time is over! " + color + " player win the game.");
         this.stop();

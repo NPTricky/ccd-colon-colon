@@ -573,7 +573,7 @@ public class King extends Piece
 
         // Pawn
         if (this.player.goDown) //check if player "go" down or up
-        {//System.out.println("go down");
+        {//System.out.debug("go down");
             newX = s.pozX - 1;
             newY = s.pozY + 1;
             if (!isout(newX, newY))

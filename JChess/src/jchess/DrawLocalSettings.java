@@ -20,12 +20,18 @@
 package jchess;
 
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.TextListener;
 import java.awt.event.TextEvent;
 import java.awt.*;
+
 import javax.swing.text.BadLocationException;
+
+import sun.util.logging.resources.logging;
+
+import org.apache.log4j.Logger;
 
 /**
  * Class responsible for drawing the fold with local game settings
@@ -33,6 +39,7 @@ import javax.swing.text.BadLocationException;
 public class DrawLocalSettings extends JPanel implements ActionListener, TextListener
 {
 
+	private static Logger log = Logger.getRootLogger();
     JDialog parent;//needet to close newGame window
     JComboBox color;//to choose color of player
     JRadioButton oponentComp;//choose oponent
@@ -92,7 +99,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
                 }
                 catch (BadLocationException exc)
                 {
-                    System.out.println("Something wrong in editables: \n" + exc);
+                    log.error("Something wrong in editables: \n" + exc);
                 }
             }
         }
@@ -176,9 +183,9 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
                 newGUI.gameClock.setTimes(sett.timeForGame, sett.timeForGame);
                 newGUI.gameClock.start();
             }
-            System.out.println(this.time4Game.getActionCommand());
+            log.debug(this.time4Game.getActionCommand());
             //this.time4Game.getComponent(this.time4Game.getSelectedIndex());
-            System.out.println("****************\nStarting new game: " + pl1.name + " vs. " + pl2.name
+            log.info("****************\nStarting new game: " + pl1.name + " vs. " + pl2.name
                     + "\ntime 4 game: " + sett.timeForGame + "\ntime limit set: " + sett.timeLimitSet
                     + "\nwhite on top?: " + sett.upsideDown + "\n****************");//4test
             newGUI.newGame();//start new Game
@@ -299,7 +306,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
         }
         catch (BadLocationException exc)
         {
-            System.out.println("Something wrong in editables: \n" + exc);
+            log.error("Something wrong in editables: \n" + exc);
         }
         return result;
     }

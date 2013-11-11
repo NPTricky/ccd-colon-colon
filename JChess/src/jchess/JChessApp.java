@@ -17,12 +17,15 @@ package jchess;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  * The main class of the application.
  */
 public class JChessApp extends SingleFrameApplication {
      static JChessView jcv;
+     static Logger log = Logger.getRootLogger();
     /**
      * At startup create and show the main frame of the application.
      */
@@ -51,6 +54,11 @@ public class JChessApp extends SingleFrameApplication {
      * Main method launching the application.
      */
     public static void main(String[] args) {
+    	// Initialize logger
+    	PropertyConfigurator.configure("log.conf");
+    	log.info("Starting JChess");
+    	
+    	// Launch program
         launch(JChessApp.class, args);
     }
 }

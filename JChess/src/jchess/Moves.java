@@ -38,7 +38,7 @@ import javax.swing.JOptionPane;
  */
 public class Moves extends AbstractTableModel
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     private ArrayList<String> move = new ArrayList<String>();
     private int columnsNum = 3;
     private int rowsNum = 0;
@@ -376,7 +376,7 @@ public class Moves extends AbstractTableModel
                     break; // R like Rook
             }
             sign = move.charAt(from);
-            System.out.println(sign);
+            log.debug(sign);
             if (sign < 97 || sign > 104) //if lower than 'a' or higher than 'h'
             {
                 return false;
@@ -459,14 +459,14 @@ public class Moves extends AbstractTableModel
         {
             from = moves.indexOf(" ", from);
             to = moves.indexOf(" ", from + 1);
-            //System.out.println(from+">"+to);
+            //log.debug(from+">"+to);
             try
             {
                 tempArray.add(moves.substring(from + 1, to).trim());
             }
             catch (java.lang.StringIndexOutOfBoundsException exc)
             {
-                System.out.println("error parsing file to load: " + exc);
+                log.error("error parsing file to load: " + exc);
                 break;
             }
             if (n % 2 == 0)

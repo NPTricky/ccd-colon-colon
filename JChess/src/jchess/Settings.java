@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
  */
 public class Settings implements Serializable
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     private static ResourceBundle loc = null;
     public int timeForGame;
     public boolean runningChat;
@@ -89,7 +89,7 @@ public class Settings implements Serializable
         {
             result = key;
         }
-        System.out.println(Settings.loc.getLocale().toString());
+        log.debug(Settings.loc.getLocale().toString());
         return result;
     }
 }

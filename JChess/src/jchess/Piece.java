@@ -35,7 +35,7 @@ Class to represent a piece (any kind) - this class should be extended to represe
  */
 public abstract class Piece
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     Chessboard chessboard; // <-- this relations isn't in class diagram, but it's necessary :/
     public Square square;
     public Player player;
@@ -91,13 +91,13 @@ public abstract class Piece
             }
             else
             {
-                System.out.println("image is null!");
+                log.error("image is null!");
             }
 
         }
         catch (java.lang.NullPointerException exc)
         {
-            System.out.println("Something wrong when painting piece: " + exc.getMessage());
+            log.error("Something wrong when painting piece: " + exc.getMessage());
         }
     }
 

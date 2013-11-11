@@ -33,7 +33,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class ThemeChooseWindow extends JDialog implements ActionListener, ListSelectionListener
 {
-
+	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getRootLogger();
     JList themesList;
     ImageIcon themePreview;
     GridBagLayout gbl;
@@ -48,7 +48,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
 
         File dir = new File(GUI.getJarPath() + File.separator + "theme"+File.separator);
 
-        System.out.println("Theme path: "+dir.getPath());
+        log.debug("Theme path: "+dir.getPath());
 
         File[] files = dir.listFiles();
         if (files != null && dir.exists())
@@ -82,7 +82,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
             }
             catch (java.lang.NullPointerException exc)
             {
-                System.out.println("Cannot find preview image: " + exc);
+                log.warn("Cannot find preview image: " + exc);
                 this.themePreview = new ImageIcon(JChessApp.class.getResource("theme/noPreview.png"));
                 return;
             }
@@ -111,7 +111,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
         String element = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
         String path = GUI.getJarPath() + File.separator + "theme/";
         //String path  = JChessApp.class.getResource("theme/").getPath().toString();
-        System.out.println(path + element + "/images/Preview.png");
+        log.debug(path + element + "/images/Preview.png");
         this.themePreview = new ImageIcon(path + element + "/images/Preview.png");
         this.themePreviewButton.setIcon(this.themePreview);
     }
@@ -144,7 +144,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
                 this.setVisible(false);
 
             }
-            System.out.print(prp.getProperty("THEME"));
+            log.debug(prp.getProperty("THEME"));
         }
     }
 }
