@@ -11,10 +11,10 @@
     <property name="source" value="1.7"/>
     <path id="JChess.classpath">
         <pathelement location="bin"/>
-        <pathelement location="appframework-1.0.3.jar"/>
-        <pathelement location="swing-layout-1.0.3.jar"/>
-        <pathelement location="swing-worker-1.1.jar"/>
-        <pathelement location="apache-log4j-1.2.17/log4j-1.2.17.jar"/>
+        <pathelement location="ext/appframework-1.0.3.jar"/>
+        <pathelement location="ext/log4j-1.2.17.jar"/>
+        <pathelement location="ext/swing-layout-1.0.3.jar"/>
+        <pathelement location="ext/swing-worker-1.1.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
