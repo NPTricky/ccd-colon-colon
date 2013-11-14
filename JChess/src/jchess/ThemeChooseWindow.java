@@ -41,12 +41,17 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
     GridBagConstraints gbc;
     JButton themePreviewButton;
     JButton okButton;
+    String themePath;
 
     ThemeChooseWindow(Frame parent) throws Exception
     {
         super(parent);
 
-        File dir = new File(GUI.getJarPath() + File.separator + "theme"+File.separator);
+        // look for themes in .\jchess\theme\
+        // TODO might need to change that when deploying...
+        themePath = GUI.getJarPath() + File.separator + "jchess" + File.separator + "theme" + File.separator;
+        
+        File dir = new File(themePath);
 
         log.debug("Theme path: "+dir.getPath());
 
@@ -109,10 +114,9 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
     public void valueChanged(ListSelectionEvent event)
     {
         String element = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
-        String path = GUI.getJarPath() + File.separator + "theme/";
         //String path  = JChessApp.class.getResource("theme/").getPath().toString();
         log.debug(path + element + "/images/Preview.png");
-        this.themePreview = new ImageIcon(path + element + "/images/Preview.png");
+        this.themePreview = new ImageIcon(themePath + element + "/images/Preview.png");
         this.themePreviewButton.setIcon(this.themePreview);
     }
 
