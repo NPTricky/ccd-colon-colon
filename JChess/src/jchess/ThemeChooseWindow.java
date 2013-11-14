@@ -115,7 +115,7 @@ public class ThemeChooseWindow extends JDialog implements ActionListener, ListSe
     {
         String element = this.themesList.getModel().getElementAt(this.themesList.getSelectedIndex()).toString();
         //String path  = JChessApp.class.getResource("theme/").getPath().toString();
-        log.debug(path + element + "/images/Preview.png");
+        log.debug(themePath + element + "/images/Preview.png");
         this.themePreview = new ImageIcon(themePath + element + "/images/Preview.png");
         this.themePreviewButton.setIcon(this.themePreview);
     }
