@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="appframework-1.0.3.jar"/>
-	<classpathentry kind="lib" path="swing-layout-1.0.3.jar"/>
-	<classpathentry kind="lib" path="swing-worker-1.1.jar"/>
-	<classpathentry kind="lib" path="apache-log4j-1.2.17/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="ext/appframework-1.0.3.jar"/>
+	<classpathentry kind="lib" path="ext/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="ext/swing-layout-1.0.3.jar"/>
+	<classpathentry kind="lib" path="ext/swing-worker-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
