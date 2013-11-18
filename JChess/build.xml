@@ -5,7 +5,8 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="JChess">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="C:/Program Files/Eclipse"/>
+    <property name="ECLIPSE_HOME" value="../../../../../../eclipse"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
@@ -22,7 +23,13 @@
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
-                <exclude name="**/*.launch"/>
+                <exclude name="**/*.ucls"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="test">
+                <exclude name="**/*.ucls"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -37,6 +44,7 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
+            <src path="test"/>
             <classpath refid="JChess.classpath"/>
         </javac>
     </target>
@@ -54,9 +62,27 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
+    <target name="jchess">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="jchess.ChessboardTest" todir="${junit.output.dir}"/>
+            <test name="jchess.JChessTests" todir="${junit.output.dir}"/>
+            <test name="jchess.SettingsTest" todir="${junit.output.dir}"/>
+            <classpath refid="JChess.classpath"/>
+        </junit>
+    </target>
     <target name="JChessApp">
         <java classname="jchess.JChessApp" failonerror="true" fork="yes">
             <classpath refid="JChess.classpath"/>
         </java>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>
