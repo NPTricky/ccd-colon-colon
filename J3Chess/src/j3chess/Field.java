@@ -1,7 +1,13 @@
 package j3chess;
 
+import j3chess.utility.Vector2d;
+
 public class Field {
 
+	public Field() {
+		mDrawPos = new Vector2d();
+	}
+	
 	public void setLeftInnerNeighbour() {
 		// \todo implement
 	}
@@ -34,15 +40,13 @@ public class Field {
 		// \todo implement
 	}
 	
-	public void setDrawPosition(float x, float y) {
-		mDrawPosX = x;
-		mDrawPosY = y;
+	public void setDrawPosition(Vector2d vec) {
+		mDrawPos.x = vec.x;
+		mDrawPos.y = vec.y;
 	}
 	
-	/** \brief Horizontal position where the field is drawn */
-	private float mDrawPosX;
-	/** \brief Vertical position where the field is drawn */
-	private float mDrawPosY;
+	/** \brief Position where the field is drawn */
+	private Vector2d mDrawPos;
 	
 	// \todo Uncomment when Entity class exists
 	/*private Entity mNeighbourLeftInner;
