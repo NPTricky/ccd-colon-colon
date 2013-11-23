@@ -1,5 +1,6 @@
 package j3chess;
 
+import java.util.ArrayList;
 import j3chess.utility.Vector2d;
 
 /**
@@ -8,11 +9,24 @@ import j3chess.utility.Vector2d;
  */
 public class Chessboard {
 
+	/* ##################################################################
+	 *  global Values
+	 * #################################################################
+	 * */
+	
+	
 	public final int NUMBEROFCIRCELS=6;
 	public final int NUMBEROFCOLUMNS=24; 
 	/** @brief 6x24 array of all fields in the game */
 	private Field mFields[][];
+	private ArrayList<Edge> moats=new ArrayList<Edge>();
+	private ArrayList<Edge> creeks= new ArrayList<Edge>();
 	
+	
+	/* ##################################################################
+	 *  constructor
+	 * #################################################################
+	 * */
 	
 	/**
 	 * @brief Creates new instance of the Chessboard class.
@@ -22,19 +36,112 @@ public class Chessboard {
 		createFields();
 		//set the Neighbors of every Field
 		setNeighbors();
+
+		//create and added Moats
+		createMoats();
+		
+		//create Creeks
+		createCreeks();
+
 		//print all Fields - just for debugging
 		printAllFields();
 		
 		// Calculate the fields' 2D drawing positions
 		calculateDrawPositions(0.9f);
+
 	}
-	private void printAllFields(){
-		for(int circles = 0; circles < NUMBEROFCIRCELS; circles++) {
-			for(int columns = 0; columns < NUMBEROFCOLUMNS; columns++) {
-				mFields[columns][circles].print();
+	
+	
+	/* ##################################################################
+	 *  creeks
+	 * #################################################################
+	 * */
+	public Boolean isCreek(Field leftField, Field rightField){
+		Edge tmpEdge=new Edge(leftField,rightField);
+		for(int i=0; i<creeks.size();i++){
+			if(creeks.get(i).isEqual(tmpEdge)){
+				return true;
 			}
-		}		
+		}
+		return false;
 	}
+	
+	
+	private void createCreeks(){
+		addCreek(mFields[23][1],mFields[0][1]);
+		addCreek(mFields[23][2],mFields[0][2]);
+		addCreek(mFields[7][1],mFields[8][1]);
+		addCreek(mFields[7][2],mFields[8][2]);
+		addCreek(mFields[15][1],mFields[16][1]);
+		addCreek(mFields[15][2],mFields[16][2]);
+	}
+	
+	public void addCreek(Field leftField, Field rightField){
+		if(leftField==rightField.getLeftNeighbor()){
+			creeks.add(new Edge(leftField,rightField));
+		}else{
+			//TODO Error werfen 
+			System.out.println("ERROR Can't create Creek, leftField is not a leftNeighbor of rightField");
+		}
+			
+		
+	}
+	/* ##################################################################
+	 *  Moats
+	 * #################################################################
+	 * */
+	private void createMoats(){
+			addMoat(mFields[23][0],mFields[0][0]);
+			addMoat(mFields[7][0],mFields[8][0]);
+			addMoat(mFields[15][0],mFields[16][0]);	
+	}
+	
+	public void removeMoat(Field leftField, Field rightField){
+			//TODO NOT implementet yet
+			//Moat entfernen - richtige Verbindungen wiederherstellen
+	}
+	
+	/**
+	 * @brief adds a Moat which can't crossed by any piece, done by removing Neighbors
+	 */ 
+	public void addMoat(Field leftField,Field rightField) {
+			if(leftField.getRightNeighbor()==rightField){
+				moats.add(new Edge(leftField,rightField));
+				//remove inner diagonals connections
+				if(leftField.getRightInnerNeighbor()!=null){
+					leftField.getRightInnerNeighbor().setLeftOuterNeighbor(null);
+					leftField.setRightInnerNeighbor(null);
+				}
+				if(rightField.getLeftInnerNeighbor()!=null){
+					rightField.getLeftInnerNeighbor().setRightOuterNeighbor(null);
+					rightField.setLeftInnerNeighbor(null);
+				}
+				//remove outer diagonal connetions
+				if(leftField.getRightOuterNeighbor()!=null){
+					leftField.getRightOuterNeighbor().setLeftInnerNeighbor(null);
+					leftField.setRightOuterNeighbor(null);
+				}			
+				if(rightField.getLeftOuterNeighbor()!=null){
+					rightField.getLeftOuterNeighbor().setRightInnerNeighbor(null);
+					rightField.setLeftOuterNeighbor(null);
+				}
+				//remove horizontal connections
+				leftField.setRightNeighbor(null);
+				rightField.setLeftNeighbor(null);			
+			}else{
+				//TODO Exception handling leftFild is not the left of the Rightfield
+				System.out.println("ERROR Can't create Moat, leftField is not a leftNeighbor of rightField");
+			}
+		
+	}
+	
+	
+
+	/* ##################################################################
+	 *  Set Neighbors
+	 * #################################################################
+	 * */
+	
 	
 	private void setNeighbors(){
 		for(int circle = 0; circle < NUMBEROFCIRCELS; circle++) {
@@ -174,6 +281,15 @@ public class Chessboard {
 		// Return null on error
 		return null;
 	}
+	
+	private void printAllFields(){
+		for(int circles = 0; circles < NUMBEROFCIRCELS; circles++) {
+			for(int columns = 0; columns < NUMBEROFCOLUMNS; columns++) {
+				mFields[columns][circles].print();
+			}
+		}		
+	}
+	
 	
 	
 }
