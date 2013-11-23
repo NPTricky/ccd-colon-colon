@@ -161,14 +161,14 @@ public class Chessboard {
 	/**
 	 * @brief Returns a field object by its coordinate.
 	 * Coordinates are m from the center to the outside and n around the circular chessboard.    
-	 * @param m	Coordinate from the center to the outside 
-	 * @param n	Coordinate around the circular chessboard
+	 * @param column	Coordinate from the center to the outside 
+	 * @param circle	Coordinate around the circular chessboard
 	 * @return Field object
 	 */
-	public Field getField(int m, int n) {
+	public Field getField(int column, int circle) {
 		// Safety checks
-		if (mFields!=null && m<mFields.length && n < mFields[0].length) {
-			return mFields[m][n];
+		if (mFields!=null && column<mFields.length && circle < mFields[0].length) {
+			return mFields[column][circle];
 		}
 		// TODO log error
 		// Return null on error

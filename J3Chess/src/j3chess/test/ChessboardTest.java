@@ -21,42 +21,62 @@ public class ChessboardTest {
 		Chessboard cb = new Chessboard();
 		
 		// Loop through all fields
-		for (int m=0; m<6; m++) {
-			for (int n=0; n<24; n++) {
-				Field testSubject = cb.getField(m,  n);
+		for (int circle=0; circle<cb.NUMBEROFCIRCELS; circle++) {
+			for (int column=0; column<cb.NUMBEROFCOLUMNS; column++) {
+				Field testSubject = cb.getField(column,  circle);
 				
 				// Test all edges for consistency
 				
 				if (testSubject.getLeftInnerNeighbor() != null) {
-					assertEquals("Left inner edge is not consistent for field ["+m+", "+n+"]",
-							testSubject.getLeftInnerNeighbor().getRightOuterNeighbor(), testSubject);
+					if(circle!=cb.NUMBEROFCIRCELS-1){
+							assertEquals("Left inner edge is not consistent for field ["+column+", "+circle+"]" ,
+									testSubject.getLeftInnerNeighbor().getRightOuterNeighbor(), testSubject);
+					}else{
+						// inner throw the middle
+						assertEquals("Left inner edge is not consistent for field ["+column+", "+circle+"]" ,
+								testSubject.getLeftInnerNeighbor().getRightInnerNeighbor(), testSubject);
+					}
+						
+					
 				}
 				if (testSubject.getInnerNeighbor() != null) {
-					assertEquals("Inner edge is not consistent for field ["+m+", "+n+"]",
+					if(circle!=cb.NUMBEROFCIRCELS-1){
+						assertEquals("Inner edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getInnerNeighbor().getOuterNeighbor(), testSubject);
+					}else{
+						// inner throw the middle 
+						assertEquals("Inner edge is not consistent for field ["+column+", "+circle+"]",
+								testSubject.getInnerNeighbor().getInnerNeighbor(), testSubject);
+					}				
 				}
 				if (testSubject.getRightInnerNeighbor() != null) {
-					assertEquals("Right inner edge is not consistent for field ["+m+", "+n+"]",
+					if(circle!=cb.NUMBEROFCIRCELS-1){
+						assertEquals("Right inner edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getRightInnerNeighbor().getLeftOuterNeighbor(), testSubject);
+					}else{
+						// inner throw the middle 
+						assertEquals("Right inner edge is not consistent for field ["+column+", "+circle+"]",
+								testSubject.getRightInnerNeighbor().getLeftInnerNeighbor(), testSubject);
+					}		
 				}
 				if (testSubject.getLeftNeighbor() != null) {
-					assertEquals("Left edge is not consistent for field ["+m+", "+n+"]",
+					assertEquals("Left edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getLeftNeighbor().getRightNeighbor(), testSubject);
 				}
 				if (testSubject.getRightNeighbor() != null) {
-					assertEquals("Right edge is not consistent for field ["+m+", "+n+"]",
+					assertEquals("Right edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getRightNeighbor().getLeftNeighbor(), testSubject);
 				}
 				if (testSubject.getLeftOuterNeighbor() != null) {
-					assertEquals("Left outer edge is not consistent for field ["+m+", "+n+"]",
+					assertEquals("Left outer edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getLeftOuterNeighbor().getRightInnerNeighbor(), testSubject);
 				}
 				if (testSubject.getOuterNeighbor() != null) {
-					assertEquals("Outer edge is not consistent for field ["+m+", "+n+"]",
+					assertEquals("Outer edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getOuterNeighbor().getInnerNeighbor(), testSubject);
 				}
 				if (testSubject.getRightOuterNeighbor() != null) {
-					assertEquals("Right outer edge is not consistent for field ["+m+", "+n+"]",
+					assertEquals("Right outer edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getRightOuterNeighbor().getLeftInnerNeighbor(), testSubject);
 				}
 			}
