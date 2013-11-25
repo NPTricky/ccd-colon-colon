@@ -11,7 +11,7 @@
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
     <path id="J3Chess.classpath">
-        <pathelement location="bin/j3chess"/>
+        <pathelement location="bin/"/>
         <pathelement location="ext/hamcrest-core-1.3.jar"/>
         <pathelement location="ext/junit-4.11.jar"/>
         <pathelement location="ext/log4j-api-2.0-beta9.jar"/>
