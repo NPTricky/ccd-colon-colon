@@ -1,56 +1,62 @@
 package j3chess;
 
 import j3chess.artemis.Entity;
-import j3chess.PieceType;
 
+/**
+ * abstract base class for every entity of type piece.
+ */
 public abstract class Piece {
-	
-	protected EntitySystem mEntitySystem;
-	protected PieceType mType;
-	protected Entity mPiece;
-	
-	/**
-	 * @brief Abstract piece class to create new entities
-	 *
-	 */
-	public Piece(EntitySystem system, PieceType type) {
-		this.mEntitySystem = system;
-		this.mType = type;
-		initialize();
-	}
-	
-	/**
-	 * @brief Do one time processing in this method... 
-	 */	
-	private void initialize() {
-		J3ChessApp.getLogger().debug("Building " + mType.toString());
-		mPiece = mEntitySystem.getWorld().createEntity();
-	}
-	
-	/**
-	 * @brief Do subclass level processing in this method... 
-	 */
-	protected abstract void construct();
 
-	/**
-	 * @return the entity system
-	 */
-	public EntitySystem getEntitySystem() {
-		return mEntitySystem;
-	}
-	
-	/**
-	 * @return the type of the piece
-	 */
-	public PieceType getType() {
-		return mType;
-	}
-	
-	/**
-	 * @return the piece entity
-	 */
-	public Entity getPiece() {
-		return mPiece;
-	}
-	
+    /** @brief the entity system to create entities into */
+    private final EntitySystem mEntitySystem;
+    /** @brief the type of the piece */
+    private final PieceType mType;
+    /** @brief the entity of the piece */
+    private Entity mPiece;
+
+    /**
+     * @brief constructor of the piece class
+     * @param system the entity system to create entities into
+     * @param type the type of the piece
+     */
+    public Piece(final EntitySystem system, final PieceType type) {
+        this.mEntitySystem = system;
+        this.mType = type;
+        initialize();
+    }
+
+    /**
+     * @brief do one time processing in this method...
+     */
+    private void initialize() {
+        J3ChessApp.getLogger().debug("Building " + mType.toString());
+        mPiece = mEntitySystem.getWorld().createEntity();
+    }
+
+    /**
+     * @brief do subclass level processing in this method...
+     */
+    protected abstract void construct();
+
+    /**
+     * @return the entity system
+     */
+    public final EntitySystem getEntitySystem() {
+        return mEntitySystem;
+    }
+
+    /**
+     * @return the type of the piece
+     */
+    public final PieceType getType() {
+        return mType;
+    }
+
+    /**
+     * @return the piece entity
+     */
+    protected final Entity getPiece() {
+        return mPiece;
+    }
+
 }
