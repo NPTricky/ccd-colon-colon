@@ -4,7 +4,7 @@
   eine Mail an jan.duewel@st.ovgu.de oder besucht mich 
   in meinem Büro in Gebäude 18 Raum 213.
 -->
-<project name="jchess" default="main" basedir=".">
+<project name="j3chess" default="main" basedir=".">
   <!-- Sets variables which can later be used. -->
   <!-- The value of a property is accessed via ${} -->
   <property name="src.dir" location="." />
@@ -69,7 +69,7 @@
   <target name="findbugs" depends="jar">
     <findbugs home="${findbugs.dir}" output="xml" outputFile="${reports.dir}/findbugs_report.xml" >
       <sourcePath path="${src.dir}" />
-      <class location="${src.dir}/dist/jChess.jar" />
+      <class location="${src.dir}/dist/J3Chess.jar" />
       <auxclasspath refid="files-classpath"/>
     </findbugs>
   </target> 
@@ -148,7 +148,7 @@
   
   <!-- Compiles the java code -->
   <target name="compile" depends="clean, makedir">
-    <copy includeemptydirs="false" todir="${build.dir}/jchess">
+    <copy includeemptydirs="false" todir="${build.dir}/j3chess">
       <fileset dir="${src.dir}">
         <exclude name="**/*.java"/>
         <exclude name="build.xml"/>
@@ -164,7 +164,7 @@
   
   <!-- Creates the deployable jar file  -->
   <target name="jar" depends="compile">
-    <jar destfile="${dist.dir}\jChess.jar" basedir="${build.dir}">
+    <jar destfile="${dist.dir}/J3Chess.jar" basedir="${build.dir}">
       <manifest>
         <attribute name="Main-Class" value="j3chess.J3ChessApp"/>
       </manifest>
@@ -192,7 +192,7 @@
 
      <batchtest todir="${junit.output.dir}">
       <fileset dir="${build.dir}">
-         <include name="jchess/tests/*"/>
+         <include name="j3chess/test/*"/>
       </fileset>
      </batchtest> 
      
