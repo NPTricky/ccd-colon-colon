@@ -1,14 +1,28 @@
 package j3chess;
 
+import j3chess.EntitySystem;
+import j3chess.Chessboard;
+import j3chess.PieceFactory;
+
 public class Game {
+	/** @brief Represents the entities within our game */
+	private EntitySystem mEntitySystem;
 	/** @brief Represents the 3-person chessboard */
 	private Chessboard mChessboard;
+	/** @brief Represents the entities within our game */
+	private PieceFactory mPieceFactory;
 
 	/**
 	 * @brief Main class that keeps track of all objects needed throughout the game.
 	 */
 	public Game() {
-		setChessboard(new Chessboard());
+		this.mEntitySystem = new EntitySystem();
+		this.mChessboard = new Chessboard();
+		this.mPieceFactory = new PieceFactory(mEntitySystem);
+	}
+	
+	public void initialize() {
+		mEntitySystem.initialize();
 	}
 	
 	/**

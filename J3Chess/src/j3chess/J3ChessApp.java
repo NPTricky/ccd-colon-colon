@@ -27,7 +27,7 @@ public class J3ChessApp extends SingleFrameApplication {
 
 	@Override
 	protected void startup() {
-		mLogger.trace("Starting " + J3ChessApp.class.getName() + "...");
+		J3ChessApp.getLogger().trace("Starting " + J3ChessApp.class.getName() + "...");
 		J3ChessView view = new J3ChessView(this);
 		this.show(view);
 	}
