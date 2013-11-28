@@ -10,7 +10,7 @@
   <property name="src.dir" location="." />
   <property name="build.dir" location="bin" />
   <property name="dist.dir" location="dist" />
-  <property name="library.dir" location="ext" />
+  <property name="library.dir" location="/usr/lib" />
   <property name="reports.dir" location="reports" />
   <property name="junit.output.dir" location="${reports.dir}/junit" />
   <property name="instrumented.dir" location="instrumented" />
@@ -20,7 +20,7 @@
   
   <!-- cobertura setup -->    
   <path id="cobertura.classpath">
-    <fileset dir="${library.dir}/cobertura">
+    <fileset dir="${library.dir}/cobertura-2.0.3">
       <include name="cobertura*.jar" />
       <include name="lib/**/*.jar" />
     </fileset>
@@ -36,7 +36,7 @@
   </path>
   
   <!-- pmd related config -->  
-  <property name="pmd.dir" location="${library.dir}/pmd-bin" />
+  <property name="pmd.dir" location="${library.dir}/pmd-bin-5.0.5" />
     
   <path id="pmd.classpath">
     <fileset dir="${pmd.dir}">
@@ -55,7 +55,7 @@
   </target>
   
   <!-- findbugs setup-->
-  <property name="findbugs.dir" location="${library.dir}/findbugs" /> 
+  <property name="findbugs.dir" location="${library.dir}/findbugs-2.0.3" /> 
   
   <path id="findbugs.classpath">
     <fileset dir="${findbugs.dir}">
@@ -74,7 +74,7 @@
   </target> 
   
   <!-- checkstyle setup -->
-  <property name="checkstyle.dir" location="${library.dir}/checkstyle" />
+  <property name="checkstyle.dir" location="${library.dir}/checkstyle-5.6" />
   
   <path id="checkstyle.classpath">
       <fileset dir="${checkstyle.dir}">
