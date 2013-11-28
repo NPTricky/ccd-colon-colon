@@ -88,10 +88,6 @@
   <target name="checkstyle" description="Generates a report of code convention violations.">
 
     <checkstyle config="${checkstyle.dir}/checkstyle_checks.xml" failOnViolation="false" >
-      <property key="checkstyle.suppressions.file" file="cfg/suppressions" />
-	  <property key="translation.severity" value="warning" />
-	  <property key="checkstyle.header.file" file="cfg/header" />
-	  <property key="checkstyle.importcontrol.file" file="cfg/imports" />
       <formatter type="xml" tofile="${reports.dir}/checkstyle_report.xml"/>
       <fileset dir="${src.dir}" includes="**/*.java"/>
     </checkstyle>
