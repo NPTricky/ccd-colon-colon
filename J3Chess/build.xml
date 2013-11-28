@@ -238,7 +238,7 @@
     </junitreport>
   </target>
       
-  <target name="main" depends="compile,findbugs,pmd,instrument,jar,tests,coverage-report,summary-coverage-report,alternate-coverage-report,junitreport"> 
+  <target name="main" depends="compile,pmd,instrument,jar,tests,coverage-report,summary-coverage-report,alternate-coverage-report,junitreport"> 
     <description>Main target</description>
   </target>
     
