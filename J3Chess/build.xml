@@ -89,7 +89,7 @@
 
     <checkstyle config="${checkstyle.dir}/checkstyle_checks.xml" failOnViolation="false" >
       <property key="checkstyle.suppressions.file" file="" />
-	  <property key="translation.severity" string="WARNING" />
+	  <property key="translation.severity" value="warning" />
       <formatter type="xml" tofile="${reports.dir}/checkstyle_report.xml"/>
       <fileset dir="${src.dir}" includes="**/*.java"/>
     </checkstyle>
