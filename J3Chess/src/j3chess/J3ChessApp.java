@@ -4,13 +4,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
+import j3chess.utility.Helpers;
 
 /**
  * the main class of the j3chess project.
  */
 public class J3ChessApp extends SingleFrameApplication {
     /** @brief common logger instance for the application */
-    private static final Logger LOGGER = LogManager.getRootLogger();
+    private static final Logger LOG = LogManager.getRootLogger();
 
     /**
      * @brief main entry point of the project
@@ -22,6 +23,7 @@ public class J3ChessApp extends SingleFrameApplication {
                 "Log4jContextSelector",
                 "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
+        // launch the application
         launch(J3ChessApp.class, args);
     }
 
@@ -38,7 +40,7 @@ public class J3ChessApp extends SingleFrameApplication {
      * @return the logger
      */
     public static Logger getLogger() {
-        return LOGGER;
+        return LOG;
     }
 
     @Override

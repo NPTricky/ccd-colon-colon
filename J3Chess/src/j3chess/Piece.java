@@ -39,6 +39,7 @@ public abstract class Piece {
     protected abstract void construct();
 
     /**
+     * @brief getter for the mEntitySystem member
      * @return the entity system
      */
     public final EntitySystem getEntitySystem() {
@@ -46,6 +47,7 @@ public abstract class Piece {
     }
 
     /**
+     * @brief getter for the mType member
      * @return the type of the piece
      */
     public final PieceType getType() {
@@ -53,6 +55,7 @@ public abstract class Piece {
     }
 
     /**
+     * @brief getter for the mPiece member
      * @return the piece entity
      */
     protected final Entity getPiece() {
