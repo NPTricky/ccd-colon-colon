@@ -1,15 +1,16 @@
 package j3chess;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 import org.jdesktop.application.Application;
@@ -20,7 +21,11 @@ import org.jdesktop.application.FrameView;
  *
  */
 public class J3ChessView extends FrameView {
-	JPanel mMainPanel;
+	public final int CHESSBOARDHEIGHT=700;
+	public final int CHESSBOARDWIDTH=700;
+	private String chessboardImagePath ="pics/chessboard.png";
+	
+	DrawPanel mMainPanel;
 	JPanel mStatusPanel;
 	JTabbedPane mTabbedPane;
 	JMenuBar mMenuBar;
@@ -35,29 +40,26 @@ public class J3ChessView extends FrameView {
 	}
 
 	private void initialize() {
+		ImageIcon chessboardImage = new ImageIcon(chessboardImagePath);	
 		
+		//scale the chessboard		
+		chessboardImage.setImage(chessboardImage.getImage().getScaledInstance(CHESSBOARDWIDTH,CHESSBOARDHEIGHT,Image.SCALE_DEFAULT));		
 		
+		mMainPanel = new DrawPanel(chessboardImage.getImage());		
+			
 		
-		mMainPanel = new JPanel();
-		mMainPanel.add(new JTextField("Bla"));
-		
-	
 		this.getFrame().add(mMainPanel);
-		
-		
-		
-		
-
-		
 		
 		mStatusPanel = new JPanel();
 		mMenuBar = new JMenuBar();
-		mTabbedPane = new JTabbedPane();
+		
+		
 		
         //setComponent(mMainPanel);
-        setMenuBar(mMenuBar);
+		setMenuBar(mMenuBar);
         setStatusBar(mStatusPanel);
         
+       
         createMenuBar();
         
 	}       
