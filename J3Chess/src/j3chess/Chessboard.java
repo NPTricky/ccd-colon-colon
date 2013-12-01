@@ -10,7 +10,7 @@ import j3chess.utility.Vector2d;
 public class Chessboard {
 
 	/* ##################################################################
-	 *  global Values
+	 * global Values
 	 * #################################################################
 	 * */
 	
@@ -19,12 +19,12 @@ public class Chessboard {
 	public final int NUMBEROFCOLUMNS=24; 
 	/** @brief 6x24 array of all fields in the game */
 	private Field[][] mFields;
-	private ArrayList<Edge> moats=new ArrayList<Edge>();
-	private ArrayList<Edge> creeks= new ArrayList<Edge>();
+	private ArrayList < Edge > moats=new ArrayList < Edge > ();
+	private ArrayList < Edge > creeks= new ArrayList < Edge > ();
 	
 	
 	/* ##################################################################
-	 *  constructor
+	 * constructor
 	 * #################################################################
 	 * */
 	
@@ -53,13 +53,13 @@ public class Chessboard {
 	
 	
 	/* ##################################################################
-	 *  creeks
+	 * creeks
 	 * #################################################################
 	 * */
-	public final Boolean isCreek(final Field leftField, final Field rightField){
+	public final Boolean isCreek(final Field leftField, final Field rightField) {
 		Edge tmpEdge=new Edge(leftField,rightField);
-		for(int i=0; i<creeks.size();i++){
-			if(creeks.get(i).isEqual(tmpEdge)){
+		for(int i=0; i < creeks.size();i++) {
+			if (creeks.get(i).isEqual(tmpEdge)) {
 				return true;
 			}
 		}
@@ -67,7 +67,7 @@ public class Chessboard {
 	}
 	
 	
-	private void createCreeks(){
+	private void createCreeks() {
 		addCreek(mFields[23][1],mFields[0][1]);
 		addCreek(mFields[23][2],mFields[0][2]);
 		addCreek(mFields[7][1],mFields[8][1]);
@@ -76,27 +76,27 @@ public class Chessboard {
 		addCreek(mFields[15][2],mFields[16][2]);
 	}
 	
-	public final void addCreek(final Field leftField, final Field rightField){
-		if(leftField==rightField.getLeftNeighbor()){
+	public final void addCreek(final Field leftField, final Field rightField) {
+		if (leftField == rightField.getNeighbor(FieldDirection.Clockwise)) {
 			creeks.add(new Edge(leftField,rightField));
-		}else{
-			//TODO Error werfen 
-			System.out.println("ERROR Can't create Creek, leftField is not a leftNeighbor of rightField");
+		} else {
+			// TODO throw exception?
+			J3ChessApp.getLogger().error("ERROR Can't create Creek, leftField is not a leftNeighbor of rightField");
 		}
 			
 		
 	}
 	/* ##################################################################
-	 *  Moats
+	 * Moats
 	 * #################################################################
 	 * */
-	private void createMoats(){
+	private void createMoats() {
 			addMoat(mFields[23][0],mFields[0][0]);
 			addMoat(mFields[7][0],mFields[8][0]);
 			addMoat(mFields[15][0],mFields[16][0]);	
 	}
 	
-	public void removeMoat(final Field leftField, final Field rightField){
+	public void removeMoat(final Field leftField, final Field rightField) {
 			//TODO NOT implementet yet
 			//Moat entfernen - richtige Verbindungen wiederherstellen
 	}
@@ -105,29 +105,29 @@ public class Chessboard {
 	 * @brief adds a Moat which can't crossed by any piece, done by removing Neighbors
 	 */ 
 	public final void addMoat(final Field leftField,final Field rightField) {
-			if(leftField.getRightNeighbor()==rightField){
-				moats.add(new Edge(leftField,rightField));
+			if (leftField.getNeighbor(FieldDirection.CounterClockwise) == rightField) {
+				moats.add(new Edge(leftField, rightField));
 				//remove inner diagonals connections
-				if(leftField.getRightInnerNeighbor()!=null){
-					leftField.getRightInnerNeighbor().setLeftOuterNeighbor(null);
-					leftField.setRightInnerNeighbor(null);
+				if (leftField.getNeighbor(FieldDirection.InCounterClockwise) != null) {
+					leftField.getNeighbor(FieldDirection.InCounterClockwise).setNeighbor(FieldDirection.OutClockwise, null);
+					leftField.setNeighbor(FieldDirection.InCounterClockwise, null);
 				}
-				if(rightField.getLeftInnerNeighbor()!=null){
-					rightField.getLeftInnerNeighbor().setRightOuterNeighbor(null);
-					rightField.setLeftInnerNeighbor(null);
+				if (rightField.getNeighbor(FieldDirection.InClockwise) != null) {
+					rightField.getNeighbor(FieldDirection.InClockwise).setNeighbor(FieldDirection.OutCounterClockwise, null);
+					rightField.setNeighbor(FieldDirection.InClockwise, null);
 				}
 				//remove outer diagonal connetions
-				if(leftField.getRightOuterNeighbor()!=null){
-					leftField.getRightOuterNeighbor().setLeftInnerNeighbor(null);
-					leftField.setRightOuterNeighbor(null);
+				if (leftField.getNeighbor(FieldDirection.OutCounterClockwise) != null) {
+					leftField.getNeighbor(FieldDirection.OutCounterClockwise).setNeighbor(FieldDirection.InClockwise, null);
+					leftField.setNeighbor(FieldDirection.OutCounterClockwise, null);
 				}			
-				if(rightField.getLeftOuterNeighbor()!=null){
-					rightField.getLeftOuterNeighbor().setRightInnerNeighbor(null);
-					rightField.setLeftOuterNeighbor(null);
+				if (rightField.getNeighbor(FieldDirection.OutClockwise) != null) {
+					rightField.getNeighbor(FieldDirection.OutClockwise).setNeighbor(FieldDirection.InCounterClockwise, null);
+					rightField.setNeighbor(FieldDirection.OutClockwise, null);
 				}
 				//remove horizontal connections
-				leftField.setRightNeighbor(null);
-				rightField.setLeftNeighbor(null);			
+				leftField.setNeighbor(FieldDirection.CounterClockwise, null);
+				rightField.setNeighbor(FieldDirection.Clockwise, null);			
 			}else{
 				//TODO Exception handling leftFild is not the left of the Rightfield
 				System.out.println("ERROR Can't create Moat, leftField is not a leftNeighbor of rightField");
@@ -138,12 +138,12 @@ public class Chessboard {
 	
 
 	/* ##################################################################
-	 *  Set Neighbors
+	 * Set Neighbors
 	 * #################################################################
 	 * */
 	
 	
-	private void setNeighbors(){
+	private void setNeighbors() {
 		for(int circle = 0; circle < NUMBEROFCIRCELS; circle++) {
 			for(int column = 0; column < NUMBEROFCOLUMNS; column++) {
 				Field field=mFields[column][circle];
@@ -161,66 +161,66 @@ public class Chessboard {
 	
 	
 	private void setRight(final Field field, final int column, final int circle) {
-		field.setRightNeighbor(mFields[((column+1)%NUMBEROFCOLUMNS)][circle]);	
+		field.setNeighbor(FieldDirection.CounterClockwise, mFields[((column+1)%NUMBEROFCOLUMNS)][circle]);	
 	}
 	
 	private void setLeft(final Field field, final int column, final int circle) {
-		if(column==0){
-			field.setLeftNeighbor(mFields[NUMBEROFCOLUMNS-1][circle]);
+		if (column == 0) {
+			field.setNeighbor(FieldDirection.Clockwise, mFields[NUMBEROFCOLUMNS-1][circle]);
 		}else{
-			field.setLeftNeighbor(mFields[column-1][circle]);
+			field.setNeighbor(FieldDirection.Clockwise, mFields[column-1][circle]);
 		}
 	}
 	
 	private void setInner(final Field field, final int column, final int circle) {
-		if(circle<NUMBEROFCIRCELS-1){
-			field.setInnerNeighbor(mFields[column][circle+1]);
+		if (circle < NUMBEROFCIRCELS-1) {
+			field.setNeighbor(FieldDirection.In, mFields[column][circle+1]);
 		} else {
-			field.setInnerNeighbor(mFields[((column+NUMBEROFCOLUMNS/2)%NUMBEROFCOLUMNS)][circle]);
+			field.setNeighbor(FieldDirection.In, mFields[((column+NUMBEROFCOLUMNS/2)%NUMBEROFCOLUMNS)][circle]);
 		}
 	}
 	
 	private void setOuter(final Field field, final int column, final int circle) {
-		if(circle>0){
-			field.setOuterNeighbor(mFields[column][circle-1]);
+		if (circle > 0) {
+			field.setNeighbor(FieldDirection.Out, mFields[column][circle-1]);
 		}
 	}
 	
 	private void setRightOuter(final Field field, final int column, final int circle) {
-		if(circle>0){
-			field.setRightOuterNeighbor(mFields[(column+1)%NUMBEROFCOLUMNS][circle-1]);
+		if (circle > 0) {
+			field.setNeighbor(FieldDirection.OutCounterClockwise, mFields[(column+1)%NUMBEROFCOLUMNS][circle-1]);
 		}
 	}
 	
 	private void setLeftOuter(final Field field, final int column, final int circle) {
-		if(circle>0){
-			if(column>0){
-				field.setLeftOuterNeighbor(mFields[column-1][circle-1]);
+		if (circle > 0) {
+			if (column > 0) {
+				field.setNeighbor(FieldDirection.OutClockwise, mFields[column-1][circle-1]);
 			}else{
-				field.setLeftOuterNeighbor(mFields[NUMBEROFCOLUMNS-1][circle-1]);	
+				field.setNeighbor(FieldDirection.OutClockwise, mFields[NUMBEROFCOLUMNS-1][circle-1]);	
 			}
 		}
 	}
 	
 	private void setRightInner(final Field field, final int column, final int circle) {
-		if(circle<NUMBEROFCIRCELS-1){
-			field.setRightInnerNeighbor(mFields[(column+1)%NUMBEROFCOLUMNS][circle+1]);
+		if (circle < NUMBEROFCIRCELS-1) {
+			field.setNeighbor(FieldDirection.InCounterClockwise, mFields[(column+1)%NUMBEROFCOLUMNS][circle+1]);
 		}else{
 			//diagonal through the middle
-			field.setRightInnerNeighbor(mFields[(column+((NUMBEROFCIRCELS-1)*2))%NUMBEROFCOLUMNS][circle]);
+			field.setNeighbor(FieldDirection.InCounterClockwise, mFields[(column+((NUMBEROFCIRCELS-1)*2))%NUMBEROFCOLUMNS][circle]);
 		}
 	}
 	
 	private void setLeftInner(final Field field, final int column, final int circle) {
-		if(circle<NUMBEROFCIRCELS-1){
-			if(column!=0){
-				field.setLeftInnerNeighbor(mFields[column-1][circle+1]);
+		if (circle < NUMBEROFCIRCELS-1) {
+			if (column != 0) {
+				field.setNeighbor(FieldDirection.InClockwise, mFields[column-1][circle+1]);
 			} else {
-				field.setLeftInnerNeighbor(mFields[NUMBEROFCOLUMNS-1][circle+1]);
+				field.setNeighbor(FieldDirection.InClockwise, mFields[NUMBEROFCOLUMNS-1][circle+1]);
 			}
 		}else{
 			//diagonal through the middle
-			field.setLeftInnerNeighbor(mFields[(column+(NUMBEROFCOLUMNS-((NUMBEROFCIRCELS-1)*2)))%NUMBEROFCOLUMNS][circle]);
+			field.setNeighbor(FieldDirection.InClockwise, mFields[(column+(NUMBEROFCOLUMNS-((NUMBEROFCIRCELS-1)*2)))%NUMBEROFCOLUMNS][circle]);
 		}
 	}
 	/**
@@ -246,8 +246,8 @@ public class Chessboard {
 	 * @param centerSize	Relative size of the center circle, e.g. 0.2 means 20% of the total diameter 
 	 */
 	private void calculateDrawPositions(final float centerSize) {
-		for (int m=0; m<6; m++) {
-			for (int n=0; n<24; n++) {
+		for (int m=0; m < 6; m++) {
+			for (int n=0; n < 24; n++) {
 				// Calculate radius of the fields
 				// Divide the total radius by 13, where each 2m+1 is the center of one field
 				// Can be visualized using the following 13 chars: |1|2|3|4|5|6|
@@ -269,14 +269,15 @@ public class Chessboard {
 	
 	/**
 	 * @brief Returns a field object by its coordinate.
-	 * Coordinates are m from the center to the outside and n around the circular chessboard.    
+	 * Coordinates are m from the center to the outside and n around the circular chessboard. 
 	 * @param column	Coordinate from the center to the outside 
 	 * @param circle	Coordinate around the circular chessboard
 	 * @return Field object
 	 */
 	public final Field getField(final int column, final int circle) {
 		// Safety checks
-		if (mFields!=null && column<mFields.length && circle < mFields[0].length) {
+		if (mFields != null && column < mFields.length
+				&& circle < mFields[0].length) {
 			return mFields[column][circle];
 		}
 		// TODO log error
@@ -284,7 +285,7 @@ public class Chessboard {
 		return null;
 	}
 	
-	private void printAllFields(){
+	private void printAllFields() {
 		for(int circles = 0; circles < NUMBEROFCIRCELS; circles++) {
 			for(int columns = 0; columns < NUMBEROFCOLUMNS; columns++) {
 				mFields[columns][circles].print();
