@@ -1,6 +1,10 @@
 package j3chess;
 
 import j3chess.artemis.Entity;
+import j3chess.artemis.ComponentType;
+import j3chess.components.Movement;
+import j3chess.components.Paintable;
+import j3chess.components.Position;
 
 /**
  * abstract base class for every entity of type piece.
@@ -31,6 +35,9 @@ public abstract class Piece {
     private void initialize() {
         J3ChessApp.getLogger().debug("Building " + mType.toString());
         mPiece = mEntitySystem.getWorld().createEntity();
+        //mPiece.addComponent(new Position(), ComponentType.getTypeFor(Position.class));
+        //mPiece.addComponent(new Movement(), ComponentType.getTypeFor(Movement.class));
+        //mPiece.addComponent(new Paintable(), ComponentType.getTypeFor(Paintable.class));
     }
 
     /**
