@@ -22,14 +22,14 @@ public class ChessboardTest {
 		Chessboard cb = new Chessboard();
 		
 		// Loop through all fields
-		for (int circle=0; circle<cb.NUMBEROFCIRCELS; circle++) {
+		for (int circle=0; circle<cb.NUMBEROFCIRCLES; circle++) {
 			for (int column=0; column<cb.NUMBEROFCOLUMNS; column++) {
 				Field testSubject = cb.getField(column,  circle);
 				
 				// Test all edges for consistency
 				
 				if (testSubject.getNeighbor(FieldDirection.InClockwise) != null) {
-					if(circle!=cb.NUMBEROFCIRCELS-1){
+					if(circle!=cb.NUMBEROFCIRCLES-1){
 							assertEquals("Left inner edge is not consistent for field ["+column+", "+circle+"]" ,
 									testSubject.getNeighbor(FieldDirection.InClockwise).getNeighbor(FieldDirection.OutCounterClockwise), testSubject);
 					}else{
@@ -41,7 +41,7 @@ public class ChessboardTest {
 					
 				}
 				if (testSubject.getNeighbor(FieldDirection.In) != null) {
-					if(circle!=cb.NUMBEROFCIRCELS-1){
+					if(circle!=cb.NUMBEROFCIRCLES-1){
 						assertEquals("Inner edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getNeighbor(FieldDirection.In).getNeighbor(FieldDirection.Out), testSubject);
 					}else{
@@ -51,7 +51,7 @@ public class ChessboardTest {
 					}				
 				}
 				if (testSubject.getNeighbor(FieldDirection.InCounterClockwise) != null) {
-					if(circle!=cb.NUMBEROFCIRCELS-1){
+					if(circle!=cb.NUMBEROFCIRCLES-1){
 						assertEquals("Right inner edge is not consistent for field ["+column+", "+circle+"]",
 							testSubject.getNeighbor(FieldDirection.InCounterClockwise).getNeighbor(FieldDirection.OutClockwise), testSubject);
 					}else{
