@@ -69,7 +69,7 @@
   <target name="findbugs" depends="jar">
     <findbugs home="${findbugs.dir}" output="xml" outputFile="${reports.dir}/findbugs_report.xml" >
       <sourcePath path="${src.dir}/j3chess" />
-      <class location="${src.dir}/dist/J3Chess.jar" />
+      <class location="${dist.dir}/J3Chess.jar" />
       <auxclasspath refid="files-classpath"/>
     </findbugs>
   </target> 
