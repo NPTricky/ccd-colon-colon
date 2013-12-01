@@ -9,120 +9,70 @@ public class Field {
 	/** @brief Position where the field is drawn */
 	private Vector2d mDrawPos;
 
-	private Field leftNeighbor;
-	private Field rightNeighbor;
-	private Field innerNeighbor;
-	private Field outerNeighbor;
-	
-	private Field leftInnerNeighbor;
-	private Field rightInnerNeighbor;
-	private Field leftOuterNeighbor;
-	private Field rightOuterNeighbor;
-	
-	public Integer circle;
-	public int column;
-	public char[] columnNames = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X'};
+	private Field[] mNeighbors;
 
-	
-	
-	/** @brief Creates a field of the chessboard */
+	public Integer mCircle;
+	public int mColumn;
+	public char[] columnNames = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
+			'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+			'S', 'T', 'U', 'V', 'W', 'X'};
+
+
+
+	/**
+	 * Creates an instance of a Field on the chessboard.
+	 * @param circle Inner / outer coordinate of the field from in the
+	 * range [0..5] where 0 is the outermost circle
+	 * @param column Coordinate around the circle, increasing CCW and
+	 * starting with the white player
+	 */
 	public Field(final int circle, final int column) {
 		mDrawPos = new Vector2d();
-		this.circle=circle;
-		this.column=column;
-	}
-	
-	/** @brief Returns the left neighbor of this field. */
-	public final Field getLeftNeighbor() {
-		return leftNeighbor;
-	}
-  
-	
-	/** @brief Sets the left neighbor of this field. */
-	public final void setLeftNeighbor(final Field leftNeighbor) {
-		this.leftNeighbor = leftNeighbor;
+		mCircle = circle;
+		mColumn = column;
+
+		// Create new array for all directions
+		mNeighbors = new Field[FieldDirection.values().length];
 	}
 
-	/** @brief Returns the right neighbor of this field. */
-	public final Field getRightNeighbor() {
-		return rightNeighbor;
-	}
-	/** @brief Sets the right neighbor of this field. */
-	public final void setRightNeighbor(final Field rightNeighbor) {
-		this.rightNeighbor = rightNeighbor;
-	}
-	/** @brief Returns the inner neighbor of this field. */
-	public final Field getInnerNeighbor() {
-		return innerNeighbor;
+	/**
+	 * Returns a neighbor of this field in the specified direction.
+	 * @param dir Direction of the neighbor
+	 * @return Reference to the neighboring field
+	 */
+	public final Field getNeighbor(final FieldDirection dir) {
+		return mNeighbors[dir.ordinal()];
 	}
 
-	/** @brief Sets the inner neighbor of this field. */
-	public final void setInnerNeighbor(final Field innerNeighbor) {
-		this.innerNeighbor = innerNeighbor;
-	}
-	/** @brief Returns the outer neighbor of this field. */
-	public final Field getOuterNeighbor() {
-		return outerNeighbor;
-	}
-	/** @brief Sets the outer neighbor of this field. */
-	public final void setOuterNeighbor(final Field outerNeighbor) {
-		this.outerNeighbor = outerNeighbor;
-	}
-
-	/** @brief Returns the left inner neighbor of this field. */
-	public final Field getLeftInnerNeighbor() {
-		return leftInnerNeighbor;
-	}
-
-	/** @brief Sets the left inner neighbor of this field. */
-	public final void setLeftInnerNeighbor(final Field leftInnerNeighbor) {
-		this.leftInnerNeighbor = leftInnerNeighbor;
-	}
-	/** @brief Returns the right inner neighbor of this field. */
-	public final Field getRightInnerNeighbor() {
-		return rightInnerNeighbor;
-	}
-	/** @brief Sets the right inner neighbor of this field. */
-	public final void setRightInnerNeighbor(final Field rightInnerNeighbor) {
-		this.rightInnerNeighbor = rightInnerNeighbor;
-	}
-	/** @brief Returns the left outer neighbor of this field. */
-	public final Field getLeftOuterNeighbor() {
-		return leftOuterNeighbor;
-	}
-
-	/** @brief Sets the left outer neighbor of this field. */
-	public final void setLeftOuterNeighbor(final Field leftOuterNeighbor) {
-		this.leftOuterNeighbor = leftOuterNeighbor;
-	}
-	/** @brief Returns the right outer neighbor of this field. */
-	public final Field getRightOuterNeighbor() {
-		return rightOuterNeighbor;
-	}
-	/** @brief Sets the right outer neighbor of this field. */
-	public final void setRightOuterNeighbor(final Field rightOuterNeighbor) {
-		this.rightOuterNeighbor = rightOuterNeighbor;
+	/**
+	 * Sets the neighbor of this field in the specified direction.
+	 * @param dir Direction of the neighbor
+	 * @param field Neighbor to be set
+	 */
+	public final void setNeighbor(final FieldDirection dir,
+			final Field field) {
+		mNeighbors[dir.ordinal()] = field;
 	}
 
 	/** @brief prints the field with his Neighbors - just for debugging */
 	public final void print(){
-		System.out.println(this.toString() + 
-				" left:" + leftNeighbor + 
-				" right:" + rightNeighbor + 
-				" inner:" + innerNeighbor + 
-				" Outer:" + outerNeighbor + 
-				" LeftOuter:" + leftOuterNeighbor + 
-				" RightOuter:" + rightOuterNeighbor + 
-				" LeftInner:" + leftInnerNeighbor + 
-				" RightInner:" + rightInnerNeighbor);
-	}	
+		J3ChessApp.getLogger().debug(this.toString()
+				+ " CW:" + getNeighbor(FieldDirection.Clockwise)
+				+ " CCW:" + getNeighbor(FieldDirection.CounterClockwise)
+				+ " Inner:" + getNeighbor(FieldDirection.In)
+				+ " Outer:" + getNeighbor(FieldDirection.Out)
+				+ " CW Outer:" + getNeighbor(FieldDirection.OutClockwise)
+				+ " CCW Outer:" + getNeighbor(FieldDirection.OutCounterClockwise)
+				+ " CW Inner:" + getNeighbor(FieldDirection.InClockwise)
+				+ " CCW Inner:" + getNeighbor(FieldDirection.InCounterClockwise));
+	}
 
-	
+
 	public final String toString(){
-		return columnNames[column] + circle.toString();
-	}	
+		return columnNames[mColumn] + mCircle.toString();
+	}
 
-	
+
 	/**
 	 * @brief Sets the position where the field (i.e. its piece) will be drawn.
 	 * @param vec	Cartesian 2-dimensional vector specifying the draw position
@@ -131,7 +81,7 @@ public class Field {
 		mDrawPos.x = vec.x;
 		mDrawPos.y = vec.y;
 	}
-	
 
-	
+
+
 }

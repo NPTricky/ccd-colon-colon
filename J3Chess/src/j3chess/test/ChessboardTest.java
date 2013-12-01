@@ -3,6 +3,7 @@ package j3chess.test;
 import static org.junit.Assert.*;
 import j3chess.Chessboard;
 import j3chess.Field;
+import j3chess.FieldDirection;
 
 import org.junit.Test;
 
@@ -27,57 +28,57 @@ public class ChessboardTest {
 				
 				// Test all edges for consistency
 				
-				if (testSubject.getLeftInnerNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.InClockwise) != null) {
 					if(circle!=cb.NUMBEROFCIRCELS-1){
 							assertEquals("Left inner edge is not consistent for field ["+column+", "+circle+"]" ,
-									testSubject.getLeftInnerNeighbor().getRightOuterNeighbor(), testSubject);
+									testSubject.getNeighbor(FieldDirection.InClockwise).getNeighbor(FieldDirection.OutCounterClockwise), testSubject);
 					}else{
 						// inner throw the middle
 						assertEquals("Left inner edge is not consistent for field ["+column+", "+circle+"]" ,
-								testSubject.getLeftInnerNeighbor().getRightInnerNeighbor(), testSubject);
+								testSubject.getNeighbor(FieldDirection.InClockwise).getNeighbor(FieldDirection.InCounterClockwise), testSubject);
 					}
 						
 					
 				}
-				if (testSubject.getInnerNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.In) != null) {
 					if(circle!=cb.NUMBEROFCIRCELS-1){
 						assertEquals("Inner edge is not consistent for field ["+column+", "+circle+"]",
-							testSubject.getInnerNeighbor().getOuterNeighbor(), testSubject);
+							testSubject.getNeighbor(FieldDirection.In).getNeighbor(FieldDirection.Out), testSubject);
 					}else{
 						// inner throw the middle 
 						assertEquals("Inner edge is not consistent for field ["+column+", "+circle+"]",
-								testSubject.getInnerNeighbor().getInnerNeighbor(), testSubject);
+								testSubject.getNeighbor(FieldDirection.In).getNeighbor(FieldDirection.In), testSubject);
 					}				
 				}
-				if (testSubject.getRightInnerNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.InCounterClockwise) != null) {
 					if(circle!=cb.NUMBEROFCIRCELS-1){
 						assertEquals("Right inner edge is not consistent for field ["+column+", "+circle+"]",
-							testSubject.getRightInnerNeighbor().getLeftOuterNeighbor(), testSubject);
+							testSubject.getNeighbor(FieldDirection.InCounterClockwise).getNeighbor(FieldDirection.OutClockwise), testSubject);
 					}else{
 						// inner throw the middle 
 						assertEquals("Right inner edge is not consistent for field ["+column+", "+circle+"]",
-								testSubject.getRightInnerNeighbor().getLeftInnerNeighbor(), testSubject);
+								testSubject.getNeighbor(FieldDirection.InCounterClockwise).getNeighbor(FieldDirection.InClockwise), testSubject);
 					}		
 				}
-				if (testSubject.getLeftNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.Clockwise) != null) {
 					assertEquals("Left edge is not consistent for field ["+column+", "+circle+"]",
-							testSubject.getLeftNeighbor().getRightNeighbor(), testSubject);
+							testSubject.getNeighbor(FieldDirection.Clockwise).getNeighbor(FieldDirection.CounterClockwise), testSubject);
 				}
-				if (testSubject.getRightNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.CounterClockwise) != null) {
 					assertEquals("Right edge is not consistent for field ["+column+", "+circle+"]",
-							testSubject.getRightNeighbor().getLeftNeighbor(), testSubject);
+							testSubject.getNeighbor(FieldDirection.CounterClockwise).getNeighbor(FieldDirection.Clockwise), testSubject);
 				}
-				if (testSubject.getLeftOuterNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.OutClockwise) != null) {
 					assertEquals("Left outer edge is not consistent for field ["+column+", "+circle+"]",
-							testSubject.getLeftOuterNeighbor().getRightInnerNeighbor(), testSubject);
+							testSubject.getNeighbor(FieldDirection.OutClockwise).getNeighbor(FieldDirection.InCounterClockwise), testSubject);
 				}
-				if (testSubject.getOuterNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.Out) != null) {
 					assertEquals("Outer edge is not consistent for field ["+column+", "+circle+"]",
-							testSubject.getOuterNeighbor().getInnerNeighbor(), testSubject);
+							testSubject.getNeighbor(FieldDirection.Out).getNeighbor(FieldDirection.In), testSubject);
 				}
-				if (testSubject.getRightOuterNeighbor() != null) {
+				if (testSubject.getNeighbor(FieldDirection.OutCounterClockwise) != null) {
 					assertEquals("Right outer edge is not consistent for field ["+column+", "+circle+"]",
-							testSubject.getRightOuterNeighbor().getLeftInnerNeighbor(), testSubject);
+							testSubject.getNeighbor(FieldDirection.OutCounterClockwise).getNeighbor(FieldDirection.InClockwise), testSubject);
 				}
 			}
 		}
