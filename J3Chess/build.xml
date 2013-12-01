@@ -7,7 +7,7 @@
 <project name="j3chess" default="main" basedir=".">
   <!-- Sets variables which can later be used. -->
   <!-- The value of a property is accessed via ${} -->
-  <property name="src.dir" location="src/j3chess" />
+  <property name="src.dir" location="src" />
   <property name="build.dir" location="bin" />
   <property name="dist.dir" location="dist" />
   <property name="library.dir" location="/usr/lib" />
@@ -49,7 +49,7 @@
     <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.classpath"/>
     <pmd rulesetfiles="rulesets/internal/all-java.xml">
       <formatter type="xml" toFile="${reports.dir}/pmd_report.xml"/>
-      <fileset dir="${src.dir}">
+      <fileset dir="${src.dir}/j3chess">
         <include name="**/*.java"/>
       </fileset>
     </pmd>
@@ -68,7 +68,7 @@
    
   <target name="findbugs" depends="jar">
     <findbugs home="${findbugs.dir}" output="xml" outputFile="${reports.dir}/findbugs_report.xml" >
-      <sourcePath path="${src.dir}" />
+      <sourcePath path="${src.dir}/j3chess" />
       <class location="${src.dir}/dist/J3Chess.jar" />
       <auxclasspath refid="files-classpath"/>
     </findbugs>
@@ -89,7 +89,7 @@
 
     <checkstyle config="${checkstyle.dir}/checkstyle_checks.xml" failOnViolation="false" >
       <formatter type="xml" tofile="${reports.dir}/checkstyle_report.xml"/>
-      <fileset dir="${src.dir}" includes="**/*.java"/>
+      <fileset dir="${src.dir}/j3chess" includes="**/*.java"/>
     </checkstyle>
     
   </target>
@@ -205,7 +205,7 @@
       Generate an XML file containing the coverage data using
       the "srcdir" attribute.
     -->
-    <cobertura-report srcdir="${src.dir}" destdir="${coverage.xml.dir}" format="xml" />
+    <cobertura-report srcdir="${src.dir}/j3chess" destdir="${coverage.xml.dir}" format="xml" />
   </target>
   
   <target name="summary-coverage-report">
@@ -213,7 +213,7 @@
       Generate an summary XML file containing the coverage data using
       the "srcdir" attribute.
     -->
-    <cobertura-report srcdir="${src.dir}" destdir="${coverage.summaryxml.dir}" format="summaryXml" />
+    <cobertura-report srcdir="${src.dir}/j3chess" destdir="${coverage.summaryxml.dir}" format="summaryXml" />
   </target>
   
   <target name="alternate-coverage-report">
@@ -222,7 +222,7 @@
       data in a user-readable form using nested source filesets.
     -->
     <cobertura-report destdir="${coverage.html.dir}">
-      <fileset dir="${src.dir}">
+      <fileset dir="${src.dir}/j3chess">
         <include name="**/*.java"/>
       </fileset>
     </cobertura-report>
