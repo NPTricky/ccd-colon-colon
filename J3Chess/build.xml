@@ -89,7 +89,10 @@
 
     <checkstyle config="${checkstyle.dir}/checkstyle_checks.xml" failOnViolation="false" >
       <formatter type="xml" tofile="${reports.dir}/checkstyle_report.xml"/>
-      <fileset dir="${src.dir}" includes="**/*.java"/>
+      <fileset dir="${src.dir}">
+		<include name="**/*.java"/>
+		<exclude name="**/*artemis*"/>
+	  </fileset>
     </checkstyle>
     
   </target>
