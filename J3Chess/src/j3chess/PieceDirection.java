@@ -22,6 +22,7 @@ public enum PieceDirection implements Direction {
     /** @brief backward to the right of the piece in a diagonal manner */
     BackwardRight;
 
+    /*
     @Override
     public Neighborhood translate(final PieceDirection direction) {
         Neighborhood result = null;
@@ -55,5 +56,5 @@ public enum PieceDirection implements Direction {
         }
         return result;
     }
-
+    */
 }

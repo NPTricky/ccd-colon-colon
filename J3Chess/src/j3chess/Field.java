@@ -13,7 +13,7 @@ public class Field {
     private Vector2d mDrawPos;
 
     /** @brief Neighbors of this field, some might be null. */
-    EnumMap<? extends Direction, Field> mNeighbors =
+    EnumMap<FieldDirection, Field> mNeighbors =
             new EnumMap<FieldDirection, Field>(FieldDirection.class);
 
     public Integer mCircle;
