@@ -1,6 +1,6 @@
 package j3chess.components;
 
-import j3chess.artemis.Component;
+import artemis.Component;
 
 /**
  * entity component for all selectable entities.

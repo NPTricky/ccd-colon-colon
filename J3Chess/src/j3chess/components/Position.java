@@ -1,7 +1,7 @@
 package j3chess.components;
 
+import artemis.Component;
 import j3chess.Field;
-import j3chess.artemis.Component;
 
 /**
  * entity component for a current and last position on a chessboard.

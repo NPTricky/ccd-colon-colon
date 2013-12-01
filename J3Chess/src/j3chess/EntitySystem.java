@@ -1,10 +1,10 @@
 package j3chess;
 
-import j3chess.artemis.ComponentManager;
-import j3chess.artemis.EntityManager;
-import j3chess.artemis.World;
-import j3chess.artemis.managers.GroupManager;
-import j3chess.artemis.managers.PlayerManager;
+import artemis.ComponentManager;
+import artemis.EntityManager;
+import artemis.World;
+import artemis.managers.GroupManager;
+import artemis.managers.PlayerManager;
 
 /**
  * wrapper for the component based entity system.

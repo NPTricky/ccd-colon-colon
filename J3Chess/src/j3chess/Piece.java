@@ -1,7 +1,7 @@
 package j3chess;
 
-import j3chess.artemis.Entity;
-import j3chess.artemis.ComponentType;
+import artemis.ComponentType;
+import artemis.Entity;
 import j3chess.components.Movement;
 import j3chess.components.Paintable;
 import j3chess.components.Position;

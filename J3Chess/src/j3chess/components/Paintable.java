@@ -1,8 +1,8 @@
 package j3chess.components;
 
-import j3chess.artemis.Component;
-
 import javax.swing.ImageIcon;
+
+import artemis.Component;
 
 /**
  * entity component for all paintable entities.
