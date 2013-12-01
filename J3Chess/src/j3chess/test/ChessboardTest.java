@@ -9,7 +9,7 @@ import org.junit.Test;
 public class ChessboardTest {
 
 	@Test
-	public void constructorTest() {
+	public final void constructorTest() {
 		// This tests whether all edges created by createFields() are symmetric.
 		// We don't want any fields Jim and Bob, where Bob is Jim's left neighbor, but
 		// Jim is not Bob's right neighbor. That doesn't make sense.

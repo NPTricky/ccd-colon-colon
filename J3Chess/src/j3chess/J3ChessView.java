@@ -18,7 +18,7 @@ public class J3ChessView extends FrameView {
 	/**
 	 * @param app Parent application.
 	 */
-	public J3ChessView(Application app) {
+	public J3ChessView(final Application app) {
 		super(app);
 		initialize();
 	}

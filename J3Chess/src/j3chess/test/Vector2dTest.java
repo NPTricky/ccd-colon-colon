@@ -8,7 +8,7 @@ import org.junit.Test;
 public class Vector2dTest {
 
 	@Test
-	public void constructorTest() {
+	public final void constructorTest() {
 		// Create zero vector
 		Vector2d test = new Vector2d();
 		assertEquals("Zero vector X is not assigned correctly", test.x, 0, 0);
@@ -32,7 +32,7 @@ public class Vector2dTest {
 	}
 	
 	@Test
-	public void polarCoordinateTest() {
+	public final void polarCoordinateTest() {
 		// Define test cases, format {r, rho}
 		float[][] testCases = {	{0, 1.2345f},
 								{1, 0},

@@ -4,12 +4,12 @@ public class Edge{
 	public Field leftField;
 	public Field rightField;
 	
-	public Edge(Field leftField,Field rightField){
+	public Edge(final Field leftField,final Field rightField){
 		this.leftField=leftField;
 		this.rightField=rightField;
 	}
 	
-	public Boolean isEqual(Edge edge){
+	public final Boolean isEqual(final Edge edge){
 		if(this.leftField==edge.leftField&&this.rightField==edge.rightField){
 			return true;
 		}

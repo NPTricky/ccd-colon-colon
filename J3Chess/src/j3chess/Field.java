@@ -21,91 +21,91 @@ public class Field {
 	
 	public Integer circle;
 	public int column;
-	public char columnNames[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X'};
+	public char[] columnNames = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X'};
 
 	
 	
 	/** @brief Creates a field of the chessboard */
-	public Field(int circle, int column) {
+	public Field(final int circle, final int column) {
 		mDrawPos = new Vector2d();
 		this.circle=circle;
 		this.column=column;
 	}
 	
 	/** @brief Returns the left neighbor of this field. */
-	public Field getLeftNeighbor() {
+	public final Field getLeftNeighbor() {
 		return leftNeighbor;
 	}
   
 	
 	/** @brief Sets the left neighbor of this field. */
-	public void setLeftNeighbor(Field leftNeighbor) {
+	public final void setLeftNeighbor(final Field leftNeighbor) {
 		this.leftNeighbor = leftNeighbor;
 	}
 
 	/** @brief Returns the right neighbor of this field. */
-	public Field getRightNeighbor() {
+	public final Field getRightNeighbor() {
 		return rightNeighbor;
 	}
 	/** @brief Sets the right neighbor of this field. */
-	public void setRightNeighbor(Field rightNeighbor) {
+	public final void setRightNeighbor(final Field rightNeighbor) {
 		this.rightNeighbor = rightNeighbor;
 	}
 	/** @brief Returns the inner neighbor of this field. */
-	public Field getInnerNeighbor() {
+	public final Field getInnerNeighbor() {
 		return innerNeighbor;
 	}
 
 	/** @brief Sets the inner neighbor of this field. */
-	public void setInnerNeighbor(Field innerNeighbor) {
+	public final void setInnerNeighbor(final Field innerNeighbor) {
 		this.innerNeighbor = innerNeighbor;
 	}
 	/** @brief Returns the outer neighbor of this field. */
-	public Field getOuterNeighbor() {
+	public final Field getOuterNeighbor() {
 		return outerNeighbor;
 	}
 	/** @brief Sets the outer neighbor of this field. */
-	public void setOuterNeighbor(Field outerNeighbor) {
+	public final void setOuterNeighbor(final Field outerNeighbor) {
 		this.outerNeighbor = outerNeighbor;
 	}
 
 	/** @brief Returns the left inner neighbor of this field. */
-	public Field getLeftInnerNeighbor() {
+	public final Field getLeftInnerNeighbor() {
 		return leftInnerNeighbor;
 	}
 
 	/** @brief Sets the left inner neighbor of this field. */
-	public void setLeftInnerNeighbor(Field leftInnerNeighbor) {
+	public final void setLeftInnerNeighbor(final Field leftInnerNeighbor) {
 		this.leftInnerNeighbor = leftInnerNeighbor;
 	}
 	/** @brief Returns the right inner neighbor of this field. */
-	public Field getRightInnerNeighbor() {
+	public final Field getRightInnerNeighbor() {
 		return rightInnerNeighbor;
 	}
 	/** @brief Sets the right inner neighbor of this field. */
-	public void setRightInnerNeighbor(Field rightInnerNeighbor) {
+	public final void setRightInnerNeighbor(final Field rightInnerNeighbor) {
 		this.rightInnerNeighbor = rightInnerNeighbor;
 	}
 	/** @brief Returns the left outer neighbor of this field. */
-	public Field getLeftOuterNeighbor() {
+	public final Field getLeftOuterNeighbor() {
 		return leftOuterNeighbor;
 	}
 
 	/** @brief Sets the left outer neighbor of this field. */
-	public void setLeftOuterNeighbor(Field leftOuterNeighbor) {
+	public final void setLeftOuterNeighbor(final Field leftOuterNeighbor) {
 		this.leftOuterNeighbor = leftOuterNeighbor;
 	}
 	/** @brief Returns the right outer neighbor of this field. */
-	public Field getRightOuterNeighbor() {
+	public final Field getRightOuterNeighbor() {
 		return rightOuterNeighbor;
 	}
 	/** @brief Sets the right outer neighbor of this field. */
-	public void setRightOuterNeighbor(Field rightOuterNeighbor) {
+	public final void setRightOuterNeighbor(final Field rightOuterNeighbor) {
 		this.rightOuterNeighbor = rightOuterNeighbor;
 	}
 
 	/** @brief prints the field with his Neighbors - just for debugging */
-	public void print(){
+	public final void print(){
 		System.out.println(this.toString() + 
 				" left:" + leftNeighbor + 
 				" right:" + rightNeighbor + 
@@ -118,7 +118,7 @@ public class Field {
 	}	
 
 	
-	public String toString(){
+	public final String toString(){
 		return columnNames[column] + circle.toString();
 	}	
 
@@ -127,7 +127,7 @@ public class Field {
 	 * @brief Sets the position where the field (i.e. its piece) will be drawn.
 	 * @param vec	Cartesian 2-dimensional vector specifying the draw position
 	 */
-	public void setDrawPosition(Vector2d vec) {
+	public final void setDrawPosition(final Vector2d vec) {
 		mDrawPos.x = vec.x;
 		mDrawPos.y = vec.y;
 	}

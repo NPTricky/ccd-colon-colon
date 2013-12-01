@@ -15,7 +15,7 @@ public class Vector2d {
 	 * @param x	Cartesian X coordinate
 	 * @param y	Cartesian Y coordinate
 	 */
-	public Vector2d(float x, float y) {
+	public Vector2d(final float x, final float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -26,7 +26,7 @@ public class Vector2d {
 	 * @param rho	Angle in radians
 	 * @return
 	 */
-	public static Vector2d fromPolarCoordinates(float r, float rho) {
+	public static Vector2d fromPolarCoordinates(final float r, final float rho) {
 		return new Vector2d((float)(r*Math.cos(rho)), (float)(r*Math.sin(rho)));
 	}
 	

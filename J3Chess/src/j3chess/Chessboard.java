@@ -18,7 +18,7 @@ public class Chessboard {
 	public final int NUMBEROFCIRCELS=6;
 	public final int NUMBEROFCOLUMNS=24; 
 	/** @brief 6x24 array of all fields in the game */
-	private Field mFields[][];
+	private Field[][] mFields;
 	private ArrayList<Edge> moats=new ArrayList<Edge>();
 	private ArrayList<Edge> creeks= new ArrayList<Edge>();
 	
@@ -56,7 +56,7 @@ public class Chessboard {
 	 *  creeks
 	 * #################################################################
 	 * */
-	public Boolean isCreek(Field leftField, Field rightField){
+	public final Boolean isCreek(final Field leftField, final Field rightField){
 		Edge tmpEdge=new Edge(leftField,rightField);
 		for(int i=0; i<creeks.size();i++){
 			if(creeks.get(i).isEqual(tmpEdge)){
@@ -76,7 +76,7 @@ public class Chessboard {
 		addCreek(mFields[15][2],mFields[16][2]);
 	}
 	
-	public void addCreek(Field leftField, Field rightField){
+	public final void addCreek(final Field leftField, final Field rightField){
 		if(leftField==rightField.getLeftNeighbor()){
 			creeks.add(new Edge(leftField,rightField));
 		}else{
@@ -96,7 +96,7 @@ public class Chessboard {
 			addMoat(mFields[15][0],mFields[16][0]);	
 	}
 	
-	public void removeMoat(Field leftField, Field rightField){
+	public void removeMoat(final Field leftField, final Field rightField){
 			//TODO NOT implementet yet
 			//Moat entfernen - richtige Verbindungen wiederherstellen
 	}
@@ -104,7 +104,7 @@ public class Chessboard {
 	/**
 	 * @brief adds a Moat which can't crossed by any piece, done by removing Neighbors
 	 */ 
-	public void addMoat(Field leftField,Field rightField) {
+	public final void addMoat(final Field leftField,final Field rightField) {
 			if(leftField.getRightNeighbor()==rightField){
 				moats.add(new Edge(leftField,rightField));
 				//remove inner diagonals connections
@@ -160,11 +160,11 @@ public class Chessboard {
 	}
 	
 	
-	private void setRight(Field field, int column, int circle) {
+	private void setRight(final Field field, final int column, final int circle) {
 		field.setRightNeighbor(mFields[((column+1)%NUMBEROFCOLUMNS)][circle]);	
 	}
 	
-	private void setLeft(Field field, int column, int circle) {
+	private void setLeft(final Field field, final int column, final int circle) {
 		if(column==0){
 			field.setLeftNeighbor(mFields[NUMBEROFCOLUMNS-1][circle]);
 		}else{
@@ -172,26 +172,27 @@ public class Chessboard {
 		}
 	}
 	
-	private void setInner(Field field, int column, int circle) {
+	private void setInner(final Field field, final int column, final int circle) {
 		if(circle<NUMBEROFCIRCELS-1){
 			field.setInnerNeighbor(mFields[column][circle+1]);
-		}else
+		} else {
 			field.setInnerNeighbor(mFields[((column+NUMBEROFCOLUMNS/2)%NUMBEROFCOLUMNS)][circle]);
+		}
 	}
 	
-	private void setOuter(Field field, int column, int circle) {
+	private void setOuter(final Field field, final int column, final int circle) {
 		if(circle>0){
 			field.setOuterNeighbor(mFields[column][circle-1]);
 		}
 	}
 	
-	private void setRightOuter(Field field, int column, int circle) {
+	private void setRightOuter(final Field field, final int column, final int circle) {
 		if(circle>0){
 			field.setRightOuterNeighbor(mFields[(column+1)%NUMBEROFCOLUMNS][circle-1]);
 		}
 	}
 	
-	private void setLeftOuter(Field field, int column, int circle) {
+	private void setLeftOuter(final Field field, final int column, final int circle) {
 		if(circle>0){
 			if(column>0){
 				field.setLeftOuterNeighbor(mFields[column-1][circle-1]);
@@ -201,7 +202,7 @@ public class Chessboard {
 		}
 	}
 	
-	private void setRightInner(Field field, int column, int circle) {
+	private void setRightInner(final Field field, final int column, final int circle) {
 		if(circle<NUMBEROFCIRCELS-1){
 			field.setRightInnerNeighbor(mFields[(column+1)%NUMBEROFCOLUMNS][circle+1]);
 		}else{
@@ -210,12 +211,13 @@ public class Chessboard {
 		}
 	}
 	
-	private void setLeftInner(Field field, int column, int circle) {
+	private void setLeftInner(final Field field, final int column, final int circle) {
 		if(circle<NUMBEROFCIRCELS-1){
 			if(column!=0){
 				field.setLeftInnerNeighbor(mFields[column-1][circle+1]);
-			}else
+			} else {
 				field.setLeftInnerNeighbor(mFields[NUMBEROFCOLUMNS-1][circle+1]);
+			}
 		}else{
 			//diagonal through the middle
 			field.setLeftInnerNeighbor(mFields[(column+(NUMBEROFCOLUMNS-((NUMBEROFCIRCELS-1)*2)))%NUMBEROFCOLUMNS][circle]);
@@ -243,7 +245,7 @@ public class Chessboard {
 	 * 
 	 * @param centerSize	Relative size of the center circle, e.g. 0.2 means 20% of the total diameter 
 	 */
-	private void calculateDrawPositions(float centerSize) {
+	private void calculateDrawPositions(final float centerSize) {
 		for (int m=0; m<6; m++) {
 			for (int n=0; n<24; n++) {
 				// Calculate radius of the fields
@@ -272,7 +274,7 @@ public class Chessboard {
 	 * @param circle	Coordinate around the circular chessboard
 	 * @return Field object
 	 */
-	public Field getField(int column, int circle) {
+	public final Field getField(final int column, final int circle) {
 		// Safety checks
 		if (mFields!=null && column<mFields.length && circle < mFields[0].length) {
 			return mFields[column][circle];
