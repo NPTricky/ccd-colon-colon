@@ -59,7 +59,6 @@ public class Chessboard {
 
     }
 
-
     /* ##################################################################
      * creeks
      * #################################################################
@@ -138,12 +137,11 @@ public class Chessboard {
             leftField.setNeighbor(FieldDirection.CounterClockwise, null);
             rightField.setNeighbor(FieldDirection.Clockwise, null);
         } else {
-            //TODO Exception handling leftFild is not the left of the Rightfield
-            System.out.println("ERROR Can't create Moat, leftField is not a leftNeighbor of rightField");
+            // TODO Throw exception?
+            J3ChessApp.getLogger().error("Can't create Moat, leftField is not a"
+                + "leftNeighbor of rightField");
         }
     }
-
-
 
     /* ##################################################################
      * Set Neighbors
