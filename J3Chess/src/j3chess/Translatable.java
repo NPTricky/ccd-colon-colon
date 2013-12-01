@@ -1,39 +1,15 @@
 package j3chess;
 
 /**
- * interface to enable the translation of directions into eight neighborhood.
- * 
- * @param <T>
- *            the source direction
- * @param <U>
- *            the target direction
+ * interface to enable translation.
+ * @param <T> the source
+ * @param <U> the target
  */
-interface Translatable<T extends Direction, U extends Direction> {
+interface Translatable<T, U> {
     /**
-     * @brief translates a direction into eight neighborhood
-     * @param direction
-     *            a source direction given in a generic type
-     * @return a target direction given in eight neighborhood
+     * @brief translates a source into a target
+     * @param source a source
+     * @return the target result
      */
-    U translate(final T direction);
-}
-
-/**
- * interface to enable the translation of directions into eight neighborhood.
- * 
- * @param <T>
- *            the source direction
- */
-interface TranslatableToGeneric<T extends Direction> extends
-        Translatable<T, GenericDirection> {
-}
-
-/**
- * interface to enable the translation of eight neighborhood into directions.
- * 
- * @param <U>
- *            the target direction
- */
-interface TranslatableFromGeneric<U extends Direction> extends
-        Translatable<GenericDirection, U> {
+    U translate(final T source);
 }

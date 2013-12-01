@@ -4,7 +4,7 @@ package j3chess;
  * enum of available directions of a single piece on the chessboard
  * eight neighborhood. sorted by maximum distance.
  */
-public enum PieceDirection implements Direction, TranslatableToGeneric<PieceDirection> {
+public enum PieceDirection implements Direction, Translatable<PieceDirection, Direction.Neighborhood> {
     /** @brief right from the piece */
     Right,
     /** @brief forward from the piece */
@@ -23,32 +23,32 @@ public enum PieceDirection implements Direction, TranslatableToGeneric<PieceDire
     BackwardRight;
 
     @Override
-    public GenericDirection translate(final PieceDirection direction) {
-        GenericDirection result = null;
+    public Neighborhood translate(final PieceDirection direction) {
+        Neighborhood result = null;
         switch (direction) {
         case Right:
-            result = GenericDirection.Right;
+            result = Neighborhood.Right;
             break;
         case Forward:
-            result = GenericDirection.Top;
+            result = Neighborhood.Top;
             break;
         case ForwardRight:
-            result = GenericDirection.TopRight;
+            result = Neighborhood.TopRight;
             break;
         case ForwardLeft:
-            result = GenericDirection.TopLeft;
+            result = Neighborhood.TopLeft;
             break;
         case Left:
-            result = GenericDirection.Left;
+            result = Neighborhood.Left;
             break;
         case Backward:
-            result = GenericDirection.Bottom;
+            result = Neighborhood.Bottom;
             break;
         case BackwardLeft:
-            result = GenericDirection.BottomLeft;
+            result = Neighborhood.BottomLeft;
             break;
         case BackwardRight:
-            result = GenericDirection.BottomRight;
+            result = Neighborhood.BottomRight;
             break;
         default:
             break;
