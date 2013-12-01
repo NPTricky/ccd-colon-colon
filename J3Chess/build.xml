@@ -7,7 +7,7 @@
 <project name="j3chess" default="main" basedir=".">
   <!-- Sets variables which can later be used. -->
   <!-- The value of a property is accessed via ${} -->
-  <property name="src.dir" location="." />
+  <property name="src.dir" location="src/j3chess" />
   <property name="build.dir" location="bin" />
   <property name="dist.dir" location="dist" />
   <property name="library.dir" location="/usr/lib" />
@@ -89,10 +89,7 @@
 
     <checkstyle config="${checkstyle.dir}/checkstyle_checks.xml" failOnViolation="false" >
       <formatter type="xml" tofile="${reports.dir}/checkstyle_report.xml"/>
-      <fileset dir="${src.dir}">
-		<include name="**/*.java"/>
-		<exclude name="**/*artemis*"/>
-	  </fileset>
+      <fileset dir="${src.dir}" includes="**/*.java"/>
     </checkstyle>
     
   </target>
