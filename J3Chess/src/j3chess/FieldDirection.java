@@ -4,7 +4,7 @@ package j3chess;
  * enum of available directions of a single field on the chessboard. eight
  * neighborhood. sorted by maximum distance.
  */
-public enum FieldDirection implements Direction, Translatable<Direction.Neighborhood, FieldDirection> {
+public enum FieldDirection implements Direction {
     /** @brief into the clockwise direction */
     Clockwise,
     /** @brief towards the center of the chessboard */
@@ -34,6 +34,7 @@ public enum FieldDirection implements Direction, Translatable<Direction.Neighbor
      */
     OutClockwise;
 
+    /*
     @Override
     public FieldDirection translate(final Neighborhood direction) {
         FieldDirection result = null;
@@ -67,5 +68,6 @@ public enum FieldDirection implements Direction, Translatable<Direction.Neighbor
         }
         return result;
     }
+    */
 
 }

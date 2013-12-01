@@ -1,10 +1,9 @@
 package j3chess;
 
-import artemis.ComponentType;
-import artemis.Entity;
-import j3chess.components.Movement;
 import j3chess.components.Paintable;
 import j3chess.components.Position;
+import artemis.ComponentType;
+import artemis.Entity;
 
 /**
  * abstract base class for every entity of type piece.
@@ -20,8 +19,10 @@ public abstract class Piece {
 
     /**
      * @brief constructor of the piece class
-     * @param system the entity system to create entities into
-     * @param type the type of the piece
+     * @param system
+     *            the entity system to create entities into
+     * @param type
+     *            the type of the piece
      */
     public Piece(final EntitySystem system, final PieceType type) {
         this.mEntitySystem = system;
@@ -35,9 +36,11 @@ public abstract class Piece {
     private void initialize() {
         J3ChessApp.getLogger().debug("Building " + mType.toString());
         mPiece = mEntitySystem.getWorld().createEntity();
-        //mPiece.addComponent(new Position(), ComponentType.getTypeFor(Position.class));
-        //mPiece.addComponent(new Movement(), ComponentType.getTypeFor(Movement.class));
-        //mPiece.addComponent(new Paintable(), ComponentType.getTypeFor(Paintable.class));
+        mPiece.addComponent(new Position(),
+                ComponentType.getTypeFor(Position.class));
+        mPiece.addComponent(new Paintable(),
+                ComponentType.getTypeFor(Paintable.class));
+        // mPiece.addComponent(new Movement(), ComponentType.getTypeFor(Movement.class));
     }
 
     /**
@@ -54,18 +57,10 @@ public abstract class Piece {
     }
 
     /**
-     * @brief getter for the mType member
-     * @return the type of the piece
-     */
-    public final PieceType getType() {
-        return mType;
-    }
-
-    /**
      * @brief getter for the mPiece member
      * @return the piece entity
      */
-    protected final Entity getPiece() {
+    protected final Entity getEntity() {
         return mPiece;
     }
 
