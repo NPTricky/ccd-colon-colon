@@ -1,5 +1,7 @@
 package j3chess;
 
+import artemis.Entity;
+
 /**
  * a helper factory for piece entities.
  */
@@ -21,26 +23,26 @@ public class PieceFactory {
      * @param type the type of the chess piece
      * @return the chess piece
      */
-    public final Piece create(final PieceType type) {
-        Piece piece = null;
+    public final Entity create(final PieceType type) {
+        Entity piece = null;
         switch (type) {
         case BISHOP:
-            // piece = new PieceBishop(mEntitySystem);
+            // piece = new PieceBishop(mEntitySystem).getEntity();
             break;
         case KING:
-            piece = new PieceKing(mEntitySystem);
+            piece = new PieceKing(mEntitySystem).getEntity();
             break;
         case KNIGHT:
-            // piece = new PieceKnight(mEntitySystem);
+            // piece = new PieceKnight(mEntitySystem).getEntity();
             break;
         case PAWN:
-            // piece = new PiecePawn(mEntitySystem);
+            // piece = new PiecePawn(mEntitySystem).getEntity();
             break;
         case QUEEN:
-            // piece = new PieceQueen(mEntitySystem);
+            // piece = new PieceQueen(mEntitySystem).getEntity();
             break;
         case ROOK:
-            // piece = new PieceRook(mEntitySystem);
+            // piece = new PieceRook(mEntitySystem).getEntity();
             break;
         default:
             /* piece = null */

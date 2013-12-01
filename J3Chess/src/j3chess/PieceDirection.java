@@ -4,7 +4,7 @@ package j3chess;
  * enum of available directions of a single piece on the chessboard
  * eight neighborhood. sorted by maximum distance.
  */
-public enum PieceDirection implements Direction, Translatable<PieceDirection, Direction.Neighborhood> {
+public enum PieceDirection implements Direction {
     /** @brief right from the piece */
     Right,
     /** @brief forward from the piece */
