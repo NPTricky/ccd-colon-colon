@@ -10,7 +10,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 
 import org.jdesktop.application.Application;
@@ -21,13 +20,13 @@ import org.jdesktop.application.FrameView;
  *
  */
 public class J3ChessView extends FrameView {
-	public final int CHESSBOARDHEIGHT=700;
-	public final int CHESSBOARDWIDTH=700;
+	public static final int CHESSBOARDHEIGHT = 700;
+	public static final int CHESSBOARDWIDTH = 700;
 	private String chessboardImagePath ="pics/chessboard.png";
 	
 	DrawPanel mMainPanel;
 	JPanel mStatusPanel;
-	JTabbedPane mTabbedPane;
+	//JTabbedPane mTabbedPane;
 	JMenuBar mMenuBar;
 	
 	/**
@@ -91,7 +90,7 @@ public class J3ChessView extends FrameView {
     	
     			@Override
     			public void actionPerformed(ActionEvent e) {
-    				System.exit(0);
+    				getFrame().dispose();
     			}
     	
     		});		

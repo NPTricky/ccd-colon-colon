@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 
-public class ContantManager {
+public class ContentManager {
 	
 	private String sourcePath;
 	private HashMap <String,ImageIcon> contant = new HashMap<String, ImageIcon>(); 
 	
 	
-	public ContantManager(String sourcePath){
+	public ContentManager(String sourcePath){
 		this.sourcePath=sourcePath;
 	}
 

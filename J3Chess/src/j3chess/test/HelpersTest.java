@@ -13,7 +13,7 @@ public class HelpersTest {
 
     @Test
     public final void testDirectionHelper() {
-        final Helpers.DirectionHelper helper = new Helpers.DirectionHelper();
+        new Helpers.DirectionHelper();
     }
 
 }
