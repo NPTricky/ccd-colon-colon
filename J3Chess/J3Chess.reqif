@@ -103,7 +103,7 @@
         </SPECIFICATION-TYPE>
       </SPEC-TYPES>
       <SPEC-OBJECTS>
-        <SPEC-OBJECT IDENTIFIER="_Pp2GwltMEeOnY_ayMMOUww" LAST-CHANGE="2013-12-02T15:12:56.585+01:00">
+        <SPEC-OBJECT IDENTIFIER="_Pp2GwltMEeOnY_ayMMOUww" LAST-CHANGE="2013-12-02T15:25:23.231+01:00">
           <VALUES>
             <ATTRIBUTE-VALUE-STRING THE-VALUE="Display the chessboard and all the pieces on their current fields.">
               <DEFINITION>
@@ -120,7 +120,7 @@
             <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
           </TYPE>
         </SPEC-OBJECT>
-        <SPEC-OBJECT IDENTIFIER="_4fVUsFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:13:06.205+01:00">
+        <SPEC-OBJECT IDENTIFIER="_4fVUsFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:22:31.051+01:00">
           <VALUES>
             <ATTRIBUTE-VALUE-STRING THE-VALUE="Make a piece the current selection by clicking on it while its the piece's player's turn. ">
               <DEFINITION>
@@ -201,6 +201,11 @@
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
           </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_F_DzwFtdEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:21:52.340+01:00">
           <TYPE>
             <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
           </TYPE>

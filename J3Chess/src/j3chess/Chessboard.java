@@ -258,14 +258,14 @@ public class Chessboard {
                 // Divide the total radius by 13, where each 2m+1 is the center of one field
                 // Can be visualized using the following 13 chars: |1|2|3|4|5|6|
                 // Each number marks a center of a field
-                float r = (1.f - (2.f * m + 1.f) / (6.f * 2.f));
+                float radius = (1.f - (2.f * m + 1.f) / (6.f * 2.f));
                 // Scale according to centerSize
-                r = (1.f-centerSize)*r + centerSize;
+                radius = (1.f-centerSize)*radius + centerSize;
                 // Calculate angle
                 float rho = (float)(2.f * Math.PI * (n/24.f));
 
                 // Convert to cartesian
-                Vector2d cartesian = Vector2d.fromPolarCoordinates(r, rho);
+                Vector2d cartesian = Vector2d.fromPolarCoordinates(radius, rho);
 
                 // Set coordinates of field
                 mFields[n][m].setDrawPosition(cartesian);

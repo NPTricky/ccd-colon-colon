@@ -34,21 +34,24 @@ public class ContentManager {
 	/**
 	 * @ Brief searches recursive for a file which contains the search value
 	 * @param searchFileName searched filename
-	 * @param directoryPath Path for searching the file
-	 * @return returns true if a file is founded which contains the search FileName
+	 * @param directory Path for searching the file
+	 * @return true if a file is found which contains the search FileName
 	 */
-	private Boolean getContentFromFileSystem (final String searchFileName, String directoryPath) {
+	private Boolean getContentFromFileSystem (final String searchFileName, final String directory) {
+		// Create copy of input parameter
+		String directoryPath = directory;
 
+		// Append slash if its missing
 		if (!directoryPath.endsWith("/")) {
-			directoryPath = directoryPath+"/";
+			directoryPath = directoryPath + "/";
 		}
 
 		Boolean returnValue = false;
 		File tmpFile = null;
 		String tmpPath = null;
 
-		File directory = new File(directoryPath);
-		String [] fileNameArray = directory.list();
+		File directoryFile = new File(directoryPath);
+		String [] fileNameArray = directoryFile.list();
 
 
 		for (int i = 0; i < fileNameArray.length; i++) {
@@ -61,7 +64,8 @@ public class ContentManager {
 
 			tmpFile = new File(tmpPath);
 			if (tmpFile.isDirectory()) {
-				returnValue = getContentFromFileSystem(searchFileName, tmpPath);
+				returnValue = getContentFromFileSystem(
+						searchFileName, tmpPath);
 			}
 
 		}
