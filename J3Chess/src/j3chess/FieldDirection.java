@@ -33,41 +33,4 @@ public enum FieldDirection implements Direction {
      *        manner
      */
     OutClockwise;
-
-    /*
-    @Override
-    public FieldDirection translate(final Neighborhood direction) {
-        FieldDirection result = null;
-        switch (direction) {
-        case Right:
-            result = FieldDirection.Clockwise;
-            break;
-        case Top:
-            result = FieldDirection.In;
-            break;
-        case TopRight:
-            result = FieldDirection.InClockwise;
-            break;
-        case TopLeft:
-            result = FieldDirection.InCounterClockwise;
-            break;
-        case Left:
-            result = FieldDirection.CounterClockwise;
-            break;
-        case Bottom:
-            result = FieldDirection.Out;
-            break;
-        case BottomLeft:
-            result = FieldDirection.OutCounterClockwise;
-            break;
-        case BottomRight:
-            result = FieldDirection.OutClockwise;
-            break;
-        default:
-            break;
-        }
-        return result;
-    }
-    */
-
 }

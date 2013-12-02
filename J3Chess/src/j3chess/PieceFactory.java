@@ -24,31 +24,32 @@ public class PieceFactory {
      * @return the chess piece
      */
     public final Entity create(final PieceType type) {
-        Entity piece = null;
+        Piece piece = null;
         switch (type) {
         case BISHOP:
-            // piece = new PieceBishop(mEntitySystem).getEntity();
+            piece = new PieceBishop(mEntitySystem);
             break;
         case KING:
-            piece = new PieceKing(mEntitySystem).getEntity();
+            piece = new PieceKing(mEntitySystem);
             break;
         case KNIGHT:
-            // piece = new PieceKnight(mEntitySystem).getEntity();
+            piece = new PieceKnight(mEntitySystem);
             break;
         case PAWN:
-            // piece = new PiecePawn(mEntitySystem).getEntity();
+            piece = new PiecePawn(mEntitySystem);
             break;
         case QUEEN:
-            // piece = new PieceQueen(mEntitySystem).getEntity();
+            piece = new PieceQueen(mEntitySystem);
             break;
         case ROOK:
-            // piece = new PieceRook(mEntitySystem).getEntity();
+            piece = new PieceRook(mEntitySystem);
             break;
         default:
             /* piece = null */
             break;
         }
-        return piece;
+        piece.construct();
+        return piece.getEntity();
     }
 
 }
