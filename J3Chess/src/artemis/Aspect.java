@@ -117,7 +117,8 @@ public class Aspect {
 	 * @param types a required component type
 	 * @return an aspect that can be matched against entities
 	 */
-	public static Aspect getAspectForAll(Class<? extends Component> type, Class<? extends Component>... types) {
+	@SafeVarargs
+    public static Aspect getAspectForAll(Class<? extends Component> type, Class<? extends Component>... types) {
 		Aspect aspect = new Aspect();
 		aspect.all(type, types);
 		return aspect;

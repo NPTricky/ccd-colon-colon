@@ -34,12 +34,9 @@ public class PiecePawn extends Piece {
 
         // movement abilities of the pawn...
         Movement move = new Movement(
-                new MotionPattern(
-                        EnumSet.of(PieceDirection.Forward),
-                        new Motion(DirectionGroup.Vertical, 1, false)),
-                new MotionPattern(
-                        EnumSet.of(PieceDirection.Forward),
-                        new Motion(DirectionGroup.Vertical, 2, false)));
+                EnumSet.of(PieceDirection.Forward),
+                new MotionPattern(new Motion(DirectionGroup.Vertical, 1, false)),
+                new MotionPattern(new Motion(DirectionGroup.Vertical, 2, false)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

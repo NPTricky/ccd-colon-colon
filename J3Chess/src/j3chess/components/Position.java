@@ -4,12 +4,10 @@ import artemis.Component;
 import j3chess.Field;
 
 /**
- * entity component for a current and last position on a chessboard.
+ * entity component for a position on a chessboard.
  */
 public class Position extends Component {
 
-    /** @brief last position on the chessboard of an entity */
-    private Field mLastPosition;
     /** @brief current position on the chessboard of an entity */
     private Field mPosition;
 
@@ -21,28 +19,10 @@ public class Position extends Component {
 
     /**
      * @brief constructor for position component
-     * @param last last position
      * @param current current position
      */
-    public Position(final Field last, final Field current) {
-        this.mLastPosition = last;
+    public Position(final Field current) {
         this.mPosition = current;
-    }
-
-    /**
-     * @brief getter for the mLastPosition member
-     * @return the last position
-     */
-    public final Field getLastPosition() {
-        return this.mLastPosition;
-    }
-
-    /**
-     * @brief setter for the mLastPosition member
-     * @param last the last position
-     */
-    public final void setLastPosition(final Field last) {
-        this.mLastPosition = last;
     }
 
     /**

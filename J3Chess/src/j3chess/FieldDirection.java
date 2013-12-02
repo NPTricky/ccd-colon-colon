@@ -1,10 +1,14 @@
 package j3chess;
 
+import java.util.EnumSet;
+
 /**
  * enum of available directions of a single field on the chessboard. eight
  * neighborhood. sorted by maximum distance.
  */
-public enum FieldDirection implements Direction {
+public enum FieldDirection implements
+        Direction,
+        Groupable<EnumSet<FieldDirection>, DirectionGroup> {
     /** @brief into the clockwise direction */
     Clockwise,
     /** @brief towards the center of the chessboard */
@@ -33,4 +37,32 @@ public enum FieldDirection implements Direction {
      *        manner
      */
     OutClockwise;
+
+    @Override
+    public EnumSet<FieldDirection> groupBy(final DirectionGroup group) {
+        EnumSet<FieldDirection> result;
+        switch (group) {
+        case Diagonal:
+            result = EnumSet.of(
+                    FieldDirection.InClockwise,
+                    FieldDirection.InCounterClockwise,
+                    FieldDirection.OutCounterClockwise,
+                    FieldDirection.OutClockwise);
+            break;
+        case Horizontal:
+            result = EnumSet.of(
+                    FieldDirection.Clockwise,
+                    FieldDirection.CounterClockwise);
+            break;
+        case Vertical:
+            result = EnumSet.of(
+                    FieldDirection.In,
+                    FieldDirection.Out);
+            break;
+        default:
+            result = EnumSet.noneOf(FieldDirection.class);
+            break;
+        }
+        return result;
+    }
 }
