@@ -1,12 +1,12 @@
 package j3chess;
 
-import j3chess.components.Paintable;
 import j3chess.components.Position;
+import j3chess.components.Selectable;
 import artemis.ComponentType;
 import artemis.Entity;
 
 /**
- * abstract base class for every entity of type piece.
+ * abstract base class for the construction of entities of type piece.
  */
 public abstract class Piece {
 
@@ -35,12 +35,16 @@ public abstract class Piece {
      */
     private void initialize() {
         J3ChessApp.getLogger().debug("Building " + mType.toString());
+
+        // initialize the entity
         mPiece = mEntitySystem.getWorld().createEntity();
-        mPiece.addComponent(new Position(),
-                ComponentType.getTypeFor(Position.class));
-        mPiece.addComponent(new Paintable(),
-                ComponentType.getTypeFor(Paintable.class));
-        // mPiece.addComponent(new Movement(), ComponentType.getTypeFor(Movement.class));
+
+        // initialize the default components for an entity of type piece
+        mPiece
+        .addComponent(new Position(),
+                ComponentType.getTypeFor(Position.class))
+        .addComponent(new Selectable(),
+                ComponentType.getTypeFor(Selectable.class));
     }
 
     /**
@@ -49,18 +53,10 @@ public abstract class Piece {
     protected abstract void construct();
 
     /**
-     * @brief getter for the mEntitySystem member
-     * @return the entity system
-     */
-    public final EntitySystem getEntitySystem() {
-        return mEntitySystem;
-    }
-
-    /**
      * @brief getter for the mPiece member
      * @return the piece entity
      */
-    protected final Entity getEntity() {
+    public final Entity getEntity() {
         return mPiece;
     }
 
