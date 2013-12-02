@@ -79,7 +79,7 @@ public class Motion {
     }
 
     /**
-     * @brief getter for the mJump member
+     * @brief getter for the mUnblockable member
      * @return whether the motion is unblockable or not
      */
     public final boolean getUnblockable() {
@@ -87,7 +87,7 @@ public class Motion {
     }
 
     /**
-     * @brief setter for the mJump member
+     * @brief setter for the mUnblockable member
      * @param unblockable
      *            whether the motion is a jump or not
      */
