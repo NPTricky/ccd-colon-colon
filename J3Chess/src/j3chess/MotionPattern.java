@@ -1,6 +1,7 @@
 package j3chess;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -9,13 +10,13 @@ import java.util.List;
 public class MotionPattern {
 
     /** @brief the list of motions which aggregates a motion pattern */
-    private List<Motion> mMotions = new ArrayList<Motion>(1);
+    private List<Motion> mMotions;
 
     /**
      * @brief default empty constructor for a motion pattern
      */
     public MotionPattern() {
-
+        this(new ArrayList<Motion>(Arrays.asList(new Motion())));
     }
 
     /**
@@ -29,7 +30,7 @@ public class MotionPattern {
 
     /**
      * @brief getter for the mMotions member
-     * @code getMotions().addAll(Array.asList(
+     * @code getMotions().addAll(Arrays.asList(
      *           new Motion[] {new Motion(), new Motion(), new Motion()})
      *       )
      * @return the list of motions which aggregates a motion pattern

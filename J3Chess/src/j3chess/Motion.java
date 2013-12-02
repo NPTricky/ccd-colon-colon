@@ -23,7 +23,7 @@ public class Motion {
      * @brief default empty constructor for a motion
      */
     public Motion() {
-
+        this(DirectionGroup.Vertical, 1, false);
     }
 
     /**
@@ -32,14 +32,16 @@ public class Motion {
      *            the general direction of the motion
      * @param steps
      *            the enforced number of steps of the motion
-     * @param jump
-     *            whether the motion is a jump or not
+     * @param unblockable
+     *            whether the motion is unblockable or not
      */
-    public Motion(final DirectionGroup direction, final int steps,
-            final boolean jump) {
+    public Motion(
+            final DirectionGroup direction,
+            final int steps,
+            final boolean unblockable) {
         this.mDirection = direction;
         this.mSteps = steps;
-        this.mUnblockable = jump;
+        this.mUnblockable = unblockable;
     }
 
     /**
@@ -78,7 +80,7 @@ public class Motion {
 
     /**
      * @brief getter for the mJump member
-     * @return whether the motion is a jump or not
+     * @return whether the motion is unblockable or not
      */
     public final boolean getUnblockable() {
         return mUnblockable;
@@ -86,11 +88,11 @@ public class Motion {
 
     /**
      * @brief setter for the mJump member
-     * @param jump
+     * @param unblockable
      *            whether the motion is a jump or not
      */
-    public final void setUnblockable(final boolean jump) {
-        this.mUnblockable = jump;
+    public final void setUnblockable(final boolean unblockable) {
+        this.mUnblockable = unblockable;
     }
 
 }
