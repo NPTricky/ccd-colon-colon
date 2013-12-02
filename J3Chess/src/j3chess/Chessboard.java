@@ -172,23 +172,23 @@ public class Chessboard {
 
     private void setLeft(final Field field, final int column, final int circle) {
         if (column == 0) {
-            field.setNeighbor(FieldDirection.Clockwise, mFields[NUMBEROFCOLUMNS-1][circle]);
+            field.setNeighbor(FieldDirection.Clockwise, mFields[NUMBEROFCOLUMNS - 1][circle]);
         } else {
-            field.setNeighbor(FieldDirection.Clockwise, mFields[column-1][circle]);
+            field.setNeighbor(FieldDirection.Clockwise, mFields[column - 1][circle]);
         }
     }
 
     private void setInner(final Field field, final int column, final int circle) {
-        if (circle < NUMBEROFCIRCLES-1) {
-            field.setNeighbor(FieldDirection.In, mFields[column][circle+1]);
+        if (circle < NUMBEROFCIRCLES - 1) {
+            field.setNeighbor(FieldDirection.In, mFields[column][circle + 1]);
         } else {
-            field.setNeighbor(FieldDirection.In, mFields[((column+NUMBEROFCOLUMNS/2)%NUMBEROFCOLUMNS)][circle]);
+            field.setNeighbor(FieldDirection.In, mFields[((column + NUMBEROFCOLUMNS / 2) % NUMBEROFCOLUMNS)][circle]);
         }
     }
 
     private void setOuter(final Field field, final int column, final int circle) {
         if (circle > 0) {
-            field.setNeighbor(FieldDirection.Out, mFields[column][circle-1]);
+            field.setNeighbor(FieldDirection.Out, mFields[column][circle - 1]);
         }
     }
 
@@ -201,9 +201,9 @@ public class Chessboard {
     private void setLeftOuter(final Field field, final int column, final int circle) {
         if (circle > 0) {
             if (column > 0) {
-                field.setNeighbor(FieldDirection.OutClockwise, mFields[column-1][circle-1]);
+                field.setNeighbor(FieldDirection.OutClockwise, mFields[column - 1][circle - 1]);
             } else {
-                field.setNeighbor(FieldDirection.OutClockwise, mFields[NUMBEROFCOLUMNS-1][circle-1]);
+                field.setNeighbor(FieldDirection.OutClockwise, mFields[NUMBEROFCOLUMNS - 1][circle - 1]);
             }
         }
     }
@@ -233,10 +233,10 @@ public class Chessboard {
      * @brief Creates all the fields and adds the required connections.
      */
     private void createFields() {
-        mFields=new Field[NUMBEROFCOLUMNS][NUMBEROFCIRCLES];
+        mFields = new Field[NUMBEROFCOLUMNS][NUMBEROFCIRCLES];
         for (int i = 0; i < NUMBEROFCOLUMNS; i++) {
             for (int j = 0; j < NUMBEROFCIRCLES; j++) {
-                mFields[i][j] = new Field(j,i);
+                mFields[i][j] = new Field(j, i);
             }
         }
     }
@@ -252,8 +252,8 @@ public class Chessboard {
      * @param centerSize    Relative size of the center circle, e.g. 0.2 means 20% of the total diameter
      */
     private void calculateDrawPositions(final float centerSize) {
-        for (int m=0; m < 6; m++) {
-            for (int n=0; n < 24; n++) {
+        for (int m = 0; m < NUMBEROFCIRCLES; m++) {
+            for (int n = 0; n < NUMBEROFCOLUMNS; n++) {
                 // Calculate radius of the fields
                 // Divide the total radius by 13, where each 2m+1 is the center of one field
                 // Can be visualized using the following 13 chars: |1|2|3|4|5|6|

@@ -74,11 +74,11 @@ public class ChessboardTest {
                             testSubject.getNeighbor(FieldDirection.OutClockwise).getNeighbor(FieldDirection.InCounterClockwise), testSubject);
                 }
                 if (testSubject.getNeighbor(FieldDirection.Out) != null) {
-                    assertEquals("Outer edge is not consistent for field ["+column+", "+circle+"]",
+                    assertEquals("Outer edge is not consistent for field [" + column + ", " + circle + "]",
                             testSubject.getNeighbor(FieldDirection.Out).getNeighbor(FieldDirection.In), testSubject);
                 }
                 if (testSubject.getNeighbor(FieldDirection.OutCounterClockwise) != null) {
-                    assertEquals("Right outer edge is not consistent for field ["+column+", "+circle+"]",
+                    assertEquals("Right outer edge is not consistent for field [" + column + ", " + circle + "]" ,
                             testSubject.getNeighbor(FieldDirection.OutCounterClockwise).getNeighbor(FieldDirection.InClockwise), testSubject);
                 }
             }

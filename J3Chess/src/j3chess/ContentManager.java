@@ -11,11 +11,20 @@ public class ContentManager {
 	private HashMap<String, ImageIcon> content = new HashMap<String, ImageIcon>();
 
 
+	/**
+	 * @Brief creates a new ContentMange needs a sourcePath
+	 * @param the sourcePath looking for files
+	 */
 	public ContentManager(final String sourcePath) {
 		this.sourcePath = sourcePath;
 	}
 
 
+	/**
+	 * @Brief searches for a imageFile - looks first in the local Hashmap, then in the filesystem
+	 * @param filename which is searched
+	 * @return the searched ImageIcon - returns null if not found
+	 */
 	public final ImageIcon getContent(final String filename) {
 		if (content.containsKey(filename)) {
 			return content.get(filename);
@@ -73,6 +82,11 @@ public class ContentManager {
 	}
 
 
+	/**
+	 * adds an ImageIcon to the hashmap
+	 * @param path path to the Content
+	 * @param key key for this Content
+	 */
 	private void addToHashmap(final String path, final String key) {
 		ImageIcon imageIcon = new ImageIcon(path);
 		content.put(key, imageIcon);
