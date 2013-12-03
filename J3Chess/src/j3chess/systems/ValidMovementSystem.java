@@ -52,7 +52,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         final Field position = mPositionMapper.get(entity).getPosition();
         final Movement movement = mMovementMapper.get(entity);
         final EnumSet<PieceDirection> mask = movement.getMask();
-        // e.g. Forward Only [ 0 1 0 0 0 0 0 0 ]
+        // e.g. Forward Only = [ 0 1 0 0 0 0 0 0 ]
 
         // update the logic
         for (final MotionPattern pattern : movement.getPatterns()) {
@@ -73,7 +73,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 final boolean unblockable = motion.getUnblockable();
                 final int steps = motion.getSteps();
                 final EnumSet<PieceDirection> group = motion.getDirections();
-                // e.g. Diagonal [ 0 0 1 1 0 0 1 1 ]
+                // e.g. Diagonal = [ 0 0 1 1 0 0 1 1 ]
             }
 
         }

@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * test the static nested helpers of the helpers class.
  */
-public class HelpersTest {
+public class HelperTest {
 
     @Before
     public final void initialization() {
