@@ -1,7 +1,7 @@
 package j3chess.test;
 
 import static org.junit.Assert.assertEquals;
-import j3chess.utility.Helpers;
+import j3chess.utility.Helper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class HelpersTest {
 
     @Test
     public final void testDirectionHelper() {
-        new Helpers.DirectionHelper();
+        new Helper.DirectionHelper();
     }
 
 }

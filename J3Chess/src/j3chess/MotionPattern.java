@@ -1,6 +1,7 @@
 package j3chess;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -39,8 +40,6 @@ public class MotionPattern {
 
     /**
      * @brief getter for the mMotions member
-     * @code getMotions().addAll(Arrays.asList( new Motion[] {new Motion(), new
-     *       Motion(), new Motion()}) )
      * @return the list of motions which aggregates a motion pattern
      */
     public final List<Motion> getMotions() {

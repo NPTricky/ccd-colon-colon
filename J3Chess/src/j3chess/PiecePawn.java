@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import j3chess.components.Movement;
 import j3chess.components.Paintable;
+import j3chess.utility.Helper;
 import artemis.ComponentType;
 
 /**
@@ -35,8 +36,10 @@ public class PiecePawn extends Piece {
         // movement abilities of the pawn...
         Movement move = new Movement(
                 EnumSet.of(PieceDirection.Forward),
-                new MotionPattern(new Motion(DirectionGroup.Vertical, 1, false)),
-                new MotionPattern(new Motion(DirectionGroup.Vertical, 2, false)));
+                new MotionPattern(
+                        new Motion(Helper.Direction.group(DirectionGroup.Vertical), 1, false)),
+                new MotionPattern(
+                        new Motion(Helper.Direction.group(DirectionGroup.Vertical), 2, false)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

@@ -18,7 +18,7 @@ public class Movement extends Component {
     /** @brief the motion pattern direction mask (0 for forbidden directions) */
     private EnumSet<PieceDirection> mMask;
     /** @brief list of possible move patterns */
-    private List<MotionPattern> mMoves;
+    private List<MotionPattern> mPatterns;
 
     /**
      * @brief empty default constructor for movement component
@@ -58,7 +58,7 @@ public class Movement extends Component {
      */
     public Movement(final Set<PieceDirection> mask,
             final List<MotionPattern> moves) {
-        this.mMoves = moves;
+        this.mPatterns = moves;
     }
 
     /**
@@ -79,20 +79,20 @@ public class Movement extends Component {
     }
 
     /**
-     * @brief getter for the mMoves member
+     * @brief getter for the mPatterns member
      * @return list of possible move patterns
      */
-    public final List<MotionPattern> getMoves() {
-        return mMoves;
+    public final List<MotionPattern> getPatterns() {
+        return mPatterns;
     }
 
     /**
-     * @brief setter for the mMoves member
+     * @brief setter for the mPatterns member
      * @param moves
      *            list of possible move patterns
      */
-    public final void setMoves(final List<MotionPattern> moves) {
-        this.mMoves = moves;
+    public final void setPatterns(final List<MotionPattern> moves) {
+        this.mPatterns = moves;
     }
 
 }

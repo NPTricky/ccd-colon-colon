@@ -2,6 +2,7 @@ package j3chess;
 
 import j3chess.components.Movement;
 import j3chess.components.Paintable;
+import j3chess.utility.Helper;
 import artemis.ComponentType;
 
 /**
@@ -25,7 +26,7 @@ public class PieceBishop extends Piece {
     @Override
     protected final void construct() {
         // visualization of the bishop...
-        Paintable paint = new Paintable();
+        final Paintable paint = new Paintable();
         this.getEntity().addComponent(
                 paint,
                 ComponentType.getTypeFor(Paintable.class));
@@ -33,7 +34,8 @@ public class PieceBishop extends Piece {
         // movement abilities of the bishop...
         Movement move = new Movement(
                 new MotionPattern(
-                        new Motion(DirectionGroup.Diagonal, 0, false)));
+                        new Motion(
+                                Helper.Direction.group(DirectionGroup.Diagonal), 0, false)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));
