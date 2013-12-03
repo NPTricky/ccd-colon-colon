@@ -8,12 +8,12 @@ import j3chess.FieldDirection;
 import org.junit.Test;
 
 
-    /**
-     * This tests whether all edges created by createFields() are
-     *  symmetric. We don't want any fields Jim and Bob, where Bob
-     *  is Jim's left neighbor, but Jim isn't Bob's right neighbor.
-     *  That doesn't make sense.
-     */
+/**
+ * This tests whether all edges created by createFields() are
+ *  symmetric. We don't want any fields Jim and Bob, where Bob
+ *  is Jim's left neighbor, but Jim isn't Bob's right neighbor.
+ *  That doesn't make sense.
+ */
 public class ChessboardTest {
     /**
      * This tests whether all edges created by createFields() are
@@ -35,9 +35,9 @@ public class ChessboardTest {
 
                 if (testSubject.getNeighbor(FieldDirection.InClockwise) != null) {
                     if (circle != Chessboard.NUMBEROFCIRCLES - 1) {
-                            assertEquals("Left inner edge is not consistent for field [" + column + ", " + circle + "]" ,
-                                    testSubject.getNeighbor(FieldDirection.InClockwise).getNeighbor(FieldDirection.OutCounterClockwise),
-                                    testSubject);
+                        assertEquals("Left inner edge is not consistent for field [" + column + ", " + circle + "]" ,
+                                testSubject.getNeighbor(FieldDirection.InClockwise).getNeighbor(FieldDirection.OutCounterClockwise),
+                                testSubject);
                     } else {
                         // inner throw the middle
                         assertEquals("Left inner edge is not consistent for field [" + column + ", " + circle + "]" ,
@@ -50,7 +50,7 @@ public class ChessboardTest {
                 if (testSubject.getNeighbor(FieldDirection.In) != null) {
                     if (circle != Chessboard.NUMBEROFCIRCLES - 1) {
                         assertEquals("Inner edge is not consistent for field [" + column + ", " + circle + "]",
-                            testSubject.getNeighbor(FieldDirection.In).getNeighbor(FieldDirection.Out), testSubject);
+                                testSubject.getNeighbor(FieldDirection.In).getNeighbor(FieldDirection.Out), testSubject);
                     } else {
                         // inner throw the middle
                         assertEquals("Inner edge is not consistent for field [" + column + ", " + circle + "]",
@@ -60,8 +60,8 @@ public class ChessboardTest {
                 if (testSubject.getNeighbor(FieldDirection.InCounterClockwise) != null) {
                     if (circle != Chessboard.NUMBEROFCIRCLES - 1) {
                         assertEquals("Right inner edge is not consistent for field [" + column + ", " + circle + "]",
-                            testSubject.getNeighbor(FieldDirection.InCounterClockwise).getNeighbor(FieldDirection.OutClockwise),
-                            testSubject);
+                                testSubject.getNeighbor(FieldDirection.InCounterClockwise).getNeighbor(FieldDirection.OutClockwise),
+                                testSubject);
                     } else {
                         // inner throw the middle
                         assertEquals("Right inner edge is not consistent for field [" + column + ", " + circle + "]",
