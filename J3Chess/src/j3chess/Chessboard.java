@@ -324,11 +324,11 @@ public class Chessboard {
                 // Divide the total radius by 13, where each 2m+1 is the center of one field
                 // Can be visualized using the following 13 chars: |1|2|3|4|5|6|
                 // Each number marks a center of a field
-                float radius = (1.f - (2.f * m + 1.f) / (NUMBEROFCIRCLES * 2.f));
+                float radius = (1.f - (2.f * m + 1.f) / ((float) NUMBEROFCIRCLES * 2.f));
                 // Scale according to centerSize
                 radius = (1.f - centerSize) * radius + centerSize;
                 // Calculate angle
-                final float rho = (float) (2.f * Math.PI * (n / NUMBEROFCOLUMNS));
+                final float rho = (float) (2.f * Math.PI * (n / (float) NUMBEROFCOLUMNS));
 
                 // Convert to cartesian
                 final Vector2d cartesian = Vector2d.fromPolarCoordinates(radius, rho);
