@@ -24,7 +24,6 @@ public class Chessboard {
 
     /** 6x24 array of all fields in the game. */
     private Field[][] mFields;
-    
 
     /** Edges that define moats, i.e. edges unpassable for pawns. */
     private final ArrayList<Edge> mMoats = new ArrayList<Edge>();
