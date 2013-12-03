@@ -1,11 +1,17 @@
 package j3chess;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -30,9 +36,8 @@ public class J3ChessView extends FrameView {
     /**
      * @param app Parent application.
      */
-    public J3ChessView(final Application app) {
-        super(app);
-
+    public J3ChessView() {
+        super(J3ChessApp.getInstance());
         initialize();
     }
 
@@ -44,7 +49,7 @@ public class J3ChessView extends FrameView {
             getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT,
             Image.SCALE_DEFAULT));
 
-        mMainPanel = new DrawPanel(chessboardImage.getImage());
+        mMainPanel = new DrawPanel(700, 700);
 
         this.getFrame().add(mMainPanel);
 
@@ -56,10 +61,9 @@ public class J3ChessView extends FrameView {
         setStatusBar(mStatusPanel);
 
         createMenuBar();
-
     }
 
-    private void createMenuBar(){
+    private void createMenuBar() {
 
         JMenuItem newGame;
         newGame = new JMenuItem("New game");
@@ -67,7 +71,7 @@ public class J3ChessView extends FrameView {
         newGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                new Game();
+                ((J3ChessApp) getApplication()).startNewGame();
             }
         });
 
@@ -100,4 +104,12 @@ public class J3ChessView extends FrameView {
         mMenuBar.add(game);
         mMenuBar.add(menuTwo);
     }
+
+    public Graphics2D getDrawGraphics() {
+        return mMainPanel.getPersistentGraphics();
+    }
+
+    public void update() {
+        //mMainPanel.revalidate();
+	}
 }

@@ -4,24 +4,27 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
+public class DrawPanel extends JComponent {
 
-class DrawPanel extends JComponent {
+	private BufferedImage mImg;
 
-    private Image mImg;
+	public DrawPanel(int sizeX, int sizeY) {
+		setPreferredSize(new Dimension(sizeX, sizeY));
+		mImg = new BufferedImage(sizeX, sizeY, BufferedImage.TYPE_INT_ARGB);
+	}
 
-    public DrawPanel(Image img) {
-        mImg = img;
-        Dimension dm = new Dimension(img.getWidth(null), img.getHeight(null));
-        setPreferredSize(dm);
-    }
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		J3ChessApp.getInstance().update();
+		g.drawImage(mImg, 0, 0, null);
+	}
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(mImg, 0, 0, this.getWidth(), this.getHeight(), null);
-    }
+	public Graphics2D getPersistentGraphics() {
+		return (Graphics2D) mImg.getGraphics();
+	}
 }

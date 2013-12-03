@@ -1,7 +1,8 @@
 package j3chess.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import j3chess.Chessboard;
+import j3chess.EntitySystem;
 import j3chess.Field;
 import j3chess.FieldDirection;
 
@@ -20,7 +21,7 @@ public class ChessboardTest {
     	// this test will fail, so adapt it accordingly!
 
         // Let's go, create a new chessboard for testing
-        Chessboard cb = new Chessboard();
+        Chessboard cb = new Chessboard(null);
 
         // Loop through all fields
         for (int circle = 0; circle < Chessboard.NUMBEROFCIRCLES; circle++) {

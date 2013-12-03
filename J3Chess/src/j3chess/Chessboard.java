@@ -1,7 +1,14 @@
 package j3chess;
 
+import j3chess.components.Paintable;
+import j3chess.components.Position;
 import j3chess.utility.Vector2d;
+
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+
+import artemis.Entity;
 
 /**
  * Represents the game's board. Keeps track of all the fields an pieces
@@ -19,7 +26,7 @@ public class Chessboard {
     /** Number of columns the chessboard consists of. */
     public static final int NUMBEROFCOLUMNS = 24;
     /** Size of the center field, fraction of the total diameter. */
-    public static final float CENTERSIZE = 0.2f;
+    public static final float CENTERSIZE = 0.3333f;
 
     /** 6x24 array of all fields in the game. */
     private Field[][] mFields;
@@ -29,6 +36,9 @@ public class Chessboard {
     /** Edges that define the creeks, i.e. connected but unpassable. */
     private final ArrayList<Edge> mCreeks = new ArrayList<Edge>();
 
+    /** Referece to the Artemis entity, i.e. the graphical chessboard. */
+	private Entity mEntity;
+
 
     /* ##################################################################
      * constructor
@@ -37,8 +47,9 @@ public class Chessboard {
 
     /**
      * @brief Creates new instance of the Chessboard class.
+     * @param entitySystem Reference to the entity system.
      */
-    public Chessboard() {
+    public Chessboard(final EntitySystem entitySystem) {
         // Create all logical fields
         createFields();
         //set the Neighbors of every Field
@@ -49,6 +60,16 @@ public class Chessboard {
 
         //create Creeks
         defineCreeks();
+
+        // Create artemis entity
+        if (entitySystem != null) {
+	        mEntity = entitySystem.getWorld().createEntity();
+	        Paintable paint = new Paintable();
+	        paint.setImage(new ImageIcon("src/j3chess/resources/graphics/chessboard.png"));
+	        mEntity.addComponent(paint);
+	        mEntity.addComponent(new Position());
+	        mEntity.addToWorld();
+        }
 
         //print all Fields - just for debugging
         printAllFields();
@@ -342,7 +363,7 @@ public class Chessboard {
 
     /**
      * @brief Returns a field object by its coordinate.
-     * Coordinates are m from the center to the outside and n around the circular chessboard.
+     * Coordinates are m from the center to the outside and n around the circle.
      * @param column    Coordinate from the center to the outside
      * @param circle    Coordinate around the circular chessboard
      * @return Field object

@@ -1,5 +1,8 @@
 package j3chess;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jdesktop.application.Application;
@@ -12,6 +15,12 @@ public class J3ChessApp extends SingleFrameApplication {
     /** @brief common logger instance for the application */
     private static final Logger LOG = LogManager.getRootLogger();
 
+    /** @brief instance of the J3Chess view that takes displays everything */
+    private J3ChessView mView;
+
+    /** @brief Current game, may be null. */
+	private Game mGame;
+
     /**
      * @brief main entry point of the project
      * @param args command line arguments that won't be considered
@@ -19,8 +28,8 @@ public class J3ChessApp extends SingleFrameApplication {
     public static void main(final String[] args) {
         // setup for asynchronous logging
         System.setProperty(
-                "Log4jContextSelector",
-                "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+            "Log4jContextSelector",
+            "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
         // launch the application
         launch(J3ChessApp.class, args);
@@ -46,8 +55,9 @@ public class J3ChessApp extends SingleFrameApplication {
     protected final void startup() {
         J3ChessApp.getLogger().trace(
                 "Starting " + J3ChessApp.class.getName() + "...");
-        final J3ChessView view = new J3ChessView(this);
-        this.show(view);
+        mView = new J3ChessView();
+        this.show(mView);
+        startNewGame();
     }
 
     @Override
@@ -55,4 +65,22 @@ public class J3ChessApp extends SingleFrameApplication {
         J3ChessApp.getLogger().trace(
                 "Shutdown " + J3ChessApp.class.getName() + "...");
     }
+
+    public void startNewGame() {
+        mGame = new Game();
+        update();
+    }
+
+    public void update() {
+        mGame.update();
+        mView.update();
+    }
+
+    public Game getGame() {
+    	return mGame;
+    }
+
+	public Graphics2D getDrawGraphics() {
+		return mView.getDrawGraphics();
+	}
 }

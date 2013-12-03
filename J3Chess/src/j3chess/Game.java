@@ -1,5 +1,7 @@
 package j3chess;
 
+import java.awt.Image;
+
 /**
  * the game class represents a single party of chess.
  */
@@ -16,17 +18,10 @@ public class Game {
      *        throughout the game.
      */
     public Game() {
-        this.mEntitySystem = new EntitySystem();
-        this.mChessboard = new Chessboard();
-        this.mPieceFactory = new PieceFactory(mEntitySystem);
-        initialize();
-    }
-
-    /**
-     * @brief initialization logic of the game
-     */
-    public final void initialize() {
+        mEntitySystem = new EntitySystem();
         mEntitySystem.initialize();
+        mChessboard = new Chessboard(mEntitySystem);
+        mPieceFactory = new PieceFactory(mEntitySystem);
     }
 
     /**
@@ -36,4 +31,8 @@ public class Game {
         return mChessboard;
     }
 
+	public void update() {
+		mEntitySystem.getWorld().setDelta(20.0f);
+		mEntitySystem.getWorld().process();
+	}
 }

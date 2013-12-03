@@ -1,5 +1,7 @@
 package j3chess.components;
 
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
 import artemis.Component;
@@ -30,8 +32,8 @@ public class Paintable extends Component {
      * @brief getter for the mImage member
      * @return the image to paint
      */
-    public final ImageIcon getImage() {
-        return this.mImage;
+    public final Image getImage() {
+        return this.mImage.getImage();
     }
 
     /**
