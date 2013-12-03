@@ -1,26 +1,26 @@
 package j3chess;
 
 /**
- * Class for horizontal Edges between two fields, to define Creeks and Moats. Edge are defined by a left and a right Field.
+ * Class for Edges between two fields, to define Creeks and Moats. Edge are defined by a two neighbored Fields.
  */
 public class Edge {
     /**
-     * Left Field of the Edge.
+     * First Field of the Edge.
      */
-    private Field mLeftField;
+    private final Field mFirstField;
     /**
-     * Right Field of the Edge.
+     * Secound Field of the Edge.
      */
-    private Field mRightField;
+    private final Field mSecoundField;
 
     /**
-     * @Brief Construktor - creates an new Edge
-     * @param leftField left Field of the Edge
-     * @param rightField right Field of the Edge
+     * @Brief Constructor - creates an new Edge
+     * @param firstField first Field of the Edge
+     * @param secoundField secound Field of the Edge
      */
-    public Edge(final Field leftField, final Field rightField) {
-        this.mLeftField = leftField;
-        this.mRightField = rightField;
+    public Edge(final Field firstField, final Field secoundField) {
+        this.mFirstField = firstField;
+        this.mSecoundField = secoundField;
     }
     /**
      * @Brief checks is the edge is equal to another Edge
@@ -28,10 +28,14 @@ public class Edge {
      * @return return true if the two have the same two horizontal Fields
      */
     public final Boolean isEqual(final Edge edge) {
-        if (this.mLeftField == edge.mLeftField
-                && this.mRightField == edge.mRightField) {
+        if (this.mFirstField == edge.mFirstField
+                && this.mSecoundField == edge.mSecoundField) {
             return true;
-        }
+        } else
+            if (this.mFirstField == edge.mSecoundField
+                    && this.mSecoundField == edge.mFirstField) {
+                return true;
+            }
         return false;
     }
 }

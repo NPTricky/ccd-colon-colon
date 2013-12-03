@@ -20,7 +20,7 @@ public class EntitySystem {
     /**
      * @brief empty default constructor of the entity system
      */
-    EntitySystem() {
+    public EntitySystem() {
 
     }
 

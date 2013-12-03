@@ -14,7 +14,7 @@ public class PieceFactory {
      * @brief constructor for piece factory
      * @param system the entity system to create entities into
      */
-    PieceFactory(final EntitySystem system) {
+    public PieceFactory(final EntitySystem system) {
         this.mEntitySystem = system;
     }
 
@@ -49,6 +49,7 @@ public class PieceFactory {
             break;
         }
         piece.construct();
+        piece.getEntity().addToWorld();
         return piece.getEntity();
     }
 

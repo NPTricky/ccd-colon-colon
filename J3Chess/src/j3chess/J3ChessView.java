@@ -25,12 +25,30 @@ import org.jdesktop.application.FrameView;
  *
  */
 public class J3ChessView extends FrameView {
+    /**
+     * Height of the Chessboard.
+     */
     public static final int CHESSBOARDHEIGHT = 700;
+    /**
+     * Width of the Chessboard.
+     */
     public static final int CHESSBOARDWIDTH = 700;
-    private String chessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
+    /**
+     * Path to the ChessboardImage.
+     */
+    private String mChessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
 
+    /**
+     * The Panel for drawing Pieces.
+     */
     private DrawPanel mMainPanel;
+    /**
+     * StatusPanel of the GUI.
+     */
     private JPanel mStatusPanel;
+    /**
+     * Menubar for the Usermenu.
+     */
     private JMenuBar mMenuBar;
 
     /**
@@ -41,13 +59,16 @@ public class J3ChessView extends FrameView {
         initialize();
     }
 
+    /**
+     * @Brief initialize the View
+     */
     private void initialize() {
-        ImageIcon chessboardImage = new ImageIcon(chessboardImagePath);
+        ImageIcon chessboardImage = new ImageIcon(mChessboardImagePath);
 
         //scale the chessboard
         chessboardImage.setImage(chessboardImage.getImage().
-            getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT,
-            Image.SCALE_DEFAULT));
+                getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT,
+                        Image.SCALE_DEFAULT));
 
         mMainPanel = new DrawPanel(700, 700);
 
@@ -63,6 +84,9 @@ public class J3ChessView extends FrameView {
         createMenuBar();
     }
 
+    /**
+     * @Brief creates the MenuBar
+     */
     private void createMenuBar() {
 
         JMenuItem newGame;
@@ -80,11 +104,11 @@ public class J3ChessView extends FrameView {
         mExit = new JMenuItem("Exit");
         mExit.setMnemonic(KeyEvent.VK_C);
         mExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-        ActionEvent.CTRL_MASK)); // ctrl+q close the program
+                ActionEvent.CTRL_MASK)); // ctrl+q close the program
         mExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                 getFrame().dispose();
+                getFrame().dispose();
             }
         });
 

@@ -21,7 +21,7 @@ public class Chessboard {
      * #################################################################
      * */
 
-     /** Number of circles the chessboard consists of. */
+    /** Number of circles the chessboard consists of. */
     public static final int NUMBEROFCIRCLES = 6;
     /** Number of columns the chessboard consists of. */
     public static final int NUMBEROFCOLUMNS = 24;
@@ -147,8 +147,8 @@ public class Chessboard {
      * @param rightField RIGHT FIELD of the MOAT
      */
     public void removeMoat(final Field leftField, final Field rightField) {
-            //TODO NOT implementet yet
-            //Moat entfernen - richtige Verbindungen wiederherstellen
+        //TODO NOT implementet yet
+        //Moat entfernen - richtige Verbindungen wiederherstellen
     }
 
     /**
@@ -183,7 +183,7 @@ public class Chessboard {
         } else {
             // TODO Throw exception?
             J3ChessApp.getLogger().error("Can't create Moat, leftField is not a"
-                + "leftNeighbor of rightField");
+                    + "leftNeighbor of rightField");
         }
     }
 
@@ -192,9 +192,9 @@ public class Chessboard {
      * #################################################################
      * */
 
-/**
- * @Brief sets all the Neighbors of every Field
- */
+    /**
+     * @Brief sets all the Neighbors of every Field
+     */
     private void setNeighbors() {
         for (int circle = 0; circle < NUMBEROFCIRCLES; circle++) {
             for (int column = 0; column < NUMBEROFCOLUMNS; column++) {
@@ -211,12 +211,12 @@ public class Chessboard {
         }
     }
 
-/**
- * @Brief sets the right Neighbor of an Field
- * @param field the Field
- * @param column the Column of the Field
- * @param circle the Circle of the Field
- */
+    /**
+     * @Brief sets the right Neighbor of an Field
+     * @param field the Field
+     * @param column the Column of the Field
+     * @param circle the Circle of the Field
+     */
     private void setRight(final Field field, final int column, final int circle) {
         field.setNeighbor(FieldDirection.CounterClockwise, mFields[((column + 1) % NUMBEROFCOLUMNS)][circle]);
     }
@@ -346,7 +346,7 @@ public class Chessboard {
                 // Divide the total radius by 13, where each 2m+1 is the center of one field
                 // Can be visualized using the following 13 chars: |1|2|3|4|5|6|
                 // Each number marks a center of a field
-                float radius = (1.f - (2.f * m + 1.f) / ((float) NUMBEROFCIRCLES * 2.f));
+                float radius = (1.f - (2.f * m + 1.f) / (NUMBEROFCIRCLES * 2.f));
                 // Scale according to centerSize
                 radius = (1.f - centerSize) * radius + centerSize;
                 // Calculate angle
@@ -379,7 +379,7 @@ public class Chessboard {
         return null;
     }
     /**
-     * @ Brief prints all Fields just for debuggin
+     * @ Brief prints all Fields just for debugging
      */
     private void printAllFields() {
         for (int circles = 0; circles < NUMBEROFCIRCLES; circles++) {

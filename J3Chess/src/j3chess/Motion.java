@@ -1,12 +1,14 @@
 package j3chess;
 
+import java.util.EnumSet;
+
 /**
  * a generalized abstraction of a motion.
  */
 public class Motion {
 
-    /** @brief the general direction of the motion */
-    private DirectionGroup mDirection;
+    /** @brief the directions of the motion */
+    private EnumSet<PieceDirection> mDirections;
     /**
      * @brief the enforced number of steps of the motion
      *        [0  ] = infinity
@@ -23,42 +25,53 @@ public class Motion {
      * @brief default empty constructor for a motion
      */
     public Motion() {
-        this(DirectionGroup.Vertical, 1, false);
+        this(EnumSet.of(PieceDirection.Forward), 1, false);
     }
 
     /**
      * @brief complete constructor for a motion
-     * @param direction
-     *            the general direction of the motion
+     * @param directions
+     *            the directions of the motion
      * @param steps
      *            the enforced number of steps of the motion
      * @param unblockable
      *            whether the motion is unblockable or not
      */
     public Motion(
-            final DirectionGroup direction,
+            final EnumSet<PieceDirection> directions,
             final int steps,
             final boolean unblockable) {
-        this.mDirection = direction;
+        this.mDirections = directions;
         this.mSteps = steps;
         this.mUnblockable = unblockable;
     }
 
     /**
-     * @brief getter for the mDirection member
-     * @return the general direction of the motion
+     * @brief apply a mask to the directions of the motion and return the result
+     * @param mask the direction mask
+     * @return masked motion directions
      */
-    public final DirectionGroup getDirection() {
-        return mDirection;
+    public final EnumSet<PieceDirection> getDirectionsMasked(EnumSet<PieceDirection> mask) {
+        EnumSet<PieceDirection> result = mDirections;
+        result.retainAll(mask);
+        return result;
     }
 
     /**
-     * @brief setter for the mDirection member
-     * @param direction
-     *            the general direction of the motion
+     * @brief getter for the mDirections member
+     * @return the directions of the motion
      */
-    public final void setDirection(final DirectionGroup direction) {
-        this.mDirection = direction;
+    public final EnumSet<PieceDirection> getDirections() {
+        return mDirections;
+    }
+
+    /**
+     * @brief setter for the mDirections member
+     * @param directions
+     *            the directions of the motion
+     */
+    public final void setDirections(final EnumSet<PieceDirection> directions) {
+        this.mDirections = directions;
     }
 
     /**
@@ -79,7 +92,7 @@ public class Motion {
     }
 
     /**
-     * @brief getter for the mJump member
+     * @brief getter for the mUnblockable member
      * @return whether the motion is unblockable or not
      */
     public final boolean getUnblockable() {
@@ -87,7 +100,7 @@ public class Motion {
     }
 
     /**
-     * @brief setter for the mJump member
+     * @brief setter for the mUnblockable member
      * @param unblockable
      *            whether the motion is a jump or not
      */

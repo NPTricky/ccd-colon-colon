@@ -43,8 +43,8 @@ public abstract class Piece {
         mPiece
         .addComponent(new Position(),
                 ComponentType.getTypeFor(Position.class))
-        .addComponent(new Selectable(),
-                ComponentType.getTypeFor(Selectable.class));
+                .addComponent(new Selectable(),
+                        ComponentType.getTypeFor(Selectable.class));
     }
 
     /**

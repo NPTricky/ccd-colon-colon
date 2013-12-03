@@ -1,8 +1,8 @@
 package j3chess;
 
 /**
- * enum of available directions of a single field on the chessboard. eight
- * neighborhood. sorted by maximum distance.
+ * enum of available directions of a single field on the chessboard.
+ * eight neighborhood. sorted by maximum distance.
  */
 public enum FieldDirection implements Direction {
     /** @brief into the clockwise direction */
