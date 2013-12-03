@@ -292,7 +292,8 @@ public class Chessboard {
             }
         } else {
             //diagonal through the middle
-            field.setNeighbor(FieldDirection.InClockwise, mFields[(column + (NUMBEROFCOLUMNS - ((NUMBEROFCIRCLES - 1) * 2))) % NUMBEROFCOLUMNS][circle]);
+            field.setNeighbor(FieldDirection.InClockwise,
+                    mFields[(column + (NUMBEROFCOLUMNS - ((NUMBEROFCIRCLES - 1) * 2))) % NUMBEROFCOLUMNS][circle]);
         }
     }
     /**
