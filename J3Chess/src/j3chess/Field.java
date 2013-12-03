@@ -23,7 +23,7 @@ public class Field {
     /** @brief Name of the columns*/
     private static final char[] COLUMNNAMES = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
         'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-        'S', 'T', 'U', 'V', 'W', 'X'};
+        'S', 'T', 'U', 'V', 'W', 'X', };
 
     /**
      * Creates an instance of a Field on the chessboard.

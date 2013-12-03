@@ -1,6 +1,6 @@
 package j3chess.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import j3chess.Chessboard;
 import j3chess.Field;
 import j3chess.FieldDirection;
