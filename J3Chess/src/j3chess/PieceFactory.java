@@ -49,6 +49,7 @@ public class PieceFactory {
             break;
         }
         piece.construct();
+        piece.getEntity().addToWorld();
         return piece.getEntity();
     }
 

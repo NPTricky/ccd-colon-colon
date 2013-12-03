@@ -47,6 +47,17 @@ public class Motion {
     }
 
     /**
+     * @brief apply a mask to the directions of the motion and return the result
+     * @param mask the direction mask
+     * @return masked motion directions
+     */
+    public final EnumSet<PieceDirection> getDirectionsMasked(EnumSet<PieceDirection> mask) {
+        EnumSet<PieceDirection> result = mDirections;
+        result.retainAll(mask);
+        return result;
+    }
+
+    /**
      * @brief getter for the mDirections member
      * @return the directions of the motion
      */

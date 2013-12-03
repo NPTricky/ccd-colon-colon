@@ -6,7 +6,6 @@ import j3chess.MotionPattern;
 import j3chess.PieceDirection;
 import j3chess.components.Movement;
 import j3chess.components.Position;
-import j3chess.utility.Helper;
 
 import java.util.EnumSet;
 
@@ -29,8 +28,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     private ComponentMapper<Movement> mMovementMapper;
 
     /**
-     * @brief
-     * @param aspect
+     * @brief the valid movement system interprets the movement capabilities of
+     *        entities and creates a list of possible move targets
      */
     public ValidMovementSystem() {
         super(Aspect.getAspectForAll(Position.class, Movement.class));
@@ -44,40 +43,39 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
     /**
      * @brief checks for valid moves of an movable entity.
-     * @param e
-     *            the movabe entity to process
+     * @param entity the movable entity to process
      * @see artemis.systems.EntityProcessingSystem#process(artemis.Entity)
      */
     @Override
-    protected final void process(final Entity e) {
+    protected final void process(final Entity entity) {
         // retrieve the relevant data from the mappers
-        final Field position = mPositionMapper.get(e).getPosition();
-        final Movement movement = mMovementMapper.get(e);
+        final Field position = mPositionMapper.get(entity).getPosition();
+        final Movement movement = mMovementMapper.get(entity);
         final EnumSet<PieceDirection> mask = movement.getMask();
-        //e.g. Forward Only
-        // 0 1 0 0 0 0 0 0
-        
-        // @todo get field direction from piece direction solution
-
-        // The EnumSet implements all methods in the Set interface, so
-        // union == addAll(),
-        // intersection == retainAll(),
-        // difference == a combination of retainAll(), addAll() and removeAll().
+        // e.g. Forward Only [ 0 1 0 0 0 0 0 0 ]
 
         // update the logic
         for (final MotionPattern pattern : movement.getPatterns()) {
-            // apply the mask on the motion pattern
-            if (true) { continue; }
+
+            final EnumSet<PieceDirection> start = pattern
+                    .getMotions() // get list of motions of the pattern
+                    .get(0) // get first motion of the list
+                    .getDirectionsMasked(mask); // get the masked directions of
+                                                // the first motion
+
+            // direction is empty...
+            if (start.equals(EnumSet.noneOf(PieceDirection.class))) {
+                // ... and thus the pattern will be skipped
+                continue;
+            }
+
             for (final Motion motion : pattern.getMotions()) {
-                // Field goal; // the target field that can be reached by this pattern
                 final boolean unblockable = motion.getUnblockable();
                 final int steps = motion.getSteps();
                 final EnumSet<PieceDirection> group = motion.getDirections();
-
-                
-                // e.g. Diagonal -> ForwardRight, ForwardLeft, BackwardLeft, BackwardRight
-                // 0 0 1 1 0 0 1 1
+                // e.g. Diagonal [ 0 0 1 1 0 0 1 1 ]
             }
+
         }
     }
 
