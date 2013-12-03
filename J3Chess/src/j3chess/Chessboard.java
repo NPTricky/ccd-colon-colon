@@ -30,7 +30,6 @@ public class Chessboard {
     /** Edges that define the creeks, i.e. connected but unpassable. */
     private final ArrayList<Edge> mCreeks = new ArrayList<Edge>();
 
-
     /* ##################################################################
      * constructor
      * #################################################################

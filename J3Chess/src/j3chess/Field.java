@@ -13,13 +13,15 @@ public class Field {
     private Vector2d mDrawPos;
 
     /** @brief Neighbors of this field, some might be null. */
-    EnumMap<FieldDirection, Field> mNeighbors =
+    private EnumMap<FieldDirection, Field> mNeighbors =
             new EnumMap<FieldDirection, Field>(FieldDirection.class);
 
-    public Integer mCircle;
-    public int mColumn;
-    
-    public char[] columnNames = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
+    /** @brief circle of the field*/
+    private Integer mCircle;
+    /** @brief column of the field*/
+    private int mColumn;
+    /** @brief Name of the columns*/
+    private static final char[] COLUMNNAMES = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
             'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
             'S', 'T', 'U', 'V', 'W', 'X'};
 
@@ -73,7 +75,7 @@ public class Field {
      * @return String [A-X][0-5]
      */
     public final String toString() {
-        return columnNames[mColumn] + mCircle.toString();
+        return COLUMNNAMES[mColumn] + mCircle.toString();
     }
 
 

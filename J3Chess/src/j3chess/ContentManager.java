@@ -19,7 +19,7 @@ public class ContentManager {
     /**
      *  HaspMap of the Founded Content.
      */
-    private final HashMap<String, ImageIcon> mcontent = new HashMap<String, ImageIcon>();
+    private final HashMap<String, ImageIcon> mContent = new HashMap<String, ImageIcon>();
 
 
     /**
@@ -28,7 +28,7 @@ public class ContentManager {
      */
     public ContentManager(final String sourcePath) {
         this.mSourcePath = sourcePath;
-        }
+    }
 
 
     /**
@@ -37,16 +37,16 @@ public class ContentManager {
      * @return the searched ImageIcon - returns null if not found
      */
     public final ImageIcon getContent(final String filename) {
-        if (mcontent.containsKey(filename)) {
-            return mcontent.get(filename);
+        if (mContent.containsKey(filename)) {
+            return mContent.get(filename);
         } else {
             if (getContentFromFileSystem(filename, mSourcePath)) {
-                return mcontent.get(filename);
+                return mContent.get(filename);
             }
         }
         //TODO image not found exception
         return null;
-     }
+    }
 
     /**
      * @ Brief searches recursive for a file which contains the search value
@@ -91,6 +91,6 @@ public class ContentManager {
      */
     private void addToHashmap(final String path, final String key) {
         final ImageIcon imageIcon = new ImageIcon(path);
-        mcontent.put(key, imageIcon);
+        mContent.put(key, imageIcon);
     }
 }
