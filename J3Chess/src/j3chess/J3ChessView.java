@@ -23,9 +23,9 @@ public class J3ChessView extends FrameView {
     public static final int CHESSBOARDWIDTH = 700;
     private String chessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
 
-    DrawPanel mMainPanel;
-    JPanel mStatusPanel;
-    JMenuBar mMenuBar;
+    private DrawPanel mMainPanel;
+    private JPanel mStatusPanel;
+    private JMenuBar mMenuBar;
 
     /**
      * @param app Parent application.
