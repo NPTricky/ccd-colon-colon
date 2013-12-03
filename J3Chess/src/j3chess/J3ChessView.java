@@ -19,12 +19,30 @@ import org.jdesktop.application.FrameView;
  *
  */
 public class J3ChessView extends FrameView {
+    /**
+     * Height of the Chessboard.
+     */
     public static final int CHESSBOARDHEIGHT = 700;
+    /**
+     * Width of the Chessboard.
+     */
     public static final int CHESSBOARDWIDTH = 700;
-    private String chessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
+    /**
+     * Path to the ChessboardImage.
+     */
+    private String mChessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
 
+    /**
+     * The Panel for drawing Pieces.
+     */
     private DrawPanel mMainPanel;
+    /**
+     * StatusPanel of the GUI.
+     */
     private JPanel mStatusPanel;
+    /**
+     * Menubar for the Usermenu.
+     */
     private JMenuBar mMenuBar;
 
     /**
@@ -36,8 +54,11 @@ public class J3ChessView extends FrameView {
         initialize();
     }
 
+    /**
+     * @Brief initialize the View
+     */
     private void initialize() {
-        ImageIcon chessboardImage = new ImageIcon(chessboardImagePath);
+        ImageIcon chessboardImage = new ImageIcon(mChessboardImagePath);
 
         //scale the chessboard
         chessboardImage.setImage(chessboardImage.getImage().
@@ -59,7 +80,11 @@ public class J3ChessView extends FrameView {
 
     }
 
-    private void createMenuBar(){
+
+    /**
+     * @Brief creates the MenuBar
+     */
+    private void createMenuBar() {
 
         JMenuItem newGame;
         newGame = new JMenuItem("New game");

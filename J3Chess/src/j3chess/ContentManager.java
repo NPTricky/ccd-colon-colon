@@ -17,7 +17,7 @@ public class ContentManager {
      */
     private final String mSourcePath;
     /**
-     *  * HaspMap of the Founded Content.
+     *  HaspMap of the Founded Content.
      */
     private final HashMap<String, ImageIcon> mcontent = new HashMap<String, ImageIcon>();
 
