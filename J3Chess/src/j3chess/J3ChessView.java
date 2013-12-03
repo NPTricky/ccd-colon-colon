@@ -62,8 +62,8 @@ public class J3ChessView extends FrameView {
 
         //scale the chessboard
         chessboardImage.setImage(chessboardImage.getImage().
-            getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT,
-            Image.SCALE_DEFAULT));
+                getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT,
+                        Image.SCALE_DEFAULT));
 
         mMainPanel = new DrawPanel(chessboardImage.getImage());
 
@@ -101,11 +101,11 @@ public class J3ChessView extends FrameView {
         mExit = new JMenuItem("Exit");
         mExit.setMnemonic(KeyEvent.VK_C);
         mExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-        ActionEvent.CTRL_MASK)); // ctrl+q close the program
+                ActionEvent.CTRL_MASK)); // ctrl+q close the program
         mExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                 getFrame().dispose();
+                getFrame().dispose();
             }
         });
 

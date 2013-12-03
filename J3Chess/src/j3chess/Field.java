@@ -22,8 +22,8 @@ public class Field {
     private int mColumn;
     /** @brief Name of the columns*/
     private static final char[] COLUMNNAMES = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
-            'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-            'S', 'T', 'U', 'V', 'W', 'X'};
+        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+        'S', 'T', 'U', 'V', 'W', 'X'};
 
     /**
      * Creates an instance of a Field on the chessboard.
@@ -60,14 +60,14 @@ public class Field {
     /** @brief prints the field with his Neighbors - just for debugging */
     public final void print() {
         J3ChessApp.getLogger().debug(this.toString()
-            + " CW:" + getNeighbor(FieldDirection.Clockwise)
-            + " CCW:" + getNeighbor(FieldDirection.CounterClockwise)
-            + " Inner:" + getNeighbor(FieldDirection.In)
-            + " Outer:" + getNeighbor(FieldDirection.Out)
-            + " CW Outer:" + getNeighbor(FieldDirection.OutClockwise)
-            + " CCW Outer:" + getNeighbor(FieldDirection.OutCounterClockwise)
-            + " CW Inner:" + getNeighbor(FieldDirection.InClockwise)
-            + " CCW Inner:" + getNeighbor(FieldDirection.InCounterClockwise));
+                + " CW:" + getNeighbor(FieldDirection.Clockwise)
+                + " CCW:" + getNeighbor(FieldDirection.CounterClockwise)
+                + " Inner:" + getNeighbor(FieldDirection.In)
+                + " Outer:" + getNeighbor(FieldDirection.Out)
+                + " CW Outer:" + getNeighbor(FieldDirection.OutClockwise)
+                + " CCW Outer:" + getNeighbor(FieldDirection.OutCounterClockwise)
+                + " CW Inner:" + getNeighbor(FieldDirection.InClockwise)
+                + " CCW Inner:" + getNeighbor(FieldDirection.InCounterClockwise));
     }
 
     /**
