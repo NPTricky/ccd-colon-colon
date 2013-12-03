@@ -1,6 +1,7 @@
 package j3chess;
 
 import j3chess.utility.Vector2d;
+
 import java.util.ArrayList;
 
 /**
@@ -325,7 +326,7 @@ public class Chessboard {
                 // Divide the total radius by 13, where each 2m+1 is the center of one field
                 // Can be visualized using the following 13 chars: |1|2|3|4|5|6|
                 // Each number marks a center of a field
-                float radius = (1.f - (2.f * m + 1.f) / ((float) NUMBEROFCIRCLES * 2.f));
+                float radius = (1.f - (2.f * m + 1.f) / (NUMBEROFCIRCLES * 2.f));
                 // Scale according to centerSize
                 radius = (1.f - centerSize) * radius + centerSize;
                 // Calculate angle
@@ -358,7 +359,7 @@ public class Chessboard {
         return null;
     }
     /**
-     * @ Brief prints all Fields just for debuggin
+     * @ Brief prints all Fields just for debugging
      */
     private void printAllFields() {
         for (int circles = 0; circles < NUMBEROFCIRCLES; circles++) {
