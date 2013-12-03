@@ -1,7 +1,7 @@
 package j3chess;
 
 /**
- * enum of available directions of a single piece on the chessboard
+ * enum of available directions of a single piece on the chessboard.
  * eight neighborhood. sorted by maximum distance.
  */
 public enum PieceDirection implements Direction {

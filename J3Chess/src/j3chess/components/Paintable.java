@@ -1,7 +1,5 @@
 package j3chess.components;
 
-import javax.swing.ImageIcon;
-
 import artemis.Component;
 
 /**
@@ -9,8 +7,8 @@ import artemis.Component;
  */
 public class Paintable extends Component {
 
-    /** @brief the image to paint */
-    private ImageIcon mImage;
+    /** @brief the filename of the image to paint */
+    private String mFilename;
 
     /**
      * @brief empty default constructor for paintable component
@@ -20,26 +18,28 @@ public class Paintable extends Component {
 
     /**
      * @brief constructor for paintable component
-     * @param image the image to paint
+     * @param filename
+     *            the image to paint
      */
-    public Paintable(final ImageIcon image) {
-        this.mImage = image;
+    public Paintable(final String filename) {
+        this.mFilename = filename;
     }
 
     /**
-     * @brief getter for the mImage member
-     * @return the image to paint
+     * @brief getter for the mFilename member
+     * @return the filename of the image to paint
      */
-    public final ImageIcon getImage() {
-        return this.mImage;
+    public final String getFilename() {
+        return mFilename;
     }
 
     /**
-     * @brief setter for the mImage member
-     * @param image the image to paint
+     * @brief setter for the mFilename member
+     * @param filename
+     *            the filename of the image to paint
      */
-    public final void setImage(final ImageIcon image) {
-        this.mImage = image;
+    public final void setFilename(final String filename) {
+        this.mFilename = filename;
     }
 
 }

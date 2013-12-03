@@ -1,15 +1,15 @@
 package j3chess.test;
 
 import static org.junit.Assert.assertEquals;
-import j3chess.utility.Helpers;
+import j3chess.utility.Helper;
 
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * test the static nested helpers of the helpers class
+ * test the static nested helpers of the helpers class.
  */
-public class HelpersTest {
+public class HelperTest {
 
     @Before
     public final void initialization() {
@@ -17,8 +17,8 @@ public class HelpersTest {
     }
 
     @Test
-    public final void testDirectionHelper() {
-        new Helpers.DirectionHelper();
+    public final void testHelperDirectionGroup() {
+        return;
     }
 
 }
