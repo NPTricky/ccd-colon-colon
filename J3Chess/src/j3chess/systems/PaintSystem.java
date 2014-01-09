@@ -47,8 +47,8 @@ public class PaintSystem extends EntityProcessingSystem {
         final Image image = paintable.getImage();
 
 		// TODO sensible image drawing code
-		if (img != null) {
-			J3ChessApp.getInstance().getDrawGraphics().drawImage(img, 0, 0, null);
+		if (image != null) {
+			J3ChessApp.getInstance().getDrawGraphics().drawImage(image, 0, 0, null);
 		}
 	}
 
