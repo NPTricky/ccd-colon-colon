@@ -76,7 +76,6 @@ public class J3ChessApp extends SingleFrameApplication {
 
     public void update() {
         mGame.update();
-        mView.update();
     }
 
     public Game getGame() {

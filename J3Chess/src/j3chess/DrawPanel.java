@@ -35,19 +35,7 @@ public class DrawPanel extends JComponent implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent arg0) {
-        // Resize x and y to [-1,1] range
-        final float x = ((float) arg0.getX() / (float) arg0.getComponent().getWidth()) * 2.0f - 1.0f;
-        final float y = ((float) arg0.getY() / (float) arg0.getComponent().getHeight()) * 2.0f - 1.0f;
-
-        // Get the field that the player clicked on
-        final Field clickedField = J3ChessApp.getInstance().getGame().getChessboard().getFieldByXY(x, y);
-
-        if (clickedField != null) {
-            // TODO process field
-
-            J3ChessApp.getLogger().log(Level.INFO, clickedField.toString()
-                + " " + clickedField.getDrawPosition().toString());
-        }
+    	// TODO Auto-generated method stub
     }
 
     @Override
@@ -62,7 +50,19 @@ public class DrawPanel extends JComponent implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent arg0) {
-        // TODO Auto-generated method stub
+        // Resize x and y to [-1,1] range
+        final float x = ((float) arg0.getX() / (float) arg0.getComponent().getWidth()) * 2.0f - 1.0f;
+        final float y = ((float) arg0.getY() / (float) arg0.getComponent().getHeight()) * 2.0f - 1.0f;
+
+        // Get the field that the player clicked on
+        final Field clickedField = J3ChessApp.getInstance().getGame().getChessboard().getFieldByXY(x, y);
+
+        if (clickedField != null) {
+            // TODO process field
+
+            J3ChessApp.getLogger().log(Level.INFO, clickedField.toString()
+                + " " + clickedField.getDrawPosition().toString());
+        }
     }
 
     @Override

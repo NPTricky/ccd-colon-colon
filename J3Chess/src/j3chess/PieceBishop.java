@@ -1,5 +1,7 @@
 package j3chess;
 
+import javax.swing.ImageIcon;
+
 import j3chess.components.Movement;
 import j3chess.components.Paintable;
 import j3chess.utility.Helper;
@@ -25,11 +27,8 @@ public class PieceBishop extends Piece {
      */
     @Override
     protected final void construct() {
-        // visualization of the bishop...
-        final Paintable paint = new Paintable();
-        this.getEntity().addComponent(
-                paint,
-                ComponentType.getTypeFor(Paintable.class));
+        // Set drawing image
+        setPieceImage(new ImageIcon("src/j3chess/resources/graphics/pieces/greenBischof.png"));
 
         // movement abilities of the bishop...
         Movement move = new Movement(

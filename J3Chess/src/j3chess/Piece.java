@@ -1,7 +1,12 @@
 package j3chess;
 
+import javax.swing.ImageIcon;
+
+import j3chess.components.Paintable;
+import j3chess.components.PieceStatus;
 import j3chess.components.Position;
 import j3chess.components.Selectable;
+import j3chess.utility.Vector2d;
 import artemis.ComponentType;
 import artemis.Entity;
 
@@ -40,11 +45,54 @@ public abstract class Piece {
         mPiece = mEntitySystem.getWorld().createEntity();
 
         // initialize the default components for an entity of type piece
-        mPiece
-        .addComponent(new Position(),
-                ComponentType.getTypeFor(Position.class))
-                .addComponent(new Selectable(),
-                        ComponentType.getTypeFor(Selectable.class));
+        mPiece.addComponent(new Position(), ComponentType.getTypeFor(Position.class));
+        mPiece.addComponent(new Selectable(), ComponentType.getTypeFor(Selectable.class));
+        mPiece.addComponent(new Paintable(), ComponentType.getTypeFor(Paintable.class));
+        mPiece.addComponent(new PieceStatus(), ComponentType.getTypeFor(PieceStatus.class));
+        getPieceStatusComponent().setPieceType(mType);
+    }
+
+    /**
+     * @brief Sets the image and the offset to draw the Piece with
+     * @param Image to be set
+     */
+    protected void setPieceImage(ImageIcon image) {
+    	Paintable paint = getPaintableComponent();
+    	paint.setImage(image);
+    	paint.setDrawOffset(new Vector2d(-image.getImage().getWidth(null) / 2,
+    			-image.getImage().getHeight(null) / 2));
+    }
+    
+    /**
+     * @brief Get the Position component.
+     * @return Position component
+     */
+    protected Position getPositionComponent() {
+        return (Position) mPiece.getComponent(ComponentType.getTypeFor(Position.class));
+    }
+
+    /**
+     * @brief Get the Selectable component.
+     * @return Selectable component
+     */
+    protected Selectable getSelectableComponent() {
+        return (Selectable) mPiece.getComponent(ComponentType.getTypeFor(Selectable.class));
+    }
+
+    /**
+     * @brief Get the Paintable component.
+     * @return Paintable component
+     */
+    protected Paintable getPaintableComponent() {
+        return (Paintable) mPiece.getComponent(ComponentType.getTypeFor(Paintable.class));
+    }
+
+    /**
+     * @brief Get the PieceStatus component.
+     * @return PieceStatus component
+     */
+    protected PieceStatus getPieceStatusComponent() {
+        return (PieceStatus) mPiece.getComponent(ComponentType.getTypeFor(PieceStatus.class));
     }
 
     /**

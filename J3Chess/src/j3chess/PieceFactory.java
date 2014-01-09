@@ -21,9 +21,10 @@ public class PieceFactory {
     /**
      * @brief helper method to create an piece entity
      * @param type the type of the chess piece
+     * @param field the field where the chess piece is placed
      * @return the chess piece
      */
-    public final Entity create(final PieceType type) {
+    public final Entity create(final PieceType type, Field field) {
         Piece piece = null;
         switch (type) {
         case BISHOP:
@@ -50,7 +51,19 @@ public class PieceFactory {
         }
         piece.construct();
         piece.getEntity().addToWorld();
+        if (field != null) {
+            piece.getPositionComponent().setPosition(field);
+            field.setPiece(piece.getPieceStatusComponent());
+        }
         return piece.getEntity();
     }
 
+    /**
+     * @brief helper method to create an piece entity
+     * @param type the type of the chess piece
+     * @return the chess piece
+     */
+    public final Entity create(final PieceType type) {
+        return create(type, null);
+    }
 }

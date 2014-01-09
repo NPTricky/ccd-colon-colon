@@ -149,8 +149,4 @@ public class J3ChessView extends FrameView {
     public Graphics2D getDrawGraphics() {
         return mMainPanel.getPersistentGraphics();
     }
-
-    public void update() {
-        //mMainPanel.revalidate();
-    }
 }

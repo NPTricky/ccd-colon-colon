@@ -65,7 +65,6 @@ public class Chessboard {
 	        Paintable paint = new Paintable();
 	        paint.setImage(new ImageIcon("src/j3chess/resources/graphics/chessboard.png"));
 	        mEntity.addComponent(paint);
-	        mEntity.addComponent(new Position());
 	        mEntity.addToWorld();
         }
 
