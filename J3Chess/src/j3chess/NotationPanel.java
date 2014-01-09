@@ -25,7 +25,7 @@ public class NotationPanel extends JPanel {
     private JTable notationTable;
 
 
-    public NotationPanel(int sizeX, int sizeY, String Player1, String Player2, String Player3) {
+    public NotationPanel(int sizeX, int sizeY) {
         setPreferredSize(new Dimension(sizeX, sizeY));
 
         //Layoutmanager initialisieren
