@@ -9,14 +9,14 @@ public class Edge {
      */
     private final Field mFirstField;
     /**
-     * Secound Field of the Edge.
+     * Second Field of the Edge.
      */
     private final Field mSecoundField;
 
     /**
      * @Brief Constructor - creates an new Edge
      * @param firstField first Field of the Edge
-     * @param secoundField secound Field of the Edge
+     * @param secoundField second Field of the Edge
      */
     public Edge(final Field firstField, final Field secoundField) {
         this.mFirstField = firstField;
