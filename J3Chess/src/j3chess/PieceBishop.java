@@ -35,7 +35,7 @@ public class PieceBishop extends Piece {
         Movement move = new Movement(
                 new MotionPattern(
                         new Motion(
-                                Helper.Direction.group(DirectionGroup.Diagonal), 0, false)));
+                                Helper.Direction.fromGroup(DirectionGroup.Diagonal), 0, false)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));
