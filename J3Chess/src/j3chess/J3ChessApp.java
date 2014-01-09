@@ -18,8 +18,11 @@ public class J3ChessApp extends SingleFrameApplication {
     /** @brief instance of the J3Chess view that takes displays everything */
     private J3ChessView mView;
 
+    /** @brief Number of Players */
+    public static final int NUMBEROFPLAYERS = 3;
+
     /** @brief Current game, may be null. */
-	private Game mGame;
+    private Game mGame;
 
     /**
      * @brief main entry point of the project

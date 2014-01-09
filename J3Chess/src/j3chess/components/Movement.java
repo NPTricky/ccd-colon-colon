@@ -15,10 +15,14 @@ import artemis.Component;
  */
 public class Movement extends Component {
 
-    /** @brief the motion pattern direction mask (0 for forbidden directions) */
+    /** @brief the motion pattern direction mask (0 for forbidden directions).
+     *         only applied to the first motion of a motion pattern. */
     private EnumSet<PieceDirection> mMask;
     /** @brief list of possible move patterns */
     private List<MotionPattern> mPatterns;
+    /** @brief whether the movable entity already crossed the center of the
+     *         map. Required to map PieceDirection's into FieldDirection's. */
+    private boolean mCrossedCenter = false;
 
     /**
      * @brief empty default constructor for movement component
@@ -93,6 +97,22 @@ public class Movement extends Component {
      */
     public final void setPatterns(final List<MotionPattern> moves) {
         this.mPatterns = moves;
+    }
+
+    /**
+     * @brief getter for the mCrossedCenter member
+     * @return whether the entity already crossed the center
+     */
+    public final boolean getCrossedCenter() {
+        return mCrossedCenter;
+    }
+
+    /**
+     * @brief setter for the mCrossedCenter member
+     * @param crossedCenter whether the entity already crossed the center
+     */
+    public final void setCrossedCenter(final boolean crossedCenter) {
+        this.mCrossedCenter = crossedCenter;
     }
 
 }

@@ -21,7 +21,7 @@ public class Paintable extends Component {
     }
 
     /**
-     * @brief constructor for paintable component
+     * @brief constructor for the paintable component
      * @param image the image to paint
      */
     public Paintable(final ImageIcon image) {
