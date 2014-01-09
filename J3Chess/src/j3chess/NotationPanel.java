@@ -38,10 +38,6 @@ public class NotationPanel extends JPanel {
         JComponent notationTable = createNatationTable(Player1, Player2, Player3);
         int row = 0;
         addComponentToGrid(notationTable, LEFT, row, 3, 1, GridBagConstraints.NORTH, 250, 500);
-        addMove("Sa3");
-        addMove("Sb3");
-        addMove("Sc3");
-        addMove("Sd3");
     }
 
     private void addComponentToGrid(JComponent c, final int x, final int y, final int width, final int height, final int anchor, final int weightx, final int weighty)
