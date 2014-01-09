@@ -1,5 +1,6 @@
 package j3chess;
 
+import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,21 +11,30 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.FrameView;
 
+
+
 /**
  *
  */
 public class J3ChessView extends FrameView {
+
+    private String Player1 = "Player 1";
+    private String Player2 ="Player 2";
+    private String Player3 ="Player 3";
+
     /**
      * Height of the Chessboard.
      */
@@ -38,8 +48,14 @@ public class J3ChessView extends FrameView {
      */
     private String mChessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
 
+    
     /**
-     * The Panel for drawing Pieces.
+     * The NotationPanel for drawing Pieces.
+     */
+    private NotationPanel mNotationPanel;
+    
+    /**
+     * DrawPanel of the GUI.
      */
     private DrawPanel mMainPanel;
     /**
@@ -71,13 +87,15 @@ public class J3ChessView extends FrameView {
                         Image.SCALE_DEFAULT));
 
         mMainPanel = new DrawPanel(700, 700);
-
+        mNotationPanel = new NotationPanel(300, 700, Player1,Player2,Player3);
+        this.getFrame().getContentPane().setLayout(new FlowLayout());
         this.getFrame().add(mMainPanel);
-
+        this.getFrame().add(mNotationPanel);
+          
+        
         mStatusPanel = new JPanel();
         mMenuBar = new JMenuBar();
 
-        //setComponent(mMainPanel);
         setMenuBar(mMenuBar);
         setStatusBar(mStatusPanel);
 
