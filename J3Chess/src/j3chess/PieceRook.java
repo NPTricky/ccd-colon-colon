@@ -34,9 +34,9 @@ public class PieceRook extends Piece {
         // movement abilities of the rook...
         Movement move = new Movement(
                 new MotionPattern(
-                        new Motion(Helper.Direction.group(DirectionGroup.Horizontal), 0, false)),
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 0, false)),
                 new MotionPattern(
-                        new Motion(Helper.Direction.group(DirectionGroup.Vertical  ), 0, false)));
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 0, false)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));
