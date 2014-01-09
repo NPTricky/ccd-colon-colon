@@ -2,6 +2,7 @@ package j3chess.utility;
 
 import j3chess.DirectionGroup;
 import j3chess.PieceDirection;
+import j3chess.FieldDirection;
 
 import java.util.EnumSet;
 
@@ -20,7 +21,9 @@ public final class Helper {
          * @param group the enum value to group by
          * @return grouped piece directions
          */
-        public static EnumSet<PieceDirection> group(final DirectionGroup group) {
+        public static EnumSet<PieceDirection> fromGroup(
+                final DirectionGroup group) {
+
             EnumSet<PieceDirection> result;
             switch (group) {
             case Diagonal:
@@ -45,6 +48,19 @@ public final class Helper {
                 break;
             }
             return result;
+        }
+
+        public static EnumSet<FieldDirection> toFieldDirections(
+                final EnumSet<PieceDirection> pieceDirections) {
+
+            return toFieldDirections(pieceDirections, false);
+        }
+
+        public static EnumSet<FieldDirection> toFieldDirections(
+                final EnumSet<PieceDirection> pieceDirections,
+                final boolean crossedCenter) {
+
+            return null;
         }
 
     }
