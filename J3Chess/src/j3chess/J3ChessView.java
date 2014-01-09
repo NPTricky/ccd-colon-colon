@@ -1,27 +1,22 @@
 package j3chess;
 
+
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
-import org.jdesktop.application.Application;
 import org.jdesktop.application.FrameView;
 
 
@@ -30,11 +25,6 @@ import org.jdesktop.application.FrameView;
  *
  */
 public class J3ChessView extends FrameView {
-
-    private String Player1 = "Player 1";
-    private String Player2 ="Player 2";
-    private String Player3 ="Player 3";
-
     /**
      * Height of the Chessboard.
      */
@@ -48,16 +38,15 @@ public class J3ChessView extends FrameView {
      */
     private String mChessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
 
-    
     /**
      * The NotationPanel for drawing Pieces.
      */
     private NotationPanel mNotationPanel;
-    
+
     /**
      * DrawPanel of the GUI.
      */
-    private DrawPanel mMainPanel;
+    private DrawPanel mDrawPanel;
     /**
      * StatusPanel of the GUI.
      */
@@ -68,7 +57,7 @@ public class J3ChessView extends FrameView {
     private JMenuBar mMenuBar;
 
     /**
-     * @param app Parent application.
+     * @brief Construtor of the View
      */
     public J3ChessView() {
         super(J3ChessApp.getInstance());
@@ -85,11 +74,18 @@ public class J3ChessView extends FrameView {
         chessboardImage.setImage(chessboardImage.getImage().
                 getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT, Image.SCALE_DEFAULT));
 
-         //  TODO Read values from image / style file
-        mMainPanel = new DrawPanel(668, 668);
-        mNotationPanel = new NotationPanel(300, 700, Player1,Player2,Player3);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new GridBagLayout());
+
+        //  TODO Read values from image / style file
+        mainPanel.setPreferredSize(new Dimension(700, 700));
+        mDrawPanel = new DrawPanel(668, 668);
+        mNotationPanel = new NotationPanel(300, 700);
+        mainPanel.add(mDrawPanel, new GridBagConstraints());
+
         this.getFrame().getContentPane().setLayout(new FlowLayout());
-        this.getFrame().add(mMainPanel);
+        this.getFrame().add(mainPanel);
         this.getFrame().add(mNotationPanel);
 
         mStatusPanel = new JPanel();
@@ -147,7 +143,7 @@ public class J3ChessView extends FrameView {
     }
 
     public Graphics2D getDrawGraphics() {
-        return mMainPanel.getPersistentGraphics();
+        return mDrawPanel.getPersistentGraphics();
     }
 
     public void update() {
