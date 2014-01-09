@@ -70,7 +70,8 @@ public class J3ChessView extends FrameView {
                 getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT,
                         Image.SCALE_DEFAULT));
 
-        mMainPanel = new DrawPanel(700, 700);
+        // TODO Read values from image / style file
+        mMainPanel = new DrawPanel(668, 668);
 
         this.getFrame().add(mMainPanel);
 
