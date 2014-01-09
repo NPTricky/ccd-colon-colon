@@ -1,6 +1,6 @@
 package j3chess;
 
-import java.awt.Image;
+import artemis.Entity;
 
 /**
  * the game class represents a single party of chess.
@@ -22,6 +22,52 @@ public class Game {
         mEntitySystem.initialize();
         mChessboard = new Chessboard(mEntitySystem);
         mPieceFactory = new PieceFactory(mEntitySystem);
+
+        // Create pieces for all three players
+        createPieces();
+    }
+
+    /**
+     * @brief Creates all the pieces for 3 players.
+     * Player 1 occupies fields A0 through H1
+     * Player 2 occupies fields I0 through P1
+     * Player 3 occupies fields Q0 through X1
+     */
+    public void createPieces() {
+    	// Create array for each player's starting piece types
+    	PieceType[][] pieceTypes = new PieceType[2][8];
+
+    	// Set row 0 (outermost circle)
+    	pieceTypes[0][0] = PieceType.ROOK;
+    	pieceTypes[0][1] = PieceType.KNIGHT;
+    	pieceTypes[0][2] = PieceType.BISHOP;
+    	pieceTypes[0][3] = PieceType.KING;
+    	pieceTypes[0][4] = PieceType.QUEEN;
+    	pieceTypes[0][5] = PieceType.BISHOP;
+    	pieceTypes[0][6] = PieceType.KNIGHT;
+    	pieceTypes[0][7] = PieceType.ROOK;
+
+    	// Set row 1 to all pawns
+    	for (int i = 0; i < pieceTypes[1].length; ++i) {
+    		pieceTypes[1][i] = PieceType.PAWN;
+    	}
+
+    	// Create pieces for all players
+    	for (int player = 0; player < 3; ++player) {
+	    	// Create all pieces
+	    	for (int y = 0; y < 2; ++y) {
+	    		for (int x = 0; x < 8; ++x) {
+	    			// Create an entity according to the piece type
+	    			Entity p = mPieceFactory.create(pieceTypes[y][x]);
+
+	    			// Get field where the piece should be placed
+	    			Field f = mChessboard.getField((player * 8 + x)
+	    					% Chessboard.NUMBEROFCOLUMNS, y);
+
+	    			// TODO add the new piece's PieceStatus component to the field
+	    		}
+	    	}
+    	}
     }
 
     /**

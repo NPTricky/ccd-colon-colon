@@ -33,7 +33,11 @@ public class Paintable extends Component {
      * @return the image to paint
      */
     public final Image getImage() {
-        return this.mImage.getImage();
+        if (mImage != null) {
+            return mImage.getImage();
+        } else {
+            return null;
+        }
     }
 
     /**

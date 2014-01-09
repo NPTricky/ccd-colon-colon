@@ -3,13 +3,9 @@ package j3chess;
 import j3chess.components.Paintable;
 import j3chess.components.Position;
 import j3chess.utility.Vector2d;
-
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
-
 import org.apache.logging.log4j.Level;
-
 import artemis.Entity;
 
 /**
@@ -63,7 +59,7 @@ public class Chessboard {
         //create Creeks
         defineCreeks();
 
-        // Create artemis entity
+        // Create artemis entity for the field
         if (entitySystem != null) {
 	        mEntity = entitySystem.getWorld().createEntity();
 	        Paintable paint = new Paintable();
@@ -73,12 +69,11 @@ public class Chessboard {
 	        mEntity.addToWorld();
         }
 
-        //print all Fields - just for debugging
-        printAllFields();
+        // Print all Fields - just for debugging
+        //printAllFields();
 
         // Calculate the fields' 2D drawing positions
         calculateDrawPositions();
-
     }
 
     /* ##################################################################
@@ -321,6 +316,7 @@ public class Chessboard {
                     mFields[(column + (NUMBEROFCOLUMNS - ((NUMBEROFCIRCLES - 1) * 2))) % NUMBEROFCOLUMNS][circle]);
         }
     }
+    
     /**
      * @brief Creates all the fields and adds the required connections.
      */
@@ -378,7 +374,8 @@ public class Chessboard {
         }
 
         // Return null on error
-        J3ChessApp.getLogger().log(Level.ERROR, "getField() arguments out of bounds.");
+        J3ChessApp.getLogger().log(Level.ERROR, "getField() arguments out of bounds:"
+        		+ "column=" + column + ", circle=" + circle);
         return null;
     }
 
