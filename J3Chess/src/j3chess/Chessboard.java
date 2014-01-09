@@ -334,7 +334,7 @@ public class Chessboard {
     }
 
     /**
-     * @brief Calculates draw positions for all fields from spheric to cartesian coordinates.
+     * @brief Calculates draw positions for all fields from polar to cartesian coordinates.
      *
      * Sets the X and Y draw coordinates of the field. Coordinates are calculated in the
      * range [-1..1], where [0,0] is the center of the board. The coordinates need to be
@@ -352,7 +352,7 @@ public class Chessboard {
                 // Scale according to centerSize
                 radius = (1.f - CENTERSIZE) * radius + CENTERSIZE;
                 // Calculate angle
-                final float rho = (float) (2.f * Math.PI * (n / (float) NUMBEROFCOLUMNS));
+                final float rho = (float) (2.f * Math.PI * ((n + 0.5f) / (float) NUMBEROFCOLUMNS));
 
                 // Convert to cartesian
                 final Vector2d cartesian = Vector2d.fromPolarCoordinates(radius, rho);
@@ -392,24 +392,32 @@ public class Chessboard {
      */
     public final Field getFieldByXY(final float x, final float y) {
     	// Calculate polar coordinates
-    	final float radius = (float) Math.sqrt(x * x + y * y);
-    	final float rho = (float) Math.atan2(y, x);
-    	
+    	final float radius = (float) Math.sqrt(x * x + y * y); // radius [0, 1]
+    	final float rho = (float) Math.atan2(y, x); // rho [-pi, pi]
+
+    	// Calculate angle in range [-1, 1]
+    	float angle = rho / (float) Math.PI;
+    	// Transform to [0, 2]
+    	if (angle < 0) {
+    		angle += 2;
+    	}
+    	// Transform to [0, 1]
+    	angle /= 2.0f;
+
     	// Detect click outside of field
     	if (radius > 1 || radius <= CENTERSIZE) {
     		return null;
     	}
 
-    	// To find the column, resize rho from [-pi,pi] to [0,1] and multiply
+    	// To find the column, use angle in range [0, 1] and multiply
     	// with NUMBEROFCOLUMNS. Modulo by NUMBEROFCOLUMNS for safety.
-    	final int column = (int) ((rho + Math.PI) / (2 * Math.PI)
-    			* NUMBEROFCOLUMNS) % NUMBEROFCOLUMNS;
+    	final int column = (int) (angle * NUMBEROFCOLUMNS) % NUMBEROFCOLUMNS;
 
     	// To find the circle, resize r from [CENTERSIZE, 1] to [0,1] and
-    	// multiply with NUMBEROFCIRCLES. Once again, modulo by NUMBEROFCIRCLES
-    	// for safety.
-    	final int circle = (int) ((radius - CENTERSIZE) / (1 - CENTERSIZE)
-    			* NUMBEROFCIRCLES) % NUMBEROFCIRCLES;
+    	// multiply with NUMBEROFCIRCLES. Finally flip because 0 is the outside.
+    	// Once again, modulo by NUMBEROFCIRCLES for safety.
+    	final int circle = NUMBEROFCIRCLES - 1 - (int) ((radius - CENTERSIZE)
+    			/ (1 - CENTERSIZE) * NUMBEROFCIRCLES) % NUMBEROFCIRCLES;
 
     	// Return the field we found
     	return mFields[column][circle];
