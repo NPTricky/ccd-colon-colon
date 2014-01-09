@@ -90,7 +90,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             }
 
             // first step
-            trySingleMotion(position, motionStart, directionsStart);
+            trySingleMotion(movement, position, motionStart, directionsStart);
 
             // this pattern is a single step pattern and doesn't require further
             // processing.
@@ -100,47 +100,68 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
             for (int i = 1; i < pattern.getMotions().size(); i++) {
                 final Motion motion = pattern.getMotions().get(i);
-                trySingleMotion(position, motion);
+                trySingleMotion(movement, position, motion);
             }
-
         }
     }
 
 /* ------------------------------------------------------------------------- */
+/* SINGLE MOTION                                                             */
+/* ------------------------------------------------------------------------- */
 
     /**
+     * @brief
+     * @param movement movement component of the entity about to move
      * @param position current position of the entity about to move
      * @param motion the motion about to be applied to the entity
      */
     private void trySingleMotion(
+            final Movement movement,
             final Field position,
             final Motion motion) {
 
         // forward using a default parameter for the directions
-        trySingleMotion(position, motion, motion.getDirections());
+        trySingleMotion(movement, position, motion, motion.getDirections());
     }
+
     /**
+     * @brief
+     * @param movement movement component of the entity about to move
      * @param position current position of the entity about to move
      * @param motion the motion about to be applied to the entity
      * @param directions the possible directions to move into
      */
     private void trySingleMotion(
+            final Movement movement,
             final Field position,
             final Motion motion,
             final EnumSet<PieceDirection> directions) {
 
-        // get some context of the motion
-        final boolean unblockable = motion.getUnblockable();
-        final int steps = motion.getSteps();
-
+        // forward the motion into each possible direction
         for (final PieceDirection pieceDirection : directions) {
-            
+            trySingleStep(movement, position, motion, pieceDirection);
         }
     }
 
 /* ------------------------------------------------------------------------- */
 
-    private void trySingleStep(final Field position) {
+    /**
+     * @brief
+     * @param movement movement component of the entity about to move
+     * @param position current position of the entity about to move
+     * @param motion the motion about to be applied to the entity
+     * @param direction the possible direction to move into
+     */
+    private void trySingleStep(
+            final Movement movement,
+            final Field position,
+            final Motion motion,
+            final PieceDirection direction) {
+
+        // get some context of the motion
+        final boolean unblockable = motion.getUnblockable();
+        final int steps = motion.getSteps();
+        final boolean crossedCenter = movement.getCrossedCenter();
 
     }
 
@@ -152,6 +173,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             final Movement movement,
             final Field position,
             final int steps) {
+
         final boolean crossedCenter = movement.getCrossedCenter();
         return position;
     }

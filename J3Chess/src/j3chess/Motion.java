@@ -34,8 +34,12 @@ public class Motion {
      *            the directions of the motion
      * @param steps
      *            the enforced number of steps of the motion
+     *            [0  ] = infinity
+     *            [1..] = enforced finite number of steps
      * @param unblockable
      *            whether the motion is unblockable or not
+     *            (e.g. jumping is unblockable)
+     *            (if true = unblockable by pieces)
      */
     public Motion(
             final EnumSet<PieceDirection> directions,
@@ -51,7 +55,8 @@ public class Motion {
      * @param mask the direction mask
      * @return masked motion directions
      */
-    public final EnumSet<PieceDirection> getDirectionsMasked(EnumSet<PieceDirection> mask) {
+    public final EnumSet<PieceDirection> getDirectionsMasked(
+            final EnumSet<PieceDirection> mask) {
         EnumSet<PieceDirection> result = mDirections;
         result.retainAll(mask);
         return result;
@@ -76,7 +81,7 @@ public class Motion {
 
     /**
      * @brief getter for the mSteps member
-     * @return the enforced number of steps of the motion
+     * @return the enforced number of steps of the motion. zero if infinite.
      */
     public final int getSteps() {
         return mSteps;
@@ -86,6 +91,8 @@ public class Motion {
      * @brief setter for the mSteps member
      * @param steps
      *            the enforced number of steps of the motion
+     *            [0  ] = infinity
+     *            [1..] = enforced finite number of steps
      */
     public final void setSteps(final int steps) {
         this.mSteps = steps;
@@ -94,6 +101,8 @@ public class Motion {
     /**
      * @brief getter for the mUnblockable member
      * @return whether the motion is unblockable or not
+     *         (e.g. jumping is unblockable)
+     *         (if true = unblockable by pieces)
      */
     public final boolean getUnblockable() {
         return mUnblockable;
@@ -103,6 +112,8 @@ public class Motion {
      * @brief setter for the mUnblockable member
      * @param unblockable
      *            whether the motion is a jump or not
+     *            (e.g. jumping is unblockable)
+     *            (if true = unblockable by pieces)
      */
     public final void setUnblockable(final boolean unblockable) {
         this.mUnblockable = unblockable;
