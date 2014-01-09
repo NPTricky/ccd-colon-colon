@@ -1,5 +1,6 @@
 package j3chess;
 
+import j3chess.systems.PaintSystem;
 import artemis.ComponentManager;
 import artemis.EntityManager;
 import artemis.World;
@@ -31,8 +32,7 @@ public class EntitySystem {
         // manager examples...
         this.mWorld.setManager(new GroupManager());
         this.mWorld.setManager(new PlayerManager());
-
-        //this.mWorld.setSystem(new PaintSystem());
+        this.mWorld.setSystem(new PaintSystem());
 
         mWorld.initialize();
     }

@@ -35,7 +35,7 @@ public class NotationPanel extends JPanel {
 
 
         this.setLayout(new GridBagLayout());
-        JComponent notationTable = createNatationTable(Player1, Player2, Player3);
+        JComponent notationTable = createNatationTable();
         int row = 0;
         addComponentToGrid(notationTable, LEFT, row, 3, 1, GridBagConstraints.NORTH, 250, 500);
     }
@@ -55,9 +55,8 @@ public class NotationPanel extends JPanel {
         add(c, gbc);
     }
 
-    
-    private JComponent createNatationTable(final String Player1, final String Player2,final String Player3){
-        String[] columnNames = {Player1, Player2, Player3};
+    private JComponent createNatationTable(){
+        String[] columnNames = {Player.ONE.toString(), Player.TWO.toString(), Player.THREE.toString()};
         notationTable = new JTable(new DefaultTableModel(null, columnNames));
         JScrollPane tableSrcollPane = new JScrollPane(notationTable);
         notationTable.setFillsViewportHeight(true);
@@ -70,7 +69,7 @@ public class NotationPanel extends JPanel {
      */
     public final void addMove(final String move) {
         DefaultTableModel tableModel = (DefaultTableModel) notationTable.getModel();
-        int moveCounter=J3ChessApp.getInstance().getGame().getMoveCounter();
+        int moveCounter = J3ChessApp.getInstance().getGame().getMoveCounter();
         if (moveCounter % J3ChessApp.NUMBEROFPLAYERS == 0) {
             tableModel.addRow(new Object[]{move});
         } else {

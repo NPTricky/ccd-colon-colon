@@ -1,7 +1,5 @@
 package j3chess;
 
-import java.awt.Image;
-
 /**
  * the game class represents a single party of chess.
  */
@@ -13,13 +11,13 @@ public class Game {
     /** @brief Represents the entities within our game */
     private final PieceFactory mPieceFactory;
 
-    /** Counts the moves of all players     */
-    private int moveCounter =0;
+    /** Counts the moves of all players.     */
+    private int moveCounter = 0;
     /**
      * @brief main class that keeps track of all objects needed
      *        throughout the game.
      */
-      
+
     public Game() {
         mEntitySystem = new EntitySystem();
         mEntitySystem.initialize();
@@ -38,13 +36,14 @@ public class Game {
 		mEntitySystem.getWorld().setDelta(20.0f);
 		mEntitySystem.getWorld().process();
 	}
-    
+
 	/** @brief increase the move Counter*/
 	public void increaseMovesCounter() {
         moveCounter++;
     }
-	/** @brief returns the number of moves*/
-    public int getMoveCounter(){
+
+	/** @return the number of moves sum of all Players*/
+    public final int getMoveCounter() {
         return moveCounter;
     }
 }
