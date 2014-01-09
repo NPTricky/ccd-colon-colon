@@ -35,6 +35,11 @@ public class Vector2d {
         return new Vector2d((float) (radius * Math.cos(rho)), (float) (radius * Math.sin(rho)));
     }
 
+    @Override
+    public String toString() {
+    	return "X: " + x + ", Y: " + y;
+    }
+    
     /** @brief Cartesian X coordinate */
     public float x;
     /** @brief Cartesian Y coordinate */

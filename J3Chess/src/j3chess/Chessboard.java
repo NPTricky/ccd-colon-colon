@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import org.apache.logging.log4j.Level;
+
 import artemis.Entity;
 
 /**
@@ -75,7 +77,7 @@ public class Chessboard {
         printAllFields();
 
         // Calculate the fields' 2D drawing positions
-        calculateDrawPositions(CENTERSIZE);
+        calculateDrawPositions();
 
     }
 
@@ -269,6 +271,7 @@ public class Chessboard {
             field.setNeighbor(FieldDirection.OutCounterClockwise, mFields[(column + 1) % NUMBEROFCOLUMNS][circle - 1]);
         }
     }
+
     /**
      * @Brief sets the left outer Neighbor of an Field
      * @param field the Field
@@ -284,6 +287,7 @@ public class Chessboard {
             }
         }
     }
+
     /**
      * @Brief sets the right inner Neighbor of an Field
      * @param field the Field
@@ -330,16 +334,14 @@ public class Chessboard {
     }
 
     /**
-     * @brief Calculates draw positions for all fields from spheric to cartesian coordinates.
+     * @brief Calculates draw positions for all fields from polar to cartesian coordinates.
      *
      * Sets the X and Y draw coordinates of the field. Coordinates are calculated in the
      * range [-1..1], where [0,0] is the center of the board. The coordinates need to be
      * scaled to the total board size before drawing.
      * Visualization: https://github.com/NPTricky/ccd-colon-colon/issues/11#issuecomment-29002979
-     *
-     * @param centerSize    Relative size of the center circle, e.g. 0.2 means 20% of the total diameter
      */
-    private void calculateDrawPositions(final float centerSize) {
+    private void calculateDrawPositions() {
         for (int m = 0; m < NUMBEROFCIRCLES; m++) {
             for (int n = 0; n < NUMBEROFCOLUMNS; n++) {
                 // Calculate radius of the fields
@@ -348,9 +350,9 @@ public class Chessboard {
                 // Each number marks a center of a field
                 float radius = (1.f - (2.f * m + 1.f) / (NUMBEROFCIRCLES * 2.f));
                 // Scale according to centerSize
-                radius = (1.f - centerSize) * radius + centerSize;
+                radius = (1.f - CENTERSIZE) * radius + CENTERSIZE;
                 // Calculate angle
-                final float rho = (float) (2.f * Math.PI * (n / (float) NUMBEROFCOLUMNS));
+                final float rho = (float) (2.f * Math.PI * ((n + 0.5f) / (float) NUMBEROFCOLUMNS));
 
                 // Convert to cartesian
                 final Vector2d cartesian = Vector2d.fromPolarCoordinates(radius, rho);
@@ -364,8 +366,8 @@ public class Chessboard {
     /**
      * @brief Returns a field object by its coordinate.
      * Coordinates are m from the center to the outside and n around the circle.
-     * @param column    Coordinate from the center to the outside
-     * @param circle    Coordinate around the circular chessboard
+     * @param column    Coordinate around the circular chessboard
+     * @param circle    Coordinate from the center to the outside
      * @return Field object
      */
     public final Field getField(final int column, final int circle) {
@@ -374,10 +376,53 @@ public class Chessboard {
                 && circle < mFields[0].length) {
             return mFields[column][circle];
         }
-        // TODO log error
+
         // Return null on error
+        J3ChessApp.getLogger().log(Level.ERROR, "getField() arguments out of bounds.");
         return null;
     }
+
+    /**
+     * @brief Return a field by x,y coordinates, e.g. if a user clicked.
+     * The x and y coordinates must be normalized, i.e. in [-1,1] range, since this
+     * class has no clue how big the drawn chessboard is.
+     * @param x    Cartesian X coordinate where the field is to be found
+     * @param y    Cartesian Y coordinate where the field is to be found
+     * @return Field object or null if out of bounds
+     */
+    public final Field getFieldByXY(final float x, final float y) {
+    	// Calculate polar coordinates
+    	final float radius = (float) Math.sqrt(x * x + y * y); // radius [0, 1]
+    	final float rho = (float) Math.atan2(y, x); // rho [-pi, pi]
+
+    	// Calculate angle in range [-1, 1]
+    	float angle = rho / (float) Math.PI;
+    	// Transform to [0, 2]
+    	if (angle < 0) {
+    		angle += 2;
+    	}
+    	// Transform to [0, 1]
+    	angle /= 2.0f;
+
+    	// Detect click outside of field
+    	if (radius > 1 || radius <= CENTERSIZE) {
+    		return null;
+    	}
+
+    	// To find the column, use angle in range [0, 1] and multiply
+    	// with NUMBEROFCOLUMNS. Modulo by NUMBEROFCOLUMNS for safety.
+    	final int column = (int) (angle * NUMBEROFCOLUMNS) % NUMBEROFCOLUMNS;
+
+    	// To find the circle, resize r from [CENTERSIZE, 1] to [0,1] and
+    	// multiply with NUMBEROFCIRCLES. Finally flip because 0 is the outside.
+    	// Once again, modulo by NUMBEROFCIRCLES for safety.
+    	final int circle = NUMBEROFCIRCLES - 1 - (int) ((radius - CENTERSIZE)
+    			/ (1 - CENTERSIZE) * NUMBEROFCIRCLES) % NUMBEROFCIRCLES;
+
+    	// Return the field we found
+    	return mFields[column][circle];
+    }
+
     /**
      * @ Brief prints all Fields just for debugging
      */
@@ -389,3 +434,4 @@ public class Chessboard {
         }
     }
 }
+

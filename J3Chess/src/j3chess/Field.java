@@ -87,7 +87,12 @@ public class Field {
         mDrawPos.x = vec.x;
         mDrawPos.y = vec.y;
     }
-
-
-
+    
+    /**
+     * @brief Gets the position where the field (i.e. its piece) will be drawn.
+     * @return Cartesian 2-dimensional vector specifying the draw position
+     */
+    public final Vector2d getDrawPosition() {
+        return mDrawPos;
+    }
 }
