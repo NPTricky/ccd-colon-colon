@@ -21,7 +21,7 @@ public class PieceFactory {
     /**
      * @brief helper method to create an piece entity
      * @param type the type of the chess piece
-     * @param player the player that owns this Pawn
+     * @param player the player that owns this piece
      * @param field the field where the chess piece is placed
      * @return the chess piece
      */
@@ -72,7 +72,7 @@ public class PieceFactory {
     /**
      * @brief helper method to create an piece entity
      * @param type the type of the chess piece
-     * @param player the player that owns this Pawn
+     * @param player the player that owns this piece
      * @return the chess piece
      */
     public final Entity create(final PieceType type, final Player player) {
