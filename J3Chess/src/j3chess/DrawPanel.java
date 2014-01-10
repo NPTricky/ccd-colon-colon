@@ -1,6 +1,5 @@
 package j3chess;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -35,7 +34,7 @@ public class DrawPanel extends JComponent implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent arg0) {
-    	// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
     }
 
     @Override
