@@ -1,5 +1,7 @@
 package j3chess.components;
 
+import j3chess.utility.Vector2d;
+
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -13,11 +15,15 @@ public class Paintable extends Component {
 
     /** @brief the image to paint */
     private ImageIcon mImage;
+    
+    /** @brief Offset to paint at */
+    private Vector2d mDrawOffset;
 
     /**
      * @brief empty default constructor for paintable component
      */
     public Paintable() {
+        mDrawOffset = new Vector2d();
     }
 
     /**
@@ -48,4 +54,19 @@ public class Paintable extends Component {
         this.mImage = image;
     }
 
+    /**
+     * @brief getter for the draw offset vector
+     * @return the draw offset vector
+     */
+    public final Vector2d getDrawOffset() {
+        return mDrawOffset;
+    }
+
+    /**
+     * @brief setter for the draw offset vector
+     * @param offset to paint
+    1 */
+    public final void setDrawOffset(final Vector2d offset) {
+        this.mDrawOffset = offset;
+    }
 }

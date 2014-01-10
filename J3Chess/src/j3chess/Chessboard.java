@@ -63,9 +63,8 @@ public class Chessboard {
         if (entitySystem != null) {
 	        mEntity = entitySystem.getWorld().createEntity();
 	        Paintable paint = new Paintable();
-	        paint.setImage(new ImageIcon("src/j3chess/resources/graphics/chessboard.png"));
+	        paint.setImage(new ImageIcon(J3ChessApp.RESOURCEPATH + "chessboard.png"));
 	        mEntity.addComponent(paint);
-	        mEntity.addComponent(new Position());
 	        mEntity.addToWorld();
         }
 

@@ -13,19 +13,26 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @brief Handels the Notationpanel
- *
+ * Class to create the Notationpanel for all moves.
  */
 public class NotationPanel extends JPanel {
 
-    private final int LEFT = 0;
-    private final int MIDDLE = 1;
-    private final int RIGHT = 2;
+    private static final int LEFT = 0;
+    private static final int MIDDLE = 1;
+    private static final int RIGHT = 2;
 
+    /**
+     * @brief notationTable to show all moves
+     */
     private JTable notationTable;
 
 
-    public NotationPanel(int sizeX, int sizeY, String Player1, String Player2, String Player3) {
+    /**
+     * The Construktor for the NotationPanel for all moves.
+     * @param sizeX weight of the Notation Panel
+     * @param sizeY height of the Notation Panel
+     */
+    public NotationPanel(final int sizeX, final int sizeY) {
         setPreferredSize(new Dimension(sizeX, sizeY));
 
         //Layoutmanager initialisieren
@@ -33,29 +40,27 @@ public class NotationPanel extends JPanel {
 
         setLayout(gridBagLayout);
 
-
         this.setLayout(new GridBagLayout());
-        JComponent notationTable = createNatationTable();
+        JComponent notationTable = createNotationTable();
+
         int row = 0;
-        addComponentToGrid(notationTable, LEFT, row, 3, 1, GridBagConstraints.NORTH, 250, 500);
+        int colum = LEFT;
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
+        gridBagConstraints.gridx = colum;
+        gridBagConstraints.gridy = row;
+        gridBagConstraints.anchor = GridBagConstraints.NORTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = sizeX;
+        gridBagConstraints.weighty = sizeY;
+        add(notationTable, gridBagConstraints);
     }
 
-    private void addComponentToGrid(JComponent c, final int x, final int y, final int width, final int height, final int anchor, final int weightx, final int weighty)
-    {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets=new Insets(3, 3, 3, 3);
-        gbc.gridx = x;
-        gbc.gridy = y;
-        gbc.gridwidth = width;
-        gbc.gridheight = height;
-        gbc.anchor = anchor;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.weightx = weightx;
-        gbc.weighty = weighty;
-        add(c, gbc);
-    }
 
-    private JComponent createNatationTable(){
+    /** @Brief Creates the NotationTable with Player Names
+     *  @return Srcoll Pane with the Notationtable
+     * */
+    private JComponent createNotationTable() {
         String[] columnNames = {Player.ONE.toString(), Player.TWO.toString(), Player.THREE.toString()};
         notationTable = new JTable(new DefaultTableModel(null, columnNames));
         JScrollPane tableSrcollPane = new JScrollPane(notationTable);

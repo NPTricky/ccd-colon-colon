@@ -20,6 +20,9 @@ public class J3ChessApp extends SingleFrameApplication {
 
     /** @brief Number of Players */
     public static final int NUMBEROFPLAYERS = 3;
+    
+    /** @brief Home path for the resource files */
+    public static final String RESOURCEPATH = "src/j3chess/resources/graphics/";
 
     /** @brief Current game, may be null. */
     private Game mGame;
@@ -76,7 +79,6 @@ public class J3ChessApp extends SingleFrameApplication {
 
     public void update() {
         mGame.update();
-        mView.update();
     }
 
     public Game getGame() {
