@@ -21,10 +21,12 @@ public class NotationPanel extends JPanel {
     private static final int MIDDLE = 1;
     private static final int RIGHT = 2;
 
+    private static final Insets INSETS = new Insets(3, 3, 3, 3);
+
     /**
      * @brief notationTable to show all moves
      */
-    private JTable notationTable;
+    private JTable mNotationTable;
 
 
     /**
@@ -46,7 +48,7 @@ public class NotationPanel extends JPanel {
         int row = 0;
         int colum = LEFT;
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = INSETS;
         gridBagConstraints.gridx = colum;
         gridBagConstraints.gridy = row;
         gridBagConstraints.anchor = GridBagConstraints.NORTH;
@@ -62,9 +64,9 @@ public class NotationPanel extends JPanel {
      * */
     private JComponent createNotationTable() {
         String[] columnNames = {Player.ONE.toString(), Player.TWO.toString(), Player.THREE.toString()};
-        notationTable = new JTable(new DefaultTableModel(null, columnNames));
-        JScrollPane tableSrcollPane = new JScrollPane(notationTable);
-        notationTable.setFillsViewportHeight(true);
+        mNotationTable = new JTable(new DefaultTableModel(null, columnNames));
+        JScrollPane tableSrcollPane = new JScrollPane(mNotationTable);
+        mNotationTable.setFillsViewportHeight(true);
         return tableSrcollPane;
     }
 
@@ -73,7 +75,7 @@ public class NotationPanel extends JPanel {
      * @param move the move to add
      */
     public final void addMove(final String move) {
-        DefaultTableModel tableModel = (DefaultTableModel) notationTable.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) mNotationTable.getModel();
         int moveCounter = J3ChessApp.getInstance().getGame().getMoveCounter();
         if (moveCounter % J3ChessApp.NUMBEROFPLAYERS == 0) {
             tableModel.addRow(new Object[]{move});
