@@ -1,5 +1,6 @@
 package j3chess.systems;
 
+import j3chess.FieldDirection;
 import j3chess.J3ChessApp;
 import j3chess.Field;
 import j3chess.Motion;
@@ -10,6 +11,7 @@ import j3chess.components.Position;
 import j3chess.utility.Helper;
 
 import java.util.EnumSet;
+import java.util.List;
 
 import artemis.Aspect;
 import artemis.ComponentMapper;
@@ -52,55 +54,33 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     protected final void process(final Entity entity) {
 
         // retrieve relevant components from the entity
-        final Field position = mPositionMapper.get(entity).getPosition();
+        final Position position = mPositionMapper.get(entity);
         final Movement movement = mMovementMapper.get(entity);
 
-        // Set of PieceDirection e.g. Forward Only = [ 0 1 0 0 0 0 0 0 ]
-        // [ Right, Forward,  ForwardRight, ForwardLeft,
-        //   Left,  Backward, BackwardLeft, BackwardRight ]
-        // EnumSet retains natural order...
-        final EnumSet<PieceDirection> mask = movement.getMask();
-
-        // update the logic
         for (final MotionPattern pattern : movement.getPatterns()) {
 
             // there are no motions in this pattern. something went wrong...
             if (pattern.getMotions().isEmpty()) {
-                J3ChessApp.getLogger().warn(
-                        "no motions within this motion pattern. this shouldn't "
-                        + "happen because the pattern is invalid.");
+                J3ChessApp.getLogger().error("no motions within a pattern");
                 continue; // skip single iteration of outer for loop
             }
 
             // masked starting directions of the pattern
-            final Motion motionStart = pattern
+            final EnumSet<PieceDirection> directionsMasked = pattern
                     .getMotions() // get list of motions of the pattern
-                    .get(0); // get first motion of the list
-            final EnumSet<PieceDirection> directionsStart = motionStart
-                    .getDirectionsMasked(mask); // get the masked directions of
-                                                // the first motion
+                    .get(0) // get first motion of the list
+                    .getDirectionsMasked(movement.getMask()); // masked motion
 
             // the set of start directions is empty after masking
-            if (directionsStart.equals(EnumSet.noneOf(PieceDirection.class))) {
-                J3ChessApp.getLogger().warn(
-                        "after masking possible directions of the piece, there "
-                        + "are no directions left. the movement pattern makes "
-                        + "no sense and is invalid.");
+            if (directionsMasked.equals(EnumSet.noneOf(PieceDirection.class))) {
+                J3ChessApp.getLogger().error("no directions left");
                 continue; // skip single iteration of outer for loop
             }
 
-            // first step
-            trySingleMotion(movement, position, motionStart, directionsStart);
-
-            // this pattern is a single step pattern and doesn't require further
-            // processing.
-            if (pattern.getMotions().size() == 1) {
-                continue; // skip single iteration of outer for loop
-            }
-
-            for (int i = 1; i < pattern.getMotions().size(); i++) {
-                final Motion motion = pattern.getMotions().get(i);
-                trySingleMotion(movement, position, motion);
+            if (!pattern.getUnblockable()) {
+                //recurseMotionList();
+            } else {
+                //recurseMotionListUnblockable();
             }
         }
     }
@@ -109,73 +89,46 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 /* SINGLE MOTION                                                             */
 /* ------------------------------------------------------------------------- */
 
-    /**
-     * @brief
-     * @param movement movement component of the entity about to move
-     * @param position current position of the entity about to move
-     * @param motion the motion about to be applied to the entity
-     */
-    private void trySingleMotion(
+    private void recurseMotionList(
             final Movement movement,
-            final Field position,
-            final Motion motion) {
+            final Position position,
+            final Field currentField,
+            final PieceDirection currentPieceDirection,
+            final List<Motion> motionList,
+            final int currentMotionIndex,
+            final int currentStep) {
 
-        // forward using a default parameter for the directions
-        trySingleMotion(movement, position, motion, motion.getDirections());
-    }
+        // step - muss in eine richtung abgearbeitet werden
+        // currentStep <= currentMotion.getSteps
+        // solange das nicht erfüllt, motionIndex nicht erhöhen
+        
 
-    /**
-     * @brief
-     * @param movement movement component of the entity about to move
-     * @param position current position of the entity about to move
-     * @param motion the motion about to be applied to the entity
-     * @param directions the possible directions to move into
-     */
-    private void trySingleMotion(
-            final Movement movement,
-            final Field position,
-            final Motion motion,
-            final EnumSet<PieceDirection> directions) {
+        
+        // motion - muss in alle seine richtungen (currentMotion.getDirections())
+        // abgearbeitet werden, rekursiv
+        
+        final int motionMax = motionList.size();
+        final Motion currentMotion = motionList.get(currentMotionIndex);
 
-        // forward the motion into each possible direction
-        for (final PieceDirection pieceDirection : directions) {
-            trySingleStep(movement, position, motion, pieceDirection);
+        final int stepMax = currentMotion.getSteps();
+
+        final boolean inverse = movement.getCrossedCenter();
+
+        final EnumSet<FieldDirection> currentFieldDirections =
+                Helper.Direction.toFieldDirections(
+                        currentPieceDirections,
+                        inverse);
+
+        for (final FieldDirection fieldDirection : currentFieldDirections) {
+            Field targetField = currentField.getNeighbor(fieldDirection);
         }
     }
 
-/* ------------------------------------------------------------------------- */
-
-    /**
-     * @brief
-     * @param movement movement component of the entity about to move
-     * @param position current position of the entity about to move
-     * @param motion the motion about to be applied to the entity
-     * @param direction the possible direction to move into
-     */
-    private void trySingleStep(
-            final Movement movement,
-            final Field position,
-            final Motion motion,
-            final PieceDirection direction) {
-
-        // get some context of the motion
-        final boolean unblockable = motion.getUnblockable();
-        final int steps = motion.getSteps();
-        final boolean crossedCenter = movement.getCrossedCenter();
-
-    }
+    // solange unblockable
+    // kann nur bewegen/schlagen wenn motionIndex == motionPattern.getMotions()
 
 /* ------------------------------------------------------------------------- */
 /* HELPERS                                                                   */
 /* ------------------------------------------------------------------------- */
-
-    private Field getFieldInDirection(
-            final Movement movement,
-            final Field position,
-            final int steps) {
-
-        final boolean crossedCenter = movement.getCrossedCenter();
-        return position;
-    }
 
 }

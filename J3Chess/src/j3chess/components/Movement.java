@@ -67,6 +67,24 @@ public class Movement extends Component {
 
     /**
      * @brief getter for the mMask member
+     *
+     * The Motion Pattern Direction Mask ( alias movement.getMask() ) is an
+     * EnumSet of PieceDirection's.
+     *
+     * EnumSet retains it's natural order:
+     *   0 Right
+     *   1 Forward
+     *   2 ForwardRight
+     *   3 ForwardLeft
+     *   4 Left
+     *   5 Backward
+     *   6 BackwardLeft
+     *   7 BackwardRight
+     *
+     * e.g. [ Forward ] = [ 0 1 0 0 0 0 0 0 ]
+     *      [ Horizontal ] = [ 0 0 1 1 0 0 1 1 ]
+     *      [ Left & Backward ] = [ 0 0 0 0 1 1 0 0 ]
+     *
      * @return the motion pattern direction mask
      */
     public final EnumSet<PieceDirection> getMask() {

@@ -34,11 +34,11 @@ public class PieceKing extends Piece {
         // movement abilities of the king...
         Movement move = new Movement(
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 1, false)),
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 1)),
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 1, false)),
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 1)),
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Diagonal  ), 1, false)));
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Diagonal  ), 1)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

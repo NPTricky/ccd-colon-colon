@@ -37,9 +37,9 @@ public class PiecePawn extends Piece {
         Movement move = new Movement(
                 EnumSet.of(PieceDirection.Forward),
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical), 1, false)),
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical), 1)),
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical), 2, false)));
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical), 2)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));
