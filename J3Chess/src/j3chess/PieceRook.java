@@ -25,12 +25,6 @@ public class PieceRook extends Piece {
      */
     @Override
     protected final void construct() {
-        // visualization of the rook...
-        Paintable paint = new Paintable();
-        this.getEntity().addComponent(
-                paint,
-                ComponentType.getTypeFor(Paintable.class));
-
         // movement abilities of the rook...
         Movement move = new Movement(
                 new MotionPattern(

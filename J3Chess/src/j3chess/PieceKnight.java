@@ -25,12 +25,6 @@ public class PieceKnight extends Piece {
      */
     @Override
     protected final void construct() {
-        // visualization of the knight...
-        Paintable paint = new Paintable();
-        this.getEntity().addComponent(
-                paint,
-                ComponentType.getTypeFor(Paintable.class));
-
         // movement abilities of the knight...
         Movement move = new Movement(
                 new MotionPattern(

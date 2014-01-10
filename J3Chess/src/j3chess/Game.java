@@ -69,7 +69,7 @@ public class Game {
 
                     // Create an entity according to the piece type on field f
                     // This synchronizes Field and the Piece's PieceStatus component positions
-                    Entity p = mPieceFactory.create(pieceTypes[y][x], f);
+                    Entity p = mPieceFactory.create(pieceTypes[y][x], Player.values()[player], f);
                 }
             }
         }

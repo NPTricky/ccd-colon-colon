@@ -27,9 +27,6 @@ public class PieceBishop extends Piece {
      */
     @Override
     protected final void construct() {
-        // Set drawing image
-        setPieceImage(new ImageIcon("src/j3chess/resources/graphics/pieces/greenBischof.png"));
-
         // movement abilities of the bishop...
         Movement move = new Movement(
                 new MotionPattern(
