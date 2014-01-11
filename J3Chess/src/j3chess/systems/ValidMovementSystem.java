@@ -156,7 +156,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // last step or a common motion pattern
         boolean isAbleToMove =
                 !currentMotionPattern.getUnblockable()
-                || (isLastStepOfMotion && currentMotionPattern.getUnblockable());
+                || (isLastStepOfMotion
+                        && currentMotionPattern.getUnblockable());
 
         // whether the current motion is the last motion of the motion list
         boolean isLastMotionOfList =
@@ -196,17 +197,19 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
 /* ------------------------------------------------------------------------- */
 
-            if (isBlocked(nextField)) {
-                if (isAbleToMove && isCapturable(myPlayer(), nextField)) {
-                    mCurrentValidMovement
-                    .getValidCaptureMoves()
-                    .add(nextField);
-                }
-                // a blocked motion list doesn't require further processing
-                continue;
-            }
-
             if (isAbleToMove) {
+                // there is something on the next field - check for capture
+                if (isBlocked(nextField)) {
+                    if (isCapturable(myPlayer(), nextField)) {
+                        mCurrentValidMovement
+                        .getValidCaptureMoves()
+                        .add(nextField);
+                    }
+                    // a blocked motion direction doesn't require further
+                    // processing
+                    continue;
+                }
+                // there is nothing on the next field - valid move
                 mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
             }
 
@@ -234,6 +237,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             }
 
 /* ------------------------------------------------------------------------- */
+
             if (!isLastMotionOfList && !isLastStepOfMotion) {
                 // processing of the whole motion list is not done yet
                 recurseMotionList(
