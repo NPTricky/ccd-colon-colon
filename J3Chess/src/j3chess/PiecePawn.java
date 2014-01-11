@@ -3,7 +3,6 @@ package j3chess;
 import java.util.EnumSet;
 
 import j3chess.components.Movement;
-import j3chess.components.Paintable;
 import j3chess.utility.Helper;
 import artemis.ComponentType;
 

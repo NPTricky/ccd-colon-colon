@@ -1,7 +1,6 @@
 package j3chess;
 
 import j3chess.components.Movement;
-import j3chess.components.Paintable;
 import j3chess.utility.Helper;
 import artemis.ComponentType;
 
@@ -34,7 +33,7 @@ public class PieceKnight extends Piece {
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 2),
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 1)));
         move.getPatterns().get(0).setUnblockable(true);
-        move.getPatterns().get(0).setUnblockable(true);
+        move.getPatterns().get(1).setUnblockable(true);
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

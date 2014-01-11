@@ -1,9 +1,6 @@
 package j3chess;
 
-import javax.swing.ImageIcon;
-
 import j3chess.components.Movement;
-import j3chess.components.Paintable;
 import j3chess.utility.Helper;
 import artemis.ComponentType;
 
