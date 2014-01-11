@@ -139,20 +139,24 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // Context Information //
         /////////////////////////
 
-        // the current motion pattern is unblockable (a jump)
-        boolean isUnblockable = currentMotionPattern.getUnblockable();
-
         // the current motion is infinite in it's directions
         boolean isInfinite =
                 (currentMotion.getSteps() == 0);
 
-        // the current step is the last step of the current motion
-        boolean isLastStepOfMotion =
+        // the current step is the last step of the current motion. always
+        // true if (isInfinite == true) and thus not as reliable as isMotionEnd.
+        boolean isLastStepOfMotionNaive =
                 !(currentStep < currentMotion.getSteps());
 
-        // whether we already reached the end of the current motion
-        boolean isMotionEnd =
-                isEndOfMotion(isInfinite, isLastStepOfMotion);
+        // whether we already reached the last step of the current motion
+        boolean isLastStepOfMotion =
+                isLastStepOfMotion(isInfinite, isLastStepOfMotionNaive);
+
+        // the current motion pattern is either unblockable (a jump) and at it's
+        // last step or a common motion pattern
+        boolean isAbleToMove =
+                !currentMotionPattern.getUnblockable()
+                || (isLastStepOfMotion && currentMotionPattern.getUnblockable());
 
         // whether the current motion is the last motion of the motion list
         boolean isLastMotionOfList =
@@ -168,7 +172,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // Logic //
         ///////////
 
-        // do recursive step for every possible direction
+        // recurse into every possible direction
         for (PieceDirection currentPieceDirection : possibleDirections) {
 
             final FieldDirection currentFieldDirection =
@@ -193,35 +197,34 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 /* ------------------------------------------------------------------------- */
 
             if (isBlocked(nextField)) {
-                if (isCapturable(myPlayer(), nextField)) {
-                    mCurrentValidMovement.getValidCaptureMoves().add(nextField);
+                if (isAbleToMove && isCapturable(myPlayer(), nextField)) {
+                    mCurrentValidMovement
+                    .getValidCaptureMoves()
+                    .add(nextField);
                 }
                 // a blocked motion list doesn't require further processing
                 continue;
             }
 
-            mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
+            if (isAbleToMove) {
+                mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
+            }
 
 /* ------------------------------------------------------------------------- */
 
             int nextMotionIndex = -1;
             int nextStep = -1;
 
-            if (!isMotionEnd) {
+            if (!isLastStepOfMotion) {
                 // same motion and next step
                 nextMotionIndex = currentMotionIndex;
                 nextStep = currentStep + 1;
             }
 
-            if (isMotionEnd && !isLastMotionOfList) {
+            if (!isLastMotionOfList && isLastStepOfMotion) {
                 // next motion and first step
                 nextMotionIndex = currentMotionIndex + 1;
                 nextStep = 0; // first step of new motion
-            }
-
-            if (isMotionEnd && isLastMotionOfList) {
-                // processing of the whole motion list is done
-                continue;
             }
 
             if (nextMotionIndex == -1 || nextStep == -1) {
@@ -231,14 +234,16 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             }
 
 /* ------------------------------------------------------------------------- */
-
-            recurseMotionList(
-                    nextField,
-                    currentPieceDirection,
-                    currentMotionPattern,
-                    nextMotionIndex,
-                    nextStep,
-                    nextCrossedCenter);
+            if (!isLastMotionOfList && !isLastStepOfMotion) {
+                // processing of the whole motion list is not done yet
+                recurseMotionList(
+                        nextField,
+                        currentPieceDirection,
+                        currentMotionPattern,
+                        nextMotionIndex,
+                        nextStep,
+                        nextCrossedCenter);
+            }
         }
 
         return;
@@ -251,12 +256,12 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     /**
      * @brief determines whether the motion already reached it's end
      * @param isInfinite the current motion is infinite
-     * @param isLastStepOfMotion it is the last step of the current motion
+     * @param isLastStepOfMotionNaive it is the last step of the current motion
      * @return whether the motion already reached it's end
      */
-    private boolean isEndOfMotion(
+    private boolean isLastStepOfMotion(
             final boolean isInfinite,
-            final boolean isLastStepOfMotion) {
+            final boolean isLastStepOfMotionNaive) {
         /**
          * problem: !(countStep < maxStep) is always true if the motion is
          * infinite because countStep [0..n] is never smaller than 0. thus
@@ -277,7 +282,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
          * XOR of isInfinite and isLastStep defines isMotionEnd, whether the
          * end of the current motion is reached.
          */
-        return (isInfinite ^ isLastStepOfMotion);
+        return (isInfinite ^ isLastStepOfMotionNaive);
     }
 
     /**
@@ -320,6 +325,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         // the current step is the first step of the current motion
         boolean isFirstStep = (currentStep == 0);
+
         // the current step is the first step of the current motion pattern
         boolean isFirstMotionOfList = (currentMotionIndex == 0 && isFirstStep);
 
