@@ -32,8 +32,8 @@ public class PieceKnight extends Piece {
                 new MotionPattern(
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 2),
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 1)));
-        move.getPatterns().get(0).setUnblockable(true);
-        move.getPatterns().get(1).setUnblockable(true);
+        move.getPatterns().get(0).setIsJump(true);
+        move.getPatterns().get(1).setIsJump(true);
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

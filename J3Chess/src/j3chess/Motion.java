@@ -74,7 +74,7 @@ public class Motion {
      *         [0  ] = infinity
      *         [1..] = enforced finite number of steps
      */
-    public final int getSteps() {
+    public final int getStepCount() {
         return mSteps;
     }
 

@@ -12,10 +12,11 @@ public class MotionPattern {
     /** @brief the list of motions which aggregates a motion pattern */
     private List<Motion> mMotions;
     /**
-     * @brief whether the motion pattern is blockable or not (e.g. jumping is
-     *        unblockable) (if true = unblockable by pieces)
+     * @brief whether the motion pattern is blockable or not
+     *        (jumping is unblockable)
+     *        (if true = jump over pieces)
      */
-    private boolean mUnblockable;
+    private boolean mIsJump;
 
     /**
      * @brief default empty constructor for a motion pattern
@@ -60,24 +61,23 @@ public class MotionPattern {
     }
 
     /**
-     * @brief getter for the mUnblockable member
-     * @return whether the motion is unblockable or not
-     *         (e.g. jumping is unblockable)
-     *         (if true = unblockable by pieces)
+     * @brief getter for the mIsJump member
+     * @return whether the motion pattern is blockable or not
+     *         (jumping is unblockable)
+     *         (if true = jump over pieces)
      */
-    public final boolean getUnblockable() {
-        return mUnblockable;
+    public final boolean isJump() {
+        return mIsJump;
     }
 
     /**
-     * @brief setter for the mUnblockable member
-     * @param unblockable
-     *            whether the motion is a jump or not
-     *            (e.g. jumping is unblockable)
-     *            (if true = unblockable by pieces)
+     * @brief setter for the mIsJump member
+     * @param isJump whether the motion pattern is blockable or not
+     *               (jumping is unblockable)
+     *               (if true = jump over pieces)
      */
-    public final void setUnblockable(final boolean unblockable) {
-        this.mUnblockable = unblockable;
+    public final void setIsJump(final boolean isJump) {
+        this.mIsJump = isJump;
     }
 
 }
