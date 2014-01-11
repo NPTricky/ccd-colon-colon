@@ -76,24 +76,18 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             }
 
             // retrieve valid moves from the motion pattern recursively
-            if (!pattern.getUnblockable()) {
-                // motion pattern is common
-                recurseMotionList(
-                        mCurrentPosition.getPosition(),
-                        null,
-                        pattern.getMotions(),
-                        0,
-                        0,
-                        mCurrentMovement.getCrossedCenter());
-            } else {
-                // motion pattern is a jump / unblockable
-                //recurseMotionListUnblockable();
-            }
+            recurseMotionList(
+                    mCurrentPosition.getPosition(),
+                    null,
+                    pattern,
+                    0,
+                    0,
+                    mCurrentMovement.getCrossedCenter());
         }
     }
 
 /* ------------------------------------------------------------------------- */
-/* MEMBERS                                                                   */
+/* Entity-Related Members                                                    */
 /* ------------------------------------------------------------------------- */
 
     /** @brief position component of the currently processed entity */
@@ -104,21 +98,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     private ValidMovement mCurrentValidMovement;
 
 /* ------------------------------------------------------------------------- */
-/* HELPERS                                                                   */
-/* ------------------------------------------------------------------------- */
-
-    /**
-     * @brief getter for the player of the currently processed entity.
-     * for convenience purposes only.
-     * @return the player of the currently processed entity
-     */
-    private Player myPlayer() {
-        return mCurrentPosition
-                .getPosition()
-                .getPiece()
-                .getPlayer();
-    }
-
+/* Recursion                                                                 */
 /* ------------------------------------------------------------------------- */
 
     /**
@@ -127,7 +107,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
      * @param currentField the current field from where to recurse
      * @param lastPieceDirection the piece direction evaluated in the last
      *                           iteration
-     * @param currentMotionList the motion pattern to evaluate
+     * @param currentMotionPattern the motion pattern to evaluate
      * @param currentMotionIndex the current index of the motion in the motion
      *                           pattern to evaluate
      * @param currentStep the current step in the current motion
@@ -138,12 +118,29 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     private void recurseMotionList(
             final Field currentField,
             final PieceDirection lastPieceDirection,
-            final List<Motion> currentMotionList,
+            final MotionPattern currentMotionPattern,
             final int currentMotionIndex,
             final int currentStep,
             final boolean currentCrossedCenter) {
 
-        final Motion currentMotion = currentMotionList.get(currentMotionIndex);
+        ////////////////
+        // Basic Data //
+        ////////////////
+
+        // get the current motion list from the pattern
+        final List<Motion> currentMotionList =
+                currentMotionPattern.getMotions();
+
+        // get the current motion from the motion list
+        final Motion currentMotion =
+                currentMotionList.get(currentMotionIndex);
+
+        /////////////////////////
+        // Context Information //
+        /////////////////////////
+
+        // the current motion pattern is unblockable (a jump)
+        boolean isUnblockable = currentMotionPattern.getUnblockable();
 
         // the current motion is infinite in it's directions
         boolean isInfinite =
@@ -161,14 +158,18 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         boolean isLastMotionOfList =
                 !(currentMotionIndex < currentMotionList.size());
 
-        EnumSet<PieceDirection> directions = getPossibleDirections(
+        EnumSet<PieceDirection> possibleDirections = getPossibleDirections(
                 currentMotion,
                 lastPieceDirection,
                 currentMotionIndex,
                 currentStep);
 
-        // recurse for every possible direction
-        for (PieceDirection currentPieceDirection : directions) {
+        ///////////
+        // Logic //
+        ///////////
+
+        // do recursive step for every possible direction
+        for (PieceDirection currentPieceDirection : possibleDirections) {
 
             final FieldDirection currentFieldDirection =
                     Helper.Direction.toFieldDirection(
@@ -196,14 +197,13 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     mCurrentValidMovement.getValidCaptureMoves().add(nextField);
                 }
                 // a blocked motion list doesn't require further processing
-                return;
+                continue;
             }
 
             mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
 
 /* ------------------------------------------------------------------------- */
 
-            // initialize local variables
             int nextMotionIndex = -1;
             int nextStep = -1;
 
@@ -221,24 +221,32 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
             if (isMotionEnd && isLastMotionOfList) {
                 // processing of the whole motion list is done
-                return;
+                continue;
             }
 
             if (nextMotionIndex == -1 || nextStep == -1) {
                 J3ChessApp.getLogger().error(
                         "logical mistake in valid movement system");
-                return;
+                continue;
             }
+
+/* ------------------------------------------------------------------------- */
 
             recurseMotionList(
                     nextField,
                     currentPieceDirection,
-                    currentMotionList,
+                    currentMotionPattern,
                     nextMotionIndex,
                     nextStep,
                     nextCrossedCenter);
         }
+
+        return;
     }
+
+/* ------------------------------------------------------------------------- */
+/* Other Methods                                                             */
+/* ------------------------------------------------------------------------- */
 
     /**
      * @brief determines whether the motion already reached it's end
@@ -336,10 +344,20 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         return directions;
     }
 
-    private void recurseMotionListUnblockable()
-    {
-        // solange unblockable
-        // kann nur bewegen/schlagen wenn motionIndex == motionPattern.getMotions()
-    }
+/* ------------------------------------------------------------------------- */
+/* Convenience                                                               */
+/* ------------------------------------------------------------------------- */
+
+        /**
+         * @brief getter for the player of the currently processed entity.
+         * for convenience purposes only.
+         * @return the player of the currently processed entity
+         */
+        private Player myPlayer() {
+            return mCurrentPosition
+                    .getPosition()
+                    .getPiece()
+                    .getPlayer();
+        }
 
 }
