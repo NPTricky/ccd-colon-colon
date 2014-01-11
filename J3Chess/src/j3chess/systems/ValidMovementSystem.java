@@ -186,9 +186,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
              *
              * (current ^ crossing) == result
              */
-            boolean nextCrossedCenter = false;
-            //boolean nextCrossedCenter = currentCrossedCenter ^ currentField
-            //        .getWhetherCrossingCenter(currentFieldDirection);
+            boolean nextCrossedCenter = currentCrossedCenter ^ currentField
+                    .getWhetherCrossingCenter(currentFieldDirection);
 
 /* ------------------------------------------------------------------------- */
 
