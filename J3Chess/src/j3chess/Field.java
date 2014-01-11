@@ -64,6 +64,25 @@ public class Field {
         mNeighbors.put(dir, field);
     }
 
+    /**
+     * @brief Tells you wether a move in direction fieldDirection crosses the center.
+     * @param fieldDirection Direction in which the move goes
+     * @return True if crossing center, false otherwise
+     */
+    public final boolean getWhetherCrossingCenter(FieldDirection fieldDirection) {
+        // Get neighboring field
+        Field next = getNeighbor(fieldDirection);
+
+        // We have a neighbor, right?
+        if (next == null) {
+            J3ChessApp.getLogger().error("Field has no neighbor in the specified direction");
+            return false;
+        }
+
+        // Check manhattan distance, if > 2 we are crossing the center
+        return (Math.abs(next.mCircle - mCircle) + Math.abs(next.mColumn - mColumn) > 2);
+    }
+
     /** @brief prints the field with his Neighbors - just for debugging */
     public final void print() {
         J3ChessApp.getLogger().debug(this.toString()
