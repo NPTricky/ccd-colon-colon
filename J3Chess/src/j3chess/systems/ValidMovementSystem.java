@@ -127,13 +127,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // Basic Data //
         ////////////////
 
-        // get the current motion list from the pattern
-        final List<Motion> currentMotionList =
-                currentMotionPattern.getMotions();
-
-        // get the current motion from the motion list
-        final Motion currentMotion =
-                currentMotionList.get(currentMotionIndex);
+        final List<Motion> currentMotionList = currentMotionPattern
+                .getMotions();
+        final Motion currentMotion = currentMotionList
+                .get(currentMotionIndex);
 
         /////////////////////////
         // Context Information //
@@ -213,17 +210,9 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             final Field nextField =
                     currentField.getNeighbor(currentFieldDirection);
 
-            /**
-             * | current | crossing | (desired) |
-             * |    0    |    0     |     0     |
-             * |    0    |    1     |     1     |
-             * |    1    |    0     |     1     |
-             * |    1    |    1     |     0     |
-             *
-             * (current ^ crossing) == desired result acquired by a XOR toggle
-             */
-            final boolean nextCrossedCenter = currentCrossedCenter
-                    ^ currentField
+            // XOR used to toggle the current crossed center status
+            final boolean nextCrossedCenter =
+                    currentCrossedCenter ^ currentField
                     .getWhetherCrossingCenter(currentFieldDirection);
 
 /* ------------------------------------------------------------------------- */
@@ -242,7 +231,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     // this motion direction is blocked
                     continue; // skip this loop iteration
                 }
-                // there is nothing on the next field - valid move
+                // there is nothing on the next field, thus it is a valid move
                 mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
             }
 
@@ -270,9 +259,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
 /* ------------------------------------------------------------------------- */
 
-            // last statement implies
-            // if (!isLastMotionOfList & !isLastStepOfMotion) {...
-
             // processing of the whole motion list is not done yet
             recurseMotionPattern(
                     nextField,
@@ -281,10 +267,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     nextMotionIndex,
                     nextStep,
                     nextCrossedCenter);
-
-            // ...} and thus cut for performance reasons.
         }
-
         return;
     }
 
