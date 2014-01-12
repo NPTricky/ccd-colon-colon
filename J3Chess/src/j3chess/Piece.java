@@ -8,6 +8,7 @@ import j3chess.components.Paintable;
 import j3chess.components.PieceStatus;
 import j3chess.components.Position;
 import j3chess.components.Selectable;
+import j3chess.components.ValidMovement;
 import j3chess.utility.Vector2d;
 import artemis.ComponentType;
 import artemis.Entity;
@@ -55,6 +56,8 @@ public abstract class Piece {
 				ComponentType.getTypeFor(Paintable.class));
 		mPiece.addComponent(new PieceStatus(),
 				ComponentType.getTypeFor(PieceStatus.class));
+        mPiece.addComponent(new ValidMovement(),
+                ComponentType.getTypeFor(ValidMovement.class));
 		getPieceStatusComponent().setPieceType(mType);
 	}
 

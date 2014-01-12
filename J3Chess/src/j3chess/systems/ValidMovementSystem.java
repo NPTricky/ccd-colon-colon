@@ -149,9 +149,30 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         final boolean isLastStepOfMotionNaive =
                 !(currentStep < currentMotion.getStepCount());
 
+        /**
+         * problem: isLastStepOfMotionNaive is always true if the motion is
+         * infinite because countStep [0..n] is never smaller than 0. thus
+         * infinite movement is always a last step.
+         *
+         * solution: look at this binary table
+         *
+         *                              (DESIRED)
+         * | isInfinite | isLastStep | isMotionEnd |
+         * |     0      |     0      |      0      |
+         * |     0      |     1      |      1      |
+         * |     1      |    (1)     |      0      |
+         * |     1      |     1      |      0      |
+         *
+         * (1) is dependent on the value of isInfinite. isLastStep is 1 if
+         * isInfinite is 1. Thus a solution with XOR is correct.
+         *
+         * XOR of isInfinite and isLastStep defines isMotionEnd, whether the
+         * end of the current motion is reached.
+         */
+
         // whether we already reached the last step of the current motion
         final boolean isLastStepOfMotion =
-                isLastStepOfMotion(isInfinite, isLastStepOfMotionNaive);
+                (isInfinite ^ isLastStepOfMotionNaive);
 
         // whether the current motion is the last motion of the motion list
         final boolean isLastMotionOfList =
@@ -176,13 +197,13 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // possible directions to move into from current position
         final EnumSet<PieceDirection> possibleDirections =
                 getPossibleDirections(
+                    currentMotionPattern,
                     currentMotion,
-                    lastPieceDirection,
                     currentMotionIndex,
-                    currentStep);
+                    lastPieceDirection);
 
         // recurse into every possible direction
-        for (PieceDirection currentPieceDirection : possibleDirections) {
+        for (final PieceDirection currentPieceDirection : possibleDirections) {
 
             final FieldDirection currentFieldDirection =
                     Helper.Direction.toFieldDirection(
@@ -210,9 +231,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             // does not apply to anything but the last step of a jump as well as
             // non jumping movement
             if (isAbleToMove) {
-                // there is something on the next field - check for capture
-                if (isBlocked(nextField)) {
-                    if (isCapturable(myPlayer(), nextField)) {
+                // check for blocker
+                if (nextField.getPiece() != null) {
+                    // there is something on the next field -> check for capture
+                    if (myPlayer() != nextField.getPiece().getPlayer()) {
                         mCurrentValidMovement
                         .getValidCaptureMoves()
                         .add(nextField);
@@ -267,81 +289,29 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     }
 
 /* ------------------------------------------------------------------------- */
-/* Other Methods                                                             */
+/* Possible Directions                                                       */
 /* ------------------------------------------------------------------------- */
 
     /**
-     * @brief determines whether the motion already reached it's end
-     * @param isInfinite the current motion is infinite
-     * @param isLastStepOfMotionNaive it is the last step of the current motion
-     * @return whether the motion already reached it's end
-     */
-    private boolean isLastStepOfMotion(
-            final boolean isInfinite,
-            final boolean isLastStepOfMotionNaive) {
-        /**
-         * problem: !(countStep < maxStep) is always true if the motion is
-         * infinite because countStep [0..n] is never smaller than 0. thus
-         * infinite movement is always a last step.
-         *
-         * solution: look at this binary table
-         *
-         *                              (DESIRED)
-         * | isInfinite | isLastStep | isMotionEnd |
-         * |     0      |     0      |      0      |
-         * |     0      |     1      |      1      |
-         * |     1      |    (1)     |      0      |
-         * |     1      |     1      |      0      |
-         *
-         * (1) is dependent on the value of isInfinite. isLastStep is 1 if
-         * isInfinite is 1. Thus a solution with XOR is correct.
-         *
-         * XOR of isInfinite and isLastStep defines isMotionEnd, whether the
-         * end of the current motion is reached.
-         */
-        return (isInfinite ^ isLastStepOfMotionNaive);
-    }
-
-    /**
-     * @brief check whether the target field is blocked
-     * @param targetField the target field about to be checked
-     * @return whether the target field is blocked
-     */
-    private boolean isBlocked(final Field targetField) {
-        return (targetField.getPiece() != null);
-    }
-
-    /**
-     * @brief check whether the target field is capturable by the player. the
-     * method assumes there is a piece on the target field.
-     * @param player the player trying to capture the target field
-     * @param targetField the target field the player is trying to capture
-     * @return whether the target field is capturable
-     */
-    private boolean isCapturable(final Player player, final Field targetField) {
-        return (player != targetField.getPiece().getPlayer());
-    }
-
-    /**
-     * @brief evaluate the possible directions of a motion
+     * @brief evaluate the currently possible directions of the motion
+     * @param motionPattern the motion pattern to evaluate
      * @param motion the motion to evaluate
-     * @param lastPieceDirection the direction of the preceding motion
      * @param currentMotionIndex the index of the current motion required for
      *                           the first motion of a list detection
-     * @param currentStep the current step count
+     * @param lastPieceDirection the direction of the preceding motion
      * @return the possible directions of a motion
      */
     private EnumSet<PieceDirection> getPossibleDirections(
+            final MotionPattern motionPattern,
             final Motion motion,
-            final PieceDirection lastPieceDirection,
             final int currentMotionIndex,
-            final int currentStep) {
+            final PieceDirection lastPieceDirection) {
 
         EnumSet<PieceDirection> directions =
                 EnumSet.noneOf(PieceDirection.class);
 
         // the current step is not the first step of the current motion
-        if (!(currentStep == 0)) {
+        if (lastPieceDirection != null) {
             // go on into the same direction as in the step before...
             directions = EnumSet.of(lastPieceDirection);
         } else {
@@ -350,7 +320,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             if (currentMotionIndex == 0) {
                 // mask the starting directions of the motion pattern
                 directions = motion
-                        .getDirectionsMasked(mCurrentMovement.getMask());
+                        .getDirectionsMasked(motionPattern.getMask());
             } else {
                 // retrieve the possible directions from the motion
                 directions = motion
