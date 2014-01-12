@@ -27,13 +27,13 @@ public class PieceKnight extends Piece {
         // movement abilities of the knight...
         Movement move = new Movement(
                 new MotionPattern(
+                        true,
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 2),
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 1)),
                 new MotionPattern(
+                        true,
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 2),
                         new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 1)));
-        move.getPatterns().get(0).setIsJump(true);
-        move.getPatterns().get(1).setIsJump(true);
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

@@ -159,15 +159,15 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         // whether the current step is the last step of the last motion
         final boolean isLastStepOfLastMotion =
-                isLastStepOfMotion & isLastMotionOfList;
+                (isLastStepOfMotion & isLastMotionOfList);
 
-        // the current motion pattern is either a jump (unblockable) and at it's
-        // last step or a common motion pattern
+        // the current motion pattern is either a jump (unblockable) and at
+        // it's last step or a common motion pattern
         //
         // (!isJump || (isLastStep && isJump)) which may be simplified to
         // (!isJump || isLastStep)
         final boolean isAbleToMove =
-                !currentMotionPattern.isJump() || isLastStepOfLastMotion;
+                (!currentMotionPattern.isJump() || isLastStepOfLastMotion);
 
         ///////////
         // Logic //
@@ -182,7 +182,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     currentStep);
 
         // recurse into every possible direction
-        for (final PieceDirection currentPieceDirection : possibleDirections) {
+        for (PieceDirection currentPieceDirection : possibleDirections) {
 
             final FieldDirection currentFieldDirection =
                     Helper.Direction.toFieldDirection(
@@ -199,7 +199,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
              * |    1    |    0     |     1     |
              * |    1    |    1     |     0     |
              *
-             * (current ^ crossing) == desired result
+             * (current ^ crossing) == desired result acquired by a XOR toggle
              */
             final boolean nextCrossedCenter = currentCrossedCenter
                     ^ currentField
@@ -207,7 +207,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
 /* ------------------------------------------------------------------------- */
 
-            // does not apply to everything but the last step of a jump
+            // does not apply to anything but the last step of a jump as well as
+            // non jumping movement
             if (isAbleToMove) {
                 // there is something on the next field - check for capture
                 if (isBlocked(nextField)) {
@@ -217,7 +218,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                         .add(nextField);
                     }
                     // this motion direction is blocked
-                    continue; // skip this branch
+                    continue; // skip this loop iteration
                 }
                 // there is nothing on the next field - valid move
                 mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
@@ -237,19 +238,18 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     // next motion and first step
                     nextMotionIndex = currentMotionIndex + 1;
                     nextStep = 0; // first step of new motion
+                } else {
+                    // if it is the last step of this motion and the last motion
+                    // of it's motion pattern then
+                    // (nextMotionIndex = -1 && nextStep = -1)
+                    continue; // skip this loop iteration
                 }
-            }
-
-            // if it is the last step of this motion and the last motion of it's
-            // motion pattern
-            if (nextMotionIndex == -1 || nextStep == -1) {
-                continue; // skip this branch
             }
 
 /* ------------------------------------------------------------------------- */
 
             // last statement implies
-            // if (!isLastMotionOfList && !isLastStepOfMotion) {...
+            // if (!isLastMotionOfList & !isLastStepOfMotion) {...
 
             // processing of the whole motion list is not done yet
             recurseMotionPattern(
@@ -340,9 +340,13 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         EnumSet<PieceDirection> directions =
                 EnumSet.noneOf(PieceDirection.class);
 
-        // the current step is the first step of the current motion
-        if (currentStep == 0) {
-            // the current step is the first step of the current motion pattern
+        // the current step is not the first step of the current motion
+        if (!(currentStep == 0)) {
+            // go on into the same direction as in the step before...
+            directions = EnumSet.of(lastPieceDirection);
+        } else {
+            // the current motion is the first step and the first motion of the
+            // current motion pattern
             if (currentMotionIndex == 0) {
                 // mask the starting directions of the motion pattern
                 directions = motion
@@ -352,9 +356,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 directions = motion
                         .getDirections();
             }
-        } else {
-            // go on into the same direction as in the step before...
-            directions = EnumSet.of(lastPieceDirection);
         }
 
         if (directions.equals(EnumSet.noneOf(PieceDirection.class))) {

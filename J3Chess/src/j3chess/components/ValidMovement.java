@@ -14,7 +14,7 @@ public class ValidMovement extends Component {
 
     /** @brief the valid non capture move targets */
     private List<Field> mValidNonCaptureMoves;
-    /** @brief the valid capturing move targets */
+    /** @brief the valid capture move targets */
     private List<Field> mValidCaptureMoves;
 
     /**
@@ -26,7 +26,7 @@ public class ValidMovement extends Component {
     }
 
     /**
-     * @brief getter for the mValidMoves member
+     * @brief getter for the mValidNonCaptureMoves member
      * @return the valid non capture move targets
      */
     public final List<Field> getValidNonCaptureMoves() {
@@ -34,11 +34,12 @@ public class ValidMovement extends Component {
     }
 
     /**
-     * @brief setter for the mValidMoves member
-     * @param validMoves the valid non capture move targets
+     * @brief setter for the mValidNonCaptureMoves member
+     * @param validNonCaptureMoves the valid non capture move targets
      */
-    public final void setValidNonCaptureMoves(final List<Field> validMoves) {
-        this.mValidNonCaptureMoves = validMoves;
+    public final void setValidNonCaptureMoves(
+            final List<Field> validNonCaptureMoves) {
+        this.mValidNonCaptureMoves = validNonCaptureMoves;
     }
 
     /**
