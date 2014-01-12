@@ -153,17 +153,25 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         final boolean isLastStepOfMotion =
                 isLastStepOfMotion(isInfinite, isLastStepOfMotionNaive);
 
+        // whether the current motion is the last motion of the motion list
+        final boolean isLastMotionOfList =
+                !(currentMotionIndex < currentMotionList.size());
+
+        // whether the current step is the last step of the last motion
+        final boolean isLastStepOfLastMotion =
+                isLastStepOfMotion && isLastMotionOfList;
+
         // the current motion pattern is either a jump (unblockable) and at it's
         // last step or a common motion pattern
         //
         // (!isJump || (isLastStep && isJump)) which may be simplified to
         // (!isJump || isLastStep)
         final boolean isAbleToMove =
-                !currentMotionPattern.isJump() || isLastStepOfMotion;
+                !currentMotionPattern.isJump() || isLastStepOfLastMotion;
 
-        // whether the current motion is the last motion of the motion list
-        final boolean isLastMotionOfList =
-                !(currentMotionIndex < currentMotionList.size());
+        ///////////
+        // Logic //
+        ///////////
 
         // possible directions to move into from current position
         final EnumSet<PieceDirection> possibleDirections =
@@ -172,10 +180,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     lastPieceDirection,
                     currentMotionIndex,
                     currentStep);
-
-        ///////////
-        // Logic //
-        ///////////
 
         // recurse into every possible direction
         for (final PieceDirection currentPieceDirection : possibleDirections) {
