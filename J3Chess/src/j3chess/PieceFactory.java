@@ -64,17 +64,9 @@ public class PieceFactory {
 
         piece.construct();
 
-/* ------------------------------------------------------------------------- */
-        field.setPiece(piece.getPieceStatusComponent());
+        field.setPiece(piece.initializeContext(player, field));
 
-        piece.getPositionComponent().setField(field);
-        piece.getPieceStatusComponent().setPlayer(player);
-        piece.loadPieceImage();
-
-/* ------------------------------------------------------------------------- */
-
-        piece.getEntity().addToWorld(); // ought to be the last instruction
-
+        piece.getEntity().addToWorld(); // last instruction (!)
         return piece.getEntity();
     }
 }

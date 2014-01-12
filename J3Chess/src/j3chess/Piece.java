@@ -5,9 +5,6 @@ import j3chess.components.PieceStatus;
 import j3chess.components.Position;
 import j3chess.components.Selectable;
 import j3chess.components.ValidMovement;
-import j3chess.utility.Vector2d;
-
-import javax.swing.ImageIcon;
 
 import artemis.ComponentType;
 import artemis.Entity;
@@ -47,76 +44,47 @@ public abstract class Piece {
         mPiece = mEntitySystem.getWorld().createEntity();
 
         // initialize the default components for an entity of type piece
-        mPiece.addComponent(new Position(),
-                ComponentType.getTypeFor(Position.class));
         mPiece.addComponent(new Selectable(),
                 ComponentType.getTypeFor(Selectable.class));
-        mPiece.addComponent(new PieceStatus(),
-                ComponentType.getTypeFor(PieceStatus.class));
         mPiece.addComponent(new ValidMovement(),
                 ComponentType.getTypeFor(ValidMovement.class));
-        getPieceStatusComponent().setPieceType(mType);
     }
 
     /**
-     * @brief automatically generates the path of the image and loads it into
-     *        the paintable component of the piece
+     * @brief initialize the piece entity with context information provided
+     * by the factory
+     * @param player the owning player
+     * @param field the field this piece stands on
+     * @return the piece status component
      */
-    protected final void loadPieceImage() {
+    protected final PieceStatus initializeContext(
+            final Player player,
+            final Field field) {
+
+        mPiece.addComponent(new Position(field),
+                ComponentType.getTypeFor(Position.class));
+        mPiece.addComponent(new PieceStatus(player, mType),
+                ComponentType.getTypeFor(PieceStatus.class));
+        mPiece.addComponent(new Paintable(generateImagePath(player)),
+                ComponentType.getTypeFor(Paintable.class));
+
+        return mPiece.getComponent(PieceStatus.class);
+    }
+
+    /**
+     * @brief automatically generates the image path string from the given
+     * context information
+     * @param player the owner of this piece
+     * @return the image path string of this piece
+     */
+    private String generateImagePath(final Player player) {
         final String imagePath = J3ChessApp.RESOURCEPATH + "pieces_"
-                + getPieceStatusComponent().getPlayer().name().toLowerCase()
+                + player.name().toLowerCase()
                 + "/"
-                + getPieceStatusComponent().getPieceType().name().toLowerCase()
+                + mType.name().toLowerCase()
                 + ".png";
         J3ChessApp.getLogger().info("Generated Path: " + imagePath);
-        loadPieceImage(imagePath);
-    }
-
-    /**
-     * @brief loads the image of the corresponding image path into the paintable
-     *        component of the piece
-     * @param imagePath
-     *            path of the image to load
-     */
-    protected final void loadPieceImage(final String imagePath) {
-        mPiece.addComponent(new Paintable(imagePath),
-                ComponentType.getTypeFor(Paintable.class));
-    }
-
-    /**
-     * @brief Get the Position component.
-     * @return Position component
-     */
-    protected final Position getPositionComponent() {
-        return (Position) mPiece.getComponent(ComponentType
-                .getTypeFor(Position.class));
-    }
-
-    /**
-     * @brief Get the Selectable component.
-     * @return Selectable component
-     */
-    protected final Selectable getSelectableComponent() {
-        return (Selectable) mPiece.getComponent(ComponentType
-                .getTypeFor(Selectable.class));
-    }
-
-    /**
-     * @brief Get the Paintable component.
-     * @return Paintable component
-     */
-    protected final Paintable getPaintableComponent() {
-        return (Paintable) mPiece.getComponent(ComponentType
-                .getTypeFor(Paintable.class));
-    }
-
-    /**
-     * @brief Get the PieceStatus component.
-     * @return PieceStatus component
-     */
-    protected final PieceStatus getPieceStatusComponent() {
-        return (PieceStatus) mPiece.getComponent(ComponentType
-                .getTypeFor(PieceStatus.class));
+        return imagePath;
     }
 
     /**

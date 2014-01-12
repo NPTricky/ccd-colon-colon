@@ -5,8 +5,6 @@ import j3chess.components.Paintable;
 import j3chess.components.Position;
 import j3chess.utility.Vector2d;
 
-import java.awt.Image;
-
 import artemis.Aspect;
 import artemis.ComponentMapper;
 import artemis.Entity;
