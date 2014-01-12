@@ -159,7 +159,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         // whether the current step is the last step of the last motion
         final boolean isLastStepOfLastMotion =
-                isLastStepOfMotion && isLastMotionOfList;
+                isLastStepOfMotion & isLastMotionOfList;
 
         // the current motion pattern is either a jump (unblockable) and at it's
         // last step or a common motion pattern
