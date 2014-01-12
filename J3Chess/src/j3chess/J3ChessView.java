@@ -21,9 +21,6 @@ import org.jdesktop.application.FrameView;
 
 
 
-/**
- *
- */
 public class J3ChessView extends FrameView {
     /**
      * Height of the Chessboard.
@@ -112,6 +109,16 @@ public class J3ChessView extends FrameView {
             }
         });
 
+        JMenuItem newGameDialog;
+        newGameDialog = new JMenuItem("New gamedialog");
+        newGameDialog.setMnemonic(KeyEvent.VK_G);
+        newGameDialog.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                new NewGameDialog();
+            }
+        });
+
         // Exit Button
         JMenuItem  mExit;
         mExit = new JMenuItem("Exit");
@@ -138,6 +145,7 @@ public class J3ChessView extends FrameView {
         //build menu
         menuTwo.add(mExit);
         game.add(newGame);
+        game.add(newGameDialog);
         mMenuBar.add(game);
         mMenuBar.add(menuTwo);
     }
