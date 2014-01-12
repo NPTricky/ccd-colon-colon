@@ -35,7 +35,7 @@ public class Chessboard {
     private final ArrayList<Edge> mCreeks = new ArrayList<Edge>();
 
     /** Referece to the Artemis entity, i.e. the graphical chessboard. */
-	private Entity mEntity;
+    private Entity mEntity;
 
 
     /* ##################################################################
@@ -61,11 +61,11 @@ public class Chessboard {
 
         // Create artemis entity for the field
         if (entitySystem != null) {
-	        mEntity = entitySystem.getWorld().createEntity();
-	        Paintable paint = new Paintable();
-	        paint.setImage(new ImageIcon(J3ChessApp.RESOURCEPATH + "chessboard.png"));
-	        mEntity.addComponent(paint);
-	        mEntity.addToWorld();
+            mEntity = entitySystem.getWorld().createEntity();
+            Paintable paint = new Paintable();
+            paint.setImage(new ImageIcon(J3ChessApp.RESOURCEPATH + "chessboard.png"));
+            mEntity.addComponent(paint);
+            mEntity.addToWorld();
         }
 
         // Print all Fields - just for debugging
@@ -315,7 +315,7 @@ public class Chessboard {
                     mFields[(column + (NUMBEROFCOLUMNS - ((NUMBEROFCIRCLES - 1) * 2))) % NUMBEROFCOLUMNS][circle]);
         }
     }
-    
+
     /**
      * @brief Creates all the fields and adds the required connections.
      */
@@ -374,7 +374,7 @@ public class Chessboard {
 
         // Return null on error
         J3ChessApp.getLogger().log(Level.ERROR, "getField() arguments out of bounds:"
-        		+ "column=" + column + ", circle=" + circle);
+                + "column=" + column + ", circle=" + circle);
         return null;
     }
 
@@ -387,36 +387,36 @@ public class Chessboard {
      * @return Field object or null if out of bounds
      */
     public final Field getFieldByXY(final float x, final float y) {
-    	// Calculate polar coordinates
-    	final float radius = (float) Math.sqrt(x * x + y * y); // radius [0, 1]
-    	final float rho = (float) Math.atan2(y, x); // rho [-pi, pi]
+        // Calculate polar coordinates
+        final float radius = (float) Math.sqrt(x * x + y * y); // radius [0, 1]
+        final float rho = (float) Math.atan2(y, x); // rho [-pi, pi]
 
-    	// Calculate angle in range [-1, 1]
-    	float angle = rho / (float) Math.PI;
-    	// Transform to [0, 2]
-    	if (angle < 0) {
-    		angle += 2;
-    	}
-    	// Transform to [0, 1]
-    	angle /= 2.0f;
+        // Calculate angle in range [-1, 1]
+        float angle = rho / (float) Math.PI;
+        // Transform to [0, 2]
+        if (angle < 0) {
+            angle += 2;
+        }
+        // Transform to [0, 1]
+        angle /= 2.0f;
 
-    	// Detect click outside of field
-    	if (radius > 1 || radius <= CENTERSIZE) {
-    		return null;
-    	}
+        // Detect click outside of field
+        if (radius > 1 || radius <= CENTERSIZE) {
+            return null;
+        }
 
-    	// To find the column, use angle in range [0, 1] and multiply
-    	// with NUMBEROFCOLUMNS. Modulo by NUMBEROFCOLUMNS for safety.
-    	final int column = (int) (angle * NUMBEROFCOLUMNS) % NUMBEROFCOLUMNS;
+        // To find the column, use angle in range [0, 1] and multiply
+        // with NUMBEROFCOLUMNS. Modulo by NUMBEROFCOLUMNS for safety.
+        final int column = (int) (angle * NUMBEROFCOLUMNS) % NUMBEROFCOLUMNS;
 
-    	// To find the circle, resize r from [CENTERSIZE, 1] to [0,1] and
-    	// multiply with NUMBEROFCIRCLES. Finally flip because 0 is the outside.
-    	// Once again, modulo by NUMBEROFCIRCLES for safety.
-    	final int circle = NUMBEROFCIRCLES - 1 - (int) ((radius - CENTERSIZE)
-    			/ (1 - CENTERSIZE) * NUMBEROFCIRCLES) % NUMBEROFCIRCLES;
+        // To find the circle, resize r from [CENTERSIZE, 1] to [0,1] and
+        // multiply with NUMBEROFCIRCLES. Finally flip because 0 is the outside.
+        // Once again, modulo by NUMBEROFCIRCLES for safety.
+        final int circle = NUMBEROFCIRCLES - 1 - (int) ((radius - CENTERSIZE)
+                / (1 - CENTERSIZE) * NUMBEROFCIRCLES) % NUMBEROFCIRCLES;
 
-    	// Return the field we found
-    	return mFields[column][circle];
+        // Return the field we found
+        return mFields[column][circle];
     }
 
     /**

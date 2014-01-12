@@ -69,7 +69,8 @@ public class Field {
      * @param fieldDirection Direction in which the move goes
      * @return True if crossing center, false otherwise
      */
-    public final boolean getWhetherCrossingCenter(FieldDirection fieldDirection) {
+    public final boolean getWhetherCrossingCenter(final FieldDirection fieldDirection) {
+        /**
         // Get neighboring field
         Field next = getNeighbor(fieldDirection);
 
@@ -78,9 +79,18 @@ public class Field {
             J3ChessApp.getLogger().error("Field has no neighbor in the specified direction");
             return false;
         }
-
         // Check manhattan distance, if > 2 we are crossing the center
         return (Math.abs(next.mCircle - mCircle) + Math.abs(next.mColumn - mColumn) > 2);
+         */
+
+        if (mColumn == Chessboard.NUMBEROFCOLUMNS - 1) {
+            if (fieldDirection == FieldDirection.In
+                    || fieldDirection == FieldDirection.InClockwise
+                    || fieldDirection == FieldDirection.InCounterClockwise) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** @brief prints the field with his Neighbors - just for debugging */
@@ -124,7 +134,7 @@ public class Field {
     /**
      * @brief Gets the position where the field (i.e. its piece) will be drawn.
      * @param width Width of the rendering domain
-     * @param width Height of the rendering domain
+     * @param height Height of the rendering domain
      * @return Cartesian 2-dimensional vector specifying the draw position
      */
     public final Vector2d getDrawPosition(int width, int height) {
@@ -158,6 +168,6 @@ public class Field {
      * @return true if empty, false otherwise
      */
     public boolean isEmpty() {
-    return mPiece == null;
+        return mPiece == null;
     }
 }

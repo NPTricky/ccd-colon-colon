@@ -1,5 +1,6 @@
 package j3chess;
 
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -86,7 +87,7 @@ public class NewGameDialog extends JFrame {
         gbc.insets = INSETS;
         gbc.gridx = column;
         gbc.gridy = row;
-        add(c, gbc);
         gbc.fill = GridBagConstraints.BOTH;
+        add(c, gbc);
     }
 }

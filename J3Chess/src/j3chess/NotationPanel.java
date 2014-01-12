@@ -56,8 +56,8 @@ public class NotationPanel extends JPanel {
         gridBagConstraints.weightx = sizeX;
         gridBagConstraints.weighty = sizeY;
         add(notationTable, gridBagConstraints);
-    }
 
+    }
 
     /** @Brief Creates the NotationTable with Player Names
      *  @return Srcoll Pane with the Notationtable
