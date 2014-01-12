@@ -1,7 +1,6 @@
 package j3chess;
 
 import j3chess.components.Movement;
-import j3chess.components.Paintable;
 import j3chess.utility.Helper;
 import artemis.ComponentType;
 
@@ -28,11 +27,11 @@ public class PieceQueen extends Piece {
         // movement abilities of the queen...
         Movement move = new Movement(
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 0, false)),
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 0)),
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 0, false)),
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 0)),
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Diagonal  ), 0, false)));
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Diagonal  ), 0)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

@@ -1,9 +1,6 @@
 package j3chess;
 
-import javax.swing.ImageIcon;
-
 import j3chess.components.Movement;
-import j3chess.components.Paintable;
 import j3chess.utility.Helper;
 import artemis.ComponentType;
 
@@ -31,7 +28,7 @@ public class PieceBishop extends Piece {
         Movement move = new Movement(
                 new MotionPattern(
                         new Motion(
-                                Helper.Direction.fromGroup(DirectionGroup.Diagonal), 0, false)));
+                                Helper.Direction.fromGroup(DirectionGroup.Diagonal), 0)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

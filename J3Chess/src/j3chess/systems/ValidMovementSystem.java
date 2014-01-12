@@ -1,15 +1,19 @@
 package j3chess.systems;
 
+import j3chess.FieldDirection;
 import j3chess.J3ChessApp;
 import j3chess.Field;
 import j3chess.Motion;
 import j3chess.MotionPattern;
 import j3chess.PieceDirection;
+import j3chess.Player;
 import j3chess.components.Movement;
 import j3chess.components.Position;
+import j3chess.components.ValidMovement;
 import j3chess.utility.Helper;
 
 import java.util.EnumSet;
+import java.util.List;
 
 import artemis.Aspect;
 import artemis.ComponentMapper;
@@ -28,13 +32,19 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     /** @brief fast component mapper to retrieve movement component */
     @Mapper
     private ComponentMapper<Movement> mMovementMapper;
+    /** @brief fast component mapper to retrieve valid movement component */
+    @Mapper
+    private ComponentMapper<ValidMovement> mValidMovementMapper;
 
     /**
      * @brief the valid movement system interprets the movement capabilities of
      *        entities and creates a list of possible move targets
      */
     public ValidMovementSystem() {
-        super(Aspect.getAspectForAll(Position.class, Movement.class));
+        super(Aspect.getAspectForAll(
+                Position.class,
+                Movement.class,
+                ValidMovement.class));
     }
 
     /* @see artemis.EntitySystem#initialize() */
@@ -52,108 +62,283 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     protected final void process(final Entity entity) {
 
         // retrieve relevant components from the entity
-        final Field position = mPositionMapper.get(entity).getPosition();
-        final Movement movement = mMovementMapper.get(entity);
+        mCurrentPosition = mPositionMapper.get(entity);
+        mCurrentMovement = mMovementMapper.get(entity);
+        mCurrentValidMovement = mValidMovementMapper.get(entity);
 
-        // Set of PieceDirection e.g. Forward Only = [ 0 1 0 0 0 0 0 0 ]
-        // [ Right, Forward,  ForwardRight, ForwardLeft,
-        //   Left,  Backward, BackwardLeft, BackwardRight ]
-        // EnumSet retains natural order...
-        final EnumSet<PieceDirection> mask = movement.getMask();
+        // for each motion pattern do...
+        for (final MotionPattern pattern : mCurrentMovement.getPatterns()) {
 
-        // update the logic
-        for (final MotionPattern pattern : movement.getPatterns()) {
-
-            // there are no motions in this pattern. something went wrong...
+            // there are no motions in this pattern. skip loop.
             if (pattern.getMotions().isEmpty()) {
-                J3ChessApp.getLogger().warn(
-                        "no motions within this motion pattern. this shouldn't "
-                        + "happen because the pattern is invalid.");
-                continue; // skip single iteration of outer for loop
+                J3ChessApp.getLogger().error("no motions within this pattern");
+                continue;
             }
 
-            // masked starting directions of the pattern
-            final Motion motionStart = pattern
-                    .getMotions() // get list of motions of the pattern
-                    .get(0); // get first motion of the list
-            final EnumSet<PieceDirection> directionsStart = motionStart
-                    .getDirectionsMasked(mask); // get the masked directions of
-                                                // the first motion
-
-            // the set of start directions is empty after masking
-            if (directionsStart.equals(EnumSet.noneOf(PieceDirection.class))) {
-                J3ChessApp.getLogger().warn(
-                        "after masking possible directions of the piece, there "
-                        + "are no directions left. the movement pattern makes "
-                        + "no sense and is invalid.");
-                continue; // skip single iteration of outer for loop
-            }
-
-            // first step
-            trySingleMotion(position, motionStart, directionsStart);
-
-            // this pattern is a single step pattern and doesn't require further
-            // processing.
-            if (pattern.getMotions().size() == 1) {
-                continue; // skip single iteration of outer for loop
-            }
-
-            for (int i = 1; i < pattern.getMotions().size(); i++) {
-                final Motion motion = pattern.getMotions().get(i);
-                trySingleMotion(position, motion);
-            }
-
+            // retrieve valid moves from the motion pattern recursively
+            recurseMotionPattern(
+                    mCurrentPosition.getField(),
+                    null,
+                    pattern,
+                    0,
+                    0,
+                    mCurrentMovement.getCrossedCenter());
         }
     }
 
 /* ------------------------------------------------------------------------- */
+/* Entity-Related Members                                                    */
+/* ------------------------------------------------------------------------- */
+
+    /** @brief position component of the currently processed entity */
+    private Position mCurrentPosition;
+    /** @brief movement component of the currently processed entity */
+    private Movement mCurrentMovement;
+    /** @brief valid movement component of the currently processed entity */
+    private ValidMovement mCurrentValidMovement;
+
+/* ------------------------------------------------------------------------- */
+/* Recursion                                                                 */
+/* ------------------------------------------------------------------------- */
 
     /**
-     * @param position current position of the entity about to move
-     * @param motion the motion about to be applied to the entity
+     * @brief Recursively interprets a motion pattern and saves the results to
+     *        a ValidMovement component
+     * @param currentField the current field from where to recurse
+     * @param lastPieceDirection the piece direction evaluated in the last
+     *                           iteration. might be null.
+     * @param currentMotionPattern the motion pattern to evaluate
+     * @param currentMotionIndex the current index of the motion in the motion
+     *                           pattern to evaluate
+     * @param currentStep the current step in the current motion
+     * @param currentCrossedCenter the current status whether we crossed the
+     *                             center or not while evaluating the motion
+     *                             pattern
      */
-    private void trySingleMotion(
-            final Field position,
-            final Motion motion) {
+    private void recurseMotionPattern(
+            final Field currentField,
+            final PieceDirection lastPieceDirection,
+            final MotionPattern currentMotionPattern,
+            final int currentMotionIndex,
+            final int currentStep,
+            final boolean currentCrossedCenter) {
 
-        // forward using a default parameter for the directions
-        trySingleMotion(position, motion, motion.getDirections());
+        ////////////////
+        // Basic Data //
+        ////////////////
+
+        final List<Motion> currentMotionList = currentMotionPattern
+                .getMotions();
+
+        final Motion currentMotion = currentMotionList
+                .get(currentMotionIndex);
+
+        /////////////////////////
+        // Context Information //
+        /////////////////////////
+
+        // the current motion is infinite in it's directions
+        final boolean isInfinite =
+                (currentMotion.getStepCount() == 0);
+
+        // the current step is the last step of the current motion. always
+        // true if (isInfinite == true) and thus clearly not as reliable as
+        // isLastStepOfMotion.
+        final boolean isLastStepOfMotionNaive =
+                !(currentStep < currentMotion.getStepCount());
+
+        /**
+         * problem: isLastStepOfMotionNaive is always true if the motion is
+         * infinite because countStep [0..n] is never smaller than 0. thus
+         * infinite movement is always a last step.
+         *
+         * solution: look at this binary table
+         *
+         *                              (DESIRED)
+         * | isInfinite | isLastStep | isMotionEnd |
+         * |     0      |     0      |      0      |
+         * |     0      |     1      |      1      |
+         * |     1      |    (1)     |      0      |
+         * |     1      |     1      |      0      |
+         *
+         * (1) is dependent on the value of isInfinite. isLastStep is 1 if
+         * isInfinite is 1. Thus a solution with XOR is correct.
+         *
+         * XOR of isInfinite and isLastStep defines isMotionEnd, whether the
+         * end of the current motion is reached.
+         */
+
+        // whether we already reached the last step of the current motion
+        final boolean isLastStepOfMotion =
+                (isInfinite ^ isLastStepOfMotionNaive);
+
+        // whether the current motion is the last motion of the motion list
+        final boolean isLastMotionOfList =
+                (currentMotionIndex == currentMotionList.size() - 1);
+
+        // whether the current step is the last step of the last motion
+        final boolean isLastStepOfLastMotion =
+                (isLastStepOfMotion & isLastMotionOfList);
+
+        // the current motion pattern is either a jump (unblockable) and at
+        // it's last step or a common motion pattern
+        //
+        // (!isJump || (isLastStep && isJump)) which may be simplified to
+        // (!isJump || isLastStep)
+        final boolean isAbleToMove =
+                (!currentMotionPattern.isJump() || isLastStepOfLastMotion);
+
+        ///////////
+        // Logic //
+        ///////////
+
+        // possible directions to move into from current position
+        final EnumSet<PieceDirection> possibleDirections =
+                getPossibleDirections(
+                    currentMotionPattern,
+                    currentMotion,
+                    currentMotionIndex,
+                    lastPieceDirection);
+
+        // recurse into every possible direction
+        for (final PieceDirection currentPieceDirection : possibleDirections) {
+
+            final FieldDirection currentFieldDirection =
+                    Helper.Direction.toFieldDirection(
+                            currentPieceDirection,
+                            currentCrossedCenter);
+
+            final Field nextField =
+                    currentField.getNeighbor(currentFieldDirection);
+
+            if (nextField == null) {
+                // there is no next field into the current direction
+                continue; // skip this loop iteration
+            }
+
+            // XOR used to toggle the current crossed center status
+            final boolean nextCrossedCenter =
+                    currentCrossedCenter ^ currentField
+                    .getWhetherCrossingCenter(currentFieldDirection);
+
+/* ------------------------------------------------------------------------- */
+
+            // does not apply to anything but the last step of a jump as well as
+            // non jumping movement
+            if (isAbleToMove) {
+                // check for blocker
+                if (nextField.getPiece() != null) {
+                    // there is something on the next field -> check for capture
+                    if (myPlayer() != nextField.getPiece().getPlayer()) {
+                        mCurrentValidMovement
+                        .getValidCaptureMoves()
+                        .add(nextField);
+                    }
+                    // this motion direction is blocked
+                    continue; // skip this loop iteration
+                }
+                // there is nothing on the next field, thus it is a valid move
+                mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
+            }
+
+/* ------------------------------------------------------------------------- */
+
+            int nextMotionIndex = -1;
+            int nextStep = -1;
+
+            if (!isLastStepOfMotion) {
+                // same motion and next step
+                nextMotionIndex = currentMotionIndex;
+                nextStep = currentStep + 1;
+            } else {
+                if (!isLastMotionOfList) {
+                    // next motion and first step
+                    nextMotionIndex = currentMotionIndex + 1;
+                    nextStep = 0; // first step of new motion
+                } else {
+                    // if it is the last step of this motion and the last motion
+                    // of it's motion pattern then
+                    // (nextMotionIndex = -1 && nextStep = -1)
+                    continue; // skip this loop iteration
+                }
+            }
+
+/* ------------------------------------------------------------------------- */
+
+            // processing of the whole motion list is not done yet
+            recurseMotionPattern(
+                    nextField,
+                    currentPieceDirection,
+                    currentMotionPattern,
+                    nextMotionIndex,
+                    nextStep,
+                    nextCrossedCenter);
+        }
+        return;
     }
+
+/* ------------------------------------------------------------------------- */
+/* Possible Directions                                                       */
+/* ------------------------------------------------------------------------- */
+
     /**
-     * @param position current position of the entity about to move
-     * @param motion the motion about to be applied to the entity
-     * @param directions the possible directions to move into
+     * @brief evaluate the currently possible directions of the motion
+     * @param motionPattern the motion pattern to evaluate
+     * @param motion the motion to evaluate
+     * @param currentMotionIndex the index of the current motion required for
+     *                           the first motion of a list detection
+     * @param lastPieceDirection the direction of the preceding motion
+     * @return the possible directions of a motion
      */
-    private void trySingleMotion(
-            final Field position,
+    private EnumSet<PieceDirection> getPossibleDirections(
+            final MotionPattern motionPattern,
             final Motion motion,
-            final EnumSet<PieceDirection> directions) {
+            final int currentMotionIndex,
+            final PieceDirection lastPieceDirection) {
 
-        // get some context of the motion
-        final boolean unblockable = motion.getUnblockable();
-        final int steps = motion.getSteps();
+        EnumSet<PieceDirection> directions =
+                EnumSet.noneOf(PieceDirection.class);
 
-        for (final PieceDirection pieceDirection : directions) {
-            
+        // the current step is not the first step of the current motion
+        if (lastPieceDirection != null) {
+            // go on into the same direction as in the step before...
+            directions = EnumSet.of(lastPieceDirection);
+        } else {
+            // the current motion is the first step and the first motion of the
+            // current motion pattern
+            if (currentMotionIndex == 0) {
+                // mask the starting directions of the motion pattern
+                directions = motion
+                        .getDirectionsMasked(motionPattern.getMask());
+            } else {
+                // retrieve the possible directions from the motion
+                directions = motion
+                        .getDirections();
+            }
         }
+
+        if (directions.equals(EnumSet.noneOf(PieceDirection.class))) {
+            // the set of directions is empty
+            J3ChessApp.getLogger().error("no directions");
+        }
+
+        return directions;
     }
 
 /* ------------------------------------------------------------------------- */
-
-    private void trySingleStep(final Field position) {
-
-    }
-
-/* ------------------------------------------------------------------------- */
-/* HELPERS                                                                   */
+/* Convenience                                                               */
 /* ------------------------------------------------------------------------- */
 
-    private Field getFieldInDirection(
-            final Movement movement,
-            final Field position,
-            final int steps) {
-        final boolean crossedCenter = movement.getCrossedCenter();
-        return position;
-    }
+        /**
+         * @brief getter for the player of the currently processed entity.
+         * for convenience purposes only.
+         * @return the player of the currently processed entity
+         */
+        private Player myPlayer() {
+            return mCurrentPosition
+                    .getField()
+                    .getPiece()
+                    .getPlayer();
+        }
 
 }

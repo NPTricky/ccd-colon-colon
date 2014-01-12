@@ -9,7 +9,7 @@ import j3chess.Field;
 public class Position extends Component {
 
     /** @brief current position on the chessboard of an entity */
-    private Field mPosition;
+    private Field mField;
 
     /**
      * @brief empty default constructor for position component
@@ -22,23 +22,23 @@ public class Position extends Component {
      * @param current current position
      */
     public Position(final Field current) {
-        this.mPosition = current;
+        this.mField = current;
     }
 
     /**
      * @brief getter for the mPosition member
      * @return the current position
      */
-    public final Field getPosition() {
-        return this.mPosition;
+    public final Field getField() {
+        return this.mField;
     }
 
     /**
      * @brief setter for the mPosition member
      * @param current the current position
      */
-    public final void setPosition(final Field current) {
-        this.mPosition = current;
+    public final void setField(final Field current) {
+        this.mField = current;
     }
 
 }
