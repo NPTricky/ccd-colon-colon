@@ -38,8 +38,6 @@ public abstract class Piece {
      * @brief do one time processing in this method...
      */
     private void initialize() {
-        J3ChessApp.getLogger().debug("Building " + mType.toString());
-
         // initialize the entity
         mPiece = mEntitySystem.getWorld().createEntity();
 
@@ -61,11 +59,15 @@ public abstract class Piece {
             final Player player,
             final Field field) {
 
+        J3ChessApp.getLogger().debug("Building <" + mType.toString() + ">"
+                + " for <" + player.toString() + ">"
+                + " on Field <" + field.toString() + ">");
+
         mPiece.addComponent(new Position(field),
                 ComponentType.getTypeFor(Position.class));
         mPiece.addComponent(new PieceStatus(player, mType),
                 ComponentType.getTypeFor(PieceStatus.class));
-        mPiece.addComponent(new Paintable(generateImagePath(player)),
+        mPiece.addComponent(new Paintable(generateImagePath(player, mType)),
                 ComponentType.getTypeFor(Paintable.class));
 
         return mPiece.getComponent(PieceStatus.class);
@@ -73,17 +75,20 @@ public abstract class Piece {
 
     /**
      * @brief automatically generates the image path string from the given
-     * context information
+     * context information (player & pieceType)
      * @param player the owner of this piece
+     * @param pieceType the type of this piece
      * @return the image path string of this piece
      */
-    private String generateImagePath(final Player player) {
+    private String generateImagePath(
+            final Player player,
+            final PieceType pieceType) {
         final String imagePath = J3ChessApp.RESOURCEPATH + "pieces_"
                 + player.name().toLowerCase()
                 + "/"
-                + mType.name().toLowerCase()
+                + pieceType.name().toLowerCase()
                 + ".png";
-        J3ChessApp.getLogger().info("Generated Path: " + imagePath);
+        J3ChessApp.getLogger().info("ImagePath: " + imagePath);
         return imagePath;
     }
 
