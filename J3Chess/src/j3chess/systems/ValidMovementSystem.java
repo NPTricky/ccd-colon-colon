@@ -155,10 +155,11 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         // the current motion pattern is either a jump (unblockable) and at it's
         // last step or a common motion pattern
+        //
+        // (!isJump || (isLastStep && isJump)) which may be simplified to
+        // (!isJump || isLastStep)
         final boolean isAbleToMove =
-                !currentMotionPattern.isJump()
-                || (isLastStepOfMotion
-                        && currentMotionPattern.isJump());
+                !currentMotionPattern.isJump() || isLastStepOfMotion;
 
         // whether the current motion is the last motion of the motion list
         final boolean isLastMotionOfList =
