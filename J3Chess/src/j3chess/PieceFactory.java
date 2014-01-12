@@ -25,8 +25,13 @@ public class PieceFactory {
      * @param field the field where the chess piece is placed
      * @return the chess piece
      */
-    public final Entity create(final PieceType type, final Player player, Field field) {
-        Piece piece = null;
+    public final Entity create(
+            final PieceType type,
+            final Player player,
+            final Field field) {
+
+        Piece piece;
+
         switch (type) {
         case BISHOP:
             piece = new PieceBishop(mEntitySystem);
@@ -47,35 +52,29 @@ public class PieceFactory {
             piece = new PieceRook(mEntitySystem);
             break;
         default:
-            /* piece = null */
+            piece = null;
             break;
         }
 
-        piece.construct();
-        piece.getEntity().addToWorld();
-
-        // Set field, if we have one
-        if (field != null) {
-            piece.getPositionComponent().setPosition(field);
-            field.setPiece(piece.getPieceStatusComponent());
+        if (piece == null) {
+            J3ChessApp.getLogger().error(
+                    "unable to create the requested piece");
+            return null;
         }
 
-        // Set the player
-        piece.getPieceStatusComponent().setPlayer(player);
+        piece.construct();
 
-        // Set the image, dependent on the player
-        piece.setPieceImage();
+/* ------------------------------------------------------------------------- */
+        field.setPiece(piece.getPieceStatusComponent());
+
+        piece.getPositionComponent().setField(field);
+        piece.getPieceStatusComponent().setPlayer(player);
+        piece.loadPieceImage();
+
+/* ------------------------------------------------------------------------- */
+
+        piece.getEntity().addToWorld(); // ought to be the last instruction
 
         return piece.getEntity();
-    }
-
-    /**
-     * @brief helper method to create an piece entity
-     * @param type the type of the chess piece
-     * @param player the player that owns this piece
-     * @return the chess piece
-     */
-    public final Entity create(final PieceType type, final Player player) {
-        return create(type, player, null);
     }
 }

@@ -1,6 +1,5 @@
 package j3chess.systems;
 
-import j3chess.Field;
 import j3chess.J3ChessApp;
 import j3chess.components.Paintable;
 import j3chess.components.Position;
@@ -23,7 +22,6 @@ public class PaintSystem extends EntityProcessingSystem {
     /** @brief fast component mapper to retrieve paintable component */
     @Mapper
     private ComponentMapper<Paintable> mPaintableMapper;
-
     /** @brief fast component mapper to retrieve position component */
     @Mapper
     private ComponentMapper<Position> mPositionMapper;
@@ -46,32 +44,19 @@ public class PaintSystem extends EntityProcessingSystem {
         final Paintable paintable = mPaintableMapper.get(entity);
         final Position position = mPositionMapper.get(entity);
 
-        // Get image from the paintable component
-        final Image image = paintable.getImage();
+        final Vector2d drawOffset = paintable.getDrawOffset();
 
-        // Draw the image if we have it
-        if (image != null) {
-            // Draw position is initially (0,0)
-            Vector2d drawPos = new Vector2d();
+        Vector2d drawPosition = new Vector2d();
 
-            // If we have a position component, modify drawPos
-            if (position != null) {
-                Field f = position.getPosition();
-
-                // If the position component has no field, don't draw
-                if (f != null) {
-                    // Set draw position
-                    drawPos = position.getPosition().getDrawPosition(668, 668);
-                } else {
-                    return;
-                }
-            }
-
-            Vector2d drawOffset = paintable.getDrawOffset();
-            J3ChessApp.getInstance().getDrawGraphics().drawImage(image,
-                    (int) (drawPos.x + drawOffset.x),
-                    (int) (drawPos.y + drawOffset.y), null);
+        if (position != null) {
+            drawPosition = position.getField().getDrawPosition(668, 668);
         }
+
+        J3ChessApp.getInstance().getDrawGraphics().drawImage(
+                paintable.getImage(),
+                (int) (drawPosition.x + drawOffset.x),
+                (int) (drawPosition.y + drawOffset.y),
+                null);
     }
 
 }

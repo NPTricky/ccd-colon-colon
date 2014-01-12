@@ -77,7 +77,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
             // retrieve valid moves from the motion pattern recursively
             recurseMotionPattern(
-                    mCurrentPosition.getPosition(),
+                    mCurrentPosition.getField(),
                     null,
                     pattern,
                     0,
@@ -106,7 +106,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
      *        a ValidMovement component
      * @param currentField the current field from where to recurse
      * @param lastPieceDirection the piece direction evaluated in the last
-     *                           iteration
+     *                           iteration. might be null.
      * @param currentMotionPattern the motion pattern to evaluate
      * @param currentMotionIndex the current index of the motion in the motion
      *                           pattern to evaluate
@@ -330,7 +330,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
          */
         private Player myPlayer() {
             return mCurrentPosition
-                    .getPosition()
+                    .getField()
                     .getPiece()
                     .getPlayer();
         }

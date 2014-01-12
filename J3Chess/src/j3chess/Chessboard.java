@@ -62,8 +62,7 @@ public class Chessboard {
         // Create artemis entity for the field
         if (entitySystem != null) {
 	        mEntity = entitySystem.getWorld().createEntity();
-	        Paintable paint = new Paintable();
-	        paint.setImage(new ImageIcon(J3ChessApp.RESOURCEPATH + "chessboard.png"));
+	        Paintable paint = new Paintable(J3ChessApp.RESOURCEPATH + "chessboard.png");
 	        mEntity.addComponent(paint);
 	        mEntity.addToWorld();
         }
