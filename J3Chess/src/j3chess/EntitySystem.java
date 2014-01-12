@@ -34,7 +34,7 @@ public class EntitySystem {
         this.mWorld.setManager(new GroupManager());
         this.mWorld.setManager(new PlayerManager());
         this.mWorld.setSystem(new PaintSystem());
-        //this.mWorld.setSystem(new ValidMovementSystem());
+        this.mWorld.setSystem(new ValidMovementSystem());
 
         mWorld.initialize();
     }

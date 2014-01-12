@@ -129,6 +129,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         final List<Motion> currentMotionList = currentMotionPattern
                 .getMotions();
+
         final Motion currentMotion = currentMotionList
                 .get(currentMotionIndex);
 
@@ -173,7 +174,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         // whether the current motion is the last motion of the motion list
         final boolean isLastMotionOfList =
-                !(currentMotionIndex < currentMotionList.size());
+                (currentMotionIndex == currentMotionList.size() - 1);
 
         // whether the current step is the last step of the last motion
         final boolean isLastStepOfLastMotion =
@@ -209,6 +210,11 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
             final Field nextField =
                     currentField.getNeighbor(currentFieldDirection);
+
+            if (nextField == null) {
+                // there is no next field into the current direction
+                continue; // skip this loop iteration
+            }
 
             // XOR used to toggle the current crossed center status
             final boolean nextCrossedCenter =
