@@ -1,7 +1,7 @@
 package j3chess;
 
 import j3chess.components.Paintable;
-import j3chess.components.PieceStatus;
+import j3chess.components.PieceContext;
 import j3chess.components.Position;
 import j3chess.components.ValidMovement;
 
@@ -50,9 +50,8 @@ public abstract class Piece {
      * by the factory
      * @param player the owning player
      * @param field the field this piece stands on
-     * @return the piece status component
      */
-    protected final PieceStatus initializeContext(
+    protected final void initializeContext(
             final Player player,
             final Field field) {
 
@@ -62,12 +61,10 @@ public abstract class Piece {
 
         mPiece.addComponent(new Position(field),
                 ComponentType.getTypeFor(Position.class));
-        mPiece.addComponent(new PieceStatus(player, mType),
-                ComponentType.getTypeFor(PieceStatus.class));
+        mPiece.addComponent(new PieceContext(player, mType),
+                ComponentType.getTypeFor(PieceContext.class));
         mPiece.addComponent(new Paintable(generateImagePath(player, mType)),
                 ComponentType.getTypeFor(Paintable.class));
-
-        return mPiece.getComponent(PieceStatus.class);
     }
 
     /**

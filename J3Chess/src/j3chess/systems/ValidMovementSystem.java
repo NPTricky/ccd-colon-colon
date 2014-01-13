@@ -8,6 +8,7 @@ import j3chess.MotionPattern;
 import j3chess.PieceDirection;
 import j3chess.Player;
 import j3chess.components.Movement;
+import j3chess.components.PieceContext;
 import j3chess.components.Position;
 import j3chess.components.ValidMovement;
 import j3chess.utility.Helper;
@@ -35,6 +36,9 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     /** @brief fast component mapper to retrieve valid movement component */
     @Mapper
     private ComponentMapper<ValidMovement> mValidMovementMapper;
+    /** @brief fast component mapper to retrieve piece context component */
+    @Mapper
+    private ComponentMapper<PieceContext> mPieceContextMapper;
 
     /**
      * @brief the valid movement system interprets the movement capabilities of
@@ -63,8 +67,9 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         // retrieve relevant components from the entity
         final Movement movement = mMovementMapper.get(entity); // not global
-        mCurrentPosition = mPositionMapper.get(entity);
+        final Position position = mPositionMapper.get(entity);
         mCurrentValidMovement = mValidMovementMapper.get(entity);
+        mCurrentPlayer = requestPlayer(position.getField());
 
         // for each motion pattern do...
         for (final MotionPattern pattern : movement.getPatterns()) {
@@ -77,7 +82,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
             // retrieve valid moves from the motion pattern recursively
             recurseMotionPattern(
-                    mCurrentPosition.getField(),
+                    position.getField(),
                     null,
                     pattern,
                     0,
@@ -90,8 +95,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 /* Entity-Related Members                                                    */
 /* ------------------------------------------------------------------------- */
 
-    /** @brief position component of the currently processed entity */
-    private Position mCurrentPosition;
+    /**@brief the player of the currently processed entity */
+    private Player mCurrentPlayer;
     /** @brief valid movement component of the currently processed entity */
     private ValidMovement mCurrentValidMovement;
 
@@ -227,7 +232,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 // check for blocker
                 if (nextField.getPiece() != null) {
                     // there is something on the next field -> check for capture
-                    if (myPlayer() != nextField.getPiece().getPlayer()) {
+                    if (mCurrentPlayer != requestPlayer(nextField)) {
                         mCurrentValidMovement
                         .getValidCaptureMoves()
                         .add(nextField);
@@ -330,13 +335,11 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         /**
          * @brief getter for the player of the currently processed entity.
          * for convenience purposes only.
+         * @param field the field to check
          * @return the player of the currently processed entity
          */
-        private Player myPlayer() {
-            return mCurrentPosition
-                    .getField()
-                    .getPiece()
-                    .getPlayer();
+        private Player requestPlayer(final Field field) {
+            return mPieceContextMapper.get(field.getPiece()).getPlayer();
         }
 
 }

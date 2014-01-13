@@ -5,9 +5,9 @@ import j3chess.Player;
 import artemis.Component;
 
 /**
- * entity component for piece status information.
+ * entity component for piece context information.
  */
-public class PieceStatus extends Component {
+public class PieceContext extends Component {
 
     /** @brief the owning player of the piece */
     private Player mPlayer;
@@ -15,17 +15,17 @@ public class PieceStatus extends Component {
     private PieceType mPieceType;
 
     /**
-     * @brief empty default constructor for piece status component.
+     * @brief empty default constructor for piece context component.
      */
-    public PieceStatus() {
+    public PieceContext() {
     }
 
     /**
-     * @brief constructor for piece status component
+     * @brief constructor for piece context component
      * @param player the owning player of the piece
      * @param pieceType type of the piece
      */
-    public PieceStatus(
+    public PieceContext(
             final Player player,
             final PieceType pieceType) {
         this.mPlayer = player;
@@ -63,5 +63,4 @@ public class PieceStatus extends Component {
     public final void setPieceType(final PieceType pieceType) {
         this.mPieceType = pieceType;
     }
-
 }

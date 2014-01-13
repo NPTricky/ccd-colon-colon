@@ -14,7 +14,7 @@ import artemis.Component;
 public class Paintable extends Component {
 
     /** @brief the image to paint */
-    private ImageIcon mImage;
+    private ImageIcon mImageIcon;
     /** @brief Offset to paint at */
     private Vector2d mDrawOffset;
 
@@ -46,15 +46,15 @@ public class Paintable extends Component {
      * @return the image to paint
      */
     public final Image getImage() {
-        return mImage.getImage();
+        return mImageIcon.getImage();
     }
 
     /**
      * @brief setter for the mImage member
-     * @param image the image to paint
+     * @param imageIcon the image to paint
      */
-    public final void setImage(final ImageIcon image) {
-        this.mImage = image;
+    public final void setImage(final ImageIcon imageIcon) {
+        this.mImageIcon = imageIcon;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Paintable extends Component {
     /**
      * @brief setter for the draw offset vector
      * @param offset to paint
-    1 */
+     */
     public final void setDrawOffset(final Vector2d offset) {
         this.mDrawOffset = offset;
     }
@@ -76,10 +76,10 @@ public class Paintable extends Component {
     /**
      * @brief setter for the draw offset vector
      * @param imageIcon the image to paint
-    1 */
+     */
     public final void setDrawOffset(final ImageIcon imageIcon) {
         this.mDrawOffset = new Vector2d(
-                -imageIcon.getImage().getWidth(null) / 2,
-                -imageIcon.getImage().getHeight(null) / 2);
+                -imageIcon.getImage().getWidth(null) * 0.5f,
+                -imageIcon.getImage().getHeight(null) * 0.5f);
     }
 }

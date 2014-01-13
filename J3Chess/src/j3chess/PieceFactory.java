@@ -63,10 +63,11 @@ public class PieceFactory {
         }
 
         piece.construct();
+        piece.initializeContext(player, field);
 
-        field.setPiece(piece.initializeContext(player, field));
-
-        piece.getEntity().addToWorld(); // last instruction (!)
-        return piece.getEntity();
+        Entity entity = piece.getEntity();
+        field.setPiece(entity);
+        entity.addToWorld(); // last instruction (!)
+        return entity;
     }
 }
