@@ -67,10 +67,10 @@ public class EntitySystem {
     }
 
     /**
-     * @brief getter for the entity systems tag manager.
-     * @return the tag manager
+     * @brief getter for the entity systems group manager.
+     * @return the group manager
      */
-    public final GroupManager getTagManager() {
+    public final GroupManager getGroupManager() {
         return mWorld.getManager(GroupManager.class);
     }
 
