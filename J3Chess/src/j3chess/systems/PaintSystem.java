@@ -46,10 +46,8 @@ public class PaintSystem extends EntityProcessingSystem {
         Vector2d drawPosition = new Vector2d();
 
         if (position == null) {
-            drawPosition.x = Math.round(
-                    (drawPosition.x + 1) / 2 * mDrawPanelSize.x);
-            drawPosition.y = Math.round(
-                    (drawPosition.y + 1) / 2 * mDrawPanelSize.y);
+            drawPosition.x = Math.round(mDrawPanelSize.x * 0.5f);
+            drawPosition.y = Math.round(mDrawPanelSize.y * 0.5f);
         } else {
             drawPosition = position.getField()
                     .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
@@ -64,5 +62,14 @@ public class PaintSystem extends EntityProcessingSystem {
 
     /** @brief size of the draw panel */
     private Point mDrawPanelSize = new Point(668, 668);
+
+    /**
+     * @brief setter for the mDrawPanelSize member
+     * @param width width of the draw panel
+     * @param height height of the draw panel
+     */
+    public final void setDrawPanelSize(final int width, final int height) {
+        this.mDrawPanelSize.move(width, height);
+    }
 
 }
