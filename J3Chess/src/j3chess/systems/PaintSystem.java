@@ -1,10 +1,11 @@
 package j3chess.systems;
 
+import java.awt.Point;
+
 import j3chess.J3ChessApp;
 import j3chess.components.Paintable;
 import j3chess.components.Position;
 import j3chess.utility.Vector2d;
-
 import artemis.Aspect;
 import artemis.ComponentMapper;
 import artemis.Entity;
@@ -42,19 +43,26 @@ public class PaintSystem extends EntityProcessingSystem {
         final Paintable paintable = mPaintableMapper.get(entity);
         final Position position = mPositionMapper.get(entity);
 
-        final Vector2d drawOffset = paintable.getDrawOffset();
-
         Vector2d drawPosition = new Vector2d();
 
-        if (position != null) {
-            drawPosition = position.getField().getDrawPosition(668, 668);
+        if (position == null) {
+            drawPosition.x = Math.round(
+                    (drawPosition.x + 1) / 2 * mDrawPanelSize.x);
+            drawPosition.y = Math.round(
+                    (drawPosition.y + 1) / 2 * mDrawPanelSize.y);
+        } else {
+            drawPosition = position.getField()
+                    .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
         }
 
         J3ChessApp.getInstance().getDrawGraphics().drawImage(
                 paintable.getImage(),
-                (int) (drawPosition.x + drawOffset.x),
-                (int) (drawPosition.y + drawOffset.y),
+                Math.round(drawPosition.x + paintable.getDrawOffset().x),
+                Math.round(drawPosition.y + paintable.getDrawOffset().y),
                 null);
     }
+
+    /** @brief size of the draw panel */
+    private Point mDrawPanelSize = new Point(668, 668);
 
 }

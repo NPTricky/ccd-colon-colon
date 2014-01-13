@@ -2,17 +2,15 @@ package j3chess;
 
 import java.util.EnumSet;
 
-import j3chess.Player;
-import j3chess.components.PieceStatus;
-import j3chess.components.Position;
-import artemis.ComponentType;
-import artemis.Entity;
-
 /**
  * the game class represents a single party of chess.
  */
 public class Game {
+    /** @brief delta time */
+    public static final float DELTA_TIME = 20.0f;
+    /** @brief width of a piece formation */
     public static final int PIECE_FORMATION_WIDTH = 8;
+    /** @brief height of a piece formation */
     public static final int PIECE_FORMATION_HEIGHT = 2;
 
     /** @brief container for the entities of our game */
@@ -93,17 +91,20 @@ public class Game {
         return mChessboard;
     }
 
-    public void update() {
-        mEntitySystem.getWorld().setDelta(20.0f);
+    /**
+     * @brief update the game
+     */
+    public final void update() {
+        mEntitySystem.getWorld().setDelta(DELTA_TIME);
         mEntitySystem.getWorld().process();
     }
 
-    /** @brief increase the move Counter*/
-    public void increaseMovesCounter() {
+    /** @brief increase the move counter */
+    public final void increaseMovesCounter() {
         mMoveCounter++;
     }
 
-    /** @return the number of moves sum of all Players*/
+    /** @return the number of moves sum of all players */
     public final int getMoveCounter() {
         return mMoveCounter;
     }

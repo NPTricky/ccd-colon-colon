@@ -30,9 +30,12 @@ public class EntitySystem {
         J3ChessApp.getLogger().trace(
                 "Initializing " + EntitySystem.class.getName() + "...");
         this.mWorld = new World();
-        // manager examples...
+
+        // managers...
         this.mWorld.setManager(new GroupManager());
         this.mWorld.setManager(new PlayerManager());
+
+        // systems...
         this.mWorld.setSystem(new PaintSystem());
         this.mWorld.setSystem(new ValidMovementSystem());
 
