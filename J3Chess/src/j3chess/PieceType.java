@@ -5,15 +5,34 @@ package j3chess;
  */
 public enum PieceType {
     /** @brief the piece type of a king */
-    KING,
+    King("K"),
     /** @brief the piece type of a queen */
-    QUEEN,
+    Queen("Q"),
     /** @brief the piece type of a rook */
-    ROOK,
+    Rook("R"),
     /** @brief the piece type of a bishop */
-    BISHOP,
+    Bishop("B"),
     /** @brief the piece type of a knight */
-    KNIGHT,
+    Knight("N"),
     /** @brief the piece type of a pawn */
-    PAWN
+    Pawn("P");
+
+    /** @brief the algebraic notation of this type */
+    private String mAlgebraic;
+
+    /**
+     * @brief the private constructor of a piece type
+     * @param algebraic the algebraic notation for this piece type
+     */
+    private PieceType(final String algebraic) {
+        this.mAlgebraic = algebraic;
+    }
+
+    /**
+     * @brief getter for the algebraic notation
+     * @return algebraic notation of the piece type
+     */
+    public String toAlgebraic() {
+        return mAlgebraic;
+    }
 }

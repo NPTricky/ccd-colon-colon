@@ -49,18 +49,18 @@ public class Game {
                 new PieceType[PIECE_FORMATION_HEIGHT][PIECE_FORMATION_WIDTH];
 
         // set types for the outermost circle of the formation
-        pieceFormation[0][0] = PieceType.ROOK;
-        pieceFormation[0][1] = PieceType.KNIGHT;
-        pieceFormation[0][2] = PieceType.BISHOP;
-        pieceFormation[0][3] = PieceType.KING;
-        pieceFormation[0][4] = PieceType.QUEEN;
-        pieceFormation[0][5] = PieceType.BISHOP;
-        pieceFormation[0][6] = PieceType.KNIGHT;
-        pieceFormation[0][7] = PieceType.ROOK;
+        pieceFormation[0][0] = PieceType.Rook;
+        pieceFormation[0][1] = PieceType.Knight;
+        pieceFormation[0][2] = PieceType.Bishop;
+        pieceFormation[0][3] = PieceType.King;
+        pieceFormation[0][4] = PieceType.Queen;
+        pieceFormation[0][5] = PieceType.Bishop;
+        pieceFormation[0][6] = PieceType.Knight;
+        pieceFormation[0][7] = PieceType.Rook;
 
         // set types for the innermost circle of the formation
         for (int i = 0; i < PIECE_FORMATION_WIDTH; ++i) {
-            pieceFormation[1][i] = PieceType.PAWN;
+            pieceFormation[1][i] = PieceType.Pawn;
         }
 
         // for every player...

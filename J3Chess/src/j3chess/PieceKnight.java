@@ -15,7 +15,7 @@ public class PieceKnight extends Piece {
      *            the entity system to create entities into
      */
     public PieceKnight(final EntitySystem system) {
-        super(system, PieceType.KNIGHT);
+        super(system, PieceType.Knight);
     }
 
     /**

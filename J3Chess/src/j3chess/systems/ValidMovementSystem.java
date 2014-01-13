@@ -62,12 +62,12 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     protected final void process(final Entity entity) {
 
         // retrieve relevant components from the entity
+        final Movement movement = mMovementMapper.get(entity); // not global
         mCurrentPosition = mPositionMapper.get(entity);
-        mCurrentMovement = mMovementMapper.get(entity);
         mCurrentValidMovement = mValidMovementMapper.get(entity);
 
         // for each motion pattern do...
-        for (final MotionPattern pattern : mCurrentMovement.getPatterns()) {
+        for (final MotionPattern pattern : movement.getPatterns()) {
 
             // there are no motions in this pattern. skip loop.
             if (pattern.getMotions().isEmpty()) {
@@ -82,7 +82,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     pattern,
                     0,
                     0,
-                    mCurrentMovement.getCrossedCenter());
+                    movement.getCrossedCenter());
         }
     }
 
@@ -92,8 +92,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
     /** @brief position component of the currently processed entity */
     private Position mCurrentPosition;
-    /** @brief movement component of the currently processed entity */
-    private Movement mCurrentMovement;
     /** @brief valid movement component of the currently processed entity */
     private ValidMovement mCurrentValidMovement;
 
@@ -183,7 +181,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // the current motion pattern is either a jump (unblockable) and at
         // it's last step or a common motion pattern
         //
-        // (!isJump || (isLastStep && isJump)) which may be simplified to
+        // (!isJump || (isLastStep & isJump)) which may be simplified to
         // (!isJump || isLastStep)
         final boolean isAbleToMove =
                 (!currentMotionPattern.isJump() || isLastStepOfLastMotion);

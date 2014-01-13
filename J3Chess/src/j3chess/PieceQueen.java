@@ -15,7 +15,7 @@ public class PieceQueen extends Piece {
      *            the entity system to create entities into
      */
     public PieceQueen(final EntitySystem system) {
-        super(system, PieceType.QUEEN);
+        super(system, PieceType.Queen);
     }
 
     /**

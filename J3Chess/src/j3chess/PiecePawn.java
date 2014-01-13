@@ -17,7 +17,7 @@ public class PiecePawn extends Piece {
      *            the entity system to create entities into
      */
     public PiecePawn(final EntitySystem system) {
-        super(system, PieceType.PAWN);
+        super(system, PieceType.Pawn);
     }
 
     /**

@@ -33,22 +33,22 @@ public class PieceFactory {
         Piece piece;
 
         switch (type) {
-        case BISHOP:
+        case Bishop:
             piece = new PieceBishop(mEntitySystem);
             break;
-        case KING:
+        case King:
             piece = new PieceKing(mEntitySystem);
             break;
-        case KNIGHT:
+        case Knight:
             piece = new PieceKnight(mEntitySystem);
             break;
-        case PAWN:
+        case Pawn:
             piece = new PiecePawn(mEntitySystem);
             break;
-        case QUEEN:
+        case Queen:
             piece = new PieceQueen(mEntitySystem);
             break;
-        case ROOK:
+        case Rook:
             piece = new PieceRook(mEntitySystem);
             break;
         default:

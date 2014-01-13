@@ -15,7 +15,7 @@ public class PieceRook extends Piece {
      *            the entity system to create entities into
      */
     public PieceRook(final EntitySystem system) {
-        super(system, PieceType.ROOK);
+        super(system, PieceType.Rook);
     }
 
     /**

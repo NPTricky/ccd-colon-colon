@@ -15,7 +15,7 @@ public class PieceBishop extends Piece {
      *            the entity system to create entities into
      */
     public PieceBishop(final EntitySystem system) {
-        super(system, PieceType.BISHOP);
+        super(system, PieceType.Bishop);
     }
 
     /**
