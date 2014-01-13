@@ -6,7 +6,7 @@ package j3chess;
 public interface PlayerController {
     /**
      * @brief execute a move in the arbitrary fashion of the player controller
-     * @return the done move
+     * @return the calculated move
      */
     Move calculateMove();
 }

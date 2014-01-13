@@ -38,6 +38,8 @@ public class Game {
 	private List<Move> mMoveHistory;
 	/** @brief the current player about to do his move */
 	private Player mCurrentPlayer;
+    /** @brief the current players in this game */
+    private EnumSet<Player> mCurrentPlayers;
 
 	/**
 	 * @brief main class that keeps track of all objects needed throughout the
@@ -52,6 +54,7 @@ public class Game {
 		mCurrentPlayer = Player.ONE;
 
 		initializePieces();
+        initializePlayers(EnumSet.allOf(Player.class));
 
 		mMoveHistory = new ArrayList<Move>();
 	}
@@ -95,12 +98,20 @@ public class Game {
 		}
 	}
 
-	/**
-	 * @return the chessboard
-	 */
-	public final Chessboard getChessboard() {
-		return mChessboard;
-	}
+    /**
+     * @brief initializes the players of the game
+     * @param currentPlayers the enum set of players
+     */
+    public final void initializePlayers(final EnumSet<Player> currentPlayers) {
+        this.mCurrentPlayers = currentPlayers;
+    }
+
+    /**
+     * @return the chessboard
+     */
+    public final Chessboard getChessboard() {
+        return mChessboard;
+    }
 
 	/**
 	 * @brief update the game
@@ -225,6 +236,12 @@ public class Game {
 		mEntitySystem.getGroupManager().add(clickedEntity, SELECTED_GROUP);
 		J3ChessApp.getLogger().info("Selected entity " + clickedEntity);
 	}
+
+    public final void setPlayer(
+            Player player,
+            PlayerController playerController) {
+
+    }
 }
 
 
