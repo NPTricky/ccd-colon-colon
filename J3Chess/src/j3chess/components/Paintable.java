@@ -79,7 +79,7 @@ public class Paintable extends Component {
      */
     public final void setDrawOffset(final ImageIcon imageIcon) {
         this.mDrawOffset = new Vector2d(
-                -imageIcon.getImage().getWidth(null) * 0.5f,
-                -imageIcon.getImage().getHeight(null) * 0.5f);
+                -imageIcon.getImage().getWidth(null) / 2,
+                -imageIcon.getImage().getHeight(null) / 2);
     }
 }

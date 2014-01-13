@@ -1,5 +1,7 @@
 package j3chess;
 
+import j3chess.components.Position;
+import artemis.ComponentType;
 import artemis.Entity;
 
 /**
@@ -79,5 +81,15 @@ public class Move {
      */
     public final void setDescription(final String description) {
         this.mDescription = description;
+    }
+
+    /**
+     * @brief Move a piece from start to target, notifying both the piece and the fields
+     */
+    public final void execute() {
+        Entity piece = mStart.getPiece();
+        mStart.setPiece(null);
+        mTarget.setPiece(piece);
+        ((Position) piece.getComponent(ComponentType.getTypeFor(Position.class))).setField(mTarget);
     }
 }

@@ -56,12 +56,13 @@ public class DrawPanel extends JComponent implements MouseListener {
         // Get the field that the player clicked on
         final Field clickedField = J3ChessApp.getInstance().getGame().getChessboard().getFieldByXY(x, y);
 
+        // Notify the game about a clicked field
         if (clickedField != null) {
-            // TODO process field
-
-            J3ChessApp.getLogger().log(Level.INFO, clickedField.toString()
-                + " " + clickedField.getDrawPosition().toString());
+            J3ChessApp.getInstance().getGame().notifyFieldClicked(clickedField);
         }
+
+        // Make changes visible
+        repaint();
     }
 
     @Override
