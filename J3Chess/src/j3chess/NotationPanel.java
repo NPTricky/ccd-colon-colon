@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.EnumSet;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -56,7 +57,6 @@ public class NotationPanel extends JPanel {
         gridBagConstraints.weightx = sizeX;
         gridBagConstraints.weighty = sizeY;
         add(notationTable, gridBagConstraints);
-
     }
 
     /** @Brief Creates the NotationTable with Player Names
@@ -82,5 +82,12 @@ public class NotationPanel extends JPanel {
         } else {
             tableModel.setValueAt(move, (Integer) moveCounter / J3ChessApp.NUMBEROFPLAYERS, moveCounter % J3ChessApp.NUMBEROFPLAYERS);
         }
+    }
+    
+    public void reset(){
+        DefaultTableModel tableModel = (DefaultTableModel) mNotationTable.getModel();
+        tableModel.setColumnCount(0);
+        EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
+        tableModel.setColumnIdentifiers(mPlayers.toArray());
     }
 }

@@ -6,24 +6,47 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.EnumSet;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
+/**
+ * Class to create the new GameDialog
+ * Starts a new game and sets the player Names.
+ */
 public class NewGameDialog extends JFrame {
-
+    /**
+     * @Brief Value to put something into the left Column of the Gridbaglayout
+     */
     private static final int LEFT = 0;
+    /**
+     *  @Brief Value to put something into the right Column of the Gridbaglayout
+     */
     private static final int RIGHT = 1;
-
+    /**
+     * @Brief insets for the GridbagLayout
+     */
     private static final Insets INSETS = new Insets(3, 3, 3, 3);
+    /**
+     * @Brief With of the JTextfields
+     */
     private static final int TEXTFIELDCOLUMNWIDTH = 15;
 
-    public NewGameDialog(){
+    /**
+     * @Brief Enum of all players
+     */
+    private EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
+
+    /**
+     * Constructor - Creates the new Gamedialog.
+     */
+    public NewGameDialog() {
         super("Start new Game");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         //Fenstergroesse festlegen
         //setPreferredSize(new Dimension(800,1000));
 
@@ -35,24 +58,29 @@ public class NewGameDialog extends JFrame {
         gridBagLayout.columnWidths = new int[]{150,150};
         setLayout(gridBagLayout);
 
-
-        JLabel labelPlayer1 = new JLabel("Player 1");
-        JLabel labelPlayer2 = new JLabel("Player 2");
-        JLabel labelPlayer3 = new JLabel("Player 3");
-        JTextField textFieldPlayer1 = new JTextField();
-        textFieldPlayer1.setColumns(TEXTFIELDCOLUMNWIDTH);
-        JTextField textFieldPlayer2 = new JTextField();
-        textFieldPlayer2.setColumns(TEXTFIELDCOLUMNWIDTH);
-        JTextField textFieldPlayer3 = new JTextField();
-        textFieldPlayer3.setColumns(TEXTFIELDCOLUMNWIDTH);
+        JLabel [] playerLabels = new JLabel[mPlayers.size()];
+        final JTextField [] playerNameTextFields = new JTextField[mPlayers.size()];
+        for (int i = 0; i < playerLabels.length; i++) {
+            playerLabels[i] = new JLabel("Player " + (i + 1));
+            playerNameTextFields[i] = new JTextField();
+            playerNameTextFields[i].setColumns(TEXTFIELDCOLUMNWIDTH);
+        }
         JButton jButtonOk = new JButton("OK");
         JButton jButtonCancel = new JButton("Cancel");
 
         jButtonOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO Set Player Names
+                for (Player player : mPlayers) {
+                    String playerName = playerNameTextFields[player.ordinal()].getText();
+                    if (playerName.equals("")) {
+                        playerName = ("Player " + (player.ordinal() + 1));
+                    }
+                    player.setName(playerName);
+                    player.setPlayerController(new HumanController());
+                }
                 //Start Game
+                J3ChessApp.getInstance().startNewGame();
                 dispose();
             }
         });
@@ -66,28 +94,29 @@ public class NewGameDialog extends JFrame {
 
 
         int row = 0;
-        addComponentToGrid(labelPlayer1, LEFT, row);
-        addComponentToGrid(textFieldPlayer1, RIGHT, row);
-        row++;
-        addComponentToGrid(labelPlayer2, LEFT, row);
-        addComponentToGrid(textFieldPlayer2, RIGHT, row);
-        row++;
-        addComponentToGrid(labelPlayer3, LEFT, row);
-        addComponentToGrid(textFieldPlayer3, RIGHT, row);
-        row++;
+        for (int i = 0; i < playerLabels.length; i++) {
+            addComponentToGrid(playerLabels[i], LEFT, row);
+            addComponentToGrid(playerNameTextFields[i], RIGHT, row);
+            row++;
+        }
         addComponentToGrid(jButtonOk, LEFT, row);
         addComponentToGrid(jButtonCancel, RIGHT, row);
-
         setVisible(true);
         pack();
     }
 
-    private void addComponentToGrid(JComponent c, int column, int row){
+    /**
+     * @Brief adds a JComponent to the GridbagLayout
+     * @param component the jComponent to add
+     * @param column column to add - Left or Right
+     * @param row - row to insert the component
+     */
+    private void addComponentToGrid(final JComponent component, final int column, final int row) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = INSETS;
         gbc.gridx = column;
         gbc.gridy = row;
         gbc.fill = GridBagConstraints.BOTH;
-        add(c, gbc);
+        add(component, gbc);
     }
 }

@@ -94,6 +94,7 @@ public class J3ChessView extends FrameView {
         createMenuBar();
     }
 
+    
     /**
      * @Brief creates the MenuBar
      */
@@ -152,5 +153,9 @@ public class J3ChessView extends FrameView {
 
     public Graphics2D getDrawGraphics() {
         return mDrawPanel.getPersistentGraphics();
+    }
+
+    public void reset() {
+        mNotationPanel.reset();
     }
 }

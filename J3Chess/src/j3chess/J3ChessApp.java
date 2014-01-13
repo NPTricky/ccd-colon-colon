@@ -73,6 +73,7 @@ public class J3ChessApp extends SingleFrameApplication {
     }
 
     public void startNewGame() {
+        mView.reset();
         mGame = new Game();
         update();
     }
