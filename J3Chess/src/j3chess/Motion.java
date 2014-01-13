@@ -7,6 +7,12 @@ import java.util.EnumSet;
  */
 public class Motion {
 
+    @Override
+    public final String toString() {
+        return "Motion [mDirections=" + mDirections
+                + ", mSteps=" + mSteps + "]";
+    }
+
     /** @brief the directions of the motion */
     private EnumSet<PieceDirection> mDirections;
     /**

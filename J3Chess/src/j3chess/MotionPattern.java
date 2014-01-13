@@ -10,6 +10,13 @@ import java.util.List;
  */
 public class MotionPattern {
 
+    @Override
+    public String toString() {
+        return "MotionPattern [mMask=" + mMask
+                + ", mMotions=" + mMotions
+                + ", mIsJump=" + mIsJump + "]";
+    }
+
     /** @brief the motion pattern direction mask (0 for forbidden directions).
      *         only applied to the first motion of a motion pattern. */
     private EnumSet<PieceDirection> mMask;

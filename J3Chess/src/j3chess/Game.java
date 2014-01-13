@@ -24,6 +24,8 @@ public class Game {
 
     /** @brief the moves of all players */
     private List<Move> mMoveHistory;
+    /** @brief the current player about to do his move */
+    private Player mCurrentPlayer;
 
     /**
      * @brief main class that keeps track of all objects needed
@@ -36,7 +38,6 @@ public class Game {
         mChessboard = new Chessboard(mEntitySystem);
         mPieceFactory = new PieceFactory(mEntitySystem);
 
-        // Create pieces for all three players
         initializePieces();
 
         mMoveHistory = new ArrayList<Move>();
@@ -126,5 +127,13 @@ public class Game {
             final Player player,
             final Field field) {
         mPieceFactory.create(pieceType, player, field);
+    }
+
+    /**
+     * @brief switch to the next player
+     */
+    public final void nextPlayer() {
+        int next = mCurrentPlayer.ordinal() + 1 % Player.values().length;
+        mCurrentPlayer = Player.values()[next];
     }
 }

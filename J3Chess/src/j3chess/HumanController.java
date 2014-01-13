@@ -13,7 +13,7 @@ public class HumanController implements PlayerController {
     }
 
     @Override
-    public final Move doMove() {
+    public final Move calculateMove() {
         // TODO Auto-generated method stub
         return null;
     }

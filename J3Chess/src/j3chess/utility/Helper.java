@@ -47,6 +47,7 @@ public final class Helper {
                 break;
             case Every:
                 result = EnumSet.allOf(PieceDirection.class);
+                break;
             default:
                 result = EnumSet.noneOf(PieceDirection.class);
                 break;

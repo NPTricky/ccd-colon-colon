@@ -8,5 +8,5 @@ public interface PlayerController {
      * @brief execute a move in the arbitrary fashion of the player controller
      * @return the done move
      */
-    Move doMove();
+    Move calculateMove();
 }

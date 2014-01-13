@@ -322,7 +322,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
         if (directions.equals(EnumSet.noneOf(PieceDirection.class))) {
             // the set of directions is empty
-            J3ChessApp.getLogger().error("no directions");
+            J3ChessApp.getLogger().debug("no possible directions in "
+                    + motionPattern.toString());
         }
 
         return directions;
