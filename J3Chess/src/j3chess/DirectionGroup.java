@@ -9,5 +9,7 @@ public enum DirectionGroup {
     /** @brief defines the horizontal directions */
     Horizontal,
     /** @brief defines the diagonal directions */
-    Diagonal;
+    Diagonal,
+    /** @brief defines every direction */
+    Every
 }

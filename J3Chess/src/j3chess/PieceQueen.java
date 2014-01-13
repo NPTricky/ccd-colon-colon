@@ -27,11 +27,7 @@ public class PieceQueen extends Piece {
         // movement abilities of the queen...
         Movement move = new Movement(
                 new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 0)),
-                new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 0)),
-                new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Diagonal  ), 0)));
+                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Every), 0)));
         this.getEntity().addComponent(
                 move,
                 ComponentType.getTypeFor(Movement.class));

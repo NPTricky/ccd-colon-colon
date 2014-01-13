@@ -13,8 +13,6 @@ public class Move {
     private Field mStart;
     /** @brief the target position of this move */
     private Field mTarget;
-    /** @brief the piece executing the move */
-    private Entity mPiece;
     /** @brief the description of this move in chess notation */
     private String mDescription;
 

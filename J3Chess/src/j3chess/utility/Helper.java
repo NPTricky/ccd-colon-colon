@@ -45,6 +45,8 @@ public final class Helper {
                         PieceDirection.Forward,
                         PieceDirection.Backward);
                 break;
+            case Every:
+                result = EnumSet.allOf(PieceDirection.class);
             default:
                 result = EnumSet.noneOf(PieceDirection.class);
                 break;

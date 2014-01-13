@@ -49,7 +49,8 @@ public class PaintSystem extends EntityProcessingSystem {
             drawPosition.x = Math.round(mDrawPanelSize.x * 0.5f);
             drawPosition.y = Math.round(mDrawPanelSize.y * 0.5f);
         } else {
-            drawPosition = position.getField()
+            drawPosition = position
+                    .getField()
                     .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
         }
 
@@ -69,7 +70,7 @@ public class PaintSystem extends EntityProcessingSystem {
      * @param height height of the draw panel
      */
     public final void setDrawPanelSize(final int width, final int height) {
-        this.mDrawPanelSize.move(width, height);
+        this.mDrawPanelSize.setLocation(width, height);
     }
 
 }
