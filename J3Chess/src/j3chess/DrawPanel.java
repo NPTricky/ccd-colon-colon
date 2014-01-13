@@ -60,6 +60,9 @@ public class DrawPanel extends JComponent implements MouseListener {
         if (clickedField != null) {
             J3ChessApp.getInstance().getGame().notifyFieldClicked(clickedField);
         }
+
+        // Make changes visible
+        repaint();
     }
 
     @Override
