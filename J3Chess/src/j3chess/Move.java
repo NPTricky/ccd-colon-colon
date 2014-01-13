@@ -1,5 +1,7 @@
 package j3chess;
 
+import artemis.Entity;
+
 /**
  * a class to define a move.
  */
@@ -11,6 +13,8 @@ public class Move {
     private Field mStart;
     /** @brief the target position of this move */
     private Field mTarget;
+    /** @brief the piece executing the move */
+    private Entity mPiece;
     /** @brief the description of this move in chess notation */
     private String mDescription;
 
@@ -43,21 +47,22 @@ public class Move {
      *
      * Common Move: <PieceType><mTarget>
      * mType.toAlgebraic() + mTarget.toString()
-     *
-     * Disambiguating Moves: <PieceType><mStart.File><mStart.Rank>...
+     * Disambiguating Move: <PieceType><mStart.File><mStart.Rank>...
      * mType.toAlgebraic() + mStart.toString() ...
      *
      * Capture: <PieceType>x<mTarget>
      * mType.toAlgebraic() + "x" + mTarget.toString()
-     *
      * Capture En Passant: <mStart.File>x<mTarget>e.p.
      * mStart.toFile() + "x" + mTarget.toString() + "e.p."
      *
      * Promotion: <mTarget><PieceType>
      * mTarget.toString() + mPromotionType.toAlgebraic()
      *
+     * [TRIVIAL]
      * Kingside Castling: 0-0
      * Queenside Castling: 0-0-0
+     *
+     * [SUFFIX]
      * Check: <CompleteMove>+
      * Checkmate: <CompleteMove>#
      *

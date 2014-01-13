@@ -1,6 +1,8 @@
 package j3chess;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 
 /**
  * the game class represents a single party of chess.
@@ -15,13 +17,14 @@ public class Game {
 
     /** @brief container for the entities of our game */
     private final EntitySystem mEntitySystem;
-    /** @brief represents the 3-person chessboard */
+    /** @brief represents the 3 person chessboard */
     private final Chessboard mChessboard;
-    /** @brief Represents the entities within our game */
+    /** @brief convenience class to create the entities within our game */
     private final PieceFactory mPieceFactory;
 
-    /** Counts the moves of all players.     */
-    private int mMoveCounter = 0;
+    /** @brief the moves of all players */
+    private List<Move> mMoveHistory;
+
     /**
      * @brief main class that keeps track of all objects needed
      *        throughout the game.
@@ -34,16 +37,18 @@ public class Game {
         mPieceFactory = new PieceFactory(mEntitySystem);
 
         // Create pieces for all three players
-        createPieces();
+        initializePieces();
+
+        mMoveHistory = new ArrayList<Move>();
     }
 
     /**
-     * @brief Creates all the pieces for 3 players.
+     * @brief initializes all the pieces for 3 players.
      * Player 1 occupies fields A0 through H1
      * Player 2 occupies fields I0 through P1
      * Player 3 occupies fields Q0 through X1
      */
-    public final void createPieces() {
+    public final void initializePieces() {
         // Create array for each player's starting piece types
         PieceType[][] pieceFormation =
                 new PieceType[PIECE_FORMATION_HEIGHT][PIECE_FORMATION_WIDTH];
@@ -68,17 +73,14 @@ public class Game {
             // ...create every piece
             for (int y = 0; y < PIECE_FORMATION_HEIGHT; ++y) {
                 for (int x = 0; x < PIECE_FORMATION_WIDTH; ++x) {
-                    // Get field where the piece should be placed
+                    // get the field where the piece should be placed
                     Field field = mChessboard.getField(
                             (player.ordinal() * PIECE_FORMATION_WIDTH + x)
                                 % Chessboard.NUMBEROFCOLUMNS,
                             y);
-
-                    // create an entity on the field
-                    mPieceFactory.create(
-                            pieceFormation[y][x],
-                            player,
-                            field);
+                    create(pieceFormation[y][x],
+                           player,
+                           field);
                 }
             }
         }
@@ -99,13 +101,30 @@ public class Game {
         mEntitySystem.getWorld().process();
     }
 
-    /** @brief increase the move counter */
-    public final void increaseMovesCounter() {
-        mMoveCounter++;
+    /** @return the number of moves already played */
+    public final int getMoveCounter() {
+        return mMoveHistory.size();
     }
 
-    /** @return the number of moves sum of all players */
-    public final int getMoveCounter() {
-        return mMoveCounter;
+    /**
+     * @brief execute a move
+     * @param move the move to be executed
+     */
+    public final void doMove(final Move move) {
+        // TODO other logic to apply a move
+        mMoveHistory.add(move);
+    }
+
+    /**
+     * @brief create a piece on the board
+     * @param pieceType type of the piece
+     * @param player owner of the piece
+     * @param field on this field
+     */
+    public final void create(
+            final PieceType pieceType,
+            final Player player,
+            final Field field) {
+        mPieceFactory.create(pieceType, player, field);
     }
 }

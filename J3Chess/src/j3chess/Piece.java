@@ -3,7 +3,6 @@ package j3chess;
 import j3chess.components.Paintable;
 import j3chess.components.PieceStatus;
 import j3chess.components.Position;
-import j3chess.components.Selectable;
 import j3chess.components.ValidMovement;
 
 import artemis.ComponentType;
@@ -42,8 +41,6 @@ public abstract class Piece {
         mPiece = mEntitySystem.getWorld().createEntity();
 
         // initialize the default components for an entity of type piece
-        mPiece.addComponent(new Selectable(),
-                ComponentType.getTypeFor(Selectable.class));
         mPiece.addComponent(new ValidMovement(),
                 ComponentType.getTypeFor(ValidMovement.class));
     }
@@ -88,7 +85,7 @@ public abstract class Piece {
                 + "/"
                 + pieceType.name().toLowerCase()
                 + ".png";
-        J3ChessApp.getLogger().info("ImagePath: " + imagePath);
+        J3ChessApp.getLogger().debug("Path: <" + imagePath + ">");
         return imagePath;
     }
 
