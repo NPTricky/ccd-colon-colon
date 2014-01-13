@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
+import artemis.Entity;
+
 /**
  * the game class represents a single party of chess.
  */
@@ -135,5 +137,12 @@ public class Game {
     public final void nextPlayer() {
         int next = mCurrentPlayer.ordinal() + 1 % Player.values().length;
         mCurrentPlayer = Player.values()[next];
+    }
+
+    /**
+     * @brief Notify the game about a click on a field
+     * @param clickedField The field the user clicked on
+     */
+    public void notifyFieldClicked(Field clickedField) {
     }
 }
