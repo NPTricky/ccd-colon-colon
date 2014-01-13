@@ -102,6 +102,21 @@ public class Game {
     public final void update() {
         mEntitySystem.getWorld().setDelta(DELTA_TIME);
         mEntitySystem.getWorld().process();
+        /*
+        while (true)
+        {
+            boolean moveconditionmet = false;
+            Move abouttomove = mCurrentPlayer.getPlayerController().calculateMove();
+            if (abouttomove != null)
+            {
+                doMove(abouttomove);
+                moveconditionmet = true;
+            }
+            if (moveconditionmet) {
+                nextPlayer();
+            }
+        }
+        */
     }
 
     /** @return the number of moves already played */
