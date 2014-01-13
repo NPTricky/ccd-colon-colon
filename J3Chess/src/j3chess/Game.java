@@ -26,6 +26,8 @@ public class Game {
     private List<Move> mMoveHistory;
     /** @brief the current player about to do his move */
     private Player mCurrentPlayer;
+    /** @brief the current players in this game */
+    private EnumSet<Player> mCurrentPlayers;
 
     /**
      * @brief main class that keeps track of all objects needed
@@ -39,6 +41,7 @@ public class Game {
         mPieceFactory = new PieceFactory(mEntitySystem);
 
         initializePieces();
+        initializePlayers(EnumSet.allOf(Player.class));
 
         mMoveHistory = new ArrayList<Move>();
     }
@@ -85,6 +88,14 @@ public class Game {
                 }
             }
         }
+    }
+
+    /**
+     * @brief initializes the players of the game
+     * @param currentPlayers the enum set of players
+     */
+    public final void initializePlayers(final EnumSet<Player> currentPlayers) {
+        this.mCurrentPlayers = currentPlayers;
     }
 
     /**
@@ -148,7 +159,13 @@ public class Game {
      * @brief switch to the next player
      */
     public final void nextPlayer() {
-        int next = mCurrentPlayer.ordinal() + 1 % Player.values().length;
-        mCurrentPlayer = Player.values()[next];
+        //int next = mCurrentPlayer.ordinal() + 1 % Player.values().length;
+        mCurrentPlayer = mCurrentPlayers.iterator().next();
+    }
+
+    public final void setPlayer(
+            Player player,
+            PlayerController playerController) {
+
     }
 }
