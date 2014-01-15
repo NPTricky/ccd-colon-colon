@@ -30,7 +30,7 @@ public enum Player {
      */
     Player(final String name) {
         this.mName = name;
-        this.mPlayerController = new HumanController();
+        this.mPlayerController = new HumanController(this);
     }
 
     @Override

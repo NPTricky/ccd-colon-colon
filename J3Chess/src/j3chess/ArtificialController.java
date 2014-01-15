@@ -7,31 +7,24 @@ import java.util.Map;
 /**
  * an artificial player.
  */
-public class ArtificialController implements PlayerController {
+public class ArtificialController extends PlayerController {
+    /**
+     * @brief Create an instance of a ArtificialController for a given player.
+     * @param player The player which owns the PlayerController.
+     */
+    public ArtificialController(Player player) {
+        super(player);
+    }
 
     /** @brief defines the importance of each piece type */
     private Map<PieceType, Integer> mPieceValue =
             new EnumMap<PieceType, Integer>(PieceType.class);
 
     /**
-     * @brief default constructor for an artificial player controller
-     */
-    public ArtificialController() {
-        // TODO Auto-generated constructor stub
-        initialise();
-    }
-
-    @Override
-    public final Move calculateMove() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
      * @brief initializes the artificial controller with some context
      */
-    private void initialise() {
-        initialiseValue(10);
+    private void initialize() {
+        initializeValue(10);
     }
 
     /**
@@ -39,7 +32,7 @@ public class ArtificialController implements PlayerController {
      * @param value basic value of a piece to calculate relative
      *        values with it
      */
-    private void initialiseValue(final int value) {
+    private void initializeValue(final int value) {
         for (PieceType pieceType : EnumSet.allOf(PieceType.class)) {
             Integer result;
             switch (pieceType) {

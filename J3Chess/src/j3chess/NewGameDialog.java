@@ -70,14 +70,14 @@ public class NewGameDialog extends JFrame {
 
         jButtonOk.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 for (Player player : mPlayers) {
                     String playerName = playerNameTextFields[player.ordinal()].getText();
                     if (playerName.equals("")) {
                         playerName = ("Player " + (player.ordinal() + 1));
                     }
                     player.setName(playerName);
-                    player.setPlayerController(new HumanController());
+                    player.setPlayerController(new HumanController(player));
                 }
                 //Start Game
                 J3ChessApp.getInstance().startNewGame();
@@ -87,7 +87,7 @@ public class NewGameDialog extends JFrame {
 
         jButtonCancel.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 dispose();
             }
         });

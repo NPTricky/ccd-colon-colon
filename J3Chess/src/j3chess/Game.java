@@ -1,15 +1,9 @@
 package j3chess;
 
-import j3chess.components.Paintable;
-import j3chess.components.PieceContext;
-import j3chess.components.Position;
-import j3chess.components.ValidMovement;
-
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-import artemis.ComponentType;
 import artemis.Entity;
 import artemis.managers.GroupManager;
 import artemis.utils.ImmutableBag;
@@ -161,7 +155,7 @@ public class Game {
 	 * @brief switch to the next player
 	 */
 	public final void nextPlayer() {
-		int next = mCurrentPlayer.ordinal() + 1 % Player.values().length;
+		int next = (mCurrentPlayer.ordinal() + 1) % Player.values().length;
 		mCurrentPlayer = Player.values()[next];
 	}
 
@@ -171,45 +165,21 @@ public class Game {
 	 *            The field the user clicked on
 	 */
 	public final void notifyFieldClicked(final Field clickedField) {
-        // Get piece on the field
-    	Entity clickedPiece = clickedField.getPiece();
-
-    	// Test wether the player clicked on his/her own piece
-    	if (clickedPiece != null) {
-    		// Get the piece's owning player
-    		Player owner = ((PieceContext) clickedPiece.getComponent(ComponentType.getTypeFor(PieceContext.class))).getPlayer();
-
-    		// Check the piece's owner
-    		if (owner == mCurrentPlayer) {
-    			// Clicked on my own piece --> select
-    			selectPiece(clickedPiece);
-    			return;
-    		}
-    	}
-
-    	// At this point, we know that the player didn't click on his own piece
-    	// We need to get the currently selected piece and check its valid moves
-    	Entity selectedPiece = getSelectedPiece();
-    	
-    	if (selectedPiece != null) {
-	    	ValidMovement moves = (ValidMovement) selectedPiece.getComponent(ComponentType.getTypeFor(ValidMovement.class));
-	
-	    	if (moves.getValidNonCaptureMoves().contains(clickedField)
-	    	 || moves.getValidCaptureMoves().contains(clickedField)) {
-	    		Field source = ((Position) selectedPiece.getComponent(ComponentType.getTypeFor(Position.class))).getField();
-	    		doMove(new Move(MoveType.Common, source, clickedField));
-	    	}
-    	}
+		// Check if there is a Human Controller currently active
+		if (mCurrentPlayer.getPlayerController().getClass() == HumanController.class) {
+			HumanController controller = (HumanController) mCurrentPlayer.getPlayerController();
+			controller.notifyFieldClicked(clickedField);
+		}
     }
 
 	/**
 	 * @brief Get the currently selected piece
 	 * @return Selected entity, or null if none
 	 */
-	private Entity getSelectedPiece() {
+	public final Entity getSelectedPiece() {
     	// Get all entities in group selected
         ImmutableBag<Entity> selectedEntities = mEntitySystem.getGroupManager().getEntities(SELECTED_GROUP);
-        
+
         Entity result = null;
         if (selectedEntities.size() == 1) {
         	// Exactly one selected piece, great!
@@ -222,16 +192,16 @@ public class Game {
 	 * @brief Selects a piece on the chessboard. Previous selections are cleared.
 	 * @param clickedEntity The piece to be selected
 	 */
-	private void selectPiece(final Entity clickedEntity) {
+	public final void selectPiece(final Entity clickedEntity) {
 		// Get the group manager
 		GroupManager groupManager = mEntitySystem.getGroupManager();
-		
+
 		// Remove previous selection (should be only 1 entity)
 		ImmutableBag<Entity> selectedEntities = mEntitySystem.getGroupManager().getEntities(SELECTED_GROUP);
 		for (int i = 0; i < selectedEntities.size(); ++i) {
 			groupManager.remove(selectedEntities.get(i), SELECTED_GROUP);
 		}
-		
+
 		// Select clicked entity
 		mEntitySystem.getGroupManager().add(clickedEntity, SELECTED_GROUP);
 		J3ChessApp.getLogger().info("Selected entity " + clickedEntity);
