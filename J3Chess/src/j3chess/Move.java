@@ -15,6 +15,8 @@ public class Move {
     private Field mStart;
     /** @brief the target position of this move */
     private Field mTarget;
+    /** @brief whether the move crossed the center */
+    private boolean mCrossedCenter;
     /** @brief the description of this move in chess notation */
     private String mDescription;
 
@@ -29,14 +31,17 @@ public class Move {
      * @param type type of the move
      * @param start start of the move
      * @param target target of the move
+     * @param crossedCenter whether the move crossed the center
      */
     public Move(
             final MoveType type,
             final Field start,
-            final Field target) {
+            final Field target,
+            final boolean crossedCenter) {
         this.mMoveType = type;
         this.mStart = start;
         this.mTarget = target;
+        this.mCrossedCenter = crossedCenter;
     }
 
     /**
@@ -73,14 +78,6 @@ public class Move {
     @Override
     public final String toString() {
         return mDescription;
-    }
-
-    /**
-     * @brief setter for the mDescription member
-     * @param description the description
-     */
-    public final void setDescription(final String description) {
-        this.mDescription = description;
     }
 
     /**

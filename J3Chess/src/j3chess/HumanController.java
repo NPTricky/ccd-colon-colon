@@ -53,9 +53,9 @@ public class HumanController extends PlayerController {
 
             if (moves.getValidNonCaptureMoves().contains(clickedField) || moves.getValidCaptureMoves().contains(clickedField)) {
                 Field source = ((Position) selectedPiece.getComponent(ComponentType.getTypeFor(Position.class))).getField();
-                game.doMove(new Move(MoveType.Common, source, clickedField));
+                game.doMove(new Move(MoveType.Common, source, clickedField, false));
                 // Next player's turn
-                game.nextPlayer();
+                game.nextPlayer(1);
             }
         }
     }
