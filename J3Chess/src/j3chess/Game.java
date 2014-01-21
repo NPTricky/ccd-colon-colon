@@ -21,6 +21,8 @@ public class Game {
 	/** @brief selected entity group name */
 	public static final String SELECTED_GROUP = "selected";
 
+	/** @brief instance of the J3Chess view that displays everything */
+	private final J3ChessView mView;
 	/** @brief container for the entities of our game */
 	private final EntitySystem mEntitySystem;
 	/** @brief represents the 3 person chessboard */
@@ -38,9 +40,11 @@ public class Game {
 	/**
 	 * @brief main class that keeps track of all objects needed throughout the
 	 *        game.
+	 * @param view J3ChessView for the Game to use
 	 */
 
-	public Game() {
+	public Game(J3ChessView view) {
+		mView = view;
 		mEntitySystem = new EntitySystem();
 		mEntitySystem.initialize();
 		mChessboard = new Chessboard(mEntitySystem);
@@ -132,8 +136,13 @@ public class Game {
 	 *            the move to be executed
 	 */
 	public final void doMove(final Move move) {
-		// TODO other logic to apply a move
+		// display the move in the table
+		mView.addMove(move.toString());
+
+		// internally save the move
 		mMoveHistory.add(move);
+
+		// Finally execute the move
 		move.execute();
 	}
 
@@ -157,6 +166,15 @@ public class Game {
 	public final void nextPlayer() {
 		int next = (mCurrentPlayer.ordinal() + 1) % Player.values().length;
 		mCurrentPlayer = Player.values()[next];
+		mView.refreshCurrentPlayer();
+	}
+
+	/**
+	 * @brief Get the ID of the player who currently has a turn.
+	 * @return ID of the player in the range 0..2
+	 */
+	public final int getCurrentPlayerID() {
+		return mCurrentPlayer.ordinal();
 	}
 
 	/**

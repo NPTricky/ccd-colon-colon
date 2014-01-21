@@ -15,12 +15,12 @@ public class J3ChessApp extends SingleFrameApplication {
     /** @brief common logger instance for the application */
     private static final Logger LOG = LogManager.getRootLogger();
 
-    /** @brief instance of the J3Chess view that takes displays everything */
+    /** @brief instance of the J3Chess view that displays everything */
     private J3ChessView mView;
 
     /** @brief Number of Players */
     public static final int NUMBEROFPLAYERS = 3;
-    
+
     /** @brief Home path for the resource files */
     public static final String RESOURCEPATH = "src/j3chess/resources/graphics/";
 
@@ -74,7 +74,7 @@ public class J3ChessApp extends SingleFrameApplication {
 
     public void startNewGame() {
         mView.reset();
-        mGame = new Game();
+        mGame = new Game(mView);
         update();
     }
 

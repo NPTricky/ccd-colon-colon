@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -94,7 +95,7 @@ public class J3ChessView extends FrameView {
         createMenuBar();
     }
 
-    
+
     /**
      * @Brief creates the MenuBar
      */
@@ -151,11 +152,26 @@ public class J3ChessView extends FrameView {
         mMenuBar.add(menuTwo);
     }
 
+    /**
+     * @brief adds a move at the end of the NotationPanel.
+     * @param move the move to add
+     */
+    public final void addMove(final String move) {
+        mNotationPanel.addMove(move);
+    }
+
     public Graphics2D getDrawGraphics() {
         return mDrawPanel.getPersistentGraphics();
     }
 
     public void reset() {
         mNotationPanel.reset();
+    }
+
+    /**
+     * @brief Sets the current player to be displayed.
+     */
+    public void refreshCurrentPlayer() {
+    	mNotationPanel.refreshCurrentPlayer();
     }
 }
