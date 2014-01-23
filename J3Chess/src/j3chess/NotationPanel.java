@@ -103,5 +103,6 @@ public class NotationPanel extends JPanel {
         tableModel.setColumnCount(0);
         EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
         tableModel.setColumnIdentifiers(mPlayers.toArray());
+        repaint();
     }
 }
