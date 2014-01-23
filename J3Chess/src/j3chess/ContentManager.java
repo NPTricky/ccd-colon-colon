@@ -1,6 +1,7 @@
 package j3chess;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
@@ -35,17 +36,18 @@ public class ContentManager {
      * @Brief searches for a imageFile - looks first in the local Hashmap, then in the filesystem
      * @param filename which is searched
      * @return the searched ImageIcon - returns null if not found
+     * @throws FileNotFoundException if the searched file can not be found
      */
-    public final ImageIcon getContent(final String filename) {
+    public final ImageIcon getContent(final String filename) throws FileNotFoundException {
         if (mContent.containsKey(filename)) {
             return mContent.get(filename);
         } else {
             if (getContentFromFileSystem(filename, mSourcePath)) {
                 return mContent.get(filename);
+            } else {
+                throw new FileNotFoundException();
             }
         }
-        //TODO image not found exception
-        return null;
     }
 
     /**
@@ -53,8 +55,9 @@ public class ContentManager {
      * @param searchFileName searched filename
      * @param directory Path for searching the file
      * @return true if a file is found which contains the search FileName
+     * @throws FileNotFoundException directory not Found
      */
-    private Boolean getContentFromFileSystem(final String searchFileName, final String directory) {
+    private Boolean getContentFromFileSystem(final String searchFileName, final String directory) throws FileNotFoundException {
         // Create copy of input parameter
         String directoryPath = directory;
         // Append slash if its missing

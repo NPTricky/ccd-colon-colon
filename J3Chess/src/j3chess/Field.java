@@ -27,9 +27,9 @@ public class Field {
     /** @brief column of the field*/
     private int mColumn;
     /** @brief Name of the columns*/
-    private static final char[] COLUMNNAMES = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
-        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-        'S', 'T', 'U', 'V', 'W', 'X', };
+    private static final char[] COLUMNNAMES = {'a', 'b', 'c', 'd', 'e', 'f', 'g',
+        'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+        's', 't', 'u', 'v', 'w', 'x', };
 
     /** @brief the piece on this field, may be null */
     private Entity mPiece;
