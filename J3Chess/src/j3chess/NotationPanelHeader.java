@@ -6,9 +6,10 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 
-import sun.swing.table.DefaultTableCellHeaderRenderer;
+import javax.swing.table.DefaultTableCellRenderer;
+//import sun.swing.table.DefaultTableCellHeaderRenderer;
 
-public class NotationPanelHeader extends DefaultTableCellHeaderRenderer {
+public class NotationPanelHeader extends DefaultTableCellRenderer {
     @Override
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean selected, final boolean focused, final int row, final int column) {
