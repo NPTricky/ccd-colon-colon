@@ -109,11 +109,27 @@ public class Field {
     }
 
     /**
-     * Converts the field an easily readable string.
-     * @return String [A-X][0-5]
+     * Converts the field to an easily readable string.
+     * @return String [a-x][0-5]
      */
     public final String toString() {
         return COLUMNNAMES[mColumn] + mCircle.toString();
+    }
+
+    /**
+     * Converts the file to an easily readable string.
+     * @return String [0-5]
+     */
+    public final String toFile() {
+        return mCircle.toString();
+    }
+
+    /**
+     * Converts the rank to an easily readable string.
+     * @return String [a-x]
+     */
+    public final String toRank() {
+        return Character.toString(COLUMNNAMES[mColumn]);
     }
 
     /**
