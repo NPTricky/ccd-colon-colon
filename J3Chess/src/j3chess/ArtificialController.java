@@ -62,7 +62,7 @@ public class ArtificialController extends PlayerController {
         }
 
         String eol = System.getProperty("line.separator");
-        String log = new String();
+        String log = "";
         for (PieceType pieceType : EnumSet.allOf(PieceType.class)) {
             log += "Value of " + pieceType.toString() + ": "
                    + mPieceValue.get(pieceType).toString() + eol;

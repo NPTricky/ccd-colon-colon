@@ -70,11 +70,10 @@ public class Movement extends Component {
     }
 
     /**
-     * @brief setter for the mCrossedCenter member
-     * @param crossedCenter whether the entity already crossed the center
+     * @brief toggles the variable, whether the component already crossed center
      */
-    public final void setCrossedCenter(final boolean crossedCenter) {
-        this.mCrossedCenter = crossedCenter;
+    public final void toggleCrossedCenter() {
+        this.mCrossedCenter ^= true;
     }
 
 }

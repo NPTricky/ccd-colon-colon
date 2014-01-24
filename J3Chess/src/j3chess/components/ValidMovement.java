@@ -1,6 +1,6 @@
 package j3chess.components;
 
-import j3chess.Field;
+import j3chess.Move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,50 +12,50 @@ import artemis.Component;
  */
 public class ValidMovement extends Component {
 
-    /** @brief the valid non capture move targets */
-    private List<Field> mValidNonCaptureMoves;
-    /** @brief the valid capture move targets */
-    private List<Field> mValidCaptureMoves;
+    /** @brief the valid non capture moves */
+    private List<Move> mValidNonCaptureMoves;
+    /** @brief the valid capture moves */
+    private List<Move> mValidCaptureMoves;
 
     /**
      * @brief empty default constructor for valid movement component
      */
     public ValidMovement() {
-        mValidNonCaptureMoves = new ArrayList<Field>();
-        mValidCaptureMoves = new ArrayList<Field>();
+        mValidNonCaptureMoves = new ArrayList<Move>();
+        mValidCaptureMoves = new ArrayList<Move>();
     }
 
     /**
      * @brief getter for the mValidNonCaptureMoves member
-     * @return the valid non capture move targets
+     * @return the valid non capture moves
      */
-    public final List<Field> getValidNonCaptureMoves() {
+    public final List<Move> getValidNonCaptureMoves() {
         return mValidNonCaptureMoves;
     }
 
     /**
      * @brief setter for the mValidNonCaptureMoves member
-     * @param validNonCaptureMoves the valid non capture move targets
+     * @param validNonCaptureMoves the valid non capture moves
      */
     public final void setValidNonCaptureMoves(
-            final List<Field> validNonCaptureMoves) {
+            final List<Move> validNonCaptureMoves) {
         this.mValidNonCaptureMoves = validNonCaptureMoves;
     }
 
     /**
      * @brief getter for the mValidCaptureMoves member
-     * @return the valid capturing move targets
+     * @return the valid capturing moves
      */
-    public final List<Field> getValidCaptureMoves() {
+    public final List<Move> getValidCaptureMoves() {
         return mValidCaptureMoves;
     }
 
     /**
      * @brief setter for the mValidCaptureMoves member
-     * @param validCaptureMoves the valid capturing move targets
+     * @param validCaptureMoves the valid capturing moves
      */
     public final void setValidCaptureMoves(
-            final List<Field> validCaptureMoves) {
+            final List<Move> validCaptureMoves) {
         this.mValidCaptureMoves = validCaptureMoves;
     }
 

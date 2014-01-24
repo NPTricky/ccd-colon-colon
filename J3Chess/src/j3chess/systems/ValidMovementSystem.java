@@ -5,6 +5,7 @@ import j3chess.J3ChessApp;
 import j3chess.Field;
 import j3chess.Motion;
 import j3chess.MotionPattern;
+import j3chess.Move;
 import j3chess.PieceDirection;
 import j3chess.Player;
 import j3chess.components.Movement;
@@ -68,6 +69,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // retrieve relevant components from the entity
         final Movement movement = mMovementMapper.get(entity); // not global
         final Position position = mPositionMapper.get(entity);
+        mCurrentStartField = position.getField();
         mCurrentValidMovement = mValidMovementMapper.get(entity);
         mCurrentPlayer = requestPlayer(position.getField());
 
@@ -82,7 +84,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
             // retrieve valid moves from the motion pattern recursively
             recurseMotionPattern(
-                    position.getField(),
+                    mCurrentStartField,
                     null,
                     pattern,
                     0,
@@ -95,8 +97,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 /* Entity-Related Members                                                    */
 /* ------------------------------------------------------------------------- */
 
-    /**@brief the player of the currently processed entity */
+    /** @brief the player of the currently processed entity */
     private Player mCurrentPlayer;
+    /** @brief the starting position of the currently processed entity */
+    private Field mCurrentStartField;
     /** @brief valid movement component of the currently processed entity */
     private ValidMovement mCurrentValidMovement;
 
@@ -211,6 +215,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                             currentPieceDirection,
                             currentCrossedCenter);
 
+            // the piece crosses the center with it about to be evaluated move
+            final boolean isCrossingCenter = currentField
+                    .getWhetherCrossingCenter(currentFieldDirection);
+
             final Field nextField =
                     currentField.getNeighbor(currentFieldDirection);
 
@@ -221,8 +229,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
             // XOR used to toggle the current crossed center status
             final boolean nextCrossedCenter =
-                    currentCrossedCenter ^ currentField
-                    .getWhetherCrossingCenter(currentFieldDirection);
+                    currentCrossedCenter ^ isCrossingCenter;
 
 /* ------------------------------------------------------------------------- */
 
@@ -233,15 +240,29 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 if (nextField.getPiece() != null) {
                     // there is something on the next field -> check for capture
                     if (mCurrentPlayer != requestPlayer(nextField)) {
+                        // there is something capturable on the next field, thus
+                        // it is a valid move
+                        Move nextCaptureMove = new Move(
+                            null,
+                            mCurrentStartField,
+                            nextField,
+                            isCrossingCenter);
                         mCurrentValidMovement
-                        .getValidCaptureMoves()
-                        .add(nextField);
+                            .getValidCaptureMoves()
+                            .add(nextCaptureMove);
                     }
                     // this motion direction is blocked
                     continue; // skip this loop iteration
                 }
                 // there is nothing on the next field, thus it is a valid move
-                mCurrentValidMovement.getValidNonCaptureMoves().add(nextField);
+                Move nextNonCaptureMove = new Move(
+                    null,
+                    mCurrentStartField,
+                    nextField,
+                    isCrossingCenter);
+                mCurrentValidMovement
+                    .getValidNonCaptureMoves()
+                    .add(nextNonCaptureMove);
             }
 
 /* ------------------------------------------------------------------------- */
