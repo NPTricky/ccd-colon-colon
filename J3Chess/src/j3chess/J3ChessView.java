@@ -166,6 +166,7 @@ public class J3ChessView extends FrameView {
 
     public void reset() {
         mNotationPanel.reset();
+        mDrawPanel.repaint();
     }
 
     /**

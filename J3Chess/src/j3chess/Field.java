@@ -27,9 +27,9 @@ public class Field {
     /** @brief column of the field*/
     private int mColumn;
     /** @brief Name of the columns*/
-    private static final char[] COLUMNNAMES = {'A', 'B', 'C', 'D', 'E', 'F', 'G',
-        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-        'S', 'T', 'U', 'V', 'W', 'X', };
+    private static final char[] COLUMNNAMES = {'a', 'b', 'c', 'd', 'e', 'f', 'g',
+        'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+        's', 't', 'u', 'v', 'w', 'x', };
 
     /** @brief the piece on this field, may be null */
     private Entity mPiece;
@@ -109,11 +109,27 @@ public class Field {
     }
 
     /**
-     * Converts the field an easily readable string.
-     * @return String [A-X][0-5]
+     * Converts the field to an easily readable string.
+     * @return String [a-x][0-5]
      */
     public final String toString() {
         return COLUMNNAMES[mColumn] + mCircle.toString();
+    }
+
+    /**
+     * Converts the file to an easily readable string.
+     * @return String [0-5]
+     */
+    public final String toFile() {
+        return mCircle.toString();
+    }
+
+    /**
+     * Converts the rank to an easily readable string.
+     * @return String [a-x]
+     */
+    public final String toRank() {
+        return Character.toString(COLUMNNAMES[mColumn]);
     }
 
     /**
