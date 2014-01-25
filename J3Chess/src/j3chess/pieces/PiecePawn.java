@@ -1,8 +1,13 @@
-package j3chess;
+package j3chess.pieces;
 
 import java.util.EnumSet;
 
+import j3chess.EntitySystem;
 import j3chess.components.Movement;
+import j3chess.motion.DirectionGroup;
+import j3chess.motion.Motion;
+import j3chess.motion.MotionPattern;
+import j3chess.motion.PieceDirection;
 import j3chess.utility.Helper;
 import artemis.ComponentType;
 
@@ -22,7 +27,7 @@ public class PiecePawn extends Piece {
 
     /**
      * @brief construction of a pawn entity
-     * @see j3chess.Piece#construct()
+     * @see j3chess.pieces.Piece#construct()
      */
     @Override
     protected final void construct() {

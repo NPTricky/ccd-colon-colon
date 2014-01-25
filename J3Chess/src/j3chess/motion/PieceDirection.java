@@ -1,4 +1,4 @@
-package j3chess;
+package j3chess.motion;
 
 /**
  * enum of available directions of a single piece on the chessboard.

@@ -1,4 +1,5 @@
-package j3chess;
+package j3chess.controller;
+
 
 /**
  * Abstract base class for player controllers.

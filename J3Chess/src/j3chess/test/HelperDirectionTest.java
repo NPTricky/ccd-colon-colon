@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.EnumSet;
 
-import j3chess.DirectionGroup;
-import j3chess.FieldDirection;
-import j3chess.PieceDirection;
+import j3chess.motion.DirectionGroup;
+import j3chess.motion.FieldDirection;
+import j3chess.motion.PieceDirection;
 import j3chess.utility.Helper;
 
 import org.junit.BeforeClass;

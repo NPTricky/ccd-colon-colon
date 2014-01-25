@@ -1,6 +1,10 @@
-package j3chess;
+package j3chess.pieces;
 
+import j3chess.EntitySystem;
 import j3chess.components.Movement;
+import j3chess.motion.DirectionGroup;
+import j3chess.motion.Motion;
+import j3chess.motion.MotionPattern;
 import j3chess.utility.Helper;
 import artemis.ComponentType;
 
@@ -20,7 +24,7 @@ public class PieceKing extends Piece {
 
     /**
      * @brief construction of a king entity
-     * @see j3chess.Piece#construct()
+     * @see j3chess.pieces.Piece#construct()
      */
     @Override
     protected final void construct() {

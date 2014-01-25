@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 import j3chess.EntitySystem;
 import j3chess.Field;
 import j3chess.J3ChessApp;
-import j3chess.PieceFactory;
-import j3chess.PieceType;
-import j3chess.Player;
 import j3chess.components.Movement;
 import j3chess.components.Paintable;
 import j3chess.components.PieceContext;
 import j3chess.components.Position;
+import j3chess.controller.Player;
+import j3chess.pieces.PieceFactory;
+import j3chess.pieces.PieceType;
 
 import java.awt.Image;
 import java.util.EnumSet;

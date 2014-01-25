@@ -1,4 +1,4 @@
-package j3chess;
+package j3chess.pieces;
 
 /**
  * enum of available piece types.

@@ -1,4 +1,4 @@
-package j3chess;
+package j3chess.motion;
 
 /**
  * tag interface for directions.

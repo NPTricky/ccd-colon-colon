@@ -2,8 +2,8 @@ package j3chess.test;
 
 import static org.junit.Assert.fail;
 import j3chess.Field;
-import j3chess.HumanController;
-import j3chess.Player;
+import j3chess.controller.HumanController;
+import j3chess.controller.Player;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

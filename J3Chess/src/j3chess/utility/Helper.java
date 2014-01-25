@@ -1,9 +1,9 @@
 package j3chess.utility;
 
 import j3chess.J3ChessApp;
-import j3chess.DirectionGroup;
-import j3chess.FieldDirection;
-import j3chess.PieceDirection;
+import j3chess.motion.DirectionGroup;
+import j3chess.motion.FieldDirection;
+import j3chess.motion.PieceDirection;
 
 import java.util.EnumSet;
 

@@ -1,6 +1,6 @@
 package j3chess.components;
 
-import j3chess.Move;
+import j3chess.motion.Move;
 
 import java.util.ArrayList;
 import java.util.List;

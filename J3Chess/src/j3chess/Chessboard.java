@@ -1,9 +1,13 @@
 package j3chess;
 
 import j3chess.components.Paintable;
+import j3chess.motion.FieldDirection;
 import j3chess.utility.Vector2d;
+
 import java.util.ArrayList;
+
 import org.apache.logging.log4j.Level;
+
 import artemis.Entity;
 
 /**

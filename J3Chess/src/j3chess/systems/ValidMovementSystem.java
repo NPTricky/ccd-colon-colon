@@ -1,18 +1,18 @@
 package j3chess.systems;
 
-import j3chess.FieldDirection;
 import j3chess.J3ChessApp;
 import j3chess.Field;
-import j3chess.Motion;
-import j3chess.MotionPattern;
-import j3chess.Move;
-import j3chess.MoveType;
-import j3chess.PieceDirection;
-import j3chess.Player;
 import j3chess.components.Movement;
 import j3chess.components.PieceContext;
 import j3chess.components.Position;
 import j3chess.components.ValidMovement;
+import j3chess.controller.Player;
+import j3chess.motion.FieldDirection;
+import j3chess.motion.Motion;
+import j3chess.motion.MotionPattern;
+import j3chess.motion.Move;
+import j3chess.motion.MoveType;
+import j3chess.motion.PieceDirection;
 import j3chess.utility.Helper;
 
 import java.util.ArrayList;

@@ -9,10 +9,10 @@ import java.util.List;
 import j3chess.Chessboard;
 import j3chess.EntitySystem;
 import j3chess.Field;
-import j3chess.PieceFactory;
-import j3chess.PieceType;
-import j3chess.Player;
 import j3chess.components.ValidMovement;
+import j3chess.controller.Player;
+import j3chess.pieces.PieceFactory;
+import j3chess.pieces.PieceType;
 import j3chess.systems.ValidMovementSystem;
 
 import org.junit.BeforeClass;

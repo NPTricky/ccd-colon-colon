@@ -1,7 +1,7 @@
 package j3chess.components;
 
-import j3chess.PieceType;
-import j3chess.Player;
+import j3chess.controller.Player;
+import j3chess.pieces.PieceType;
 import artemis.Component;
 
 /**

@@ -1,4 +1,5 @@
-package j3chess;
+package j3chess.controller;
+
 
 /**
  * enum of available players.

@@ -1,6 +1,8 @@
 package j3chess;
 
 
+import j3chess.controller.Player;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

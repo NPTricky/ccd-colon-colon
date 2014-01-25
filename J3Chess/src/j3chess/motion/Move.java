@@ -1,5 +1,7 @@
-package j3chess;
+package j3chess.motion;
 
+import j3chess.Field;
+import j3chess.J3ChessApp;
 import j3chess.components.Movement;
 import j3chess.components.PieceContext;
 import j3chess.components.Position;

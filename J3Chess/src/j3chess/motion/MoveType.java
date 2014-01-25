@@ -1,4 +1,4 @@
-package j3chess;
+package j3chess.motion;
 
 /**
  * enum of available move types.

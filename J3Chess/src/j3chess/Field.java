@@ -1,5 +1,6 @@
 package j3chess;
 
+import j3chess.motion.FieldDirection;
 import j3chess.utility.Vector2d;
 
 import java.util.EnumMap;

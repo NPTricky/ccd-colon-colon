@@ -3,7 +3,7 @@ package j3chess.test;
 import static org.junit.Assert.assertEquals;
 import j3chess.Chessboard;
 import j3chess.Field;
-import j3chess.FieldDirection;
+import j3chess.motion.FieldDirection;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

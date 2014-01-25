@@ -1,10 +1,14 @@
-package j3chess;
+package j3chess.controller;
 
 import java.util.List;
 
+import j3chess.Field;
+import j3chess.Game;
+import j3chess.J3ChessApp;
 import j3chess.components.PieceContext;
 import j3chess.components.Position;
 import j3chess.components.ValidMovement;
+import j3chess.motion.Move;
 import artemis.ComponentType;
 import artemis.Entity;
 
