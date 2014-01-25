@@ -175,7 +175,7 @@
   <target name="tests" depends="compile">
     <mkdir dir="${junit.output.dir}"/>
   
-    <junit fork="yes" printsummary="yes" haltonfailure="yes" >
+    <junit fork="yes" printsummary="yes" haltonfailure="no" >
       <classpath location="${instrumented.dir}" />
       <classpath location="${build.dir}" />
     
