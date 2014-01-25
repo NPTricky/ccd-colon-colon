@@ -21,31 +21,27 @@ public class HumanControllerSelectionTest {
 
     /**
      * This tests wether a HumanController without a game will
-     * throw a proper exception, instead of showing undefined
-     * behaviour.
+     * exit gracefully and not produce errors.
      */
     @Test
     public final void failWithoutGame() {
         try {
             mHumanController.notifyFieldClicked(new Field(0, 0), null);
         } catch (Exception e) {
-            // Test passed
+        	fail();
         }
-        fail();
     }
 
     /**
      * This tests wether a HumanController without a game and
-     * a field will throw a proper exception, instead of showing
-     * undefined behaviour.
+     * a field will exit gracefully and not produce errors.
      */
     @Test
     public final void failWithoutValues() {
         try {
             mHumanController.notifyFieldClicked(null, null);
         } catch (Exception e) {
-            // Test passed
+            fail();
         }
-        fail();
     }
 }
