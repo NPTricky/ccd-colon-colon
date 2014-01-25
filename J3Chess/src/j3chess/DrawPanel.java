@@ -1,5 +1,7 @@
 package j3chess;
 
+import j3chess.utility.Vector2d;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -51,8 +53,11 @@ public class DrawPanel extends JComponent implements MouseListener {
     @Override
     public void mousePressed(MouseEvent arg0) {
         // Resize x and y to [-1,1] range
-        final float x = ((float) arg0.getX() / (float) arg0.getComponent().getWidth()) * 2.0f - 1.0f;
-        final float y = ((float) arg0.getY() / (float) arg0.getComponent().getHeight()) * 2.0f - 1.0f;
+    	final Vector2d offset = new Vector2d((J3ChessView.DRAWPANELWIDTH
+    			- J3ChessView.CHESSBOARDWIDTH) / 2.0f, (J3ChessView.DRAWPANELHEIGHT
+    	        - J3ChessView.CHESSBOARDHEIGHT) / 2.0f);
+        final float x = ((float) (arg0.getX() - offset.x) / (float) J3ChessView.CHESSBOARDWIDTH) * 2.0f - 1.0f;
+        final float y = ((float) (arg0.getY() - offset.y) / (float) J3ChessView.CHESSBOARDHEIGHT) * 2.0f - 1.0f;
 
         // Get the field that the player clicked on
         final Field clickedField = J3ChessApp.getInstance().getGame().getChessboard().getFieldByXY(x, y);

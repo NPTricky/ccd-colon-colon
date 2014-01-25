@@ -85,7 +85,7 @@ public class Field {
         return (Math.abs(next.mCircle - mCircle) + Math.abs(next.mColumn - mColumn) > 2);
          */
 
-        if (mColumn == Chessboard.NUMBEROFCOLUMNS - 1) {
+        if (mCircle == Chessboard.NUMBEROFCIRCLES - 1) {
             if (fieldDirection == FieldDirection.In
                     || fieldDirection == FieldDirection.InClockwise
                     || fieldDirection == FieldDirection.InCounterClockwise) {

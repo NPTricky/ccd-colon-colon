@@ -1,6 +1,7 @@
 package j3chess.systems;
 
 import j3chess.J3ChessApp;
+import j3chess.J3ChessView;
 import j3chess.Move;
 import j3chess.components.Paintable;
 import j3chess.components.Position;
@@ -8,6 +9,7 @@ import j3chess.components.ValidMovement;
 import j3chess.utility.Vector2d;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
@@ -80,26 +82,27 @@ public class PaintSystem extends EntityProcessingSystem {
                     mDrawPanelSize.x, mDrawPanelSize.y);
         }
 
-        J3ChessApp
-                .getInstance()
-                .getDrawGraphics()
-                .drawImage(
+        final Graphics2D graphics = J3ChessApp.getInstance()
+                .getDrawGraphics();
+        graphics.drawImage(
                         paintable.getImage(),
-                        Math.round(drawPosition.x + paintable.getDrawOffset().x),
-                        Math.round(drawPosition.y + paintable.getDrawOffset().y),
+                        Math.round(drawPosition.x + paintable.getDrawOffset().x
+                        		+ mDrawOffset.x),
+                        Math.round(drawPosition.y + paintable.getDrawOffset().y
+                        		+ mDrawOffset.y),
                         null);
 
         if (J3ChessApp.getInstance().getGame().getSelectedPiece() == entity) {
-            final Graphics2D graphics = J3ChessApp.getInstance()
-                    .getDrawGraphics();
 
             // Draw selection ring
             graphics.drawImage(
                     SELECTION_OVERLAY.getImage(),
-                    Math.round(drawPosition.x
-                            - SELECTION_OVERLAY.getIconWidth() / 2.0f),
+                    Math.round(Math.round(drawPosition.x
+                            - SELECTION_OVERLAY.getIconWidth() / 2.0f
+                            + mDrawOffset.x)),
                     Math.round(drawPosition.y
-                            - SELECTION_OVERLAY.getIconHeight() / 2.0f), null);
+                            - SELECTION_OVERLAY.getIconHeight() / 2.0f
+                            + mDrawOffset.y), null);
 
             // Draw valid moves
             final ValidMovement moves = (ValidMovement) entity
@@ -110,8 +113,10 @@ public class PaintSystem extends EntityProcessingSystem {
                         .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
                 graphics.drawImage(
                         MOVE_OVERLAY.getImage(),
-                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f),
-                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f), null);
+                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
+                        		+ mDrawOffset.x),
+                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
+                        		+ mDrawOffset.y), null);
             }
 
             for (final Move move : moves.getValidCaptureMoves()) {
@@ -119,15 +124,21 @@ public class PaintSystem extends EntityProcessingSystem {
                         .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
                 graphics.drawImage(
                         CAPTURE_OVERLAY.getImage(),
-                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f),
-                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f), null);
+                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
+                        		+ mDrawOffset.x),
+                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
+                        		+ mDrawOffset.y), null);
             }
 
         }
     }
 
     /** @brief size of the draw panel */
-    private final Point mDrawPanelSize = new Point(668, 668);
+    private final Point mDrawPanelSize = new Point(J3ChessView.CHESSBOARDWIDTH,
+    		J3ChessView.CHESSBOARDHEIGHT);
+    
+    private final Vector2d mDrawOffset = new Vector2d((J3ChessView.DRAWPANELWIDTH - mDrawPanelSize.x) / 2.0f,
+    		(J3ChessView.DRAWPANELHEIGHT - mDrawPanelSize.x) / 2.0f);
 
     /**
      * @brief setter for the mDrawPanelSize member
