@@ -1,0 +1,2 @@
+Diese Programm wurde entwickelt von: Tim Benedickt Jagla, David Kuri und Kai Friedrich.
+Es entstand im Rahmen der Vorlesung Clean Code Development WS13/14 von Prof. Ortmeier an der Otto-von-Guericke-Universität Magdeburg.

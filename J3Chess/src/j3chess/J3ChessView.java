@@ -9,11 +9,16 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -119,23 +124,56 @@ public class J3ChessView extends FrameView {
 
 
     /**
+     * @brief reads the Abouttext from the About Textfile
+     * @return the Abouttext
+     */
+    private String getAboutFromTextFile() {
+        String returnValue = "";
+        try {
+            FileReader filereader = new FileReader("about.txt");
+            BufferedReader br = new BufferedReader(filereader);
+            String zeile = "";
+            while ((zeile = br.readLine()) != null) {
+                System.out.println(zeile);
+                returnValue += zeile + "\n";
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            returnValue = "Aboutfile not found";
+        } catch (IOException e) {
+            returnValue = "Aboutfile not readable";
+        }
+        return returnValue;
+    }
+
+    /**
+     * @brief creates the About Message
+     */
+    private void createAboutMessage() {
+        JOptionPane.showMessageDialog(null, getAboutFromTextFile(), "About", JOptionPane.DEFAULT_OPTION);
+    }
+
+    /**
      * @Brief creates the MenuBar
      */
     private void createMenuBar() {
-
-        JMenuItem newGame;
-        newGame = new JMenuItem("New game");
-        newGame.setMnemonic(KeyEvent.VK_N);
-        newGame.addActionListener(new ActionListener() {
+        JMenuItem about;
+        about = new JMenuItem("about");
+        about.setMnemonic(KeyEvent.VK_A);
+        about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
+                ActionEvent.CTRL_MASK));
+        about.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                ((J3ChessApp) getApplication()).startNewGame();
+                createAboutMessage();
             }
         });
 
         JMenuItem newGameDialog;
-        newGameDialog = new JMenuItem("New gamedialog");
-        newGameDialog.setMnemonic(KeyEvent.VK_G);
+        newGameDialog = new JMenuItem("new game");
+        newGameDialog.setMnemonic(KeyEvent.VK_N);
+        newGameDialog.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+                ActionEvent.CTRL_MASK));
         newGameDialog.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -145,8 +183,8 @@ public class J3ChessView extends FrameView {
 
         // Exit Button
         JMenuItem  mExit;
-        mExit = new JMenuItem("Exit");
-        mExit.setMnemonic(KeyEvent.VK_C);
+        mExit = new JMenuItem("exit");
+        mExit.setMnemonic(KeyEvent.VK_E);
         mExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
                 ActionEvent.CTRL_MASK)); // ctrl+q close the program
         mExit.addActionListener(new ActionListener() {
@@ -156,27 +194,27 @@ public class J3ChessView extends FrameView {
             }
         });
 
-        // menuTwo menu
-        JMenu menuTwo;
-        menuTwo = new JMenu("Menu Two");
-        menuTwo.setMnemonic(KeyEvent.VK_M);
+        // ? menu
+        JMenu menuQuestionMark;
+        menuQuestionMark = new JMenu("?");
+        menuQuestionMark.add(about);
 
         // game menu
         JMenu game;
-        game = new JMenu("Game");
+        game = new JMenu("game");
         game.setMnemonic(KeyEvent.VK_G);
 
         //build menu
-        menuTwo.add(mExit);
-        game.add(newGame);
         game.add(newGameDialog);
+        game.add(mExit);
         mMenuBar.add(game);
-        mMenuBar.add(menuTwo);
+        mMenuBar.add(menuQuestionMark);
     }
 
     /**
      * @brief adds a move at the end of the NotationPanel.
      * @param move the move to add
+     * @param game the game
      */
     public final void addMove(final String move, final Game game) {
         mNotationPanel.addMove(move, game);
@@ -199,6 +237,7 @@ public class J3ChessView extends FrameView {
 
     /**
      * @brief Sets the current player to be displayed.
+     * @param game the game
      */
     public final void refreshCurrentPlayer(Game game) {
         mNotationPanel.refreshCurrentPlayer(game);
