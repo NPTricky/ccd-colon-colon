@@ -28,7 +28,7 @@
                 <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
               </TYPE>
             </ATTRIBUTE-DEFINITION-STRING>
-            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_JAyKQFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:07:50.850+01:00" LONG-NAME="Method">
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_JAyKQFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:07:50.850+01:00" LONG-NAME="Method" IS-EDITABLE="true">
               <TYPE>
                 <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
               </TYPE>
@@ -48,6 +48,11 @@
               </TYPE>
             </ATTRIBUTE-DEFINITION-STRING>
             <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_JAyKQFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:07:50.850+01:00" LONG-NAME="Class">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_wfMfkIXzEeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:06:08.493+01:00" LONG-NAME="Method">
               <TYPE>
                 <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
               </TYPE>
@@ -90,6 +95,11 @@
                 <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
               </TYPE>
             </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_yitPcIXzEeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:06:23.053+01:00" LONG-NAME="Method">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
           </SPEC-ATTRIBUTES>
         </SPEC-OBJECT-TYPE>
         <SPECIFICATION-TYPE IDENTIFIER="_Pp2GwFtMEeOnY_ayMMOUww" LAST-CHANGE="2013-12-02T13:21:17.704+01:00" LONG-NAME="Specification Type">
@@ -99,11 +109,16 @@
                 <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
               </TYPE>
             </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_VNHOcIXzEeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:03:00.353+01:00" LONG-NAME="Method" IS-EDITABLE="false">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>_Pp1fsFtMEeOnY_ayMMOUww</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
           </SPEC-ATTRIBUTES>
         </SPECIFICATION-TYPE>
       </SPEC-TYPES>
       <SPEC-OBJECTS>
-        <SPEC-OBJECT IDENTIFIER="_Pp2GwltMEeOnY_ayMMOUww" LAST-CHANGE="2013-12-02T15:25:23.231+01:00">
+        <SPEC-OBJECT IDENTIFIER="_Pp2GwltMEeOnY_ayMMOUww" LAST-CHANGE="2014-01-25T20:20:57.624+01:00">
           <VALUES>
             <ATTRIBUTE-VALUE-STRING THE-VALUE="Display the chessboard and all the pieces on their current fields.">
               <DEFINITION>
@@ -115,12 +130,17 @@
                 <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="(multiple)">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_yitPcIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
           </VALUES>
           <TYPE>
             <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
           </TYPE>
         </SPEC-OBJECT>
-        <SPEC-OBJECT IDENTIFIER="_4fVUsFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:22:31.051+01:00">
+        <SPEC-OBJECT IDENTIFIER="_4fVUsFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2014-01-25T20:20:58.714+01:00">
           <VALUES>
             <ATTRIBUTE-VALUE-STRING THE-VALUE="Make a piece the current selection by clicking on it while its the piece's player's turn. ">
               <DEFINITION>
@@ -132,12 +152,17 @@
                 <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="(multiple)">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_yitPcIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
           </VALUES>
           <TYPE>
             <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
           </TYPE>
         </SPEC-OBJECT>
-        <SPEC-OBJECT IDENTIFIER="_95a-0FtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:13:47.845+01:00">
+        <SPEC-OBJECT IDENTIFIER="_95a-0FtbEeOfc8r7KZBEEQ" LAST-CHANGE="2014-01-25T20:43:04.596+01:00">
           <VALUES>
             <ATTRIBUTE-VALUE-STRING THE-VALUE="Display the currently selected piece's possible moves.">
               <DEFINITION>
@@ -147,6 +172,11 @@
             <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-03">
               <DEFINITION>
                 <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="(multiple)">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_yitPcIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
           </VALUES>
@@ -166,6 +196,11 @@
                 <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="(multiple)">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_yitPcIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
           </VALUES>
           <TYPE>
             <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
@@ -181,6 +216,11 @@
             <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-05">
               <DEFINITION>
                 <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="(multiple)">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_yitPcIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
           </VALUES>
@@ -200,12 +240,397 @@
                 <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="(multiple)">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_yitPcIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
           </VALUES>
           <TYPE>
             <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
           </TYPE>
         </SPEC-OBJECT>
         <SPEC-OBJECT IDENTIFIER="_F_DzwFtdEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:21:52.340+01:00">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_97UGcYXzEeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:07:39.389+01:00"/>
+        <SPEC-OBJECT IDENTIFIER="__J1vEIXzEeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:42:49.816+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Initialize a window and a panel to draw on.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-01-03">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="DrawPanel.DrawPanel">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_Mi7QEIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:42:52.986+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Draw the pieces onto the chessboard.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-01-05">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="PaintSystem.process">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_XSDFMIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:42:44.876+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Create a logical representation of the chessboard.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Chessboard.Chessboard">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-01-01">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_db0f0IX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:42:47.936+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Create a logical representation of the pieces.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="PieceFactory.create">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-01-02">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_n1ZiwIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:12:20.420+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Draw the chessboard itself.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="PaintSystem.process">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-01-04">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_uGIhAIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:42:57.136+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Capture the player's click and translate to field on chessboard.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-02-01">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="DrawPanel.mouseButtonPressed">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_zyoJwIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:14:44.511+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="React to the player's click, depending on where he clicked.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="HumanPlayerControler.notifyFieldPressed">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-02-02">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_-UT_0IX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:15:36.711+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Select the clicked entity if it belongs to the current player.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Game.selectPiece">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-02-03">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_FDLrkIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:17:22.642+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Draw an overlay onto the selected piece.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="SelectedSystem.process">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_JAyKQFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-02-04">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_WitdgIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:18:32.563+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Calculate the possibly moves.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="ValidMovement.getValidMoves">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-03-02">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_f5b8UIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:43:11.776+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Define the logic for each piece.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="MotionPattern.MotionPattern">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-03-01">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_n9GQwIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:19:30.394+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Draw the calculated moves onto the chessboard.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="SelectedSystem.process">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-03-03">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_sZAbYIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:21:08.204+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Execute the move and switch to the next player.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Game.doMove">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-04-01">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_2sF0wIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:21:11.224+01:00">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_6AMp0IX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:44:01.998+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Deactivate and hide the captured figure.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Move.execute">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-05-01">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_8ALkkIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:44:09.748+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Add the move to the log table.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="J3ChessView.addMove">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-04-02">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_C7jbQIX2EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:43:40.886+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Deactivate the player.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-06-01">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_Ebye8IX2EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:43:39.366+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="When only one player remains, display a winning message.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_Pp1fsltMEeOnY_ayMMOUww</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_wfMfkIXzEeOWMfXqYOEMuw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="RQ-06-02">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_HGJCgFtbEeOfc8r7KZBEEQ</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
           <TYPE>
             <SPEC-OBJECT-TYPE-REF>_Pp1fsVtMEeOnY_ayMMOUww</SPEC-OBJECT-TYPE-REF>
           </TYPE>
@@ -228,31 +653,130 @@
               <OBJECT>
                 <SPEC-OBJECT-REF>_Pp2GwltMEeOnY_ayMMOUww</SPEC-OBJECT-REF>
               </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="_XS6A0IX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:10:34.919+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_XSDFMIX0EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_dcZHkIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:11:18.119+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_db0f0IX0EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="__KkH0IXzEeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:07:46.640+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>__J1vEIXzEeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_n2ERIIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:12:25.910+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_n1ZiwIX0EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <CHILDREN/>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_Mjl-cIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:09:17.079+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_Mi7QEIX0EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
             </SPEC-HIERARCHY>
             <SPEC-HIERARCHY IDENTIFIER="_4gADEFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:13:06.205+01:00">
               <OBJECT>
                 <SPEC-OBJECT-REF>_4fVUsFtbEeOfc8r7KZBEEQ</SPEC-OBJECT-REF>
               </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="_uG5WAIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:13:02.090+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_uGIhAIX0EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_zzS4IIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:13:40.730+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_zyoJwIX0EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_-U-uMIX0EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:14:53.271+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_-UT_0IX0EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_FDwTUIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:15:37.801+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_FDLrkIX1EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
             </SPEC-HIERARCHY>
             <SPEC-HIERARCHY IDENTIFIER="_96R6cFtbEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:13:47.845+01:00">
               <OBJECT>
                 <SPEC-OBJECT-REF>_95a-0FtbEeOfc8r7KZBEEQ</SPEC-OBJECT-REF>
               </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="_f6S38IX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:18:49.633+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_f5b8UIX1EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_WjeSgIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:18:51.373+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_WitdgIX1EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_n9w_IIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:19:30.394+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_n9GQwIX1EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
             </SPEC-HIERARCHY>
             <SPEC-HIERARCHY IDENTIFIER="_CMjn8FtcEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:14:15.655+01:00">
               <OBJECT>
                 <SPEC-OBJECT-REF>_CLssUFtcEeOfc8r7KZBEEQ</SPEC-OBJECT-REF>
               </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="_sZrJwIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:19:54.734+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_sZAbYIX1EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <CHILDREN/>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_8A2S8IX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:22:24.046+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_8ALkkIX1EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
             </SPEC-HIERARCHY>
             <SPEC-HIERARCHY IDENTIFIER="_Ht_QMFtcEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:14:54.125+01:00">
               <OBJECT>
                 <SPEC-OBJECT-REF>_HtIUkFtcEeOfc8r7KZBEEQ</SPEC-OBJECT-REF>
               </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="_6A3YMIX1EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:21:28.785+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_6AMp0IX1EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
             </SPEC-HIERARCHY>
             <SPEC-HIERARCHY IDENTIFIER="_XoHxoFtcEeOfc8r7KZBEEQ" LAST-CHANGE="2013-12-02T15:16:41.101+01:00">
               <OBJECT>
                 <SPEC-OBJECT-REF>_XnWVkFtcEeOfc8r7KZBEEQ</SPEC-OBJECT-REF>
               </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="_C8aW4IX2EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:22:32.116+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_C7jbQIX2EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="_EcjT8IX2EeOWMfXqYOEMuw" LAST-CHANGE="2014-01-25T20:22:43.557+01:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_Ebye8IX2EeOWMfXqYOEMuw</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
             </SPEC-HIERARCHY>
           </CHILDREN>
         </SPECIFICATION>
@@ -265,8 +789,9 @@
         <configuration:specViewConfigurations>
           <configuration:ProrSpecViewConfiguration specification="_Pp2Gw1tMEeOnY_ayMMOUww">
             <configuration:columns>
-              <configuration:Column label="Description" width="477"/>
-              <configuration:Column label="ID" width="100"/>
+              <configuration:Column label="Description" width="400"/>
+              <configuration:Column label="ID" width="65"/>
+              <configuration:Column label="Method" width="186"/>
             </configuration:columns>
             <configuration:leftHeaderColumn>
               <configuration:Column label="Lead Header Column" width="30"/>
@@ -282,6 +807,9 @@
             </configuration:labelConfiguration>
           </configuration:ProrGeneralConfiguration>
         </configuration:generalConfiguration>
+        <configuration:presentationConfigurations>
+          <configuration:ProrPresentationConfigurations/>
+        </configuration:presentationConfigurations>
       </configuration:ProrToolExtension>
     </REQ-IF-TOOL-EXTENSION>
   </TOOL-EXTENSIONS>
