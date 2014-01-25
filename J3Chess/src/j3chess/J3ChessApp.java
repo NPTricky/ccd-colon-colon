@@ -14,8 +14,10 @@ package j3chess;
  * The rules are very similar to the commonly known chess rules. Most
  * the pieces move as in standard chess.
  *
- * The pawn can always move one or two fields at will. It also captures
+ * The Pawn can always move one or two fields at will. It also captures
  * other pieces straight which is different from basic chess.
+ *
+ * The Knight can only teleport exactly three fields in a straight line.
  *
  * Your figures can move across the center field. The center is not a field
  * itself and can't be occupied by a piece. When moving diagonally across
