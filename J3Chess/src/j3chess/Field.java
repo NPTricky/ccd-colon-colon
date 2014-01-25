@@ -1,11 +1,8 @@
 package j3chess;
 
-import j3chess.components.PieceContext;
 import j3chess.utility.Vector2d;
 
 import java.util.EnumMap;
-
-import org.apache.logging.log4j.Level;
 
 import artemis.Entity;
 
@@ -27,9 +24,11 @@ public class Field {
     /** @brief column of the field*/
     private int mColumn;
     /** @brief Name of the columns*/
-    private static final char[] COLUMNNAMES = {'a', 'b', 'c', 'd', 'e', 'f', 'g',
-        'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-        's', 't', 'u', 'v', 'w', 'x', };
+    private static final char[] COLUMNNAMES = {
+        'a', 'b', 'c', 'd', 'e', 'f', 'g',
+        'h', 'i', 'j', 'k', 'l', 'm', 'n',
+        'o', 'p', 'q', 'r', 's', 't', 'u',
+        'v', 'w', 'x', };
 
     /** @brief the piece on this field, may be null */
     private Entity mPiece;
@@ -67,25 +66,14 @@ public class Field {
     }
 
     /**
-     * @brief Tells you wether a move in direction fieldDirection crosses the center.
+     * @brief Tells you whether a move in direction fieldDirection
+     *        crosses the center.
      * @param fieldDirection Direction in which the move goes
      * @return True if crossing center, false otherwise
      */
-    public final boolean getWhetherCrossingCenter(final FieldDirection fieldDirection) {
-        /**
-        // Get neighboring field
-        Field next = getNeighbor(fieldDirection);
-
-        // We have a neighbor, right?
-        if (next == null) {
-            J3ChessApp.getLogger().error("Field has no neighbor in the specified direction");
-            return false;
-        }
-        // Check manhattan distance, if > 2 we are crossing the center
-        return (Math.abs(next.mCircle - mCircle) + Math.abs(next.mColumn - mColumn) > 2);
-         */
-
-        if (mColumn == Chessboard.NUMBEROFCOLUMNS - 1) {
+    public final boolean getWhetherCrossingCenter(
+            final FieldDirection fieldDirection) {
+        if (mCircle == Chessboard.NUMBEROFCIRCLES - 1) {
             if (fieldDirection == FieldDirection.In
                     || fieldDirection == FieldDirection.InClockwise
                     || fieldDirection == FieldDirection.InCounterClockwise) {
@@ -143,7 +131,8 @@ public class Field {
 
     /**
      * @brief Gets the position where the field (i.e. its piece) will be drawn.
-     * @return Cartesian 2-dimensional vector [-1,1] specifying the draw position
+     * @return Cartesian 2-dimensional vector [-1,1] specifying the draw
+     *         position
      */
     public final Vector2d getDrawPosition() {
         return mDrawPos;

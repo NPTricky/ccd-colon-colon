@@ -70,7 +70,7 @@ public class Move {
         }
         mTargetPiece = mTargetField.getPiece();
 
-        //generateDescription();
+        generateDescription();
     }
 
     /**
@@ -104,6 +104,7 @@ public class Move {
         case Disambiguating:
             this.mDescription = movingPiece + mStartField.toString() + " "
                               + movingPiece + mTargetField.toString();
+            break;
         case KingsideCastling:
             this.mDescription = "0-0";
             break;
@@ -113,12 +114,15 @@ public class Move {
         case QueensideCastling:
             this.mDescription = "0-0-0";
             break;
-        case Check: // win conditions
-        case Checkmate: // win conditions
         default:
             this.mDescription = "";
             break;
         }
+
+    //case Check: // win conditions
+    //    this.mDescription = this.mDescription + "+";
+    //case Checkmate: // win conditions
+    //    this.mDescription = this.mDescription + "#";
 
     }
 
@@ -155,8 +159,8 @@ public class Move {
      */
     @Override
     public final String toString() {
-        //return mDescription;
-        return mStartField.toString() + " " + mTargetField.toString();
+        return mDescription;
+        //return mStartField.toString() + " " + mTargetField.toString();
     }
 
     /**
