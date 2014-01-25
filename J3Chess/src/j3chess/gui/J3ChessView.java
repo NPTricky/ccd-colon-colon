@@ -241,11 +241,9 @@ public class J3ChessView extends FrameView {
 
     /**
      * @brief Sets the current player to be displayed.
-     * @param game
-     *            the game
      */
-    public final void refreshCurrentPlayer(final Game game) {
-        mNotationPanel.refreshCurrentPlayer(game);
+    public final void refreshCurrentPlayer() {
+        mNotationPanel.refreshCurrentPlayer();
     }
 
     /**

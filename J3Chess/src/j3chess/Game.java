@@ -56,7 +56,9 @@ public class Game {
      *            J3ChessView for the Game to use
      */
     public Game(final J3ChessView view) {
+        mMoveHistory = new ArrayList<Move>();
         mView = view;
+        mView.reset();
         mEntitySystem = new EntitySystem();
 
         // systems...
@@ -72,7 +74,6 @@ public class Game {
         initializePieces();
         initializePlayers(EnumSet.allOf(Player.class));
 
-        mMoveHistory = new ArrayList<Move>();
     }
 
     /**
@@ -183,7 +184,7 @@ public class Game {
         // Clear selection
         clearSelection();
 
-        mView.refreshCurrentPlayer(this);
+        mView.refreshCurrentPlayer();
     }
 
     /**

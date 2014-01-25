@@ -22,12 +22,8 @@ import javax.swing.table.DefaultTableModel;
 public class NotationPanel extends JPanel {
 
     private static final int LEFT = 0;
-    private static final int MIDDLE = 1;
-    private static final int RIGHT = 2;
 
     private static final Insets INSETS = new Insets(3, 3, 3, 3);
-
-    int mCurrentPlayer = 0;
 
     /**
      * @brief notationTable to show all moves
@@ -83,15 +79,15 @@ public class NotationPanel extends JPanel {
 
     /**
      * @brief adds a move at the end of the NotationPanel.
-     * @param move
-     *            the move to add
+     * @param move the move to add
+     * @param game the game
      */
     public final void addMove(final String move, final Game game) {
-        final DefaultTableModel tableModel = (DefaultTableModel) mNotationTable
-                .getModel();
+        final DefaultTableModel tableModel = (DefaultTableModel) mNotationTable.getModel();
         final int moveCounter = game.getMoveCounter();
+
         if (moveCounter % J3ChessApp.NUMBEROFPLAYERS == 0) {
-            tableModel.addRow(new Object[] { move });
+            tableModel.addRow(new Object[] {move });
         } else {
             tableModel.setValueAt(move, moveCounter
                     / J3ChessApp.NUMBEROFPLAYERS, moveCounter
@@ -102,8 +98,7 @@ public class NotationPanel extends JPanel {
     /**
      * @brief Sets the current player to be displayed.
      */
-    public final void refreshCurrentPlayer(final Game game) {
-        mCurrentPlayer = game.getCurrentPlayerID();
+    public final void refreshCurrentPlayer() {
         mNotationTable.getTableHeader().repaint();
     }
 
@@ -114,6 +109,12 @@ public class NotationPanel extends JPanel {
         final DefaultTableModel tableModel = (DefaultTableModel) mNotationTable
                 .getModel();
         tableModel.setColumnCount(0);
+
+        //delete all tableRows
+        while (tableModel.getRowCount() > 0) {
+            tableModel.removeRow(0);
+        }
+
         final EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
         tableModel.setColumnIdentifiers(mPlayers.toArray());
         repaint();
