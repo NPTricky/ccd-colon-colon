@@ -90,7 +90,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 continue;
             }
 
-            J3ChessApp.getLogger().error("Recursing with "+mCurrentEntityType+mCurrentEntityID+": nextField ["+mCurrentStartField.toString()+"] currentPieceDirection [START] currentFieldDirection [START] nextMotionIndex [0] nextStep [0] nextCrossedCenter ["+movement.getCrossedCenter()+"]");
             // retrieve valid moves from the motion pattern recursively
             recurseMotionPattern(
                     mCurrentStartField,
@@ -143,6 +142,21 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             final int currentStep,
             final boolean currentCrossedCenter) {
 
+        // write the valid movement lists after a complete recursion
+        if (currentMotionIndex == -1 || currentStep == -1) {
+            J3ChessApp.getLogger().error("Reached last step and last motion");
+            mCurrentValidMovement
+                .setValidNonCaptureMoves(mCurrentValidNonCaptureMoves);
+            mCurrentValidMovement
+                .setValidCaptureMoves(mCurrentValidCaptureMoves);
+            return;
+        }
+
+        if(lastPieceDirection == null) {
+            J3ChessApp.getLogger().error("Recurse: currentField ["+currentField.toString()+"] lastPieceDirection [null] currentMotionIndex ["+currentMotionIndex+"] currentStep ["+currentStep+"]  currentCrossedCenter ["+currentCrossedCenter+"]");
+        } else {
+            J3ChessApp.getLogger().error("Recurse: currentField ["+currentField.toString()+"] lastPieceDirection ["+lastPieceDirection.toString()+"] currentMotionIndex ["+currentMotionIndex+"] currentStep ["+currentStep+"]  currentCrossedCenter ["+currentCrossedCenter+"]");
+        }
         ////////////////
         // Basic Data //
         ////////////////
@@ -189,6 +203,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     currentMotionIndex,
                     lastPieceDirection);
 
+        J3ChessApp.getLogger().error("possibleDirections: "+possibleDirections.toString());
+
         // recurse into every possible direction
         for (final PieceDirection currentPieceDirection : possibleDirections) {
 
@@ -196,6 +212,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     Helper.Direction.toFieldDirection(
                             currentPieceDirection,
                             currentCrossedCenter);
+
+            J3ChessApp.getLogger().error("currentFieldDirection: "+currentFieldDirection.toString());
 
             final Field nextField =
                     currentField.getNeighbor(currentFieldDirection);
@@ -214,7 +232,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             // XOR used to toggle the current crossed center status
             final boolean nextCrossedCenter =
                     currentCrossedCenter ^ isCrossingCenter;
-            J3ChessApp.getLogger().error("isCrossingCenter ["+isCrossingCenter+"] nextCrossedCenter ["+nextCrossedCenter+"]");
+
 /* ------------------------------------------------------------------------- */
 
             // does not apply to anything but the last step of a jump as well as
@@ -233,10 +251,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                             isCrossingCenter);
                         mCurrentValidCaptureMoves
                             .add(nextCaptureMove);
-                        J3ChessApp.getLogger().error("Capturing...");
+                        J3ChessApp.getLogger().error("capturing...");
                     }
                     // this motion direction is blocked
-                    J3ChessApp.getLogger().error("Skip because of blocking piece or capture (if Capturing...)");
+                    J3ChessApp.getLogger().error("Skip because of blocking piece or capture (if capturing...)");
                     continue; // skip this loop iteration
                 } else {
                     // there is nothing on the next field, thus it is a valid
@@ -266,18 +284,11 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     // next motion and first step
                     nextMotionIndex = currentMotionIndex + 1;
                     nextStep = 0; // first step of new motion
-                } else {
-                    // if it is the last step of this motion and the last motion
-                    // of it's motion pattern then
-                    // (nextMotionIndex = -1 && nextStep = -1)
-                    J3ChessApp.getLogger().error("Skip because of last step and last motion");
-                    continue; // skip this loop iteration
                 }
             }
 
 /* ------------------------------------------------------------------------- */
 
-            J3ChessApp.getLogger().error("Recursing with "+mCurrentEntityType+mCurrentEntityID+": nextField ["+nextField.toString()+"] currentPieceDirection ["+currentPieceDirection.toString()+"] currentFieldDirection ["+currentFieldDirection.toString()+"] nextMotionIndex ["+nextMotionIndex+"] nextStep ["+nextStep+"]  nextCrossedCenter ["+nextCrossedCenter+"]");
             // processing of the whole motion list is not done yet
             recurseMotionPattern(
                     nextField,
@@ -287,12 +298,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     nextStep,
                     nextCrossedCenter);
         }
-
-        // write the valid movement lists after a complete recursion
-        mCurrentValidMovement
-            .setValidNonCaptureMoves(mCurrentValidNonCaptureMoves);
-        mCurrentValidMovement
-            .setValidCaptureMoves(mCurrentValidCaptureMoves);
     }
 
 /* ------------------------------------------------------------------------- */
