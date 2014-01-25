@@ -98,28 +98,28 @@ public final class Helper {
             if (crossedCenter) {
                 switch (pieceDirection) {
                 case Right:
-                    result = FieldDirection.CounterClockwise;
+                    result = FieldDirection.Clockwise;
                     break;
                 case Forward:
                     result = FieldDirection.Out;
                     break;
                 case ForwardRight:
-                    result = FieldDirection.OutCounterClockwise;
-                    break;
-                case ForwardLeft:
                     result = FieldDirection.OutClockwise;
                     break;
+                case ForwardLeft:
+                    result = FieldDirection.OutCounterClockwise;
+                    break;
                 case Left:
-                    result = FieldDirection.Clockwise;
+                    result = FieldDirection.CounterClockwise;
                     break;
                 case Backward:
                     result = FieldDirection.In;
                     break;
                 case BackwardLeft:
-                    result = FieldDirection.InClockwise;
+                    result = FieldDirection.InCounterClockwise;
                     break;
                 case BackwardRight:
-                    result = FieldDirection.InCounterClockwise;
+                    result = FieldDirection.InClockwise;
                     break;
                 default:
                     J3ChessApp.getLogger().error(
@@ -131,28 +131,28 @@ public final class Helper {
             } else { // !crossedCenter
                 switch (pieceDirection) {
                 case Right:
-                    result = FieldDirection.Clockwise;
+                    result = FieldDirection.CounterClockwise;
                     break;
                 case Forward:
                     result = FieldDirection.In;
                     break;
                 case ForwardRight:
-                    result = FieldDirection.InClockwise;
-                    break;
-                case ForwardLeft:
                     result = FieldDirection.InCounterClockwise;
                     break;
+                case ForwardLeft:
+                    result = FieldDirection.InClockwise;
+                    break;
                 case Left:
-                    result = FieldDirection.CounterClockwise;
+                    result = FieldDirection.Clockwise;
                     break;
                 case Backward:
                     result = FieldDirection.Out;
                     break;
                 case BackwardLeft:
-                    result = FieldDirection.OutCounterClockwise;
+                    result = FieldDirection.OutClockwise;
                     break;
                 case BackwardRight:
-                    result = FieldDirection.OutClockwise;
+                    result = FieldDirection.OutCounterClockwise;
                     break;
                 default:
                     J3ChessApp.getLogger().error(
