@@ -9,6 +9,7 @@ import j3chess.FieldDirection;
 import j3chess.PieceDirection;
 import j3chess.utility.Helper;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -22,7 +23,7 @@ public class HelperDirectionTest {
      * @Brief checks if the direction groups contains the right PieceDirections
      */
     @Test
-    public static void directionFromGroupTest() {
+    public void directionFromGroupTest() {
         EnumSet<PieceDirection> testdirection;
 
         //checking every direction
@@ -69,7 +70,7 @@ public class HelperDirectionTest {
      * @Brief checks if the PieceDirections are right converted to the FieldDirections
      */
     @Test
-    public static void toFieldDirectionTest() {
+    public void toFieldDirectionTest() {
         Boolean crossedCenter = false;
 
         assertEquals(Helper.Direction.toFieldDirection(
