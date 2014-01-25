@@ -252,10 +252,11 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                         mCurrentValidCaptureMoves
                             .add(nextCaptureMove);
                         J3ChessApp.getLogger().error("capturing...");
+                    } else {
+                        // this motion direction is blocked
+                        J3ChessApp.getLogger().error("Skip because of blocking piece or capture (if capturing...)");
+                        continue; // skip this loop iteration
                     }
-                    // this motion direction is blocked
-                    J3ChessApp.getLogger().error("Skip because of blocking piece or capture (if capturing...)");
-                    continue; // skip this loop iteration
                 } else {
                     // there is nothing on the next field, thus it is a valid
                     // move

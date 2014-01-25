@@ -49,7 +49,6 @@ public class Game {
     public Game(final J3ChessView view) {
         mView = view;
         mEntitySystem = new EntitySystem();
-        mEntitySystem.initialize();
         mChessboard = new Chessboard(mEntitySystem);
         mPieceFactory = new PieceFactory(mEntitySystem);
         mCurrentPlayerIndex = 0;
