@@ -92,7 +92,8 @@ public class Move {
         // move type
         switch (mMoveType) {
         case Capture:
-            this.mDescription = movingPiece + mStartField.toString() +"x" + mTargetField.toString();
+            this.mDescription = movingPiece + mStartField.toString() + "x"
+                              + mTargetField.toString();
             break;
         case CaptureEnPassant:
             this.mDescription = mStartField.toFile() + ":"

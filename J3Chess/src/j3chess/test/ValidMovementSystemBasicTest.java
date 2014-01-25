@@ -40,6 +40,8 @@ public class ValidMovementSystemBasicTest {
         create(PieceType.Rook, Player.ONE, new Field(0, 0));
         mEntitySystem.process(20);
         ValidMovement valid = mEntitySystem.getWorld().getEntity(0).getComponent(ValidMovement.class);
+        assertEquals("Single Piece should not capture anything.", 0, valid.getValidCaptureMoves().size());
+        mEntitySystem.reset();
     }
 
     @Test
@@ -56,7 +58,7 @@ public class ValidMovementSystemBasicTest {
         }
 
         mEntitySystem.process(20);
-        ValidMovement valid = mEntitySystem.getWorld().getEntity(0).getComponent(ValidMovement.class);
+        mEntitySystem.reset();
     }
 
     private void create(PieceType type, Player player, Field field) {

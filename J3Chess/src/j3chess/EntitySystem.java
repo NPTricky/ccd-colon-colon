@@ -1,8 +1,5 @@
 package j3chess;
 
-import j3chess.systems.PaintSystem;
-import j3chess.systems.SelectedSystem;
-import j3chess.systems.ValidMovementSystem;
 import artemis.ComponentManager;
 import artemis.EntityManager;
 import artemis.World;
@@ -23,12 +20,8 @@ public class EntitySystem {
     public EntitySystem() {
         J3ChessApp.getLogger().trace(
                 "Initializing " + EntitySystem.class.getName() + "...");
-        this.mWorld = new World();
 
-        // managers...
-        this.mWorld.setManager(new GroupManager());
-        this.mWorld.setManager(new PlayerManager());
-
+        reset();
         initialize();
     }
 
@@ -39,6 +32,16 @@ public class EntitySystem {
         mWorld.initialize();
     }
 
+    /**
+     * @brief Resets the world behind the entity system.
+     */
+    public final void reset() {
+        this.mWorld = new World();
+
+        // managers...
+        this.mWorld.setManager(new GroupManager());
+        this.mWorld.setManager(new PlayerManager());
+    }
     /**
      * @brief getter for the entity systems world.
      * @return the world

@@ -8,7 +8,6 @@ import j3chess.MotionPattern;
 import j3chess.Move;
 import j3chess.MoveType;
 import j3chess.PieceDirection;
-import j3chess.PieceType;
 import j3chess.Player;
 import j3chess.components.Movement;
 import j3chess.components.PieceContext;
@@ -74,12 +73,11 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         final Position position = mPositionMapper.get(entity);
         mCurrentStartField = position.getField();
         mCurrentValidMovement = mValidMovementMapper.get(entity);
+        //mCurrentValidMovement.setValidCaptureMoves(new ArrayList<Move>());
+        //mCurrentValidMovement.setValidNonCaptureMoves(new ArrayList<Move>());
         mCurrentValidNonCaptureMoves = new ArrayList<Move>();
         mCurrentValidCaptureMoves = new ArrayList<Move>();
         mCurrentPlayer = requestPlayer(position.getField());
-        mCurrentEntityID = entity.getId();
-        mCurrentEntityType = mPieceContextMapper.get(entity).getPieceType();
-        J3ChessApp.getLogger().error("------------------- Processing next Entity "+mCurrentEntityType+mCurrentEntityID+" by "+mCurrentPlayer.toString()+" in ValidMovementSystem ------------------");
 
         // for each motion pattern do...
         for (final MotionPattern pattern : movement.getPatterns()) {
@@ -114,8 +112,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
 
     private List<Move> mCurrentValidNonCaptureMoves;
     private List<Move> mCurrentValidCaptureMoves;
-    private int mCurrentEntityID;
-    private PieceType mCurrentEntityType;
 /* ------------------------------------------------------------------------- */
 /* Recursion                                                                 */
 /* ------------------------------------------------------------------------- */
@@ -142,21 +138,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             final int currentStep,
             final boolean currentCrossedCenter) {
 
-        // write the valid movement lists after a complete recursion
-        if (currentMotionIndex == -1 || currentStep == -1) {
-            J3ChessApp.getLogger().error("Reached last step and last motion");
-            mCurrentValidMovement
-                .setValidNonCaptureMoves(mCurrentValidNonCaptureMoves);
-            mCurrentValidMovement
-                .setValidCaptureMoves(mCurrentValidCaptureMoves);
-            return;
-        }
-
-        if(lastPieceDirection == null) {
-            J3ChessApp.getLogger().error("Recurse: currentField ["+currentField.toString()+"] lastPieceDirection [null] currentMotionIndex ["+currentMotionIndex+"] currentStep ["+currentStep+"]  currentCrossedCenter ["+currentCrossedCenter+"]");
-        } else {
-            J3ChessApp.getLogger().error("Recurse: currentField ["+currentField.toString()+"] lastPieceDirection ["+lastPieceDirection.toString()+"] currentMotionIndex ["+currentMotionIndex+"] currentStep ["+currentStep+"]  currentCrossedCenter ["+currentCrossedCenter+"]");
-        }
         ////////////////
         // Basic Data //
         ////////////////
@@ -203,8 +184,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     currentMotionIndex,
                     lastPieceDirection);
 
-        J3ChessApp.getLogger().error("possibleDirections: "+possibleDirections.toString());
-
         // recurse into every possible direction
         for (final PieceDirection currentPieceDirection : possibleDirections) {
 
@@ -213,18 +192,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                             currentPieceDirection,
                             currentCrossedCenter);
 
-            J3ChessApp.getLogger().error("currentFieldDirection: "+currentFieldDirection.toString());
-
-            final Field nextField =
-                    currentField.getNeighbor(currentFieldDirection);
-
-            if (nextField == null) {
-                // there is no next field into the current direction because
-                // the border of the chessboard was reached
-                J3ChessApp.getLogger().error("Skip because of next field == null");
-                continue; // skip this loop iteration
-            }
-
             // the piece crosses the center with it about to be evaluated move
             final boolean isCrossingCenter = currentField
                     .getWhetherCrossingCenter(currentFieldDirection);
@@ -232,6 +199,14 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             // XOR used to toggle the current crossed center status
             final boolean nextCrossedCenter =
                     currentCrossedCenter ^ isCrossingCenter;
+
+            final Field nextField =
+                    currentField.getNeighbor(currentFieldDirection);
+
+            if (nextField == null) {
+                // there is no next field into the current direction
+                continue; // skip this loop iteration
+            }
 
 /* ------------------------------------------------------------------------- */
 
@@ -251,23 +226,18 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                             isCrossingCenter);
                         mCurrentValidCaptureMoves
                             .add(nextCaptureMove);
-                        J3ChessApp.getLogger().error("capturing...");
-                    } else {
-                        // this motion direction is blocked
-                        J3ChessApp.getLogger().error("Skip because of blocking piece or capture (if capturing...)");
-                        continue; // skip this loop iteration
                     }
-                } else {
-                    // there is nothing on the next field, thus it is a valid
-                    // move
-                    Move nextNonCaptureMove = new Move(
-                        MoveType.Disambiguating,
-                        mCurrentStartField,
-                        nextField,
-                        isCrossingCenter);
-                    mCurrentValidNonCaptureMoves
-                        .add(nextNonCaptureMove);
+                    // this motion direction is blocked
+                    continue; // skip this loop iteration
                 }
+                // there is nothing on the next field, thus it is a valid move
+                Move nextNonCaptureMove = new Move(
+                    MoveType.Disambiguating,
+                    mCurrentStartField,
+                    nextField,
+                    isCrossingCenter);
+                mCurrentValidNonCaptureMoves
+                    .add(nextNonCaptureMove);
             }
 
 /* ------------------------------------------------------------------------- */
@@ -275,16 +245,20 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             int nextMotionIndex = -1;
             int nextStep = -1;
 
-            if (!isLastStepOfMotion) { // the motion is not yet at its end
+            if (!isLastStepOfMotion) {
                 // same motion and next step
                 nextMotionIndex = currentMotionIndex;
                 nextStep = currentStep + 1;
             } else {
-                if (!isLastMotionOfList) { // the moion list is not yet at its
-                                           // end
+                if (!isLastMotionOfList) {
                     // next motion and first step
                     nextMotionIndex = currentMotionIndex + 1;
                     nextStep = 0; // first step of new motion
+                } else {
+                    // if it is the last step of this motion and the last motion
+                    // of it's motion pattern then
+                    // (nextMotionIndex = -1 && nextStep = -1)
+                    continue; // skip this loop iteration
                 }
             }
 
@@ -299,6 +273,12 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     nextStep,
                     nextCrossedCenter);
         }
+
+        // write the valid movement lists after a complete recursion
+        mCurrentValidMovement
+            .setValidNonCaptureMoves(mCurrentValidNonCaptureMoves);
+        mCurrentValidMovement
+            .setValidCaptureMoves(mCurrentValidCaptureMoves);
     }
 
 /* ------------------------------------------------------------------------- */
