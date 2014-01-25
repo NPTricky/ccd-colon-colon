@@ -141,8 +141,8 @@
           Instrument all the application classes, but
           don't instrument the test classes.
         -->
-        <include name="**/*.class" />
-        <exclude name="**/test/*.class" />
+        <include name="j3chess/**/*.class" />
+        <exclude name="j3chess/test/*.class" />
       </fileset>
     </cobertura-instrument>
   </target>
