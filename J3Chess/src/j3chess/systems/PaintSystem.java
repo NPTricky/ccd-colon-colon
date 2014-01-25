@@ -54,10 +54,10 @@ public class PaintSystem extends EntityProcessingSystem {
     }
 
     protected void begin() {
-    	// Clear rect
+        // Clear rect
         final Graphics2D graphics = J3ChessApp.getInstance().getDrawGraphics();
         graphics.setColor(J3ChessApp.getInstance().getMainView().
-        		getFrame().getBackground());
+                getFrame().getBackground());
         graphics.fillRect(0, 0, mDrawPanelSize.x, mDrawPanelSize.y);
     }
 
@@ -87,58 +87,19 @@ public class PaintSystem extends EntityProcessingSystem {
         graphics.drawImage(
                         paintable.getImage(),
                         Math.round(drawPosition.x + paintable.getDrawOffset().x
-                        		+ mDrawOffset.x),
+                                + mDrawOffset.x),
                         Math.round(drawPosition.y + paintable.getDrawOffset().y
-                        		+ mDrawOffset.y),
+                                + mDrawOffset.y),
                         null);
-
-        if (J3ChessApp.getInstance().getGame().getSelectedPiece() == entity) {
-
-            // Draw selection ring
-            graphics.drawImage(
-                    SELECTION_OVERLAY.getImage(),
-                    Math.round(Math.round(drawPosition.x
-                            - SELECTION_OVERLAY.getIconWidth() / 2.0f
-                            + mDrawOffset.x)),
-                    Math.round(drawPosition.y
-                            - SELECTION_OVERLAY.getIconHeight() / 2.0f
-                            + mDrawOffset.y), null);
-
-            // Draw valid moves
-            final ValidMovement moves = (ValidMovement) entity
-                    .getComponent(ComponentType.getTypeFor(ValidMovement.class));
-
-            for (final Move move : moves.getValidNonCaptureMoves()) {
-                final Vector2d fDrawPosition = move.getTargetField()
-                        .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
-                graphics.drawImage(
-                        MOVE_OVERLAY.getImage(),
-                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
-                        		+ mDrawOffset.x),
-                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
-                        		+ mDrawOffset.y), null);
-            }
-
-            for (final Move move : moves.getValidCaptureMoves()) {
-                final Vector2d fDrawPosition = move.getTargetField()
-                        .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
-                graphics.drawImage(
-                        CAPTURE_OVERLAY.getImage(),
-                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
-                        		+ mDrawOffset.x),
-                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
-                        		+ mDrawOffset.y), null);
-            }
-
         }
-    }
 
     /** @brief size of the draw panel */
     private final Point mDrawPanelSize = new Point(J3ChessView.CHESSBOARDWIDTH,
-    		J3ChessView.CHESSBOARDHEIGHT);
-    
+            J3ChessView.CHESSBOARDHEIGHT);
+
+    /** @brief offset used for drawing on the chessboard */
     private final Vector2d mDrawOffset = new Vector2d((J3ChessView.DRAWPANELWIDTH - mDrawPanelSize.x) / 2.0f,
-    		(J3ChessView.DRAWPANELHEIGHT - mDrawPanelSize.x) / 2.0f);
+            (J3ChessView.DRAWPANELHEIGHT - mDrawPanelSize.x) / 2.0f);
 
     /**
      * @brief setter for the mDrawPanelSize member

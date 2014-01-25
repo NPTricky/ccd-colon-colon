@@ -1,6 +1,7 @@
 package j3chess;
 
 import j3chess.systems.PaintSystem;
+import j3chess.systems.SelectedSystem;
 import j3chess.systems.ValidMovementSystem;
 import artemis.ComponentManager;
 import artemis.EntityManager;
@@ -38,6 +39,7 @@ public class EntitySystem {
         // systems...
         this.mWorld.setSystem(new PaintSystem());
         this.mWorld.setSystem(new ValidMovementSystem());
+        this.mWorld.setSystem(new SelectedSystem());
 
         mWorld.initialize();
     }
