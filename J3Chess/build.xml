@@ -134,6 +134,7 @@
         purposes of coverage reporting.
       -->
       <ignore regex="org.apache.log4j.*" />
+      <ignore regex="artemis.*" />
 
       <fileset dir="${build.dir}">
         <!--
@@ -141,7 +142,7 @@
           don't instrument the test classes.
         -->
         <include name="**/*.class" />
-        <exclude name="**/*Test.class" />
+        <exclude name="**/test/*.class" />
       </fileset>
     </cobertura-instrument>
   </target>
