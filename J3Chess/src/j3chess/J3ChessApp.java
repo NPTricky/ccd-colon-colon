@@ -73,8 +73,8 @@ public class J3ChessApp extends SingleFrameApplication {
     }
 
     public void startNewGame() {
-        mView.reset();
         mGame = new Game(mView);
+        mView.reset();
         update();
     }
 
@@ -89,7 +89,7 @@ public class J3ChessApp extends SingleFrameApplication {
     public Graphics2D getDrawGraphics() {
         return mView.getDrawGraphics();
     }
-    public J3ChessView getView(){
+    public J3ChessView getView() {
         return mView;
     }
 }

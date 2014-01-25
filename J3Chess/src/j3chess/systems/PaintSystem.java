@@ -2,14 +2,9 @@ package j3chess.systems;
 
 import j3chess.J3ChessApp;
 import j3chess.J3ChessView;
-import j3chess.Move;
 import j3chess.components.Paintable;
 import j3chess.components.Position;
-import j3chess.components.ValidMovement;
 import j3chess.utility.Vector2d;
-
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
@@ -17,7 +12,6 @@ import javax.swing.ImageIcon;
 
 import artemis.Aspect;
 import artemis.ComponentMapper;
-import artemis.ComponentType;
 import artemis.Entity;
 import artemis.annotations.Mapper;
 import artemis.systems.EntityProcessingSystem;
