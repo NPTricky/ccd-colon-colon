@@ -1,8 +1,8 @@
 package j3chess.test;
 
 import j3chess.EntitySystem;
-import j3chess.J3ChessView;
 import j3chess.components.Paintable;
+import j3chess.gui.J3ChessView;
 import j3chess.systems.PaintSystem;
 
 import javax.swing.ImageIcon;

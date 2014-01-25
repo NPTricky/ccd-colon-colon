@@ -39,6 +39,8 @@ package j3chess;
  * Have fun coding and thanks for your support!
  */
 
+import j3chess.gui.J3ChessView;
+
 import java.awt.Graphics2D;
 
 import org.apache.logging.log4j.LogManager;
@@ -112,7 +114,6 @@ public class J3ChessApp extends SingleFrameApplication {
 
     public void startNewGame() {
         mGame = new Game(mView);
-        mView.reset();
         update();
     }
 

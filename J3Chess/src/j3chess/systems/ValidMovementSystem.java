@@ -104,7 +104,15 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     /** @brief valid movement component of the currently processed entity */
     private ValidMovement mCurrentValidMovement;
 
+    /**
+     * @brief the list of valid non capture moves of the currently processed
+     *        entity
+     */
     private List<Move> mCurrentValidNonCaptureMoves;
+    /**
+     * @brief the list of valid capture moves of the currently processed
+     *        entity
+     */
     private List<Move> mCurrentValidCaptureMoves;
 
     /* ------------------------------------------------------------------------- */
@@ -199,11 +207,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 continue; // skip this loop iteration
             }
 
-            /*
-             * ------------------------------------------------------------------
-             * -------
-             */
-
             // does not apply to anything but the last step of a jump as well as
             // non jumping movement
             if (isAbleToMove) {
@@ -227,11 +230,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 mCurrentValidNonCaptureMoves.add(nextNonCaptureMove);
             }
 
-            /*
-             * ------------------------------------------------------------------
-             * -------
-             */
-
             int nextMotionIndex = -1;
             int nextStep = -1;
 
@@ -251,11 +249,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     continue; // skip this loop iteration
                 }
             }
-
-            /*
-             * ------------------------------------------------------------------
-             * -------
-             */
 
             // processing of the whole motion list is not done yet
             recurseMotionPattern(nextField, currentPieceDirection,

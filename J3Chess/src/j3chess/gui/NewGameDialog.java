@@ -1,5 +1,6 @@
-package j3chess;
+package j3chess.gui;
 
+import j3chess.J3ChessApp;
 import j3chess.controller.HumanController;
 import j3chess.controller.Player;
 

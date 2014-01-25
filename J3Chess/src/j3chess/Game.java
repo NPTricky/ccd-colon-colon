@@ -4,6 +4,7 @@ import j3chess.components.Selection;
 import j3chess.controller.HumanController;
 import j3chess.controller.Player;
 import j3chess.controller.PlayerController;
+import j3chess.gui.J3ChessView;
 import j3chess.motion.Move;
 import j3chess.pieces.PieceFactory;
 import j3chess.pieces.PieceType;
@@ -55,7 +56,9 @@ public class Game {
      *            J3ChessView for the Game to use
      */
     public Game(final J3ChessView view) {
+        mMoveHistory = new ArrayList<Move>();
         mView = view;
+        mView.reset();
         mEntitySystem = new EntitySystem();
 
         // systems...
@@ -71,7 +74,6 @@ public class Game {
         initializePieces();
         initializePlayers(EnumSet.allOf(Player.class));
 
-        mMoveHistory = new ArrayList<Move>();
     }
 
     /**
@@ -182,7 +184,7 @@ public class Game {
         // Clear selection
         clearSelection();
 
-        mView.refreshCurrentPlayer(this);
+        mView.refreshCurrentPlayer();
     }
 
     /**

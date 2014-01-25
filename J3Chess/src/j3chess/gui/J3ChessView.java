@@ -1,5 +1,7 @@
-package j3chess;
+package j3chess.gui;
 
+import j3chess.Game;
+import j3chess.J3ChessApp;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -23,7 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import org.jdesktop.application.FrameView;
-
 
 /**
  * The main GUI class of the game, which creates the View.
@@ -59,7 +60,7 @@ public class J3ChessView extends FrameView {
     /**
      * Path to the ChessboardImage.
      */
-    private String mChessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
+    private final String mChessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
 
     /**
      * The NotationPanel for drawing Pieces.
@@ -91,22 +92,23 @@ public class J3ChessView extends FrameView {
      * @Brief initialize the View
      */
     private void initialize() {
-        ImageIcon chessboardImage = new ImageIcon(mChessboardImagePath);
+        final ImageIcon chessboardImage = new ImageIcon(mChessboardImagePath);
         chessboardImage.setImage(chessboardImage.getImage());
 
         final int border = 12;
         mDrawPanelWidth = chessboardImage.getIconWidth() + border;
         mDrawPanelHeight = chessboardImage.getIconHeight() + border;
 
-
-        JPanel mainPanel = new JPanel();
+        final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
 
-        //  TODO Read values from image / style file
+        // TODO Read values from image / style file
         final int drawPanelBorder = 8;
-        mainPanel.setPreferredSize(new Dimension(mDrawPanelWidth + drawPanelBorder, mDrawPanelHeight + drawPanelBorder));
+        mainPanel.setPreferredSize(new Dimension(mDrawPanelWidth
+                + drawPanelBorder, mDrawPanelHeight + drawPanelBorder));
         mDrawPanel = new DrawPanel(mDrawPanelWidth, mDrawPanelHeight);
-        mNotationPanel = new NotationPanel(NOTATIONPANELWIDTH, NOTATIONPANELHIGHT);
+        mNotationPanel = new NotationPanel(NOTATIONPANELWIDTH,
+                NOTATIONPANELHIGHT);
         mainPanel.add(mDrawPanel, new GridBagConstraints());
 
         this.getFrame().getContentPane().setLayout(new FlowLayout());
@@ -122,7 +124,6 @@ public class J3ChessView extends FrameView {
         createMenuBar();
     }
 
-
     /**
      * @brief reads the Abouttext from the About Textfile
      * @return the Abouttext
@@ -130,17 +131,17 @@ public class J3ChessView extends FrameView {
     private String getAboutFromTextFile() {
         String returnValue = "";
         try {
-            FileReader filereader = new FileReader("about.txt");
-            BufferedReader br = new BufferedReader(filereader);
+            final FileReader filereader = new FileReader("about.txt");
+            final BufferedReader br = new BufferedReader(filereader);
             String zeile = "";
             while ((zeile = br.readLine()) != null) {
                 System.out.println(zeile);
                 returnValue += zeile + "\n";
             }
             br.close();
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             returnValue = "Aboutfile not found";
-        } catch (IOException e) {
+        } catch (final IOException e) {
             returnValue = "Aboutfile not readable";
         }
         return returnValue;
@@ -150,7 +151,8 @@ public class J3ChessView extends FrameView {
      * @brief creates the About Message
      */
     private void createAboutMessage() {
-        JOptionPane.showMessageDialog(null, getAboutFromTextFile(), "About", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showMessageDialog(null, getAboutFromTextFile(), "About",
+                JOptionPane.DEFAULT_OPTION);
     }
 
     /**
@@ -182,7 +184,7 @@ public class J3ChessView extends FrameView {
         });
 
         // Exit Button
-        JMenuItem  mExit;
+        JMenuItem mExit;
         mExit = new JMenuItem("exit");
         mExit.setMnemonic(KeyEvent.VK_E);
         mExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
@@ -204,7 +206,7 @@ public class J3ChessView extends FrameView {
         game = new JMenu("game");
         game.setMnemonic(KeyEvent.VK_G);
 
-        //build menu
+        // build menu
         game.add(newGameDialog);
         game.add(mExit);
         mMenuBar.add(game);
@@ -213,8 +215,10 @@ public class J3ChessView extends FrameView {
 
     /**
      * @brief adds a move at the end of the NotationPanel.
-     * @param move the move to add
-     * @param game the game
+     * @param move
+     *            the move to add
+     * @param game
+     *            the game
      */
     public final void addMove(final String move, final Game game) {
         mNotationPanel.addMove(move, game);
@@ -237,10 +241,9 @@ public class J3ChessView extends FrameView {
 
     /**
      * @brief Sets the current player to be displayed.
-     * @param game the game
      */
-    public final void refreshCurrentPlayer(Game game) {
-        mNotationPanel.refreshCurrentPlayer(game);
+    public final void refreshCurrentPlayer() {
+        mNotationPanel.refreshCurrentPlayer();
     }
 
     /**
@@ -249,6 +252,7 @@ public class J3ChessView extends FrameView {
     public final int getDrawPanelHeight() {
         return mDrawPanelHeight;
     }
+
     /**
      * @return the DrawPanelWidth
      */
