@@ -8,7 +8,7 @@ import org.junit.Test;
 public class PieceFactoryBasicTest {
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setup() {
         System.out.println("TestCase1 setup");
     }
 

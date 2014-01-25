@@ -5,11 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class EntitySystemBasicTest {
+public class HelperDirectionTest {
 
-    @BeforeClass 
+    @BeforeClass
     public static void setup() {
-        System.out.println("EntitySystemBasicTest Setup...");
+        System.out.println("HelperDirectionTest Setup...");
     }
 
     @Test

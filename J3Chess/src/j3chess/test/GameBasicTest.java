@@ -8,8 +8,8 @@ import org.junit.Test;
 public class GameBasicTest {
 
     @BeforeClass
-    public static void setUpClass() {
-        System.out.println("TestCase1 setup");
+    public static void setup() {
+        System.out.println("GameBasicTest Setup...");
     }
 
     @Test

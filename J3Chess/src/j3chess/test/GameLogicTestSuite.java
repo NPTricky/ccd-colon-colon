@@ -10,17 +10,19 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     PieceFactoryTestSuite.class,
     GameTestSuite.class,
-    EntitySystemTestSuite.class })
+    EntitySystemTestSuite.class,
+    HelperTestSuite.class
+})
 public class GameLogicTestSuite {
 
     @BeforeClass 
-    public static void setUpClass() {      
-        System.out.println("Master setup");
+    public static void setup() {
+        System.out.println("GameLogicTestSuite Setup...");
 
     }
 
-    @AfterClass public static void tearDownClass() { 
-        System.out.println("Master tearDown");
+    @AfterClass public static void cleanup() {
+        System.out.println("GameLogicTestSuite Cleanup...");
     }
 
 }

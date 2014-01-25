@@ -8,8 +8,8 @@ import org.junit.Test;
 public class EntitySystemGroupTest {
 
     @BeforeClass 
-    public static void setUpClass() {
-        System.out.println("TestCase1 setup");
+    public static void setup() {
+        System.out.println("EntitySystemGroupTest Setup...");
     }
 
     @Test
