@@ -98,8 +98,8 @@ public class PaintSystem extends EntityProcessingSystem {
             J3ChessView.CHESSBOARDHEIGHT);
 
     /** @brief offset used for drawing on the chessboard */
-    private final Vector2d mDrawOffset = new Vector2d((J3ChessView.DRAWPANELWIDTH - mDrawPanelSize.x) / 2.0f,
-            (J3ChessView.DRAWPANELHEIGHT - mDrawPanelSize.x) / 2.0f);
+    private final Vector2d mDrawOffset = new Vector2d((J3ChessApp.getInstance().getView().getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
+            (J3ChessApp.getInstance().getView().getDrawPanelHight() - mDrawPanelSize.x) / 2.0f);
 
     /**
      * @brief setter for the mDrawPanelSize member

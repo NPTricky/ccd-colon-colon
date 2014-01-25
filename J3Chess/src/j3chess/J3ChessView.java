@@ -34,11 +34,11 @@ public class J3ChessView extends FrameView {
     /**
      * Height of the DrawPanel.
      */
-    public static int DRAWPANELHEIGHT;
+    private static int mDrawPanelHight;
     /**
      * Width of the DrawPanel.
      */
-    public static int DRAWPANELWIDTH;
+    private static int mDrawPanelWidth;
     /**
      * Path to the ChessboardImage.
      */
@@ -76,18 +76,18 @@ public class J3ChessView extends FrameView {
     private void initialize() {
         ImageIcon chessboardImage = new ImageIcon(mChessboardImagePath);
         chessboardImage.setImage(chessboardImage.getImage());
-        
+
         final int border = 12;
-        DRAWPANELWIDTH = chessboardImage.getIconWidth() + border;
-        DRAWPANELHEIGHT = chessboardImage.getIconHeight() + border;
+        mDrawPanelWidth = chessboardImage.getIconWidth() + border;
+        mDrawPanelHight = chessboardImage.getIconHeight() + border;
 
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
 
         //  TODO Read values from image / style file
-        mainPanel.setPreferredSize(new Dimension(DRAWPANELWIDTH + 8, DRAWPANELHEIGHT + 8));
-        mDrawPanel = new DrawPanel(DRAWPANELWIDTH, DRAWPANELHEIGHT);
+        mainPanel.setPreferredSize(new Dimension(mDrawPanelWidth + 8, mDrawPanelHight + 8));
+        mDrawPanel = new DrawPanel(mDrawPanelWidth, mDrawPanelHight);
         mNotationPanel = new NotationPanel(300, 728);
         mainPanel.add(mDrawPanel, new GridBagConstraints());
 
@@ -181,7 +181,20 @@ public class J3ChessView extends FrameView {
     /**
      * @brief Sets the current player to be displayed.
      */
-    public void refreshCurrentPlayer() {
-    	mNotationPanel.refreshCurrentPlayer();
+    public final void refreshCurrentPlayer() {
+        mNotationPanel.refreshCurrentPlayer();
+    }
+
+    /**
+     * @return the DrawPanelHight
+     */
+    public final int getDrawPanelHight() {
+        return mDrawPanelHight;
+    }
+    /**
+     * @return the DrawPanelWidth
+     */
+    public final int getDrawPanelWidth() {
+        return mDrawPanelWidth;
     }
 }

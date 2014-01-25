@@ -53,8 +53,8 @@ public class DrawPanel extends JComponent implements MouseListener {
     @Override
     public void mousePressed(MouseEvent arg0) {
         // Resize x and y to [-1,1] range
-    	final Vector2d offset = new Vector2d((J3ChessView.DRAWPANELWIDTH
-    			- J3ChessView.CHESSBOARDWIDTH) / 2.0f, (J3ChessView.DRAWPANELHEIGHT
+    	final Vector2d offset = new Vector2d((J3ChessApp.getInstance().getView().getDrawPanelWidth()
+    			- J3ChessView.CHESSBOARDWIDTH) / 2.0f, (J3ChessApp.getInstance().getView().getDrawPanelWidth()
     	        - J3ChessView.CHESSBOARDHEIGHT) / 2.0f);
         final float x = ((float) (arg0.getX() - offset.x) / (float) J3ChessView.CHESSBOARDWIDTH) * 2.0f - 1.0f;
         final float y = ((float) (arg0.getY() - offset.y) / (float) J3ChessView.CHESSBOARDHEIGHT) * 2.0f - 1.0f;
