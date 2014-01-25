@@ -27,6 +27,10 @@ public class HumanController extends PlayerController {
      *            The field the user clicked on
      */
     public final void notifyFieldClicked(final Field clickedField, final Game game) {
+        if (game == null || clickedField == null) {
+            return;
+        }
+
         // Get piece on the field
         Entity clickedPiece = clickedField.getPiece();
 
