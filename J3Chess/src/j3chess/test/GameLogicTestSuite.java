@@ -18,12 +18,9 @@ public class GameLogicTestSuite {
 
     @BeforeClass 
     public static void setup() {
-        System.out.println("GameLogicTestSuite Setup...");
-
     }
 
     @AfterClass public static void cleanup() {
-        System.out.println("GameLogicTestSuite Cleanup...");
     }
 
 }

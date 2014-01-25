@@ -29,7 +29,6 @@ public class EntitySystemBasicTest {
 
     @BeforeClass
     public static void setup() {
-        System.out.println("EntitySystemBasicTest Setup...");
     }
 
     @Test

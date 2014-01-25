@@ -9,7 +9,6 @@ public class EntitySystemGroupTest {
 
     @BeforeClass 
     public static void setup() {
-        System.out.println("EntitySystemGroupTest Setup...");
     }
 
     @Test

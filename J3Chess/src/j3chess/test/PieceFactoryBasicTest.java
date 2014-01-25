@@ -42,7 +42,6 @@ public class PieceFactoryBasicTest {
 
     @BeforeClass
     public static void setup() {
-        System.out.println("PieceFactoryBasicTest Setup...");
     }
 
     @Test
