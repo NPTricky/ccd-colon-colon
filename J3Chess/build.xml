@@ -89,7 +89,10 @@
 
     <checkstyle config="${checkstyle.dir}/checkstyle_checks.xml" failOnViolation="false" >
       <formatter type="xml" tofile="${reports.dir}/checkstyle_report.xml"/>
-      <fileset dir="${src.dir}/j3chess" includes="**/*.java"/>
+      <fileset dir="${src.dir}/j3chess">
+		<include name="**/*.java"/>
+		<exclude name="test/*.java"/>
+	  </fileset>
     </checkstyle>
     
   </target>

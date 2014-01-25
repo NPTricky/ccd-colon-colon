@@ -1,5 +1,46 @@
 package j3chess;
 
+/**
+ * \mainpage J3Chess - Chess for 3 players on a circular chessboard
+ *
+ * \section intro_sec Introduction
+ *
+ * J3Chess is a chess application, designed for 3 players on a
+ * circular chessboard. It is the spiritual successor of <a href=
+ * "http://chess.geniusprophecy.com/jchess.html">JChess</a>.
+ *
+ * \section rules_sec Rules
+ *
+ * The rules are very similar to the commonly known chess rules. Most
+ * the pieces move as in standard chess.
+ *
+ * The Pawn can always move one or two fields at will. It also captures
+ * other pieces straight which is different from basic chess.
+ *
+ * The Knight can only teleport exactly three fields in a straight line.
+ *
+ * Your figures can move across the center field. The center is not a field
+ * itself and can't be occupied by a piece. When moving diagonally across
+ * the center, try to follow the dashed lines. The game also assists
+ * you by drawing all the legal moves.
+ *
+ * \section developers_sec For Developers
+ *
+ * If you are a developer and want to contribute to J3Chess, that's
+ * great! There are some things you should know:
+ *
+ * * J3Chess makes use of the <a href="http://gamadu.com/artemis/">Artemis</a>
+ *   framework. You should be familiar with the concepts of component-
+ *   driven design.
+ * * We try to keep our code base clean. For coding style, please refer
+ *   to the <a href="http://www.oracle.com/technetwork/java/codeconv-138413.html">
+ *   Java Code Conventions</a>. We used <a href="http://checkstyle.sourceforge.net/">
+ *   Checkstyle</a> and <a href="http://findbugs.sourceforge.net/">FindBugs</a>
+ *   to help us writing clean code, and we recommend you do too.
+ *
+ * Have fun coding and thanks for your support!
+ */
+
 import j3chess.gui.J3ChessView;
 
 import java.awt.Graphics2D;
