@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class EntitySystemGroupTest {
 
-    @BeforeClass 
+    @BeforeClass
     public static void setup() {
     }
 
