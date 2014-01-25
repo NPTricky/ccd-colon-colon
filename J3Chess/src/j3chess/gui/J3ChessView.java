@@ -52,11 +52,11 @@ public class J3ChessView extends FrameView {
     /**
      * Height of the DrawPanel.
      */
-    private static int mDrawPanelHeight;
+    private static int drawPanelHeight;
     /**
      * Width of the DrawPanel.
      */
-    private static int mDrawPanelWidth;
+    private static int drawPanelWidth;
     /**
      * Path to the ChessboardImage.
      */
@@ -96,17 +96,17 @@ public class J3ChessView extends FrameView {
         chessboardImage.setImage(chessboardImage.getImage());
 
         final int border = 12;
-        mDrawPanelWidth = chessboardImage.getIconWidth() + border;
-        mDrawPanelHeight = chessboardImage.getIconHeight() + border;
+        drawPanelWidth = chessboardImage.getIconWidth() + border;
+        drawPanelHeight = chessboardImage.getIconHeight() + border;
 
         final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
 
         // TODO Read values from image / style file
         final int drawPanelBorder = 8;
-        mainPanel.setPreferredSize(new Dimension(mDrawPanelWidth
-                + drawPanelBorder, mDrawPanelHeight + drawPanelBorder));
-        mDrawPanel = new DrawPanel(mDrawPanelWidth, mDrawPanelHeight);
+        mainPanel.setPreferredSize(new Dimension(drawPanelWidth
+                + drawPanelBorder, drawPanelHeight + drawPanelBorder));
+        mDrawPanel = new DrawPanel(drawPanelWidth, drawPanelHeight);
         mNotationPanel = new NotationPanel(NOTATIONPANELWIDTH,
                 NOTATIONPANELHIGHT);
         mainPanel.add(mDrawPanel, new GridBagConstraints());
@@ -133,8 +133,7 @@ public class J3ChessView extends FrameView {
         try {
             final FileReader filereader = new FileReader("about.txt");
             final BufferedReader br = new BufferedReader(filereader);
-            StringBuffer stringBuffer = new StringBuffer();
-            
+            final StringBuffer stringBuffer = new StringBuffer();
             String zeile = "";
             while ((zeile = br.readLine()) != null) {
                 stringBuffer.append(zeile);
@@ -253,13 +252,13 @@ public class J3ChessView extends FrameView {
      * @return the DrawPanelHight
      */
     public final int getDrawPanelHeight() {
-        return mDrawPanelHeight;
+        return drawPanelHeight;
     }
 
     /**
      * @return the DrawPanelWidth
      */
     public final int getDrawPanelWidth() {
-        return mDrawPanelWidth;
+        return drawPanelWidth;
     }
 }
