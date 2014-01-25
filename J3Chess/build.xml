@@ -193,6 +193,8 @@
      <batchtest todir="${junit.output.dir}">
       <fileset dir="${build.dir}">
          <include name="j3chess/test/*"/>
+		 <exclude name="j3chess/test/GameViewTest.java"/>
+		 <exclude name="j3chess/test/*Suite.java"/>
       </fileset>
      </batchtest> 
      
