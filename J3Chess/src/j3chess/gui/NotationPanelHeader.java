@@ -1,4 +1,7 @@
-package j3chess;
+package j3chess.gui;
+
+import j3chess.Game;
+import j3chess.J3ChessApp;
 
 import java.awt.Color;
 import java.awt.Component;

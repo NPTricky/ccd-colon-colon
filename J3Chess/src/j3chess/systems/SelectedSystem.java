@@ -1,10 +1,10 @@
 package j3chess.systems;
 
 import j3chess.J3ChessApp;
-import j3chess.J3ChessView;
 import j3chess.components.Position;
 import j3chess.components.Selection;
 import j3chess.components.ValidMovement;
+import j3chess.gui.J3ChessView;
 import j3chess.motion.Move;
 import j3chess.utility.Vector2d;
 

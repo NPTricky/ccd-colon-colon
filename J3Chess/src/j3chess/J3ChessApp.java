@@ -1,5 +1,7 @@
 package j3chess;
 
+import j3chess.gui.J3ChessView;
+
 import java.awt.Graphics2D;
 
 import org.apache.logging.log4j.LogManager;

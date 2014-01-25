@@ -1,5 +1,7 @@
-package j3chess;
+package j3chess.gui;
 
+import j3chess.Game;
+import j3chess.J3ChessApp;
 import j3chess.controller.Player;
 
 import java.awt.Dimension;

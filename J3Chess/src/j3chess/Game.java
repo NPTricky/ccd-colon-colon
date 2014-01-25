@@ -4,6 +4,7 @@ import j3chess.components.Selection;
 import j3chess.controller.HumanController;
 import j3chess.controller.Player;
 import j3chess.controller.PlayerController;
+import j3chess.gui.J3ChessView;
 import j3chess.motion.Move;
 import j3chess.pieces.PieceFactory;
 import j3chess.pieces.PieceType;

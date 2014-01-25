@@ -1,5 +1,7 @@
-package j3chess;
+package j3chess.gui;
 
+import j3chess.Field;
+import j3chess.J3ChessApp;
 import j3chess.utility.Vector2d;
 
 import java.awt.Dimension;

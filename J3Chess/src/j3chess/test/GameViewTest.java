@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import j3chess.Chessboard;
 import j3chess.Game;
-import j3chess.J3ChessView;
+import j3chess.gui.J3ChessView;
 import j3chess.motion.Move;
 import j3chess.motion.MoveType;
 
