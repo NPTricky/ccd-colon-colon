@@ -199,7 +199,7 @@ public class Game {
                 .getPlayerController();
         if (currentController.getClass() == HumanController.class) {
             HumanController controller = (HumanController) currentController;
-            controller.notifyFieldClicked(clickedField);
+            controller.notifyFieldClicked(clickedField, this);
         }
     }
 

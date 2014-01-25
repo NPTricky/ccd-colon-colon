@@ -26,10 +26,7 @@ public class HumanController extends PlayerController {
      * @param clickedField
      *            The field the user clicked on
      */
-    public final void notifyFieldClicked(final Field clickedField) {
-        // Get the Game object
-        Game game = J3ChessApp.getInstance().getGame();
-
+    public final void notifyFieldClicked(final Field clickedField, final Game game) {
         // Get piece on the field
         Entity clickedPiece = clickedField.getPiece();
 
