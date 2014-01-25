@@ -128,14 +128,7 @@ public class Game {
      * @brief update the game
      */
     public final void update() {
-        mEntitySystem.getWorld().setDelta(DELTA_TIME);
-        mEntitySystem.getWorld().process();
-        /*
-         * while (true) { boolean moveconditionmet = false; Move abouttomove =
-         * mCurrentPlayer.getPlayerController().calculateMove(); if (abouttomove
-         * != null) { doMove(abouttomove); moveconditionmet = true; } if
-         * (moveconditionmet) { nextPlayer(); } }
-         */
+        mEntitySystem.process(DELTA_TIME);
     }
 
     /** @return the number of moves already played */

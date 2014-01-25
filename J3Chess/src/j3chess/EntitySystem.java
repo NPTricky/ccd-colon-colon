@@ -87,4 +87,13 @@ public class EntitySystem {
     public final <T extends artemis.EntitySystem> void setSystem(final T system) {
         this.mWorld.setSystem(system);
     }
+
+    /**
+     * @brief one simulation through all of the processing systems
+     * @param delta time delta
+     */
+    public final void process(final float delta) {
+        this.mWorld.setDelta(delta);
+        this.mWorld.process();
+    }
 }
