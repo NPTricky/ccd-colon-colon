@@ -12,9 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
@@ -131,15 +135,17 @@ public class J3ChessView extends FrameView {
     private String getAboutFromTextFile() {
         String returnValue = "";
         try {
-            final FileReader filereader = new FileReader("about.txt");
-            final BufferedReader br = new BufferedReader(filereader);
+            final File aboutFile = new File("about.txt");
+            final FileInputStream fileInputStream = new FileInputStream(aboutFile);
+            final InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, Charset.forName("UTF-8"));
+            final BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             final StringBuffer stringBuffer = new StringBuffer();
             String zeile = "";
-            while ((zeile = br.readLine()) != null) {
+            while ((zeile = bufferedReader.readLine()) != null) {
                 stringBuffer.append(zeile);
                 stringBuffer.append("\n");
             }
-            br.close();
+            bufferedReader.close();
             returnValue = stringBuffer.toString();
         } catch (final FileNotFoundException e) {
             returnValue = "Aboutfile not found";
