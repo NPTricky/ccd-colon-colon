@@ -38,11 +38,12 @@ public class SelectedSystem extends EntityProcessingSystem {
             J3ChessView.CHESSBOARDHEIGHT);
 
     /** @brief offset used for drawing on the chessboard */
-    private final Vector2d mDrawOffset = new Vector2d((J3ChessApp.getInstance().getView().getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
-            (J3ChessApp.getInstance().getView().getDrawPanelHight() - mDrawPanelSize.x) / 2.0f);
+    private final Vector2d mDrawOffset;
 
-	public SelectedSystem() {
+	public SelectedSystem(J3ChessView view) {
 		super(Aspect.getAspectForAll(Selection.class, Position.class));
+		mDrawOffset = new Vector2d((view.getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
+				(view.getDrawPanelHeight() - mDrawPanelSize.x) / 2.0f);
 	}
 
 

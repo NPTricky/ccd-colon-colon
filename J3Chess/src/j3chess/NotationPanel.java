@@ -78,9 +78,9 @@ public class NotationPanel extends JPanel {
      * @brief adds a move at the end of the NotationPanel.
      * @param move the move to add
      */
-    public final void addMove(final String move) {
+    public final void addMove(final String move, final Game game) {
         DefaultTableModel tableModel = (DefaultTableModel) mNotationTable.getModel();
-        int moveCounter = J3ChessApp.getInstance().getGame().getMoveCounter();
+        int moveCounter = game.getMoveCounter();
         if (moveCounter % J3ChessApp.NUMBEROFPLAYERS == 0) {
             tableModel.addRow(new Object[]{move});
         } else {
@@ -91,8 +91,8 @@ public class NotationPanel extends JPanel {
     /**
      * @brief Sets the current player to be displayed.
      */
-    public final void refreshCurrentPlayer() {
-        mCurrentPlayer = J3ChessApp.getInstance().getGame().getCurrentPlayerID();
+    public final void refreshCurrentPlayer(Game game) {
+        mCurrentPlayer = game.getCurrentPlayerID();
         mNotationTable.getTableHeader().repaint();
     }
 

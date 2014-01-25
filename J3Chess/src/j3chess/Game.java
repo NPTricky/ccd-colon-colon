@@ -54,9 +54,9 @@ public class Game {
         mEntitySystem = new EntitySystem();
 
         // systems...
-        mEntitySystem.setSystem(new PaintSystem());
+        mEntitySystem.setSystem(new PaintSystem(view));
         mEntitySystem.setSystem(new ValidMovementSystem());
-        mEntitySystem.setSystem(new SelectedSystem());
+        mEntitySystem.setSystem(new SelectedSystem(view));
         mEntitySystem.initialize();
 
         mChessboard = new Chessboard(mEntitySystem);
@@ -150,7 +150,7 @@ public class Game {
      */
     public final void doMove(final Move move) {
         // display the move in the table
-        mView.addMove(move.toString());
+        mView.addMove(move.toString(), this);
 
         // internally save the move
         mMoveHistory.add(move);
@@ -183,7 +183,7 @@ public class Game {
         // Clear selection
         clearSelection();
 
-        mView.refreshCurrentPlayer();
+        mView.refreshCurrentPlayer(this);
     }
 
     /**

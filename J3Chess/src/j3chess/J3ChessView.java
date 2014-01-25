@@ -178,8 +178,8 @@ public class J3ChessView extends FrameView {
      * @brief adds a move at the end of the NotationPanel.
      * @param move the move to add
      */
-    public final void addMove(final String move) {
-        mNotationPanel.addMove(move);
+    public final void addMove(final String move, final Game game) {
+        mNotationPanel.addMove(move, game);
     }
 
     /**
@@ -200,14 +200,14 @@ public class J3ChessView extends FrameView {
     /**
      * @brief Sets the current player to be displayed.
      */
-    public final void refreshCurrentPlayer() {
-        mNotationPanel.refreshCurrentPlayer();
+    public final void refreshCurrentPlayer(Game game) {
+        mNotationPanel.refreshCurrentPlayer(game);
     }
 
     /**
      * @return the DrawPanelHight
      */
-    public final int getDrawPanelHight() {
+    public final int getDrawPanelHeight() {
         return mDrawPanelHeight;
     }
     /**

@@ -43,8 +43,11 @@ public class PaintSystem extends EntityProcessingSystem {
      * @brief the paint system draws every paintable component, position is
      *        optional.
      */
-    public PaintSystem() {
+    public PaintSystem(J3ChessView view) {
         super(Aspect.getAspectForAll(Paintable.class));
+        mDrawOffset = new Vector2d(
+                (view.getDrawPanelWidth()  - mDrawPanelSize.x) / 2.0f,
+                (view.getDrawPanelHeight() - mDrawPanelSize.x) / 2.0f);
     }
 
     protected void begin() {
@@ -69,8 +72,8 @@ public class PaintSystem extends EntityProcessingSystem {
         Vector2d drawPosition = new Vector2d();
 
         if (position == null) {
-            drawPosition.x = Math.round(mDrawPanelSize.x * 0.5f);
-            drawPosition.y = Math.round(mDrawPanelSize.y * 0.5f);
+            drawPosition.x = Math.round(mDrawPanelSize.x / 2.0f);
+            drawPosition.y = Math.round(mDrawPanelSize.y / 2.0f);
         } else {
             drawPosition = position.getField().getDrawPosition(
                     mDrawPanelSize.x, mDrawPanelSize.y);
@@ -93,9 +96,7 @@ public class PaintSystem extends EntityProcessingSystem {
             J3ChessView.CHESSBOARDHEIGHT);
 
     /** @brief offset used for drawing on the chessboard */
-    private final Vector2d mDrawOffset = new Vector2d(
-            (J3ChessApp.getInstance().getView().getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
-            (J3ChessApp.getInstance().getView().getDrawPanelHight() - mDrawPanelSize.x) / 2.0f);
+    private final Vector2d mDrawOffset;
 
     /**
      * @brief setter for the mDrawPanelSize member
