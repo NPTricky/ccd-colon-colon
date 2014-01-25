@@ -134,14 +134,15 @@
         purposes of coverage reporting.
       -->
       <ignore regex="org.apache.log4j.*" />
+      <ignore regex="artemis.*" />
 
       <fileset dir="${build.dir}">
         <!--
           Instrument all the application classes, but
           don't instrument the test classes.
         -->
-        <include name="**/*.class" />
-        <exclude name="**/*Test.class" />
+        <include name="j3chess/**/*.class" />
+        <exclude name="j3chess/test/*.class" />
       </fileset>
     </cobertura-instrument>
   </target>
@@ -175,7 +176,7 @@
   <target name="tests" depends="compile">
     <mkdir dir="${junit.output.dir}"/>
   
-    <junit fork="yes" printsummary="yes" haltonfailure="yes" >
+    <junit fork="yes" printsummary="yes" haltonfailure="no" >
       <classpath location="${instrumented.dir}" />
       <classpath location="${build.dir}" />
     
@@ -193,8 +194,8 @@
      <batchtest todir="${junit.output.dir}">
       <fileset dir="${build.dir}">
          <include name="j3chess/test/*"/>
-		 <exclude name="j3chess/test/GameViewTest.java"/>
-		 <exclude name="j3chess/test/*Suite.java"/>
+		 <exclude name="j3chess/test/*GameViewTest*"/>
+		 <exclude name="j3chess/test/*Suite*"/>
       </fileset>
      </batchtest> 
      
