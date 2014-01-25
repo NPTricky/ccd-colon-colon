@@ -16,7 +16,6 @@ public class ValidMovementSystemBasicTest {
 
     @BeforeClass
     public static void setup() {
-        System.out.println("ValidMovementSystemBasicTest Setup...");
     }
 
     @Test

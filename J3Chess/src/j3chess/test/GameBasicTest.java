@@ -9,7 +9,6 @@ public class GameBasicTest {
 
     @BeforeClass
     public static void setup() {
-        System.out.println("GameBasicTest Setup...");
     }
 
     @Test

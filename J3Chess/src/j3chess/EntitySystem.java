@@ -21,13 +21,6 @@ public class EntitySystem {
      * @brief empty default constructor of the entity system
      */
     public EntitySystem() {
-        initialize();
-    }
-
-    /**
-     * @brief Initialize our custom configuration of the artemis entity system.
-     */
-    public final void initialize() {
         J3ChessApp.getLogger().trace(
                 "Initializing " + EntitySystem.class.getName() + "...");
         this.mWorld = new World();
@@ -36,11 +29,13 @@ public class EntitySystem {
         this.mWorld.setManager(new GroupManager());
         this.mWorld.setManager(new PlayerManager());
 
-        // systems...
-        this.mWorld.setSystem(new PaintSystem());
-        this.mWorld.setSystem(new ValidMovementSystem());
-        this.mWorld.setSystem(new SelectedSystem());
+        initialize();
+    }
 
+    /**
+     * @brief Initialize our custom configuration of the artemis entity system.
+     */
+    public final void initialize() {
         mWorld.initialize();
     }
 
@@ -84,4 +79,12 @@ public class EntitySystem {
         return mWorld.getManager(PlayerManager.class);
     }
 
+    /**
+     * @brief add a system to the entity system (manager)
+     * @param system the system to add
+     * @param <T> type of the system to add
+     */
+    public final <T extends artemis.EntitySystem> void setSystem(final T system) {
+        this.mWorld.setSystem(system);
+    }
 }

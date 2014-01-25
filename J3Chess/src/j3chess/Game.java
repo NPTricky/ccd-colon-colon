@@ -1,6 +1,9 @@
 package j3chess;
 
 import j3chess.components.Selection;
+import j3chess.systems.PaintSystem;
+import j3chess.systems.SelectedSystem;
+import j3chess.systems.ValidMovementSystem;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,6 +52,13 @@ public class Game {
     public Game(final J3ChessView view) {
         mView = view;
         mEntitySystem = new EntitySystem();
+
+        // systems...
+        mEntitySystem.setSystem(new PaintSystem());
+        mEntitySystem.setSystem(new ValidMovementSystem());
+        mEntitySystem.setSystem(new SelectedSystem());
+        mEntitySystem.initialize();
+
         mChessboard = new Chessboard(mEntitySystem);
         mPieceFactory = new PieceFactory(mEntitySystem);
         mCurrentPlayerIndex = 0;

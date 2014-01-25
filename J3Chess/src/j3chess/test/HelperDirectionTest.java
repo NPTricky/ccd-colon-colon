@@ -9,7 +9,6 @@ public class HelperDirectionTest {
 
     @BeforeClass
     public static void setup() {
-        System.out.println("HelperDirectionTest Setup...");
     }
 
     @Test
