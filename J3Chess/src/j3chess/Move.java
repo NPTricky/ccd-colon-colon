@@ -20,7 +20,7 @@ public class Move {
     /** @brief the target position of this move */
     private Field mTargetField;
     /** @brief whether the moving piece crossed the center with this move */
-    private boolean mCrossedCenter;
+    private boolean mIsCrossingCenter;
 
 /* ------------------------------------------------------------------------- */
 
@@ -32,23 +32,6 @@ public class Move {
     private String mDescription;
 
 /* ------------------------------------------------------------------------- */
-
-    /** @brief fast component mapper to retrieve piece context component */
-    @Mapper
-    private ComponentMapper<PieceContext> mPieceContextMapper;
-    /** @brief fast component mapper to retrieve movement component */
-    @Mapper
-    private ComponentMapper<Movement> mMovementMapper;
-    /** @brief fast component mapper to retrieve position component */
-    @Mapper
-    private ComponentMapper<Position> mPositionMapper;
-
-    /**
-     * @brief default constructor for a move
-     */
-    public Move() {
-    }
-
 
     /**
      * @brief complete constructor for a move
@@ -79,12 +62,15 @@ public class Move {
         this.mMoveType = type;
         this.mStartField = start;
         this.mTargetField = target;
-        this.mCrossedCenter = crossedCenter;
+        this.mIsCrossingCenter = crossedCenter;
 
         mMovingPiece = mStartField.getPiece();
+        if (mMovingPiece == null) {
+            J3ChessApp.getLogger().error("Moving piece null");
+        }
         mTargetPiece = mTargetField.getPiece();
 
-        generateDescription();
+        //generateDescription();
     }
 
     /**
@@ -92,14 +78,13 @@ public class Move {
      */
     final void generateDescription() {
         // pieces
-        String movingPiece = mPieceContextMapper
-                .get(mMovingPiece)
-                .getPieceType()
-                .toAlgebraic();
+        ComponentType contextType = ComponentType.getTypeFor(PieceContext.class);
+        String movingPiece = ((PieceContext) mMovingPiece.getComponent(contextType))
+            .getPieceType()
+            .toAlgebraic();
         String targetPiece = "";
         if (mTargetPiece != null) {
-            targetPiece = mPieceContextMapper
-                    .get(mTargetPiece)
+            targetPiece = ((PieceContext) mTargetPiece.getComponent(contextType))
                     .getPieceType()
                     .toAlgebraic();
         }
@@ -170,7 +155,8 @@ public class Move {
      */
     @Override
     public final String toString() {
-        return mDescription;
+        //return mDescription;
+        return mStartField.toString() + " " + mTargetField.toString();
     }
 
     /**
@@ -178,11 +164,12 @@ public class Move {
      * the fields
      */
     public final void execute() {
-
+        ComponentType positionType = ComponentType.getTypeFor(Position.class);
+        ComponentType movementType = ComponentType.getTypeFor(Movement.class);
         // notify moving piece
-        mPositionMapper.get(mMovingPiece).setField(mTargetField);
-        if (this.mCrossedCenter) {
-            mMovementMapper.get(mMovingPiece).toggleCrossedCenter();
+        ((Position) mMovingPiece.getComponent(positionType)).setField(mTargetField);
+        if (this.mIsCrossingCenter) {
+            ((Movement) mMovingPiece.getComponent(movementType)).toggleCrossedCenter();
         }
 
         // notify other piece
@@ -193,6 +180,22 @@ public class Move {
         // notify fields
         mStartField.setPiece(null);
         mTargetField.setPiece(mMovingPiece);
+    }
+
+    /**
+     * @brief getter for the mTargetField member
+     * @return the target field of this move
+     */
+    public final Field getTargetField() {
+        return mTargetField;
+    }
+
+    /**
+     * @brief getter for the mIsCrossingCenter member
+     * @return whether the move is across the center
+     */
+    public final boolean isCrossingCenter() {
+        return mIsCrossingCenter;
     }
 
 }

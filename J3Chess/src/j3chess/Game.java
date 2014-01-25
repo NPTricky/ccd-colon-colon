@@ -1,6 +1,7 @@
 package j3chess;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -33,9 +34,9 @@ public class Game {
     /** @brief the moves of all players */
     private List<Move> mMoveHistory;
     /** @brief the current player about to do his move */
-    private Player mCurrentPlayer;
+    private int mCurrentPlayerIndex;
     /** @brief the current players in this game */
-    private EnumSet<Player> mCurrentPlayers;
+    private List<Player> mCurrentPlayers;
 
     /**
      * @brief main class that keeps track of all objects needed throughout the
@@ -48,7 +49,7 @@ public class Game {
         mEntitySystem.initialize();
         mChessboard = new Chessboard(mEntitySystem);
         mPieceFactory = new PieceFactory(mEntitySystem);
-        mCurrentPlayer = Player.ONE;
+        mCurrentPlayerIndex = 0;
 
         initializePieces();
         initializePlayers(EnumSet.allOf(Player.class));
@@ -63,7 +64,8 @@ public class Game {
      */
     public final void initializePieces() {
         // Create array for each player's starting piece types
-        PieceType[][] pieceFormation = new PieceType[PIECE_FORMATION_HEIGHT][PIECE_FORMATION_WIDTH];
+        PieceType[][] pieceFormation =
+                new PieceType[PIECE_FORMATION_HEIGHT][PIECE_FORMATION_WIDTH];
 
         // set types for the outermost circle of the formation
         pieceFormation[0][0] = PieceType.Rook;
@@ -100,7 +102,7 @@ public class Game {
      * @param currentPlayers the enum set of players
      */
     public final void initializePlayers(final EnumSet<Player> currentPlayers) {
-        this.mCurrentPlayers = currentPlayers;
+        this.mCurrentPlayers = new ArrayList<Player>(currentPlayers);
     }
 
     /**
@@ -143,6 +145,7 @@ public class Game {
 
         // Finally execute the move
         move.execute();
+        nextPlayer();
     }
 
     /**
@@ -163,8 +166,7 @@ public class Game {
      * @brief switch to the next player
      */
     public final void nextPlayer() {
-        int next = (mCurrentPlayer.ordinal() + 1) % Player.values().length;
-        mCurrentPlayer = Player.values()[next];
+        mCurrentPlayerIndex = (mCurrentPlayerIndex + 1) % mCurrentPlayers.size();
 
         // Clear selection
         clearSelection();
@@ -177,7 +179,7 @@ public class Game {
      * @return ID of the player in the range 0..2
      */
     public final int getCurrentPlayerID() {
-        return mCurrentPlayer.ordinal();
+        return mCurrentPlayerIndex;
     }
 
     /**
@@ -187,8 +189,11 @@ public class Game {
      */
     public final void notifyFieldClicked(final Field clickedField) {
         // Check if there is a Human Controller currently active
-        if (mCurrentPlayer.getPlayerController().getClass() == HumanController.class) {
-            HumanController controller = (HumanController) mCurrentPlayer.getPlayerController();
+        PlayerController currentController = mCurrentPlayers
+                .get(mCurrentPlayerIndex)
+                .getPlayerController();
+        if (currentController.getClass() == HumanController.class) {
+            HumanController controller = (HumanController) currentController;
             controller.notifyFieldClicked(clickedField);
         }
     }
@@ -234,12 +239,6 @@ public class Game {
         for (int i = 0; i < selectedEntities.size(); ++i) {
             groupManager.remove(selectedEntities.get(i), SELECTED_GROUP);
         }
-    }
-
-    public final void setPlayer(
-            Player player,
-            PlayerController playerController) {
-
     }
 }
 

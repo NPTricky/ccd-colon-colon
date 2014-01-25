@@ -1,5 +1,7 @@
 package j3chess;
 
+import java.util.List;
+
 import j3chess.components.PieceContext;
 import j3chess.components.Position;
 import j3chess.components.ValidMovement;
@@ -49,13 +51,17 @@ public class HumanController extends PlayerController {
         Entity selectedPiece = game.getSelectedPiece();
 
         if (selectedPiece != null) {
-            ValidMovement moves = (ValidMovement) selectedPiece.getComponent(ComponentType.getTypeFor(ValidMovement.class));
+            ValidMovement validMovement = (ValidMovement) selectedPiece.getComponent(ComponentType.getTypeFor(ValidMovement.class));
 
-            if (moves.getValidNonCaptureMoves().contains(clickedField) || moves.getValidCaptureMoves().contains(clickedField)) {
-                Field source = ((Position) selectedPiece.getComponent(ComponentType.getTypeFor(Position.class))).getField();
-                game.doMove(new Move(MoveType.Common, source, clickedField));
-                // Next player's turn
-                game.nextPlayer();
+            J3ChessApp.getLogger().error("NON"+validMovement.getValidNonCaptureMoves().toString());
+            J3ChessApp.getLogger().error("CAP"+validMovement.getValidCaptureMoves().toString());
+            J3ChessApp.getLogger().error("ALL"+validMovement.getValidMoves().toString());
+
+            for (Move move : validMovement.getValidMoves()) {
+                if (move.getTargetField() == clickedField) {
+                    game.doMove(move);
+                    return;
+                }
             }
         }
     }

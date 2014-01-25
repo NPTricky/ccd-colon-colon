@@ -1,23 +1,22 @@
 package j3chess.systems;
 
+import j3chess.J3ChessApp;
+import j3chess.Move;
+import j3chess.components.Paintable;
+import j3chess.components.Position;
+import j3chess.components.ValidMovement;
+import j3chess.utility.Vector2d;
+
 import java.awt.Graphics2D;
 import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
-import j3chess.Field;
-import j3chess.Game;
-import j3chess.J3ChessApp;
-import j3chess.components.Paintable;
-import j3chess.components.Position;
-import j3chess.components.ValidMovement;
-import j3chess.utility.Vector2d;
 import artemis.Aspect;
 import artemis.ComponentMapper;
 import artemis.ComponentType;
 import artemis.Entity;
 import artemis.annotations.Mapper;
-import artemis.managers.GroupManager;
 import artemis.systems.EntityProcessingSystem;
 
 /**
@@ -36,8 +35,8 @@ public class PaintSystem extends EntityProcessingSystem {
     static final ImageIcon SELECTION_OVERLAY = new ImageIcon(
             J3ChessApp.RESOURCEPATH + "selection.png");
 
-    static final ImageIcon MOVE_OVERLAY = new ImageIcon(
-            J3ChessApp.RESOURCEPATH + "move.png");
+    static final ImageIcon MOVE_OVERLAY = new ImageIcon(J3ChessApp.RESOURCEPATH
+            + "move.png");
 
     static final ImageIcon CAPTURE_OVERLAY = new ImageIcon(
             J3ChessApp.RESOURCEPATH + "capture.png");
@@ -81,43 +80,44 @@ public class PaintSystem extends EntityProcessingSystem {
                         null);
 
         if (J3ChessApp.getInstance().getGame().getSelectedPiece() == entity) {
-            Graphics2D graphics = J3ChessApp.getInstance().getDrawGraphics();
+            final Graphics2D graphics = J3ChessApp.getInstance()
+                    .getDrawGraphics();
 
             // Draw selection ring
             graphics.drawImage(
-                            SELECTION_OVERLAY.getImage(),
-                            Math.round(drawPosition.x - SELECTION_OVERLAY.getIconWidth() / 2.0f),
-                            Math.round(drawPosition.y - SELECTION_OVERLAY.getIconHeight() / 2.0f),
-                            null);
+                    SELECTION_OVERLAY.getImage(),
+                    Math.round(drawPosition.x
+                            - SELECTION_OVERLAY.getIconWidth() / 2.0f),
+                    Math.round(drawPosition.y
+                            - SELECTION_OVERLAY.getIconHeight() / 2.0f), null);
 
             // Draw valid moves
-            ValidMovement moves = (ValidMovement) entity.getComponent(
-                    ComponentType.getTypeFor(ValidMovement.class));
+            final ValidMovement moves = (ValidMovement) entity
+                    .getComponent(ComponentType.getTypeFor(ValidMovement.class));
 
-            for (Field f: moves.getValidNonCaptureMoves()) {
-            	Vector2d fDrawPosition = f.getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
+            for (final Move move : moves.getValidNonCaptureMoves()) {
+                final Vector2d fDrawPosition = move.getTargetField()
+                        .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
                 graphics.drawImage(
                         MOVE_OVERLAY.getImage(),
                         Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f),
-                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f),
-                        null);
+                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f), null);
             }
 
-            for (Field f: moves.getValidCaptureMoves()) {
-            	Vector2d fDrawPosition = f.getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
+            for (final Move move : moves.getValidCaptureMoves()) {
+                final Vector2d fDrawPosition = move.getTargetField()
+                        .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
                 graphics.drawImage(
                         CAPTURE_OVERLAY.getImage(),
                         Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f),
-                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f),
-                        null);
+                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f), null);
             }
-
 
         }
     }
 
     /** @brief size of the draw panel */
-    private Point mDrawPanelSize = new Point(668, 668);
+    private final Point mDrawPanelSize = new Point(668, 668);
 
     /**
      * @brief setter for the mDrawPanelSize member

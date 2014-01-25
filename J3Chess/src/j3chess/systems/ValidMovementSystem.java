@@ -14,6 +14,7 @@ import j3chess.components.Position;
 import j3chess.components.ValidMovement;
 import j3chess.utility.Helper;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -71,6 +72,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         final Position position = mPositionMapper.get(entity);
         mCurrentStartField = position.getField();
         mCurrentValidMovement = mValidMovementMapper.get(entity);
+        //mCurrentValidMovement.setValidCaptureMoves(new ArrayList<Move>());
+        //mCurrentValidMovement.setValidNonCaptureMoves(new ArrayList<Move>());
+        mCurrentValidNonCaptureMoves = new ArrayList<Move>();
+        mCurrentValidCaptureMoves = new ArrayList<Move>();
         mCurrentPlayer = requestPlayer(position.getField());
 
         // for each motion pattern do...
@@ -104,6 +109,8 @@ public class ValidMovementSystem extends EntityProcessingSystem {
     /** @brief valid movement component of the currently processed entity */
     private ValidMovement mCurrentValidMovement;
 
+    private List<Move> mCurrentValidNonCaptureMoves;
+    private List<Move> mCurrentValidCaptureMoves;
 /* ------------------------------------------------------------------------- */
 /* Recursion                                                                 */
 /* ------------------------------------------------------------------------- */
@@ -144,44 +151,13 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // Context Information //
         /////////////////////////
 
-        // the current motion is infinite in it's directions
-        final boolean isInfinite =
-                (currentMotion.getStepCount() == 0);
-
-        // the current step is the last step of the current motion. always
-        // true if (isInfinite == true) and thus clearly not as reliable as
-        // isLastStepOfMotion.
-        final boolean isLastStepOfMotionNaive =
-                !(currentStep < currentMotion.getStepCount());
-
-        /**
-         * problem: isLastStepOfMotionNaive is always true if the motion is
-         * infinite because countStep [0..n] is never smaller than 0. thus
-         * infinite movement is always a last step.
-         *
-         * solution: look at this binary table
-         *
-         *                              (DESIRED)
-         * | isInfinite | isLastStep | isMotionEnd |
-         * |     0      |     0      |      0      |
-         * |     0      |     1      |      1      |
-         * |     1      |    (1)     |      0      |
-         * |     1      |     1      |      0      |
-         *
-         * (1) is dependent on the value of isInfinite. isLastStep is 1 if
-         * isInfinite is 1. Thus a solution with XOR is correct.
-         *
-         * XOR of isInfinite and isLastStep defines isMotionEnd, whether the
-         * end of the current motion is reached.
-         */
-
-        // whether we already reached the last step of the current motion
-        final boolean isLastStepOfMotion =
-                (isInfinite ^ isLastStepOfMotionNaive);
-
         // whether the current motion is the last motion of the motion list
         final boolean isLastMotionOfList =
-                (currentMotionIndex == currentMotionList.size() - 1);
+                (currentMotionIndex == (currentMotionList.size() - 1));
+
+        // the current step is the last step of the current motion
+        final boolean isLastStepOfMotion =
+                (currentStep == (currentMotion.getStepCount() - 1));
 
         // whether the current step is the last step of the last motion
         final boolean isLastStepOfLastMotion =
@@ -190,10 +166,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
         // the current motion pattern is either a jump (unblockable) and at
         // it's last step or a common motion pattern
         //
-        // (!isJump || (isLastStep & isJump)) which may be simplified to
-        // (!isJump || isLastStep)
+        // (!isJump | (isLastStep & isJump)) which may be simplified to
+        // (!isJump | isLastStep)
         final boolean isAbleToMove =
-                (!currentMotionPattern.isJump() || isLastStepOfLastMotion);
+                (!currentMotionPattern.isJump() | isLastStepOfLastMotion);
 
         ///////////
         // Logic //
@@ -219,6 +195,10 @@ public class ValidMovementSystem extends EntityProcessingSystem {
             final boolean isCrossingCenter = currentField
                     .getWhetherCrossingCenter(currentFieldDirection);
 
+            // XOR used to toggle the current crossed center status
+            final boolean nextCrossedCenter =
+                    currentCrossedCenter ^ isCrossingCenter;
+
             final Field nextField =
                     currentField.getNeighbor(currentFieldDirection);
 
@@ -226,10 +206,6 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                 // there is no next field into the current direction
                 continue; // skip this loop iteration
             }
-
-            // XOR used to toggle the current crossed center status
-            final boolean nextCrossedCenter =
-                    currentCrossedCenter ^ isCrossingCenter;
 
 /* ------------------------------------------------------------------------- */
 
@@ -247,8 +223,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                             mCurrentStartField,
                             nextField,
                             isCrossingCenter);
-                        mCurrentValidMovement
-                            .getValidCaptureMoves()
+                        mCurrentValidCaptureMoves
                             .add(nextCaptureMove);
                     }
                     // this motion direction is blocked
@@ -260,8 +235,7 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     mCurrentStartField,
                     nextField,
                     isCrossingCenter);
-                mCurrentValidMovement
-                    .getValidNonCaptureMoves()
+                mCurrentValidNonCaptureMoves
                     .add(nextNonCaptureMove);
             }
 
@@ -298,7 +272,12 @@ public class ValidMovementSystem extends EntityProcessingSystem {
                     nextStep,
                     nextCrossedCenter);
         }
-        return;
+
+        // write the valid movement lists after a complete recursion
+        mCurrentValidMovement
+            .setValidNonCaptureMoves(mCurrentValidNonCaptureMoves);
+        mCurrentValidMovement
+            .setValidCaptureMoves(mCurrentValidCaptureMoves);
     }
 
 /* ------------------------------------------------------------------------- */

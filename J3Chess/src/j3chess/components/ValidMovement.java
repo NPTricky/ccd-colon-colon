@@ -51,6 +51,16 @@ public class ValidMovement extends Component {
     }
 
     /**
+     * @brief getter for a complete list of all valid moves
+     * @return a complete list of all valid moves
+     */
+    public final List<Move> getValidMoves() {
+        List<Move> validMoves = new ArrayList<Move>(mValidCaptureMoves);
+        validMoves.addAll(mValidNonCaptureMoves);
+        return validMoves;
+    }
+
+    /**
      * @brief setter for the mValidCaptureMoves member
      * @param validCaptureMoves the valid capturing moves
      */
