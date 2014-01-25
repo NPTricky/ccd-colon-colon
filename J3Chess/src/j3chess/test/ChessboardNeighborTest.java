@@ -2,10 +2,10 @@ package j3chess.test;
 
 import static org.junit.Assert.assertEquals;
 import j3chess.Chessboard;
-import j3chess.EntitySystem;
 import j3chess.Field;
 import j3chess.FieldDirection;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -16,6 +16,17 @@ import org.junit.Test;
  *  That doesn't make sense.
  */
 public class ChessboardNeighborTest {
+
+	/** Chessboard used for testing. */
+    private static Chessboard mChessboard;
+
+    /** Set up the test environment. */
+    @BeforeClass
+    public static void setup() {
+       // Let's go, create a new chessboard for testing
+       mChessboard = new Chessboard(null);
+    }
+
     /**
      * This tests whether all edges created by createFields() are
      *  symmetric. We don't want any fields Jim and Bob, where Bob
@@ -24,13 +35,10 @@ public class ChessboardNeighborTest {
      */
     @Test
     public final void properConstructor() {
-        // Let's go, create a new chessboard for testing
-        Chessboard cb = new Chessboard(null);
-
         // Loop through all fields
         for (int circle = 0; circle < Chessboard.NUMBEROFCIRCLES; circle++) {
             for (int column = 0; column < Chessboard.NUMBEROFCOLUMNS; column++) {
-                Field testSubject = cb.getField(column, circle);
+                Field testSubject = mChessboard.getField(column, circle);
 
                 // Test all edges for consistency
 
@@ -95,5 +103,4 @@ public class ChessboardNeighborTest {
             }
         }
     }
-
 }

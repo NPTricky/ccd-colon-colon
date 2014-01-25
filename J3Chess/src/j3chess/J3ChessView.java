@@ -181,6 +181,7 @@ public class J3ChessView extends FrameView {
     public final void addMove(final String move) {
         mNotationPanel.addMove(move);
     }
+
     /**
      * @return the persistent Graphics of the Draw Panel as Graphics2D object
      */
