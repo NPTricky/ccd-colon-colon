@@ -11,7 +11,10 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
-
+/**
+ * Panel for the Chessboard. Draws the Chessboard and all pieces.
+ * Implements the Mouselistener.
+ */
 public class DrawPanel extends JComponent implements MouseListener {
 
     /**

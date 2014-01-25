@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,7 +20,9 @@ import javax.swing.KeyStroke;
 import org.jdesktop.application.FrameView;
 
 
-
+/**
+ * The main GUI class of the game, which creates the View.
+ */
 public class J3ChessView extends FrameView {
     /**
      * Height of the Chessboard.
@@ -31,10 +32,21 @@ public class J3ChessView extends FrameView {
      * Width of the Chessboard.
      */
     public static final int CHESSBOARDWIDTH = 664;
+
+    /**
+     * The width of the NotationPanel.
+     */
+    public static final int NOTATIONPANELWIDTH = 300;
+
+    /**
+     * The height of the NotationPanel.
+     */
+    public static final int NOTATIONPANELHIGHT = 728;
+
     /**
      * Height of the DrawPanel.
      */
-    private static int mDrawPanelHight;
+    private static int mDrawPanelHeight;
     /**
      * Width of the DrawPanel.
      */
@@ -79,16 +91,17 @@ public class J3ChessView extends FrameView {
 
         final int border = 12;
         mDrawPanelWidth = chessboardImage.getIconWidth() + border;
-        mDrawPanelHight = chessboardImage.getIconHeight() + border;
+        mDrawPanelHeight = chessboardImage.getIconHeight() + border;
 
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
 
         //  TODO Read values from image / style file
-        mainPanel.setPreferredSize(new Dimension(mDrawPanelWidth + 8, mDrawPanelHight + 8));
-        mDrawPanel = new DrawPanel(mDrawPanelWidth, mDrawPanelHight);
-        mNotationPanel = new NotationPanel(300, 728);
+        final int drawPanelBorder = 8;
+        mainPanel.setPreferredSize(new Dimension(mDrawPanelWidth + drawPanelBorder, mDrawPanelHeight + drawPanelBorder));
+        mDrawPanel = new DrawPanel(mDrawPanelWidth, mDrawPanelHeight);
+        mNotationPanel = new NotationPanel(NOTATIONPANELWIDTH, NOTATIONPANELHIGHT);
         mainPanel.add(mDrawPanel, new GridBagConstraints());
 
         this.getFrame().getContentPane().setLayout(new FlowLayout());
@@ -168,12 +181,17 @@ public class J3ChessView extends FrameView {
     public final void addMove(final String move) {
         mNotationPanel.addMove(move);
     }
-
-    public Graphics2D getDrawGraphics() {
+    /**
+     * @return the persistent Graphics of the Draw Panel as Graphics2D object
+     */
+    public final Graphics2D getDrawGraphics() {
         return mDrawPanel.getPersistentGraphics();
     }
 
-    public void reset() {
+    /**
+     * @brief reset the view for a new game
+     */
+    public final void reset() {
         mNotationPanel.reset();
         mDrawPanel.repaint();
     }
@@ -189,7 +207,7 @@ public class J3ChessView extends FrameView {
      * @return the DrawPanelHight
      */
     public final int getDrawPanelHight() {
-        return mDrawPanelHight;
+        return mDrawPanelHeight;
     }
     /**
      * @return the DrawPanelWidth
