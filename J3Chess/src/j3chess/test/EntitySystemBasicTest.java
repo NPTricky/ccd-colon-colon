@@ -13,7 +13,7 @@ import artemis.utils.Bag;
 
 public class EntitySystemBasicTest {
 
-    public class SimpleComponent extends Component {
+    public static class SimpleComponent extends Component {
 
         SimpleComponent() {
         }
