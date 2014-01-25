@@ -26,11 +26,19 @@ public class J3ChessView extends FrameView {
     /**
      * Height of the Chessboard.
      */
-    public static final int CHESSBOARDHEIGHT = 700;
+    public static final int CHESSBOARDHEIGHT = 664;
     /**
      * Width of the Chessboard.
      */
-    public static final int CHESSBOARDWIDTH = 700;
+    public static final int CHESSBOARDWIDTH = 664;
+    /**
+     * Height of the DrawPanel.
+     */
+    public static int DRAWPANELHEIGHT;
+    /**
+     * Width of the DrawPanel.
+     */
+    public static int DRAWPANELWIDTH;
     /**
      * Path to the ChessboardImage.
      */
@@ -67,19 +75,20 @@ public class J3ChessView extends FrameView {
      */
     private void initialize() {
         ImageIcon chessboardImage = new ImageIcon(mChessboardImagePath);
-
-        //scale the chessboard
-        chessboardImage.setImage(chessboardImage.getImage().
-                getScaledInstance(CHESSBOARDWIDTH, CHESSBOARDHEIGHT, Image.SCALE_DEFAULT));
+        chessboardImage.setImage(chessboardImage.getImage());
+        
+        final int border = 12;
+        DRAWPANELWIDTH = chessboardImage.getIconWidth() + border;
+        DRAWPANELHEIGHT = chessboardImage.getIconHeight() + border;
 
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
 
         //  TODO Read values from image / style file
-        mainPanel.setPreferredSize(new Dimension(700, 700));
-        mDrawPanel = new DrawPanel(668, 668);
-        mNotationPanel = new NotationPanel(300, 700);
+        mainPanel.setPreferredSize(new Dimension(DRAWPANELWIDTH + 8, DRAWPANELHEIGHT + 8));
+        mDrawPanel = new DrawPanel(DRAWPANELWIDTH, DRAWPANELHEIGHT);
+        mNotationPanel = new NotationPanel(300, 728);
         mainPanel.add(mDrawPanel, new GridBagConstraints());
 
         this.getFrame().getContentPane().setLayout(new FlowLayout());

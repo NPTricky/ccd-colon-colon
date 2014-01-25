@@ -1,10 +1,13 @@
 package j3chess;
 
+import j3chess.components.Selection;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 
+import artemis.Aspect;
 import artemis.Entity;
 import artemis.managers.GroupManager;
 import artemis.utils.ImmutableBag;
@@ -224,6 +227,8 @@ public class Game {
 
         // Select clicked entity
         mEntitySystem.getGroupManager().add(clickedEntity, SELECTED_GROUP);
+        clickedEntity.addComponent(new Selection());
+        clickedEntity.changedInWorld();
         J3ChessApp.getLogger().info("Selected entity " + clickedEntity);
     }
 
@@ -237,6 +242,8 @@ public class Game {
         // Remove previous selection (should be only 1 entity)
         ImmutableBag<Entity> selectedEntities = groupManager.getEntities(SELECTED_GROUP);
         for (int i = 0; i < selectedEntities.size(); ++i) {
+            selectedEntities.get(i).removeComponent(Selection.class);
+            selectedEntities.get(i).changedInWorld();
             groupManager.remove(selectedEntities.get(i), SELECTED_GROUP);
         }
     }
