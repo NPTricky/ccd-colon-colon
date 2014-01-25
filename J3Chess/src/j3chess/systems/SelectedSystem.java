@@ -40,16 +40,16 @@ public class SelectedSystem extends EntityProcessingSystem {
     /** @brief offset used for drawing on the chessboard */
     private final Vector2d mDrawOffset;
 
-	public SelectedSystem(J3ChessView view) {
-		super(Aspect.getAspectForAll(Selection.class, Position.class));
-		mDrawOffset = new Vector2d((view.getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
-				(view.getDrawPanelHeight() - mDrawPanelSize.x) / 2.0f);
-	}
+    public SelectedSystem(J3ChessView view) {
+        super(Aspect.getAspectForAll(Selection.class, Position.class));
+        mDrawOffset = new Vector2d((view.getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
+                (view.getDrawPanelHeight() - mDrawPanelSize.x) / 2.0f);
+    }
 
 
-	@Override
-	protected void process(Entity e) {
-		J3ChessApp.getLogger().debug("=== PROCESSING SELECTION ===");
+    @Override
+    protected void process(Entity e) {
+        J3ChessApp.getLogger().debug("=== PROCESSING SELECTION ===");
         Position position = mPositionMapper.get(e);
 
         final Graphics2D graphics = J3ChessApp.getInstance()
@@ -72,27 +72,27 @@ public class SelectedSystem extends EntityProcessingSystem {
         final ValidMovement moves = (ValidMovement) e.getComponent(ComponentType.getTypeFor(ValidMovement.class));
 
         if (moves != null) {
-	        for (final Move move : moves.getValidNonCaptureMoves()) {
-	            final Vector2d fDrawPosition = move.getTargetField()
-	                    .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
-	            graphics.drawImage(
-	                    MOVE_OVERLAY.getImage(),
-	                    Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
-	                            + mDrawOffset.x),
-	                    Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
-	                            + mDrawOffset.y), null);
-	        }
+            for (final Move move : moves.getValidNonCaptureMoves()) {
+                final Vector2d fDrawPosition = move.getTargetField()
+                        .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
+                graphics.drawImage(
+                        MOVE_OVERLAY.getImage(),
+                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
+                                + mDrawOffset.x),
+                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
+                                + mDrawOffset.y), null);
+            }
 
-	        for (final Move move : moves.getValidCaptureMoves()) {
-	            final Vector2d fDrawPosition = move.getTargetField()
-	                    .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
-	            graphics.drawImage(
-	                    CAPTURE_OVERLAY.getImage(),
-	                    Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
-	                            + mDrawOffset.x),
-	                    Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
-	                            + mDrawOffset.y), null);
-	        }
+            for (final Move move : moves.getValidCaptureMoves()) {
+                final Vector2d fDrawPosition = move.getTargetField()
+                        .getDrawPosition(mDrawPanelSize.x, mDrawPanelSize.y);
+                graphics.drawImage(
+                        CAPTURE_OVERLAY.getImage(),
+                        Math.round(fDrawPosition.x - MOVE_OVERLAY.getIconWidth() / 2.0f
+                                + mDrawOffset.x),
+                        Math.round(fDrawPosition.y - MOVE_OVERLAY.getIconHeight() / 2.0f
+                                + mDrawOffset.y), null);
+            }
         }
-	}
+    }
 }

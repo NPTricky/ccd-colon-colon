@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class ChessboardNeighborTest {
 
-	/** Chessboard used for testing. */
+    /** Chessboard used for testing. */
     private static Chessboard mChessboard;
 
     /** Set up the test environment. */

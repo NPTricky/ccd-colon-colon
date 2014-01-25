@@ -16,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 })
 public class GameLogicTestSuite {
 
-    @BeforeClass 
+    @BeforeClass
     public static void setup() {
     }
 
