@@ -2,6 +2,7 @@ package j3chess.test;
 
 import static org.junit.Assert.assertEquals;
 import j3chess.EntitySystem;
+import j3chess.components.Position;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,13 +13,6 @@ import artemis.World;
 import artemis.utils.Bag;
 
 public class EntitySystemBasicTest {
-
-    public class SimpleComponent extends Component {
-        @Override
-        public String toString() {
-            return "SimpleComponent []";
-        }
-    }
 
     static EntitySystem mEntitySystem = new EntitySystem();
     static World mWorld = mEntitySystem.getWorld();
@@ -39,8 +33,8 @@ public class EntitySystemBasicTest {
     public void createEntityWithComponent() {
         Entity entity = createExampleEntity();
         assertEquals("Entity has no Component.",
-                "SimpleComponent []",
-                entity.getComponent(SimpleComponent.class).toString());
+                Position.class,
+                entity.getComponent(Position.class).getClass());
     }
 
     @Test
@@ -57,16 +51,16 @@ public class EntitySystemBasicTest {
     @Test
     public void deleteComponentFromEntity() {
         Entity entity = createExampleEntity();
-        entity.removeComponent(SimpleComponent.class);
+        entity.removeComponent(Position.class);
         assertEquals(
                 "Component is still there.",
                 null,
-                entity.getComponent(SimpleComponent.class));
+                entity.getComponent(Position.class));
     }
 
     private Entity createExampleEntity() {
         final Entity entity = mWorld.createEntity();
-        final SimpleComponent componentInserted = new SimpleComponent();
+        final Position componentInserted = new Position();
         entity.addComponent(componentInserted);
         entity.addToWorld();
         return entity;
