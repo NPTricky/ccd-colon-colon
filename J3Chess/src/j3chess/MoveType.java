@@ -18,8 +18,4 @@ public enum MoveType {
     KingsideCastling,
     /** @brief queenside castling */
     QueensideCastling,
-    /** @brief check, if another king is in danger */
-    Check,
-    /** @brief checkmate, if another king is in checkmate */
-    Checkmate
 }
