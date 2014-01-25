@@ -34,8 +34,8 @@ public class J3ChessApp extends SingleFrameApplication {
     public static void main(final String[] args) {
         // setup for asynchronous logging
         System.setProperty(
-            "Log4jContextSelector",
-            "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+                "Log4jContextSelector",
+                "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
         // launch the application
         launch(J3ChessApp.class, args);
@@ -83,10 +83,13 @@ public class J3ChessApp extends SingleFrameApplication {
     }
 
     public Game getGame() {
-    	return mGame;
+        return mGame;
     }
 
-	public Graphics2D getDrawGraphics() {
-		return mView.getDrawGraphics();
-	}
+    public Graphics2D getDrawGraphics() {
+        return mView.getDrawGraphics();
+    }
+    public J3ChessView getView(){
+        return mView;
+    }
 }

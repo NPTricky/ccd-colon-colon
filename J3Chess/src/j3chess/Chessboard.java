@@ -1,10 +1,8 @@
 package j3chess;
 
 import j3chess.components.Paintable;
-import j3chess.components.Position;
 import j3chess.utility.Vector2d;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 import org.apache.logging.log4j.Level;
 import artemis.Entity;
 
@@ -213,7 +211,7 @@ public class Chessboard {
      * @param circle the Circle of the Field
      */
     private void setRight(final Field field, final int column, final int circle) {
-        field.setNeighbor(FieldDirection.CounterClockwise, mFields[((column + 1) % NUMBEROFCOLUMNS)][circle]);
+        field.setNeighbor(FieldDirection.CounterClockwise, mFields[(column + 1) % NUMBEROFCOLUMNS][circle]);
     }
 
     /**
@@ -239,7 +237,7 @@ public class Chessboard {
         if (circle < NUMBEROFCIRCLES - 1) {
             field.setNeighbor(FieldDirection.In, mFields[column][circle + 1]);
         } else {
-            field.setNeighbor(FieldDirection.In, mFields[((column + NUMBEROFCOLUMNS / 2) % NUMBEROFCOLUMNS)][circle]);
+            field.setNeighbor(FieldDirection.In, mFields[(column + NUMBEROFCOLUMNS / 2) % NUMBEROFCOLUMNS][circle]);
         }
     }
     /**
@@ -303,10 +301,10 @@ public class Chessboard {
      */
     private void setLeftInner(final Field field, final int column, final int circle) {
         if (circle < NUMBEROFCIRCLES - 1) {
-            if (column != 0) {
-                field.setNeighbor(FieldDirection.InClockwise, mFields[column - 1][circle + 1]);
-            } else {
+            if (column == 0) {
                 field.setNeighbor(FieldDirection.InClockwise, mFields[NUMBEROFCOLUMNS - 1][circle + 1]);
+            } else {
+                field.setNeighbor(FieldDirection.InClockwise, mFields[column - 1][circle + 1]);
             }
         } else {
             //diagonal through the middle
@@ -416,17 +414,6 @@ public class Chessboard {
 
         // Return the field we found
         return mFields[column][circle];
-    }
-
-    /**
-     * @ Brief prints all Fields just for debugging
-     */
-    private void printAllFields() {
-        for (int circles = 0; circles < NUMBEROFCIRCLES; circles++) {
-            for (int columns = 0; columns < NUMBEROFCOLUMNS; columns++) {
-                mFields[columns][circles].print();
-            }
-        }
     }
 }
 

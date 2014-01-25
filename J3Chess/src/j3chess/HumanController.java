@@ -53,9 +53,9 @@ public class HumanController extends PlayerController {
         if (selectedPiece != null) {
             ValidMovement validMovement = (ValidMovement) selectedPiece.getComponent(ComponentType.getTypeFor(ValidMovement.class));
 
-            J3ChessApp.getLogger().error("NON"+validMovement.getValidNonCaptureMoves().toString());
-            J3ChessApp.getLogger().error("CAP"+validMovement.getValidCaptureMoves().toString());
-            J3ChessApp.getLogger().error("ALL"+validMovement.getValidMoves().toString());
+            J3ChessApp.getLogger().error("NON" + validMovement.getValidNonCaptureMoves().toString());
+            J3ChessApp.getLogger().error("CAP" + validMovement.getValidCaptureMoves().toString());
+            J3ChessApp.getLogger().error("ALL" + validMovement.getValidMoves().toString());
 
             for (Move move : validMovement.getValidMoves()) {
                 if (move.getTargetField() == clickedField) {

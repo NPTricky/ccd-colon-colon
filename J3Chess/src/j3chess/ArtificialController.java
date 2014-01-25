@@ -43,13 +43,13 @@ public class ArtificialController extends PlayerController {
                 result = value * value;
                 break;
             case Rook:
-                result = Math.round(value + (value * value / 2));
+                result = Math.round(value + (value * value / (float) 2));
                 break;
             case Bishop:
-                result = Math.round(2 * value + (value / 2));
+                result = Math.round(2 * value + (value / (float) 2));
                 break;
             case Knight:
-                result = Math.round(2 * value + (value / 2));
+                result = Math.round(2 * value + (value / (float) 2));
                 break;
             case Pawn:
                 result = value;
@@ -62,12 +62,12 @@ public class ArtificialController extends PlayerController {
         }
 
         String eol = System.getProperty("line.separator");
-        String log = "";
+        StringBuffer logStringBuffer = new StringBuffer();
         for (PieceType pieceType : EnumSet.allOf(PieceType.class)) {
-            log += "Value of " + pieceType.toString() + ": "
-                   + mPieceValue.get(pieceType).toString() + eol;
+            logStringBuffer.append("Value of " + pieceType.toString() + ": "
+                   + mPieceValue.get(pieceType).toString() + eol);
         }
-        J3ChessApp.getLogger().debug(log);
+        J3ChessApp.getLogger().debug(logStringBuffer.toString());
     }
 
 }

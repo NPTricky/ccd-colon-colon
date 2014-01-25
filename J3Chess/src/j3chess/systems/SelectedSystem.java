@@ -38,17 +38,17 @@ public class SelectedSystem extends EntityProcessingSystem {
             J3ChessView.CHESSBOARDHEIGHT);
 
     /** @brief offset used for drawing on the chessboard */
-    private final Vector2d mDrawOffset = new Vector2d((J3ChessView.DRAWPANELWIDTH - mDrawPanelSize.x) / 2.0f,
-            (J3ChessView.DRAWPANELHEIGHT - mDrawPanelSize.x) / 2.0f);
+    private final Vector2d mDrawOffset = new Vector2d((J3ChessApp.getInstance().getView().getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
+            (J3ChessApp.getInstance().getView().getDrawPanelHight() - mDrawPanelSize.x) / 2.0f);
 
 	public SelectedSystem() {
 		super(Aspect.getAspectForAll(Selection.class, Position.class));
 	}
-	
+
+
 	@Override
 	protected void process(Entity e) {
 		J3ChessApp.getLogger().debug("=== PROCESSING SELECTION ===");
-		
         Position position = mPositionMapper.get(e);
 
         final Graphics2D graphics = J3ChessApp.getInstance()
@@ -60,9 +60,9 @@ public class SelectedSystem extends EntityProcessingSystem {
         // Draw selection ring
         graphics.drawImage(
                 SELECTION_OVERLAY.getImage(),
-                Math.round(Math.round(drawPosition.x
+                Math.round(drawPosition.x
                         - SELECTION_OVERLAY.getIconWidth() / 2.0f
-                        + mDrawOffset.x)),
+                        + mDrawOffset.x),
                 Math.round(drawPosition.y
                         - SELECTION_OVERLAY.getIconHeight() / 2.0f
                         + mDrawOffset.y), null);
@@ -94,6 +94,4 @@ public class SelectedSystem extends EntityProcessingSystem {
 	        }
         }
 	}
-
-	
 }
