@@ -2,13 +2,9 @@ package j3chess.test;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.swing.ImageIcon;
-
 import j3chess.EntitySystem;
 import j3chess.J3ChessView;
-import j3chess.components.Paintable;
 import j3chess.components.Selection;
-import j3chess.systems.PaintSystem;
 import j3chess.systems.SelectedSystem;
 
 import org.junit.BeforeClass;
@@ -33,8 +29,6 @@ public class SelectedSystemBasicTest {
 
     @Test
     public void initialise() {
-        ImageIcon image = new ImageIcon("src/j3chess/resources/graphics/pieces_two/queen.png");
-
         Entity entity_one = mEntitySystem.getWorld().createEntity();
         entity_one.addComponent(new Selection());
         entity_one.addToWorld();
