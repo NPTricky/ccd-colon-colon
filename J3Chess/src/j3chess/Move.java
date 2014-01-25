@@ -92,18 +92,18 @@ public class Move {
         // move type
         switch (mMoveType) {
         case Capture:
-            this.mDescription = movingPiece + "x" + mTargetField.toString();
+            this.mDescription = movingPiece + mStartField.toString() +"x" + mTargetField.toString();
             break;
         case CaptureEnPassant:
-            this.mDescription = mStartField.toFile() + "x"
+            this.mDescription = mStartField.toFile() + ":"
                               + mTargetField.toString() + "e.p.";
             break;
         case Common:
             this.mDescription = movingPiece + mTargetField.toString();
             break;
         case Disambiguating:
-            this.mDescription = movingPiece + mStartField.toString() + " "
-                              + movingPiece + mTargetField.toString();
+            this.mDescription = movingPiece + mStartField.toString() + "-"
+                               + mTargetField.toString();
             break;
         case KingsideCastling:
             this.mDescription = "0-0";
