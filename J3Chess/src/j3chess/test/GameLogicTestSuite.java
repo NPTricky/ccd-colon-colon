@@ -11,7 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
     PieceFactoryTestSuite.class,
     GameTestSuite.class,
     EntitySystemTestSuite.class,
-    HelperTestSuite.class
+    HelperTestSuite.class,
+    ChessboardTestSuite.class
 })
 public class GameLogicTestSuite {
 

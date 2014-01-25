@@ -15,7 +15,7 @@ import org.junit.Test;
  *  is Jim's left neighbor, but Jim isn't Bob's right neighbor.
  *  That doesn't make sense.
  */
-public class ChessboardTest {
+public class ChessboardNeighborTest {
     /**
      * This tests whether all edges created by createFields() are
      *  symmetric. We don't want any fields Jim and Bob, where Bob
@@ -23,7 +23,7 @@ public class ChessboardTest {
      *  That doesn't make sense.
      */
     @Test
-    public final void constructorTest() {
+    public final void properConstructor() {
         // Let's go, create a new chessboard for testing
         Chessboard cb = new Chessboard(null);
 
