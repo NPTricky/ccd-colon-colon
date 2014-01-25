@@ -60,7 +60,7 @@ public class J3ChessView extends FrameView {
     /**
      * Path to the ChessboardImage.
      */
-    private final String mChessboardImagePath = "src/j3chess/resources/graphics/chessboard.png";
+    private static final String CHESSBOARDIMAGEPATH = "src/j3chess/resources/graphics/chessboard.png";
 
     /**
      * The NotationPanel for drawing Pieces.
@@ -92,7 +92,7 @@ public class J3ChessView extends FrameView {
      * @Brief initialize the View
      */
     private void initialize() {
-        final ImageIcon chessboardImage = new ImageIcon(mChessboardImagePath);
+        final ImageIcon chessboardImage = new ImageIcon(CHESSBOARDIMAGEPATH);
         chessboardImage.setImage(chessboardImage.getImage());
 
         final int border = 12;
@@ -133,12 +133,15 @@ public class J3ChessView extends FrameView {
         try {
             final FileReader filereader = new FileReader("about.txt");
             final BufferedReader br = new BufferedReader(filereader);
+            StringBuffer stringBuffer = new StringBuffer();
+            
             String zeile = "";
             while ((zeile = br.readLine()) != null) {
-                System.out.println(zeile);
-                returnValue += zeile + "\n";
+                stringBuffer.append(zeile);
+                stringBuffer.append("\n");
             }
             br.close();
+            returnValue = stringBuffer.toString();
         } catch (final FileNotFoundException e) {
             returnValue = "Aboutfile not found";
         } catch (final IOException e) {
