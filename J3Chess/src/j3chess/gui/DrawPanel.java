@@ -34,7 +34,6 @@ public class DrawPanel extends JComponent implements MouseListener {
 
     /**
      * Constructor of the DrawPanel.
-     * 
      * @param sizeX
      *            width of the drawPanel
      * @param sizeY

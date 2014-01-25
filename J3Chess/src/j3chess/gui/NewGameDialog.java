@@ -52,15 +52,15 @@ public class NewGameDialog extends JFrame {
         super("Start new Game");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        // Fenstergroesse festlegen
-        // setPreferredSize(new Dimension(800,1000));
-
         // Fensterposition festlegen
-        setLocation(150, 150);
+        final int positionX = 150;
+        final int positionY = 150;
+        setLocation(positionX, positionY);
 
         // HauptGridLayout 2 columns
         final GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[] { 150, 150 };
+        final int [] gridColumnWidths = {150, 150};
+        gridBagLayout.columnWidths = gridColumnWidths;
         setLayout(gridBagLayout);
 
         final JLabel[] playerLabels = new JLabel[mPlayers.size()];
