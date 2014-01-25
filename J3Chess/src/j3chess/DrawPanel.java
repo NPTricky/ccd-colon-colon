@@ -18,6 +18,7 @@ public class DrawPanel extends JComponent implements MouseListener {
     public DrawPanel(int sizeX, int sizeY) {
         setPreferredSize(new Dimension(sizeX, sizeY));
         mImg = new BufferedImage(sizeX, sizeY, BufferedImage.TYPE_INT_ARGB);
+        mImg.getGraphics();
         this.addMouseListener(this);
     }
 

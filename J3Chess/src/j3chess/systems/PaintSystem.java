@@ -7,6 +7,7 @@ import j3chess.components.Position;
 import j3chess.components.ValidMovement;
 import j3chess.utility.Vector2d;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
@@ -18,6 +19,7 @@ import artemis.ComponentType;
 import artemis.Entity;
 import artemis.annotations.Mapper;
 import artemis.systems.EntityProcessingSystem;
+
 
 /**
  * entity processing system which draws every paintable entity at its
@@ -47,6 +49,14 @@ public class PaintSystem extends EntityProcessingSystem {
      */
     public PaintSystem() {
         super(Aspect.getAspectForAll(Paintable.class));
+    }
+
+    protected void begin() {
+    	// Clear rect
+        final Graphics2D graphics = J3ChessApp.getInstance().getDrawGraphics();
+        graphics.setColor(J3ChessApp.getInstance().getMainView().
+        		getFrame().getBackground());
+        graphics.fillRect(0, 0, mDrawPanelSize.x, mDrawPanelSize.y);
     }
 
     /**
