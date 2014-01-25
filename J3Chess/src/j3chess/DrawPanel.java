@@ -11,13 +11,20 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
-import org.apache.logging.log4j.Level;
 
 public class DrawPanel extends JComponent implements MouseListener {
 
+    /**
+     * @brief Background Image of the DrawPanel (the Chessboard)
+     */
     private BufferedImage mImg;
 
-    public DrawPanel(int sizeX, int sizeY) {
+    /**
+     * Constructor of the DrawPanel.
+     * @param sizeX width of the drawPanel
+     * @param sizeY height of the drawPanel
+     */
+    public DrawPanel(final int sizeX, final int sizeY) {
         setPreferredSize(new Dimension(sizeX, sizeY));
         mImg = new BufferedImage(sizeX, sizeY, BufferedImage.TYPE_INT_ARGB);
         mImg.getGraphics();
@@ -25,7 +32,7 @@ public class DrawPanel extends JComponent implements MouseListener {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public final void paintComponent(final Graphics g) {
         super.paintComponent(g);
         J3ChessApp.getInstance().update();
         g.drawImage(mImg, 0, 0, null);
@@ -53,9 +60,9 @@ public class DrawPanel extends JComponent implements MouseListener {
     @Override
     public void mousePressed(MouseEvent arg0) {
         // Resize x and y to [-1,1] range
-    	final Vector2d offset = new Vector2d((J3ChessApp.getInstance().getView().getDrawPanelWidth()
-    			- J3ChessView.CHESSBOARDWIDTH) / 2.0f, (J3ChessApp.getInstance().getView().getDrawPanelWidth()
-    	        - J3ChessView.CHESSBOARDHEIGHT) / 2.0f);
+        final Vector2d offset = new Vector2d((J3ChessApp.getInstance().getView().getDrawPanelWidth()
+                - J3ChessView.CHESSBOARDWIDTH) / 2.0f, (J3ChessApp.getInstance().getView().getDrawPanelWidth()
+                        - J3ChessView.CHESSBOARDHEIGHT) / 2.0f);
         final float x = ((float) (arg0.getX() - offset.x) / (float) J3ChessView.CHESSBOARDWIDTH) * 2.0f - 1.0f;
         final float y = ((float) (arg0.getY() - offset.y) / (float) J3ChessView.CHESSBOARDHEIGHT) * 2.0f - 1.0f;
 

@@ -213,7 +213,7 @@ public class Chessboard {
      * @param circle the Circle of the Field
      */
     private void setRight(final Field field, final int column, final int circle) {
-        field.setNeighbor(FieldDirection.CounterClockwise, mFields[((column + 1) % NUMBEROFCOLUMNS)][circle]);
+        field.setNeighbor(FieldDirection.CounterClockwise, mFields[(column + 1) % NUMBEROFCOLUMNS][circle]);
     }
 
     /**
@@ -239,7 +239,7 @@ public class Chessboard {
         if (circle < NUMBEROFCIRCLES - 1) {
             field.setNeighbor(FieldDirection.In, mFields[column][circle + 1]);
         } else {
-            field.setNeighbor(FieldDirection.In, mFields[((column + NUMBEROFCOLUMNS / 2) % NUMBEROFCOLUMNS)][circle]);
+            field.setNeighbor(FieldDirection.In, mFields[(column + NUMBEROFCOLUMNS / 2) % NUMBEROFCOLUMNS][circle]);
         }
     }
     /**

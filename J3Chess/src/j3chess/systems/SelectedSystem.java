@@ -60,9 +60,9 @@ public class SelectedSystem extends EntityProcessingSystem {
         // Draw selection ring
         graphics.drawImage(
                 SELECTION_OVERLAY.getImage(),
-                Math.round(Math.round(drawPosition.x
+                Math.round(drawPosition.x
                         - SELECTION_OVERLAY.getIconWidth() / 2.0f
-                        + mDrawOffset.x)),
+                        + mDrawOffset.x),
                 Math.round(drawPosition.y
                         - SELECTION_OVERLAY.getIconHeight() / 2.0f
                         + mDrawOffset.y), null);
