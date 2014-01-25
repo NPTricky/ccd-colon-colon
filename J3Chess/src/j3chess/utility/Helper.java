@@ -29,20 +29,16 @@ public final class Helper {
             EnumSet<PieceDirection> result;
             switch (group) {
             case Diagonal:
-                result = EnumSet.of(
-                        PieceDirection.ForwardRight,
+                result = EnumSet.of(PieceDirection.ForwardRight,
                         PieceDirection.ForwardLeft,
                         PieceDirection.BackwardLeft,
                         PieceDirection.BackwardRight);
                 break;
             case Horizontal:
-                result = EnumSet.of(
-                        PieceDirection.Right,
-                        PieceDirection.Left);
+                result = EnumSet.of(PieceDirection.Right, PieceDirection.Left);
                 break;
             case Vertical:
-                result = EnumSet.of(
-                        PieceDirection.Forward,
+                result = EnumSet.of(PieceDirection.Forward,
                         PieceDirection.Backward);
                 break;
             case Every:
@@ -59,10 +55,10 @@ public final class Helper {
          * @brief translates a set of field directions into a set of piece
          *        directions
          * @param pieceDirections
-         *        the directions of the piece about to be mapped into field
-         *        directions
+         *            the directions of the piece about to be mapped into field
+         *            directions
          * @param crossedCenter
-         *        whether the piece already crossed the center of the board
+         *            whether the piece already crossed the center of the board
          * @return the translated field directions
          */
         public static EnumSet<FieldDirection> toFieldDirections(
@@ -84,15 +80,14 @@ public final class Helper {
         /**
          * @brief translates a field direction into a piece direction
          * @param pieceDirection
-         *        the direction of the piece about to be mapped into a field
-         *        direction
+         *            the direction of the piece about to be mapped into a field
+         *            direction
          * @param crossedCenter
-         *        whether the piece already crossed the center of the board
+         *            whether the piece already crossed the center of the board
          * @return the translated field direction
          */
         public static FieldDirection toFieldDirection(
-                final PieceDirection pieceDirection,
-                final boolean crossedCenter) {
+                final PieceDirection pieceDirection, final boolean crossedCenter) {
 
             FieldDirection result = null;
             if (crossedCenter) {
@@ -124,8 +119,8 @@ public final class Helper {
                 default:
                     J3ChessApp.getLogger().error(
                             "Impossible to map PieceDirection "
-                            + pieceDirection.toString() + " into a"
-                            + "FieldDirection.");
+                                    + pieceDirection.toString() + " into a"
+                                    + "FieldDirection.");
                     break;
                 }
             } else { // !crossedCenter
@@ -157,8 +152,8 @@ public final class Helper {
                 default:
                     J3ChessApp.getLogger().error(
                             "Impossible to map PieceDirection "
-                            + pieceDirection.toString() + " into a"
-                            + "FieldDirection.");
+                                    + pieceDirection.toString() + " into a"
+                                    + "FieldDirection.");
                     break;
                 }
             }

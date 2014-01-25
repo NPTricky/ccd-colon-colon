@@ -1,7 +1,7 @@
 package j3chess.components;
 
-import artemis.Component;
 import j3chess.Field;
+import artemis.Component;
 
 /**
  * entity component for a position on a chessboard.
@@ -19,7 +19,8 @@ public class Position extends Component {
 
     /**
      * @brief constructor for position component
-     * @param current current position
+     * @param current
+     *            current position
      */
     public Position(final Field current) {
         this.mField = current;
@@ -35,7 +36,8 @@ public class Position extends Component {
 
     /**
      * @brief setter for the mPosition member
-     * @param current the current position
+     * @param current
+     *            the current position
      */
     public final void setField(final Field current) {
         this.mField = current;

@@ -42,6 +42,7 @@ public class EntitySystem {
         this.mWorld.setManager(new GroupManager());
         this.mWorld.setManager(new PlayerManager());
     }
+
     /**
      * @brief getter for the entity systems world.
      * @return the world
@@ -84,8 +85,10 @@ public class EntitySystem {
 
     /**
      * @brief add a system to the entity system (manager)
-     * @param system the system to add
-     * @param <T> type of the system to add
+     * @param system
+     *            the system to add
+     * @param <T>
+     *            type of the system to add
      */
     public final <T extends artemis.EntitySystem> void setSystem(final T system) {
         this.mWorld.setSystem(system);
@@ -93,7 +96,8 @@ public class EntitySystem {
 
     /**
      * @brief one simulation through all of the processing systems
-     * @param delta time delta
+     * @param delta
+     *            time delta
      */
     public final void process(final float delta) {
         this.mWorld.setDelta(delta);

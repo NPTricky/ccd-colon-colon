@@ -25,10 +25,8 @@ import artemis.Entity;
 
 public class PieceFactoryBasicTest {
 
-    static EntitySystem mEntitySystem =
-            new EntitySystem();
-    static PieceFactory mPieceFactory =
-            new PieceFactory(mEntitySystem);
+    static EntitySystem mEntitySystem = new EntitySystem();
+    static PieceFactory mPieceFactory = new PieceFactory(mEntitySystem);
 
     static ComponentType mPieceContextType = ComponentType
             .getTypeFor(PieceContext.class);
@@ -54,14 +52,12 @@ public class PieceFactoryBasicTest {
                         .getComponent(mPieceContextType)).getPieceType();
                 assertEquals(
                         "Factory Method <-> Entity System: PieceType Mismatch",
-                        type,
-                        entityType);
+                        type, entityType);
                 final Player entityPlayer = ((PieceContext) entity
                         .getComponent(mPieceContextType)).getPlayer();
                 assertEquals(
                         "Factory Method <-> Entity System: Player Mismatch",
-                        player,
-                        entityPlayer);
+                        player, entityPlayer);
                 checkCommon(entity);
             }
         }
@@ -69,15 +65,12 @@ public class PieceFactoryBasicTest {
 
     private void checkCommon(final Entity entity) {
         // check movement common
-        assertEquals(
-                "Crossed Center",
+        assertEquals("Crossed Center",
                 ((Movement) entity.getComponent(mMovementType))
-                    .getCrossedCenter(),
-                false);
+                        .getCrossedCenter(), false);
 
         // check position
-        assertEquals(
-                "Field Mismatch",
+        assertEquals("Field Mismatch",
                 ((Position) entity.getComponent(mPositionType)).getField(),
                 mDefaultField);
 
@@ -90,9 +83,6 @@ public class PieceFactoryBasicTest {
                 + context.getPlayer().name().toLowerCase() + "/"
                 + context.getPieceType().name().toLowerCase() + ".png";
         final Image testImage = new ImageIcon(path).getImage();
-        assertEquals(
-                "Image Mismatch",
-                entityImage,
-                testImage);
+        assertEquals("Image Mismatch", entityImage, testImage);
     }
 }

@@ -18,7 +18,8 @@ public class Selection extends Component {
 
     /**
      * @brief constructor for the selection component
-     * @param selected whether entity is selected
+     * @param selected
+     *            whether entity is selected
      */
     public Selection(final boolean selected) {
         this.mSelected = selected;
@@ -34,7 +35,8 @@ public class Selection extends Component {
 
     /**
      * @brief setter for the mSelected member
-     * @param selected whether entity is selected
+     * @param selected
+     *            whether entity is selected
      */
     public final void setSelected(final boolean selected) {
         this.mSelected = selected;

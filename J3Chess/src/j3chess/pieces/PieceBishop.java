@@ -29,12 +29,9 @@ public class PieceBishop extends Piece {
     @Override
     protected final void construct() {
         // movement abilities of the bishop...
-        Movement move = new Movement(
-                new MotionPattern(
-                        new Motion(
-                                Helper.Direction.fromGroup(DirectionGroup.Diagonal), 0)));
-        this.getEntity().addComponent(
-                move,
+        final Movement move = new Movement(new MotionPattern(new Motion(
+                Helper.Direction.fromGroup(DirectionGroup.Diagonal), 0)));
+        this.getEntity().addComponent(move,
                 ComponentType.getTypeFor(Movement.class));
     }
 

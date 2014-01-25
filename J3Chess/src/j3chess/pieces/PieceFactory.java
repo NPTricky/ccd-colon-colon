@@ -16,7 +16,8 @@ public class PieceFactory {
 
     /**
      * @brief constructor for piece factory
-     * @param system the entity system to create entities into
+     * @param system
+     *            the entity system to create entities into
      */
     public PieceFactory(final EntitySystem system) {
         this.mEntitySystem = system;
@@ -24,14 +25,15 @@ public class PieceFactory {
 
     /**
      * @brief helper method to create an piece entity
-     * @param type the type of the chess piece
-     * @param player the player that owns this piece
-     * @param field the field where the chess piece is placed
+     * @param type
+     *            the type of the chess piece
+     * @param player
+     *            the player that owns this piece
+     * @param field
+     *            the field where the chess piece is placed
      * @return the chess piece
      */
-    public final Entity create(
-            final PieceType type,
-            final Player player,
+    public final Entity create(final PieceType type, final Player player,
             final Field field) {
 
         Piece piece;
@@ -61,15 +63,15 @@ public class PieceFactory {
         }
 
         if (piece == null) {
-            J3ChessApp.getLogger().error(
-                    "unable to create the requested piece");
+            J3ChessApp.getLogger()
+                    .error("unable to create the requested piece");
             return null;
         }
 
         piece.construct();
         piece.initializeContext(player, field);
 
-        Entity entity = piece.getEntity();
+        final Entity entity = piece.getEntity();
         field.setPiece(entity);
         entity.addToWorld(); // last instruction (!)
         return entity;

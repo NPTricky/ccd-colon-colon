@@ -5,8 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(value = Suite.class)
-@SuiteClasses(value = {
-        EntitySystemBasicTest.class,
-        EntitySystemGroupTest.class
-})
-public class EntitySystemTestSuite {}
+@SuiteClasses(value = { EntitySystemBasicTest.class,
+        EntitySystemGroupTest.class })
+public class EntitySystemTestSuite {
+}

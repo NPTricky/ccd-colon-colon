@@ -35,7 +35,8 @@ public class ValidMovement extends Component {
 
     /**
      * @brief setter for the mValidNonCaptureMoves member
-     * @param validNonCaptureMoves the valid non capture moves
+     * @param validNonCaptureMoves
+     *            the valid non capture moves
      */
     public final void setValidNonCaptureMoves(
             final List<Move> validNonCaptureMoves) {
@@ -55,17 +56,17 @@ public class ValidMovement extends Component {
      * @return a complete list of all valid moves
      */
     public final List<Move> getValidMoves() {
-        List<Move> validMoves = new ArrayList<Move>(mValidCaptureMoves);
+        final List<Move> validMoves = new ArrayList<Move>(mValidCaptureMoves);
         validMoves.addAll(mValidNonCaptureMoves);
         return validMoves;
     }
 
     /**
      * @brief setter for the mValidCaptureMoves member
-     * @param validCaptureMoves the valid capturing moves
+     * @param validCaptureMoves
+     *            the valid capturing moves
      */
-    public final void setValidCaptureMoves(
-            final List<Move> validCaptureMoves) {
+    public final void setValidCaptureMoves(final List<Move> validCaptureMoves) {
         this.mValidCaptureMoves = validCaptureMoves;
     }
 

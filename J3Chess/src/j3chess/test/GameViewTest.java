@@ -13,13 +13,13 @@ import org.junit.Test;
 
 public class GameViewTest {
     /**
-     * @brief Modifies some game parameters and checks if they are
-     *        reset on "New Game".
+     * @brief Modifies some game parameters and checks if they are reset on
+     *        "New Game".
      */
     @Test
     public final void startGameTest() {
         // Get a game and do some stuff
-        J3ChessView view = new J3ChessView();
+        final J3ChessView view = new J3ChessView();
         Game game = new Game(view);
         assertNotNull(game);
         Chessboard chessboard = game.getChessboard();

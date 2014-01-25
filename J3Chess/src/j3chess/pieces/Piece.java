@@ -49,18 +49,20 @@ public abstract class Piece {
     }
 
     /**
-     * @brief initialize the piece entity with context information provided
-     * by the factory
-     * @param player the owning player
-     * @param field the field this piece stands on
+     * @brief initialize the piece entity with context information provided by
+     *        the factory
+     * @param player
+     *            the owning player
+     * @param field
+     *            the field this piece stands on
      */
-    protected final void initializeContext(
-            final Player player,
+    protected final void initializeContext(final Player player,
             final Field field) {
 
-        J3ChessApp.getLogger().debug("Building <" + mType.toString() + ">"
-                + " for <" + player.toString() + ">"
-                + " on Field <" + field.toString() + ">");
+        J3ChessApp.getLogger().debug(
+                "Building <" + mType.toString() + ">" + " for <"
+                        + player.toString() + ">" + " on Field <"
+                        + field.toString() + ">");
 
         mPiece.addComponent(new Position(field),
                 ComponentType.getTypeFor(Position.class));
@@ -72,19 +74,18 @@ public abstract class Piece {
 
     /**
      * @brief automatically generates the image path string from the given
-     * context information (player & pieceType)
-     * @param player the owner of this piece
-     * @param pieceType the type of this piece
+     *        context information (player & pieceType)
+     * @param player
+     *            the owner of this piece
+     * @param pieceType
+     *            the type of this piece
      * @return the image path string of this piece
      */
-    private String generateImagePath(
-            final Player player,
+    private String generateImagePath(final Player player,
             final PieceType pieceType) {
         final String imagePath = J3ChessApp.RESOURCEPATH + "pieces_"
-                + player.name().toLowerCase()
-                + "/"
-                + pieceType.name().toLowerCase()
-                + ".png";
+                + player.name().toLowerCase() + "/"
+                + pieceType.name().toLowerCase() + ".png";
         J3ChessApp.getLogger().debug("Path: <" + imagePath + ">");
         return imagePath;
     }

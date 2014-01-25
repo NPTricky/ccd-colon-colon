@@ -1,6 +1,5 @@
 package j3chess.controller;
 
-
 /**
  * enum of available players.
  */
@@ -19,7 +18,8 @@ public enum Player {
 
     /**
      * @brief setter for the mName member. getter is toString().
-     * @param name the name of the player
+     * @param name
+     *            the name of the player
      */
     public final void setName(final String name) {
         this.mName = name;
@@ -27,7 +27,8 @@ public enum Player {
 
     /**
      * @brief private constructor
-     * @param name the name of the player
+     * @param name
+     *            the name of the player
      */
     Player(final String name) {
         this.mName = name;
@@ -49,7 +50,8 @@ public enum Player {
 
     /**
      * @brief setter for the mPlayerController member
-     * @param playerController the controller of this player
+     * @param playerController
+     *            the controller of this player
      */
     public void setPlayerController(final PlayerController playerController) {
         this.mPlayerController = playerController;

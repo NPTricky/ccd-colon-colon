@@ -14,8 +14,10 @@ public class Movement extends Component {
 
     /** @brief list of possible move patterns */
     private List<MotionPattern> mPatterns;
-    /** @brief whether the movable entity already crossed the center of the
-     *         map. Required to map PieceDirection's into FieldDirection's. */
+    /**
+     * @brief whether the movable entity already crossed the center of the map.
+     *        Required to map PieceDirection's into FieldDirection's.
+     */
     private boolean mCrossedCenter = false;
 
     /**

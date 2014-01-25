@@ -1,7 +1,6 @@
 package j3chess;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,12 +28,12 @@ public class J3ChessApp extends SingleFrameApplication {
 
     /**
      * @brief main entry point of the project
-     * @param args command line arguments that won't be considered
+     * @param args
+     *            command line arguments that won't be considered
      */
     public static void main(final String[] args) {
         // setup for asynchronous logging
-        System.setProperty(
-                "Log4jContextSelector",
+        System.setProperty("Log4jContextSelector",
                 "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
         // launch the application
@@ -89,6 +88,7 @@ public class J3ChessApp extends SingleFrameApplication {
     public Graphics2D getDrawGraphics() {
         return mView.getDrawGraphics();
     }
+
     public J3ChessView getView() {
         return mView;
     }

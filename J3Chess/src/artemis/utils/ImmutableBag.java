@@ -2,12 +2,12 @@ package artemis.utils;
 
 public interface ImmutableBag<E> {
 
-	E get(int index);
+    E get(int index);
 
-	int size();
+    int size();
 
-	boolean isEmpty();
-	
-	boolean contains(E e);
+    boolean isEmpty();
+
+    boolean contains(E e);
 
 }

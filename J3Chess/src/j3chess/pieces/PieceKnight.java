@@ -29,17 +29,14 @@ public class PieceKnight extends Piece {
     @Override
     protected final void construct() {
         // movement abilities of the knight...
-        Movement move = new Movement(
-                new MotionPattern(
-                        true,
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 2),
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 1)),
-                new MotionPattern(
-                        true,
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical  ), 2),
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Horizontal), 1)));
-        this.getEntity().addComponent(
-                move,
+        final Movement move = new Movement(new MotionPattern(true, new Motion(
+                Helper.Direction.fromGroup(DirectionGroup.Horizontal), 2),
+                new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical),
+                        1)), new MotionPattern(true, new Motion(
+                Helper.Direction.fromGroup(DirectionGroup.Vertical), 2),
+                new Motion(Helper.Direction
+                        .fromGroup(DirectionGroup.Horizontal), 1)));
+        this.getEntity().addComponent(move,
                 ComponentType.getTypeFor(Movement.class));
     }
 

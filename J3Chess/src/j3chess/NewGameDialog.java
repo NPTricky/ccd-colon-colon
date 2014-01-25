@@ -1,6 +1,5 @@
 package j3chess;
 
-
 import j3chess.controller.HumanController;
 import j3chess.controller.Player;
 
@@ -16,9 +15,11 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
 /**
- * Class to create the new GameDialog
- * Starts a new game and sets the player Names.
+ * Class to create the new GameDialog Starts a new game and sets the player
+ * Names.
  */
 public class NewGameDialog extends JFrame {
     /**
@@ -26,7 +27,7 @@ public class NewGameDialog extends JFrame {
      */
     private static final int LEFT = 0;
     /**
-     *  @Brief Value to put something into the right Column of the Gridbaglayout
+     * @Brief Value to put something into the right Column of the Gridbaglayout
      */
     private static final int RIGHT = 1;
     /**
@@ -41,48 +42,50 @@ public class NewGameDialog extends JFrame {
     /**
      * @Brief Enum of all players
      */
-    private EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
+    private final EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
 
     /**
      * Constructor - Creates the new Gamedialog.
      */
     public NewGameDialog() {
         super("Start new Game");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        //Fenstergroesse festlegen
-        //setPreferredSize(new Dimension(800,1000));
+        // Fenstergroesse festlegen
+        // setPreferredSize(new Dimension(800,1000));
 
         // Fensterposition festlegen
         setLocation(150, 150);
 
-        //HauptGridLayout 2 columns
-        GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[]{150,150};
+        // HauptGridLayout 2 columns
+        final GridBagLayout gridBagLayout = new GridBagLayout();
+        gridBagLayout.columnWidths = new int[] { 150, 150 };
         setLayout(gridBagLayout);
 
-        JLabel [] playerLabels = new JLabel[mPlayers.size()];
-        final JTextField [] playerNameTextFields = new JTextField[mPlayers.size()];
+        final JLabel[] playerLabels = new JLabel[mPlayers.size()];
+        final JTextField[] playerNameTextFields = new JTextField[mPlayers
+                .size()];
         for (int i = 0; i < playerLabels.length; i++) {
             playerLabels[i] = new JLabel("Player " + (i + 1));
             playerNameTextFields[i] = new JTextField();
             playerNameTextFields[i].setColumns(TEXTFIELDCOLUMNWIDTH);
         }
-        JButton jButtonOk = new JButton("OK");
-        JButton jButtonCancel = new JButton("Cancel");
+        final JButton jButtonOk = new JButton("OK");
+        final JButton jButtonCancel = new JButton("Cancel");
 
         jButtonOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                for (Player player : mPlayers) {
-                    String playerName = playerNameTextFields[player.ordinal()].getText();
+                for (final Player player : mPlayers) {
+                    String playerName = playerNameTextFields[player.ordinal()]
+                            .getText();
                     if (playerName.equals("")) {
                         playerName = ("Player " + (player.ordinal() + 1));
                     }
                     player.setName(playerName);
                     player.setPlayerController(new HumanController(player));
                 }
-                //Start Game
+                // Start Game
                 J3ChessApp.getInstance().startNewGame();
                 dispose();
             }
@@ -94,7 +97,6 @@ public class NewGameDialog extends JFrame {
                 dispose();
             }
         });
-
 
         int row = 0;
         for (int i = 0; i < playerLabels.length; i++) {
@@ -110,12 +112,16 @@ public class NewGameDialog extends JFrame {
 
     /**
      * @Brief adds a JComponent to the GridbagLayout
-     * @param component the jComponent to add
-     * @param column column to add - Left or Right
-     * @param row - row to insert the component
+     * @param component
+     *            the jComponent to add
+     * @param column
+     *            column to add - Left or Right
+     * @param row
+     *            - row to insert the component
      */
-    private void addComponentToGrid(final JComponent component, final int column, final int row) {
-        GridBagConstraints gbc = new GridBagConstraints();
+    private void addComponentToGrid(final JComponent component,
+            final int column, final int row) {
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = INSETS;
         gbc.gridx = column;
         gbc.gridy = row;

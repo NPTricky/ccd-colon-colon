@@ -5,7 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(value = Suite.class)
-@SuiteClasses(value = {
-        ChessboardNeighborTest.class,
-})
-public class ChessboardTestSuite { }
+@SuiteClasses(value = { ChessboardNeighborTest.class, })
+public class ChessboardTestSuite {
+}

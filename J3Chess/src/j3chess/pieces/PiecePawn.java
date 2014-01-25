@@ -1,7 +1,5 @@
 package j3chess.pieces;
 
-import java.util.EnumSet;
-
 import j3chess.EntitySystem;
 import j3chess.components.Movement;
 import j3chess.motion.DirectionGroup;
@@ -9,6 +7,9 @@ import j3chess.motion.Motion;
 import j3chess.motion.MotionPattern;
 import j3chess.motion.PieceDirection;
 import j3chess.utility.Helper;
+
+import java.util.EnumSet;
+
 import artemis.ComponentType;
 
 /**
@@ -32,15 +33,14 @@ public class PiecePawn extends Piece {
     @Override
     protected final void construct() {
         // movement abilities of the pawn...
-        Movement move = new Movement(
-                new MotionPattern(
-                        EnumSet.of(PieceDirection.Forward),
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical), 1)),
-                new MotionPattern(
-                        EnumSet.of(PieceDirection.Forward),
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Vertical), 2)));
-        this.getEntity().addComponent(
-                move,
+        final Movement move = new Movement(
+                new MotionPattern(EnumSet.of(PieceDirection.Forward),
+                        new Motion(Helper.Direction
+                                .fromGroup(DirectionGroup.Vertical), 1)),
+                new MotionPattern(EnumSet.of(PieceDirection.Forward),
+                        new Motion(Helper.Direction
+                                .fromGroup(DirectionGroup.Vertical), 2)));
+        this.getEntity().addComponent(move,
                 ComponentType.getTypeFor(Movement.class));
     }
 

@@ -22,7 +22,8 @@ public enum PieceType {
 
     /**
      * @brief the private constructor of a piece type
-     * @param algebraic the algebraic notation for this piece type
+     * @param algebraic
+     *            the algebraic notation for this piece type
      */
     private PieceType(final String algebraic) {
         this.mAlgebraic = algebraic;

@@ -1,13 +1,11 @@
 package j3chess.test;
 
-import static org.junit.Assert.assertEquals;
-
-import javax.swing.ImageIcon;
-
 import j3chess.EntitySystem;
 import j3chess.J3ChessView;
 import j3chess.components.Paintable;
 import j3chess.systems.PaintSystem;
+
+import javax.swing.ImageIcon;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,13 +29,15 @@ public class PaintSystemBasicTest {
 
     @Test
     public void initialise() {
-        ImageIcon image = new ImageIcon("src/j3chess/resources/graphics/pieces_two/queen.png");
+        final ImageIcon image = new ImageIcon(
+                "src/j3chess/resources/graphics/pieces_two/queen.png");
 
-        Entity entity_one = mEntitySystem.getWorld().createEntity();
-        entity_one.addComponent(new Paintable("src/j3chess/resources/graphics/pieces_one/king.png"));
+        final Entity entity_one = mEntitySystem.getWorld().createEntity();
+        entity_one.addComponent(new Paintable(
+                "src/j3chess/resources/graphics/pieces_one/king.png"));
         entity_one.addToWorld();
 
-        Entity entity_two = mEntitySystem.getWorld().createEntity();
+        final Entity entity_two = mEntitySystem.getWorld().createEntity();
         entity_two.addComponent(new Paintable(image));
         entity_two.addToWorld();
 

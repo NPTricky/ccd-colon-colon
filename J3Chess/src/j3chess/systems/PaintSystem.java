@@ -5,6 +5,7 @@ import j3chess.J3ChessView;
 import j3chess.components.Paintable;
 import j3chess.components.Position;
 import j3chess.utility.Vector2d;
+
 import java.awt.Graphics2D;
 import java.awt.Point;
 
@@ -15,7 +16,6 @@ import artemis.ComponentMapper;
 import artemis.Entity;
 import artemis.annotations.Mapper;
 import artemis.systems.EntityProcessingSystem;
-
 
 /**
  * entity processing system which draws every paintable entity at its
@@ -43,18 +43,19 @@ public class PaintSystem extends EntityProcessingSystem {
      * @brief the paint system draws every paintable component, position is
      *        optional.
      */
-    public PaintSystem(J3ChessView view) {
+    public PaintSystem(final J3ChessView view) {
         super(Aspect.getAspectForAll(Paintable.class));
         mDrawOffset = new Vector2d(
-                (view.getDrawPanelWidth()  - mDrawPanelSize.x) / 2.0f,
+                (view.getDrawPanelWidth() - mDrawPanelSize.x) / 2.0f,
                 (view.getDrawPanelHeight() - mDrawPanelSize.x) / 2.0f);
     }
 
+    @Override
     protected void begin() {
         // Clear rect
         final Graphics2D graphics = J3ChessApp.getInstance().getDrawGraphics();
-        graphics.setColor(J3ChessApp.getInstance().getMainView().
-                getFrame().getBackground());
+        graphics.setColor(J3ChessApp.getInstance().getMainView().getFrame()
+                .getBackground());
         graphics.fillRect(0, 0, mDrawPanelSize.x, mDrawPanelSize.y);
     }
 
@@ -79,20 +80,17 @@ public class PaintSystem extends EntityProcessingSystem {
                     mDrawPanelSize.x, mDrawPanelSize.y);
         }
 
-        final Graphics2D graphics = J3ChessApp.getInstance()
-                .getDrawGraphics();
+        final Graphics2D graphics = J3ChessApp.getInstance().getDrawGraphics();
         graphics.drawImage(
-                        paintable.getImage(),
-                        Math.round(drawPosition.x + paintable.getDrawOffset().x
-                                + mDrawOffset.x),
-                        Math.round(drawPosition.y + paintable.getDrawOffset().y
-                                + mDrawOffset.y),
-                        null);
-        }
+                paintable.getImage(),
+                Math.round(drawPosition.x + paintable.getDrawOffset().x
+                        + mDrawOffset.x),
+                Math.round(drawPosition.y + paintable.getDrawOffset().y
+                        + mDrawOffset.y), null);
+    }
 
     /** @brief size of the draw panel */
-    private final Point mDrawPanelSize = new Point(
-            J3ChessView.CHESSBOARDWIDTH,
+    private final Point mDrawPanelSize = new Point(J3ChessView.CHESSBOARDWIDTH,
             J3ChessView.CHESSBOARDHEIGHT);
 
     /** @brief offset used for drawing on the chessboard */

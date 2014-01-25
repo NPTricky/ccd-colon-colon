@@ -12,11 +12,9 @@ import j3chess.systems.SelectedSystem;
 import j3chess.systems.ValidMovementSystem;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 
-import artemis.Aspect;
 import artemis.Entity;
 import artemis.managers.GroupManager;
 import artemis.utils.ImmutableBag;
@@ -44,7 +42,7 @@ public class Game {
     private final PieceFactory mPieceFactory;
 
     /** @brief the moves of all players */
-    private List<Move> mMoveHistory;
+    private final List<Move> mMoveHistory;
     /** @brief the current player about to do his move */
     private int mCurrentPlayerIndex;
     /** @brief the current players in this game */
@@ -53,7 +51,8 @@ public class Game {
     /**
      * @brief main class that keeps track of all objects needed throughout the
      *        game.
-     * @param view J3ChessView for the Game to use
+     * @param view
+     *            J3ChessView for the Game to use
      */
     public Game(final J3ChessView view) {
         mView = view;
@@ -82,8 +81,7 @@ public class Game {
      */
     public final void initializePieces() {
         // Create array for each player's starting piece types
-        PieceType[][] pieceFormation =
-                new PieceType[PIECE_FORMATION_HEIGHT][PIECE_FORMATION_WIDTH];
+        final PieceType[][] pieceFormation = new PieceType[PIECE_FORMATION_HEIGHT][PIECE_FORMATION_WIDTH];
 
         // set types for the outermost circle of the formation
         pieceFormation[0][0] = PieceType.Rook;
@@ -101,12 +99,12 @@ public class Game {
         }
 
         // for every player...
-        for (Player player : EnumSet.allOf(Player.class)) {
+        for (final Player player : EnumSet.allOf(Player.class)) {
             // ...create every piece
             for (int y = 0; y < PIECE_FORMATION_HEIGHT; ++y) {
                 for (int x = 0; x < PIECE_FORMATION_WIDTH; ++x) {
                     // get the field where the piece should be placed
-                    Field field = mChessboard.getField((player.ordinal()
+                    final Field field = mChessboard.getField((player.ordinal()
                             * PIECE_FORMATION_WIDTH + x)
                             % Chessboard.NUMBEROFCOLUMNS, y);
                     create(pieceFormation[y][x], player, field);
@@ -117,7 +115,8 @@ public class Game {
 
     /**
      * @brief initializes the players of the game
-     * @param currentPlayers the enum set of players
+     * @param currentPlayers
+     *            the enum set of players
      */
     public final void initializePlayers(final EnumSet<Player> currentPlayers) {
         this.mCurrentPlayers = new ArrayList<Player>(currentPlayers);
@@ -177,7 +176,8 @@ public class Game {
      * @brief switch to the next player
      */
     public final void nextPlayer() {
-        mCurrentPlayerIndex = (mCurrentPlayerIndex + 1) % mCurrentPlayers.size();
+        mCurrentPlayerIndex = (mCurrentPlayerIndex + 1)
+                % mCurrentPlayers.size();
 
         // Clear selection
         clearSelection();
@@ -200,11 +200,10 @@ public class Game {
      */
     public final void notifyFieldClicked(final Field clickedField) {
         // Check if there is a Human Controller currently active
-        PlayerController currentController = mCurrentPlayers
-                .get(mCurrentPlayerIndex)
-                .getPlayerController();
+        final PlayerController currentController = mCurrentPlayers.get(
+                mCurrentPlayerIndex).getPlayerController();
         if (currentController.getClass() == HumanController.class) {
-            HumanController controller = (HumanController) currentController;
+            final HumanController controller = (HumanController) currentController;
             controller.notifyFieldClicked(clickedField, this);
         }
     }
@@ -215,7 +214,8 @@ public class Game {
      */
     public final Entity getSelectedPiece() {
         // Get all entities in group selected
-        ImmutableBag<Entity> selectedEntities = mEntitySystem.getGroupManager().getEntities(SELECTED_GROUP);
+        final ImmutableBag<Entity> selectedEntities = mEntitySystem
+                .getGroupManager().getEntities(SELECTED_GROUP);
 
         Entity result = null;
         if (selectedEntities.size() == 1) {
@@ -226,8 +226,10 @@ public class Game {
     }
 
     /**
-     * @brief Selects a piece on the chessboard. Previous selections are cleared.
-     * @param clickedEntity The piece to be selected
+     * @brief Selects a piece on the chessboard. Previous selections are
+     *        cleared.
+     * @param clickedEntity
+     *            The piece to be selected
      */
     public final void selectPiece(final Entity clickedEntity) {
         // Remove previous selection (should be only 1 entity)
@@ -245,10 +247,11 @@ public class Game {
      */
     public final void clearSelection() {
         // Get the group manager
-        GroupManager groupManager = mEntitySystem.getGroupManager();
+        final GroupManager groupManager = mEntitySystem.getGroupManager();
 
         // Remove previous selection (should be only 1 entity)
-        ImmutableBag<Entity> selectedEntities = groupManager.getEntities(SELECTED_GROUP);
+        final ImmutableBag<Entity> selectedEntities = groupManager
+                .getEntities(SELECTED_GROUP);
         for (int i = 0; i < selectedEntities.size(); ++i) {
             selectedEntities.get(i).removeComponent(Selection.class);
             selectedEntities.get(i).changedInWorld();
@@ -256,5 +259,3 @@ public class Game {
         }
     }
 }
-
-

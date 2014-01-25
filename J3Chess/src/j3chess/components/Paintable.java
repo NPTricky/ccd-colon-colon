@@ -26,7 +26,8 @@ public class Paintable extends Component {
 
     /**
      * @brief constructor for the paintable component
-     * @param imageIcon the image to paint
+     * @param imageIcon
+     *            the image to paint
      */
     public Paintable(final ImageIcon imageIcon) {
         setDrawOffset(imageIcon);
@@ -35,7 +36,8 @@ public class Paintable extends Component {
 
     /**
      * @brief constructor for the paintable component
-     * @param imagePath the path of the image to paint
+     * @param imagePath
+     *            the path of the image to paint
      */
     public Paintable(final String imagePath) {
         this(new ImageIcon(imagePath));
@@ -51,7 +53,8 @@ public class Paintable extends Component {
 
     /**
      * @brief setter for the mImage member
-     * @param imageIcon the image to paint
+     * @param imageIcon
+     *            the image to paint
      */
     public final void setImage(final ImageIcon imageIcon) {
         this.mImageIcon = imageIcon;
@@ -67,7 +70,8 @@ public class Paintable extends Component {
 
     /**
      * @brief setter for the draw offset vector
-     * @param offset to paint
+     * @param offset
+     *            to paint
      */
     public final void setDrawOffset(final Vector2d offset) {
         this.mDrawOffset = offset;
@@ -75,11 +79,11 @@ public class Paintable extends Component {
 
     /**
      * @brief setter for the draw offset vector
-     * @param imageIcon the image to paint
+     * @param imageIcon
+     *            the image to paint
      */
     public final void setDrawOffset(final ImageIcon imageIcon) {
-        this.mDrawOffset = new Vector2d(
-                -imageIcon.getImage().getWidth(null) / (float) 2,
-                -imageIcon.getImage().getHeight(null) / (float) 2);
+        this.mDrawOffset = new Vector2d(-imageIcon.getImage().getWidth(null)
+                / (float) 2, -imageIcon.getImage().getHeight(null) / (float) 2);
     }
 }

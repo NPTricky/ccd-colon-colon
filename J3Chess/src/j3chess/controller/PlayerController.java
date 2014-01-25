@@ -1,13 +1,13 @@
 package j3chess.controller;
 
-
 /**
  * Abstract base class for player controllers.
  */
 public abstract class PlayerController {
     /**
      * @brief Create an instance of a PlayerController for a given player.
-     * @param player The player which owns the PlayerController.
+     * @param player
+     *            The player which owns the PlayerController.
      */
     public PlayerController(final Player player) {
         mPlayer = player;

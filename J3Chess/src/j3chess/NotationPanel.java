@@ -1,6 +1,5 @@
 package j3chess;
 
-
 import j3chess.controller.Player;
 
 import java.awt.Dimension;
@@ -13,7 +12,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,26 +32,28 @@ public class NotationPanel extends JPanel {
      */
     private JTable mNotationTable;
 
-
     /**
      * The constructor for the NotationPanel for all moves.
-     * @param sizeX weight of the Notation Panel
-     * @param sizeY height of the Notation Panel
+     * 
+     * @param sizeX
+     *            weight of the Notation Panel
+     * @param sizeY
+     *            height of the Notation Panel
      */
     public NotationPanel(final int sizeX, final int sizeY) {
         setPreferredSize(new Dimension(sizeX, sizeY));
 
         // Initialize layout manager
-        GridBagLayout gridBagLayout = new GridBagLayout();
+        final GridBagLayout gridBagLayout = new GridBagLayout();
 
         setLayout(gridBagLayout);
 
         this.setLayout(new GridBagLayout());
-        JComponent notationTable = createNotationTable();
+        final JComponent notationTable = createNotationTable();
 
-        int row = 0;
-        int column = LEFT;
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        final int row = 0;
+        final int column = LEFT;
+        final GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = INSETS;
         gridBagConstraints.gridx = column;
         gridBagConstraints.gridy = row;
@@ -64,36 +64,43 @@ public class NotationPanel extends JPanel {
         add(notationTable, gridBagConstraints);
     }
 
-    /** @Brief Creates the NotationTable with Player Names
-     *  @return Srcoll pane with the NotationPanel
+    /**
+     * @Brief Creates the NotationTable with Player Names
+     * @return Srcoll pane with the NotationPanel
      * */
     private JComponent createNotationTable() {
-        String[] columnNames = {Player.ONE.toString(), Player.TWO.toString(), Player.THREE.toString()};
+        final String[] columnNames = { Player.ONE.toString(),
+                Player.TWO.toString(), Player.THREE.toString() };
         mNotationTable = new JTable(new DefaultTableModel(null, columnNames));
-        mNotationTable.getTableHeader().setDefaultRenderer(new NotationPanelHeader());
-        JScrollPane tableSrcollPane = new JScrollPane(mNotationTable);
+        mNotationTable.getTableHeader().setDefaultRenderer(
+                new NotationPanelHeader());
+        final JScrollPane tableSrcollPane = new JScrollPane(mNotationTable);
         mNotationTable.setFillsViewportHeight(true);
         return tableSrcollPane;
     }
 
     /**
      * @brief adds a move at the end of the NotationPanel.
-     * @param move the move to add
+     * @param move
+     *            the move to add
      */
     public final void addMove(final String move, final Game game) {
-        DefaultTableModel tableModel = (DefaultTableModel) mNotationTable.getModel();
-        int moveCounter = game.getMoveCounter();
+        final DefaultTableModel tableModel = (DefaultTableModel) mNotationTable
+                .getModel();
+        final int moveCounter = game.getMoveCounter();
         if (moveCounter % J3ChessApp.NUMBEROFPLAYERS == 0) {
-            tableModel.addRow(new Object[]{move});
+            tableModel.addRow(new Object[] { move });
         } else {
-            tableModel.setValueAt(move, (Integer) moveCounter / J3ChessApp.NUMBEROFPLAYERS, moveCounter % J3ChessApp.NUMBEROFPLAYERS);
+            tableModel.setValueAt(move, moveCounter
+                    / J3ChessApp.NUMBEROFPLAYERS, moveCounter
+                    % J3ChessApp.NUMBEROFPLAYERS);
         }
     }
 
     /**
      * @brief Sets the current player to be displayed.
      */
-    public final void refreshCurrentPlayer(Game game) {
+    public final void refreshCurrentPlayer(final Game game) {
         mCurrentPlayer = game.getCurrentPlayerID();
         mNotationTable.getTableHeader().repaint();
     }
@@ -102,9 +109,10 @@ public class NotationPanel extends JPanel {
      * @brief Clears out the contents of the NotationPanel.
      */
     public final void reset() {
-        DefaultTableModel tableModel = (DefaultTableModel) mNotationTable.getModel();
+        final DefaultTableModel tableModel = (DefaultTableModel) mNotationTable
+                .getModel();
         tableModel.setColumnCount(0);
-        EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
+        final EnumSet<Player> mPlayers = EnumSet.allOf(Player.class);
         tableModel.setColumnIdentifiers(mPlayers.toArray());
         repaint();
     }

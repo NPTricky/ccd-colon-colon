@@ -1,7 +1,5 @@
 package j3chess.test;
 
-import static org.junit.Assert.assertEquals;
-
 import j3chess.EntitySystem;
 import j3chess.J3ChessView;
 import j3chess.components.Selection;
@@ -29,11 +27,11 @@ public class SelectedSystemBasicTest {
 
     @Test
     public void initialise() {
-        Entity entity_one = mEntitySystem.getWorld().createEntity();
+        final Entity entity_one = mEntitySystem.getWorld().createEntity();
         entity_one.addComponent(new Selection());
         entity_one.addToWorld();
 
-        Entity entity_two = mEntitySystem.getWorld().createEntity();
+        final Entity entity_two = mEntitySystem.getWorld().createEntity();
         entity_two.addComponent(new Selection());
         entity_two.addToWorld();
 

@@ -6,4 +6,5 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(value = Suite.class)
 @SuiteClasses(value = { PieceFactoryBasicTest.class })
-public class PieceFactoryTestSuite {}
+public class PieceFactoryTestSuite {
+}

@@ -22,12 +22,12 @@ public class PieceContext extends Component {
 
     /**
      * @brief constructor for piece context component
-     * @param player the owning player of the piece
-     * @param pieceType type of the piece
+     * @param player
+     *            the owning player of the piece
+     * @param pieceType
+     *            type of the piece
      */
-    public PieceContext(
-            final Player player,
-            final PieceType pieceType) {
+    public PieceContext(final Player player, final PieceType pieceType) {
         this.mPlayer = player;
         this.mPieceType = pieceType;
     }
@@ -42,7 +42,8 @@ public class PieceContext extends Component {
 
     /**
      * @brief setter for the mPlayer member
-     * @param player the owning player of the piece
+     * @param player
+     *            the owning player of the piece
      */
     public final void setPlayer(final Player player) {
         this.mPlayer = player;
@@ -58,7 +59,8 @@ public class PieceContext extends Component {
 
     /**
      * @brief setter for the mPieceType member
-     * @param pieceType type of the piece
+     * @param pieceType
+     *            type of the piece
      */
     public final void setPieceType(final PieceType pieceType) {
         this.mPieceType = pieceType;

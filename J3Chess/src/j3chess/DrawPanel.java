@@ -12,28 +12,31 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 /**
- * Panel for the Chessboard. Draws the Chessboard and all pieces.
- * Implements the Mouselistener.
+ * Panel for the Chessboard. Draws the Chessboard and all pieces. Implements the
+ * Mouselistener.
  */
 public class DrawPanel extends JComponent implements MouseListener {
 
     /**
      * @brief height of the Drawpanel
      */
-    private int mHeight;
+    private final int mHeight;
     /**
      * @brief width of the Drawpanel
      */
-    private int mWidth;
+    private final int mWidth;
     /**
      * @brief Background Image of the DrawPanel (the Chessboard)
      */
-    private BufferedImage mImg;
+    private final BufferedImage mImg;
 
     /**
      * Constructor of the DrawPanel.
-     * @param sizeX width of the drawPanel
-     * @param sizeY height of the drawPanel
+     * 
+     * @param sizeX
+     *            width of the drawPanel
+     * @param sizeY
+     *            height of the drawPanel
      */
     public DrawPanel(final int sizeX, final int sizeY) {
         setPreferredSize(new Dimension(sizeX, sizeY));
@@ -56,31 +59,32 @@ public class DrawPanel extends JComponent implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent arg0) {
+    public void mouseClicked(final MouseEvent arg0) {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public void mouseEntered(MouseEvent arg0) {
+    public void mouseEntered(final MouseEvent arg0) {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public void mouseExited(MouseEvent arg0) {
+    public void mouseExited(final MouseEvent arg0) {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public void mousePressed(MouseEvent arg0) {
+    public void mousePressed(final MouseEvent arg0) {
         // Resize x and y to [-1,1] range
-        final Vector2d offset = new Vector2d((mWidth
-                - J3ChessView.CHESSBOARDWIDTH) / 2.0f, (mHeight
-                        - J3ChessView.CHESSBOARDHEIGHT) / 2.0f);
-        final float x = ((float) (arg0.getX() - offset.x) / (float) J3ChessView.CHESSBOARDWIDTH) * 2.0f - 1.0f;
-        final float y = ((float) (arg0.getY() - offset.y) / (float) J3ChessView.CHESSBOARDHEIGHT) * 2.0f - 1.0f;
+        final Vector2d offset = new Vector2d(
+                (mWidth - J3ChessView.CHESSBOARDWIDTH) / 2.0f,
+                (mHeight - J3ChessView.CHESSBOARDHEIGHT) / 2.0f);
+        final float x = ((arg0.getX() - offset.x) / J3ChessView.CHESSBOARDWIDTH) * 2.0f - 1.0f;
+        final float y = ((arg0.getY() - offset.y) / J3ChessView.CHESSBOARDHEIGHT) * 2.0f - 1.0f;
 
         // Get the field that the player clicked on
-        final Field clickedField = J3ChessApp.getInstance().getGame().getChessboard().getFieldByXY(x, y);
+        final Field clickedField = J3ChessApp.getInstance().getGame()
+                .getChessboard().getFieldByXY(x, y);
 
         // Notify the game about a clicked field
         if (clickedField != null) {
@@ -92,7 +96,7 @@ public class DrawPanel extends JComponent implements MouseListener {
     }
 
     @Override
-    public void mouseReleased(MouseEvent arg0) {
+    public void mouseReleased(final MouseEvent arg0) {
         // TODO Auto-generated method stub
     }
 

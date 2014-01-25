@@ -29,11 +29,9 @@ public class PieceQueen extends Piece {
     @Override
     protected final void construct() {
         // movement abilities of the queen...
-        Movement move = new Movement(
-                new MotionPattern(
-                        new Motion(Helper.Direction.fromGroup(DirectionGroup.Every), 0)));
-        this.getEntity().addComponent(
-                move,
+        final Movement move = new Movement(new MotionPattern(new Motion(
+                Helper.Direction.fromGroup(DirectionGroup.Every), 0)));
+        this.getEntity().addComponent(move,
                 ComponentType.getTypeFor(Movement.class));
     }
 

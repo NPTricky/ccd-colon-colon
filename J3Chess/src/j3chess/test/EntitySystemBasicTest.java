@@ -31,30 +31,24 @@ public class EntitySystemBasicTest {
 
     @Test
     public void createEntityWithComponent() {
-        Entity entity = createExampleEntity();
-        assertEquals("Entity has no Component.",
-                Position.class,
-                entity.getComponent(Position.class).getClass());
+        final Entity entity = createExampleEntity();
+        assertEquals("Entity has no Component.", Position.class, entity
+                .getComponent(Position.class).getClass());
     }
 
     @Test
     public void deleteEntityWithComponent() {
-        Entity entity = createExampleEntity();
-        int entityID = entity.getId();
+        final Entity entity = createExampleEntity();
+        final int entityID = entity.getId();
         entity.deleteFromWorld();
-        assertEquals(
-                "Entity is still there.",
-                null,
-                mWorld.getEntity(entityID));
+        assertEquals("Entity is still there.", null, mWorld.getEntity(entityID));
     }
 
     @Test
     public void deleteComponentFromEntity() {
-        Entity entity = createExampleEntity();
+        final Entity entity = createExampleEntity();
         entity.removeComponent(Position.class);
-        assertEquals(
-                "Component is still there.",
-                null,
+        assertEquals("Component is still there.", null,
                 entity.getComponent(Position.class));
     }
 

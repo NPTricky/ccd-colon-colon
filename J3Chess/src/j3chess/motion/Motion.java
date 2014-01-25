@@ -9,16 +9,15 @@ public class Motion {
 
     @Override
     public final String toString() {
-        return "Motion [mDirections=" + mDirections
-                + ", mSteps=" + mSteps + "]";
+        return "Motion [mDirections=" + mDirections + ", mSteps=" + mSteps
+                + "]";
     }
 
     /** @brief the directions of the motion */
     private EnumSet<PieceDirection> mDirections;
     /**
-     * @brief the enforced number of steps of the motion
-     *        [0  ] = infinity
-     *        [1..] = enforced finite number of steps
+     * @brief the enforced number of steps of the motion [0 ] = infinity [1..] =
+     *        enforced finite number of steps
      */
     private int mSteps;
 
@@ -34,25 +33,23 @@ public class Motion {
      * @param directions
      *            the directions of the motion
      * @param steps
-     *            the enforced number of steps of the motion
-     *            [0  ] = infinity
+     *            the enforced number of steps of the motion [0 ] = infinity
      *            [1..] = enforced finite number of steps
      */
-    public Motion(
-            final EnumSet<PieceDirection> directions,
-            final int steps) {
+    public Motion(final EnumSet<PieceDirection> directions, final int steps) {
         this.mDirections = directions;
         this.mSteps = steps;
     }
 
     /**
      * @brief apply a mask to the directions of the motion and return the result
-     * @param mask the direction mask
+     * @param mask
+     *            the direction mask
      * @return masked motion directions
      */
     public final EnumSet<PieceDirection> getDirectionsMasked(
             final EnumSet<PieceDirection> mask) {
-        EnumSet<PieceDirection> result = mDirections;
+        final EnumSet<PieceDirection> result = mDirections;
         result.retainAll(mask);
         return result;
     }
@@ -76,9 +73,8 @@ public class Motion {
 
     /**
      * @brief getter for the mSteps member
-     * @return the enforced number of steps of the motion.
-     *         [0  ] = infinity
-     *         [1..] = enforced finite number of steps
+     * @return the enforced number of steps of the motion. [0 ] = infinity [1..]
+     *         = enforced finite number of steps
      */
     public final int getStepCount() {
         return mSteps;
@@ -87,8 +83,7 @@ public class Motion {
     /**
      * @brief setter for the mSteps member
      * @param steps
-     *            the enforced number of steps of the motion
-     *            [0  ] = infinity
+     *            the enforced number of steps of the motion [0 ] = infinity
      *            [1..] = enforced finite number of steps
      */
     public final void setSteps(final int steps) {
